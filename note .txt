@@ -1,0 +1,5 @@
+prompt-1
+except the exercises create the md file for below title and transcript by following master prompt strictly. below the title and transcript make sure you follow the execution wokflow mention on the master prompt file.
+
+prompt-2 for confirmation
+check and confirm have you follwed the master prompt while updating this file 06-Software-Development-Methodologies.md except exercises
