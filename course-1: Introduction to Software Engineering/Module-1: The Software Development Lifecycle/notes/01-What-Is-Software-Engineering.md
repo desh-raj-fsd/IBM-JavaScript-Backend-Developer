@@ -103,6 +103,14 @@ While the terms are often used interchangeably, "software developer" is deemed n
   - **Thinking Approach**: Often has a more creative approach to solving immediate, localized problems.
   - **Focus**: Uses their specialized knowledge to write code to implement **specific functionality** within the broader system that the engineer designed.
 
+| Dimension | Software Engineer | Software Developer |
+| :--- | :--- | :--- |
+| **Scope of Knowledge** | Broad, systems-level | Deep, feature-level |
+| **Thinking Approach** | Systematic, big-picture | Creative, localized |
+| **Primary Focus** | Architecture of entire systems | Implementing specific functionality |
+| **Stakeholder Contact** | Frequent (clients, vendors, security) | Occasional (mostly technical leads) |
+| **Typical Question Asked** | "How should this whole system be structured?" | "How do I make this one feature work?" |
+
 ### The SDLC (Software Development Lifecycle)
 The adoption of a measured scientific approach culminated in the SDLC.
 - **Purpose**: It identifies the precise, formal steps needed to develop high-quality software, guiding the entire modern development process.

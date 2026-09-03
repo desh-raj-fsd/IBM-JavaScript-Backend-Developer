@@ -66,6 +66,13 @@ To prevent overlap and save time, testing occurs in four distinct, chronological
    - Formal testing usually done by the **customer or stakeholders** during the maintenance stage.
    - Verifies that the software actually satisfies the business processes and user needs.
 
+| Level | Performed By | Scope | Typical Environment |
+| :--- | :--- | :--- | :--- |
+| **Unit** | Developer | Single function/component | Local machine |
+| **Integration** | Developer / QA | Multiple combined modules | Local / CI pipeline |
+| **System** | QA Team | The entire, complete application | Staging (mirrors production) |
+| **Acceptance** | Customer / Stakeholder | Business needs & processes | UAT / Production-like |
+
 ```mermaid
 flowchart TD
     margin_1((" "))

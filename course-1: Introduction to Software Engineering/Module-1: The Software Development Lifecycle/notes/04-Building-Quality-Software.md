@@ -70,6 +70,12 @@
   2. **Beta Release (Limited Release):** Given to stakeholders outside the developing organization. Intended to test functionality under real conditions and identify outstanding bugs. Must meet functional requirements.
   3. **GA (General Availability):** The stable version released to *all* users.
 
+| Stage | Audience | Stability | Primary Goal |
+| :--- | :--- | :--- | :--- |
+| **Alpha** | Internal stakeholders only | Low — errors expected | Validate core functionality exists |
+| **Beta** | External, limited outside group | Medium — functional, bugs remain | Test under real-world conditions |
+| **GA** | Everyone (general public) | High — production-ready | Full-scale, stable public release |
+
 ### 6. Software Documenting
 * **The Goal:** Explaining the software via text or video to both technical and non-technical audiences.
 * **System Documentation (For Technical Users):** 

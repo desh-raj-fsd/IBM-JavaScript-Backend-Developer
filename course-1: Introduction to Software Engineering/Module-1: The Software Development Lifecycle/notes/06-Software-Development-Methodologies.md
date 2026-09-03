@@ -120,6 +120,12 @@ The four core values that define Agile:
 3. **Customer collaboration** over contract negotiation.
 4. **Responding to change** over following a plan.
 
+| Methodology | Flexibility | Testing Timing | Best Suited For |
+| :--- | :--- | :--- | :--- |
+| **Waterfall** | Very low — rigid, linear | Deferred to the end | Fixed-scope, well-understood projects |
+| **V-Shape** | Low — sequential, but test-first | Planned alongside each design phase | High-safety systems (medical, aerospace) |
+| **Agile** | High — iterative sprints | Continuous, within every sprint | Evolving products with shifting requirements |
+
 ## 4. Step-by-Step Breakdown: The Agile Sprint Lifecycle
 
 1. **Sprint Planning**: The team looks at the list of features the client wants (the backlog) and picks a small chunk to build over the next 2 weeks.

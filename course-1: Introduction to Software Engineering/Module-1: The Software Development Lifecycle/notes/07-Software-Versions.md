@@ -60,6 +60,15 @@ flowchart TD
     D --> G[Bug Fixes Only]
 ```
 
+In practice, developers rarely type exact version numbers — `package.json` uses prefix symbols to tell npm exactly how much auto-updating is allowed:
+
+| Prefix | Example | Auto-Updates | Risk Level |
+| :--- | :--- | :--- | :--- |
+| **Caret `^`** | `^4.18.2` | Minor & Patch, never Major | Low-Medium |
+| **Tilde `~`** | `~6.0.1` | Patch only, never Minor/Major | Low |
+| **None (Exact)** | `4.17.21` | Nothing — fully locked | None |
+| **Wildcard `*`** | `*` | Everything, including Major | Very High |
+
 ### Backwards Compatibility and Troubleshooting
 The most common problem in software engineering is a **lack of compatibility** between different versions of software.
 - **The Problem**: You write code using a brand-new feature from Database Version `3.0`. You deploy your code to a server that is only running Database Version `2.5`. The server crashes because it doesn't understand your code.

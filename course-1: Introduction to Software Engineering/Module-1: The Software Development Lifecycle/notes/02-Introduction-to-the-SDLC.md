@@ -41,6 +41,13 @@
   * **Micro-Mechanics:** Over time, the SDLC adapted into **iterative methods**. Instead of a single, massive linear progression, development happens in cycles.
   * **The "Why":** This adaptation was necessary to successfully address modern customer needs and constantly shifting business requirements. 
 
+| Dimension | Waterfall (Original) | Iterative (Modern Adaptation) |
+| :--- | :--- | :--- |
+| **Flow Pattern** | Strict, linear, downward | Cyclical, repeating loops |
+| **Requirement Changes** | Extremely costly to accommodate | Absorbed into the next cycle |
+| **Client Visibility** | Only at the very end | Frequently, after each cycle |
+| **Best Suited For** | Fixed, well-understood scope | Evolving, uncertain scope |
+
 ### The 5 Key Advantages of Following the SDLC
 For businesses and engineering teams, following the SDLC provides five distinct advantages:
 

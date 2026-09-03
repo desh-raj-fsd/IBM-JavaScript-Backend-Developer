@@ -30,6 +30,15 @@
   * **Micro-Mechanics:** "Discrete" means that the tasks from a previous phase do not overlap with tasks in the next phase. The team officially finishes one phase before beginning the next.
   * **The 6 Phases:** Planning → Design → Development → Testing → Deployment → Maintenance.
 
+| Phase | Primary Goal | Key Deliverable | Primary Actor |
+| :--- | :--- | :--- | :--- |
+| **1. Planning** | Gather and document requirements | SRS Document | Product Manager / Analyst |
+| **2. Design** | Translate requirements into a blueprint | Design Document | System Architect |
+| **3. Development** | Write the actual code | Working Code | Software Developer |
+| **4. Testing** | Verify code against the SRS | Bug Reports / Stable Build | QA Engineer |
+| **5. Deployment** | Release to real users | Live Application | DevOps / SRE |
+| **6. Maintenance** | Support and gather new needs | Patches / New Requirements | Whole Team |
+
 ### 1. The Planning Phase
 * **The Goal:** Requirements are gathered, analyzed, documented, and prioritized.
 * **The Process:**

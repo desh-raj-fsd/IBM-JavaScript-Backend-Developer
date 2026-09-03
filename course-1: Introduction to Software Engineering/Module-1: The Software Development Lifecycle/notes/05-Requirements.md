@@ -80,6 +80,12 @@
   * System acceptance criteria.
   * *Crucially:* Expectations of the **hardware** needed for the system (in addition to software).
 
+| Document | Scope | Primary Audience | Verified By |
+| :--- | :--- | :--- | :--- |
+| **URS** | Business needs & user expectations | Business stakeholders | User Acceptance Testing |
+| **SRS** | Software functionality & performance | Developers, QA | Functional / System Testing |
+| **SysRS** | Entire system: software + hardware + policy | Architects, IT, Compliance | System Acceptance Criteria |
+
 ```mermaid
 flowchart TD
     margin_1((" "))
