@@ -32,6 +32,16 @@ Analyze the provided transcript, lecture subtitles, or rough notes (see [Source 
 | 1 | **Notes** — a comprehensive technical guide | `notes/` | `01-[topic].md` |
 | 2 | **Images** — conceptual visuals embedded in the notes | `images/` | `01-[topic]-[short-name].svg` (or `.png` / `.jpg`) |
 
+**Folder layout:** save both outputs under `course-N-[course-title]/module-N-[module-title]/` (for example `course-1-introduction-to-software-engineering/module-1-the-software-development-lifecycle/notes/`).
+
+**File and folder naming rules (must work on Windows, macOS and Linux):**
+
+- Use only lowercase letters, digits and hyphens: `a-z`, `0-9`, `-` (plus the file extension). Replace spaces and punctuation with `-`.
+- **Never** use these characters in any file or folder name: `: * ? " < > | \` — Windows cannot check them out, and `git clone` fails.
+- No leading or trailing space or dot in a name (for example `note .txt` → `note.txt`).
+- Do not use Windows reserved names: `CON`, `PRN`, `AUX`, `NUL`, `COM1`–`COM9`, `LPT1`–`LPT9`.
+- Keep full paths short (under ~200 characters) to stay clear of the Windows 260-character path limit.
+
 - Extract **every detail** from the source text, no matter how minor, and supplement it with your expert knowledge where necessary.
 - **The lecture is the starting point, not the limit.** Lectures may have been recorded years ago or may simplify the topic, so they can miss practices that the industry adopted later. Actively **add any important industry concept, practice, tool or standard that is missing from the lecture** — anything a professional backend engineer is expected to know or would be asked in an interview about this topic. Mark these additions clearly (for example "not in the lecture — industry practice") so lecture facts and additions stay distinguishable.
 - If the source text contains a **factual error or a confusing/contradictory statement**, explicitly flag it with:

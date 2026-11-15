@@ -2,7 +2,7 @@
 
 How professional backend teams run **Planning, Design, Development, Testing, Deployment and Maintenance** today.
 
-**Related course note:** [03 — Phases of the SDLC](<course-1: Introduction to Software Engineering/Module-1: The Software Development Lifecycle/notes/03-phases-of-the-sdlc.md>) (the lecture version)
+**Related course note:** [03 — Phases of the SDLC](course-1-introduction-to-software-engineering/module-1-the-software-development-lifecycle/notes/03-phases-of-the-sdlc.md) (the lecture version)
 
 ---
 

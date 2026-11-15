@@ -1,0 +1,18 @@
+#!/bin/sh
+# Block commits that add file/folder names Windows cannot check out.
+# Enable once per clone:  git config core.hooksPath .githooks
+
+bad=$(git diff --cached --name-only --diff-filter=ACR -z | tr '\0' '\n' | awk -F/ '
+{
+  for (i = 1; i <= NF; i++) {
+    p = $i
+    if (p ~ /[:*?"<>|\\]/ || p ~ /[ .]$/ || p ~ /^ / ||
+        toupper(p) ~ /^(CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9])(\.|$)/) { print $0; next }
+  }
+}')
+
+if [ -n "$bad" ]; then
+  echo "pre-commit: these paths are not valid on Windows (see master-prompt.md naming rules):" >&2
+  echo "$bad" | sed 's/^/  /' >&2
+  exit 1
+fi
