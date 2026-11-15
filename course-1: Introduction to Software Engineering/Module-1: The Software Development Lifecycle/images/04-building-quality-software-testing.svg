@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" font-family="Helvetica, Arial, sans-serif">
+  <rect width="900" height="600" fill="#ffffff"/>
+  <text x="450" y="44" text-anchor="middle" font-size="26" font-weight="bold" fill="#1f2937">Testing: Levels and Types</text>
+  <text x="450" y="72" text-anchor="middle" font-size="15" fill="#6b7280">Levels say WHAT SIZE you test. Types say WHAT QUALITY you check.</text>
+  <text x="250" y="112" text-anchor="middle" font-size="18" font-weight="bold" fill="#374151">Levels (bottom → top)</text>
+  <polygon points="250,130 120,250 380,250" fill="#fde68a" stroke="#d97706" stroke-width="2"/>
+  <text x="250" y="218" text-anchor="middle" font-size="15" font-weight="bold" fill="#78350f">UAT</text>
+  <text x="250" y="238" text-anchor="middle" font-size="11" fill="#78350f">intended end users</text>
+  <polygon points="120,252 380,252 430,340 70,340" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text x="250" y="292" text-anchor="middle" font-size="15" font-weight="bold" fill="#92400e">System</text>
+  <text x="250" y="312" text-anchor="middle" font-size="11" fill="#92400e">the complete product</text>
+  <polygon points="70,342 430,342 480,430 20,430" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="250" y="382" text-anchor="middle" font-size="15" font-weight="bold" fill="#166534">Integration</text>
+  <text x="250" y="402" text-anchor="middle" font-size="11" fill="#166534">components working together</text>
+  <polygon points="20,432 480,432 480,520 20,520" fill="#bbf7d0" stroke="#16a34a" stroke-width="2"/>
+  <text x="250" y="470" text-anchor="middle" font-size="15" font-weight="bold" fill="#14532d">Unit</text>
+  <text x="250" y="490" text-anchor="middle" font-size="11" fill="#14532d">smallest isolated piece · by the developer · many and fast</text>
+  <text x="250" y="555" text-anchor="middle" font-size="12" fill="#6b7280">UAT is sometimes called beta testing (related, not identical)</text>
+
+  <text x="700" y="112" text-anchor="middle" font-size="18" font-weight="bold" fill="#374151">Types</text>
+  <rect x="540" y="135" width="320" height="110" rx="12" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="700" y="168" text-anchor="middle" font-size="17" font-weight="bold" fill="#1e40af">Functional</text>
+  <text x="700" y="194" text-anchor="middle" font-size="13" fill="#1e3a8a">Does each feature do what</text>
+  <text x="700" y="214" text-anchor="middle" font-size="13" fill="#1e3a8a">the requirement says?</text>
+  <rect x="540" y="265" width="320" height="110" rx="12" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+  <text x="700" y="298" text-anchor="middle" font-size="17" font-weight="bold" fill="#5b21b6">Non-functional</text>
+  <text x="700" y="324" text-anchor="middle" font-size="13" fill="#4c1d95">Is it fast, secure, reliable,</text>
+  <text x="700" y="344" text-anchor="middle" font-size="13" fill="#4c1d95">usable enough?</text>
+  <rect x="540" y="395" width="320" height="110" rx="12" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+  <text x="700" y="428" text-anchor="middle" font-size="17" font-weight="bold" fill="#991b1b">Regression</text>
+  <text x="700" y="454" text-anchor="middle" font-size="13" fill="#7f1d1d">Did a new change break</text>
+  <text x="700" y="474" text-anchor="middle" font-size="13" fill="#7f1d1d">something that worked before?</text>
+  <text x="700" y="555" text-anchor="middle" font-size="12" fill="#6b7280">Any type can be tested at any level</text>
+</svg>

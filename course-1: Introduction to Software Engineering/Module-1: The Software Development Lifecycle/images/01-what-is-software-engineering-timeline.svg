@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 640" font-family="Helvetica, Arial, sans-serif">
+  <rect width="900" height="640" fill="#ffffff"/>
+  <text x="450" y="44" text-anchor="middle" font-size="26" font-weight="bold" fill="#1f2937">From Ad Hoc Coding to an Engineering Discipline</text>
+  <text x="450" y="72" text-anchor="middle" font-size="15" fill="#6b7280">Timeline of software engineering</text>
+
+  <!-- vertical line -->
+  <line x1="200" y1="110" x2="200" y2="600" stroke="#9ca3af" stroke-width="4"/>
+
+  <!-- crisis band -->
+  <rect x="186" y="232" width="28" height="226" rx="6" fill="#fca5a5"/>
+  <text x="120" y="350" text-anchor="middle" font-size="14" font-weight="bold" fill="#b91c1c" transform="rotate(-90 120 350)">SOFTWARE CRISIS</text>
+
+  <!-- events -->
+  <g font-size="15" fill="#1f2937">
+    <circle cx="200" cy="130" r="13" fill="#9ca3af"/>
+    <text x="235" y="126" font-weight="bold">Late 1950s</text>
+    <text x="235" y="148">Computing spreads. Software engineering is undefined. Ad hoc programming.</text>
+
+    <circle cx="200" cy="200" r="13" fill="#60a5fa"/>
+    <text x="235" y="196" font-weight="bold">1960s</text>
+    <text x="235" y="218">Software engineering becomes a discipline. Approach becomes more scientific.</text>
+
+    <circle cx="200" cy="270" r="13" fill="#ef4444"/>
+    <text x="235" y="266" font-weight="bold">Mid-1960s — crisis begins</text>
+    <text x="235" y="288">Demand for complex software grows faster than development methods.</text>
+
+    <circle cx="200" cy="340" r="13" fill="#ef4444"/>
+    <text x="235" y="336" font-weight="bold">1968 — NATO Software Engineering Conference</text>
+    <text x="235" y="358">The term "software engineering" becomes widely known.</text>
+
+    <circle cx="200" cy="420" r="13" fill="#ef4444"/>
+    <text x="235" y="408" font-weight="bold">Crisis symptoms</text>
+    <text x="235" y="430">Over budget • Behind schedule • Buggy, unmanageable code</text>
+    <text x="235" y="450">Outdated on delivery • Small-system methods do not scale</text>
+
+    <circle cx="200" cy="500" r="13" fill="#22c55e"/>
+    <text x="235" y="496" font-weight="bold">Mid-1980s — relief</text>
+    <text x="235" y="518">Rise of CASE tools • Standardized methodologies • More computing resources</text>
+
+    <circle cx="200" cy="575" r="13" fill="#16a34a"/>
+    <text x="235" y="571" font-weight="bold">Today</text>
+    <text x="235" y="593">Process guided by the SDLC. Some issues remain, but much smaller.</text>
+  </g>
+</svg>

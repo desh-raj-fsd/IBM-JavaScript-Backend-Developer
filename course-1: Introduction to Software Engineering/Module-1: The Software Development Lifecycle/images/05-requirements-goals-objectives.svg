@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" font-family="Helvetica, Arial, sans-serif">
+  <defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4b5563"/></marker></defs>
+  <rect width="900" height="560" fill="#ffffff"/>
+  <text x="450" y="42" text-anchor="middle" font-size="26" font-weight="bold" fill="#1f2937">From Goals to Requirements</text>
+  <text x="450" y="68" text-anchor="middle" font-size="15" fill="#6b7280">Every requirement should help reach a measurable objective</text>
+  <rect x="250" y="95" width="400" height="80" rx="14" fill="#ede9fe" stroke="#7c3aed" stroke-width="2.5"/>
+  <text x="450" y="124" text-anchor="middle" font-size="13" font-weight="bold" fill="#6d28d9">GOAL — broad, long-term</text>
+  <text x="450" y="152" text-anchor="middle" font-size="18" font-weight="bold" fill="#4c1d95">"Readers trust our reviews"</text>
+  <rect x="70" y="225" width="350" height="90" rx="14" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+  <text x="245" y="252" text-anchor="middle" font-size="13" font-weight="bold" fill="#1d4ed8">OBJECTIVE 1 — specific, measurable</text>
+  <text x="245" y="278" text-anchor="middle" font-size="14" fill="#1e3a8a">30% of visitors read a full review</text>
+  <text x="245" y="298" text-anchor="middle" font-size="14" fill="#1e3a8a">per visit by 31 December</text>
+  <rect x="480" y="225" width="350" height="90" rx="14" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+  <text x="655" y="252" text-anchor="middle" font-size="13" font-weight="bold" fill="#1d4ed8">OBJECTIVE 2 — specific, measurable</text>
+  <text x="655" y="278" text-anchor="middle" font-size="14" fill="#1e3a8a">Spam under 1% of reviews</text>
+  <text x="655" y="298" text-anchor="middle" font-size="14" fill="#1e3a8a">within 3 months</text>
+  <g font-size="13">
+    <rect x="40" y="370" width="200" height="70" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <text x="140" y="398" text-anchor="middle" font-weight="bold" fill="#166534">REQ-07</text>
+    <text x="140" y="420" text-anchor="middle" fill="#14532d">rate a book 1–5</text>
+    <rect x="250" y="370" width="200" height="70" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <text x="350" y="398" text-anchor="middle" font-weight="bold" fill="#166534">NFR-02</text>
+    <text x="350" y="420" text-anchor="middle" fill="#14532d">pages load &lt; 200 ms</text>
+    <rect x="460" y="370" width="200" height="70" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <text x="560" y="398" text-anchor="middle" font-weight="bold" fill="#166534">REQ-09</text>
+    <text x="560" y="420" text-anchor="middle" fill="#14532d">hide after 3 reports</text>
+    <rect x="670" y="370" width="200" height="70" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <text x="770" y="398" text-anchor="middle" font-weight="bold" fill="#166534">REQ-11</text>
+    <text x="770" y="420" text-anchor="middle" fill="#14532d">verified email to post</text>
+  </g>
+  <g stroke="#4b5563" stroke-width="2" marker-end="url(#a)" fill="none">
+    <path d="M400,175 L270,221"/><path d="M500,175 L630,221"/>
+    <path d="M200,315 L145,366"/><path d="M290,315 L345,366"/>
+    <path d="M610,315 L565,366"/><path d="M700,315 L765,366"/>
+  </g>
+  <rect x="120" y="475" width="660" height="60" rx="10" fill="#f3f4f6" stroke="#9ca3af"/>
+  <text x="450" y="499" text-anchor="middle" font-size="14" font-weight="bold" fill="#374151">Modern format: OKRs — Objective (qualitative) + 2–5 Key Results (numbers)</text>
+  <text x="450" y="520" text-anchor="middle" font-size="13" fill="#374151">Measure outcomes (behavior, results), not outputs (features shipped)</text>
+</svg>

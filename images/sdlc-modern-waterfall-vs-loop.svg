@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 640" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4b5563"/>
+    </marker>
+  </defs>
+  <rect width="900" height="640" fill="#ffffff"/>
+  <text x="450" y="42" text-anchor="middle" font-size="26" font-weight="bold" fill="#1f2937">Same Six Jobs, Different Rhythm</text>
+  <text x="450" y="68" text-anchor="middle" font-size="15" fill="#6b7280">Waterfall runs the phases once in a line. Modern teams run them in short loops.</text>
+  <line x1="450" y1="90" x2="450" y2="620" stroke="#e5e7eb" stroke-width="2"/>
+
+  <!-- LEFT: waterfall -->
+  <text x="225" y="108" text-anchor="middle" font-size="20" font-weight="bold" fill="#374151">Waterfall (lecture model)</text>
+  <g font-size="15" font-weight="bold">
+    <rect x="30"  y="130" width="160" height="44" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="110" y="158" text-anchor="middle" fill="#1e40af">1. Planning</text>
+    <rect x="70"  y="200" width="160" height="44" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+    <text x="150" y="228" text-anchor="middle" fill="#5b21b6">2. Design</text>
+    <rect x="110" y="270" width="160" height="44" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <text x="190" y="298" text-anchor="middle" fill="#166534">3. Development</text>
+    <rect x="150" y="340" width="160" height="44" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+    <text x="230" y="368" text-anchor="middle" fill="#92400e">4. Testing</text>
+    <rect x="190" y="410" width="160" height="44" rx="8" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+    <text x="270" y="438" text-anchor="middle" fill="#991b1b">5. Deployment</text>
+    <rect x="230" y="480" width="190" height="44" rx="8" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+    <text x="325" y="508" text-anchor="middle" fill="#075985">6. Maintenance</text>
+  </g>
+  <g stroke="#4b5563" stroke-width="2.2" fill="none">
+    <path d="M150 174 Q 150 186 160 196" marker-end="url(#arr)"/>
+    <path d="M190 244 Q 190 256 200 266" marker-end="url(#arr)"/>
+    <path d="M230 314 Q 230 326 240 336" marker-end="url(#arr)"/>
+    <path d="M270 384 Q 270 396 280 406" marker-end="url(#arr)"/>
+    <path d="M310 454 Q 310 466 320 476" marker-end="url(#arr)"/>
+  </g>
+  <g font-size="13" fill="#374151">
+    <text x="30" y="560">• One pass, months long</text>
+    <text x="30" y="580">• Each phase must finish first</text>
+    <text x="30" y="600">• Users see it only at the end</text>
+  </g>
+
+  <!-- RIGHT: modern loop -->
+  <text x="675" y="108" text-anchor="middle" font-size="20" font-weight="bold" fill="#374151">Modern (Agile + DevOps)</text>
+  <circle cx="675" cy="320" r="150" fill="none" stroke="#d1d5db" stroke-width="3" stroke-dasharray="8 6"/>
+  <g font-size="14" font-weight="bold" text-anchor="middle">
+    <rect x="615" y="150" width="120" height="40" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="675" y="175" fill="#1e40af">Plan</text>
+    <rect x="760" y="225" width="120" height="40" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+    <text x="820" y="250" fill="#5b21b6">Design</text>
+    <rect x="760" y="375" width="120" height="40" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <text x="820" y="400" fill="#166534">Develop</text>
+    <rect x="615" y="450" width="120" height="40" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+    <text x="675" y="475" fill="#92400e">Test</text>
+    <rect x="470" y="375" width="120" height="40" rx="8" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+    <text x="530" y="400" fill="#991b1b">Deploy</text>
+    <rect x="470" y="225" width="120" height="40" rx="8" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+    <text x="530" y="250" fill="#075985">Maintain</text>
+  </g>
+  <g stroke="#4b5563" stroke-width="2.2" fill="none">
+    <path d="M735 175 Q 790 185 810 220" marker-end="url(#arr)"/>
+    <line x1="820" y1="265" x2="820" y2="370" marker-end="url(#arr)"/>
+    <path d="M810 415 Q 790 455 740 468" marker-end="url(#arr)"/>
+    <path d="M615 468 Q 560 455 540 420" marker-end="url(#arr)"/>
+    <line x1="530" y1="375" x2="530" y2="270" marker-end="url(#arr)"/>
+    <path d="M540 225 Q 560 185 610 175" marker-end="url(#arr)"/>
+  </g>
+  <text x="675" y="305" text-anchor="middle" font-size="16" font-weight="bold" fill="#374151">1–4 week loop</text>
+  <text x="675" y="327" text-anchor="middle" font-size="13" fill="#6b7280">small slice of features</text>
+  <text x="675" y="347" text-anchor="middle" font-size="13" fill="#6b7280">CI/CD automates test + deploy</text>
+  <g font-size="13" fill="#374151">
+    <text x="480" y="560">• Many short loops, small releases</text>
+    <text x="480" y="580">• Phases overlap (test while coding)</text>
+    <text x="480" y="600">• Feedback after every release</text>
+  </g>
+</svg>

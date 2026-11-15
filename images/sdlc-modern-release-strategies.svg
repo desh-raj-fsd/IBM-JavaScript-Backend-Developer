@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4b5563"/>
+    </marker>
+  </defs>
+  <rect width="900" height="700" fill="#ffffff"/>
+  <text x="450" y="42" text-anchor="middle" font-size="26" font-weight="bold" fill="#1f2937">Safe Release Strategies</text>
+  <text x="450" y="68" text-anchor="middle" font-size="15" fill="#6b7280">Grey = old version (v1)   •   Green = new version (v2)</text>
+
+  <!-- ROLLING -->
+  <rect x="30" y="90" width="840" height="170" rx="14" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="50" y="116" font-size="18" font-weight="bold" fill="#1f2937">Rolling</text>
+  <text x="50" y="138" font-size="13" fill="#6b7280">replace pods one by one — no downtime</text>
+  <g font-size="12" font-weight="bold" text-anchor="middle">
+    <!-- step 1 -->
+    <text x="140" y="172" font-size="12" font-weight="normal" fill="#6b7280">step 1</text>
+    <rect x="70"  y="182" width="40" height="40" rx="6" fill="#16a34a"/><text x="90"  y="207" fill="#fff">v2</text>
+    <rect x="120" y="182" width="40" height="40" rx="6" fill="#9ca3af"/><text x="140" y="207" fill="#fff">v1</text>
+    <rect x="170" y="182" width="40" height="40" rx="6" fill="#9ca3af"/><text x="190" y="207" fill="#fff">v1</text>
+    <!-- step 2 -->
+    <text x="450" y="172" font-size="12" font-weight="normal" fill="#6b7280">step 2</text>
+    <rect x="380" y="182" width="40" height="40" rx="6" fill="#16a34a"/><text x="400" y="207" fill="#fff">v2</text>
+    <rect x="430" y="182" width="40" height="40" rx="6" fill="#16a34a"/><text x="450" y="207" fill="#fff">v2</text>
+    <rect x="480" y="182" width="40" height="40" rx="6" fill="#9ca3af"/><text x="500" y="207" fill="#fff">v1</text>
+    <!-- step 3 -->
+    <text x="760" y="172" font-size="12" font-weight="normal" fill="#6b7280">step 3</text>
+    <rect x="690" y="182" width="40" height="40" rx="6" fill="#16a34a"/><text x="710" y="207" fill="#fff">v2</text>
+    <rect x="740" y="182" width="40" height="40" rx="6" fill="#16a34a"/><text x="760" y="207" fill="#fff">v2</text>
+    <rect x="790" y="182" width="40" height="40" rx="6" fill="#16a34a"/><text x="810" y="207" fill="#fff">v2</text>
+  </g>
+  <line x1="225" y1="202" x2="365" y2="202" stroke="#4b5563" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="535" y1="202" x2="675" y2="202" stroke="#4b5563" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="450" y="248" text-anchor="middle" font-size="12" fill="#92400e">watch out: v1 and v2 run at the same time for a while</text>
+
+  <!-- BLUE-GREEN -->
+  <rect x="30" y="275" width="840" height="190" rx="14" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="50" y="301" font-size="18" font-weight="bold" fill="#1f2937">Blue-green</text>
+  <text x="50" y="323" font-size="13" fill="#6b7280">two full environments — flip all traffic at once, flip back to roll back</text>
+  <rect x="380" y="340" width="140" height="44" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="450" y="367" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e40af">Load balancer</text>
+  <rect x="120" y="400" width="240" height="50" rx="10" fill="#e5e7eb" stroke="#6b7280" stroke-width="2"/>
+  <text x="240" y="430" text-anchor="middle" font-size="14" font-weight="bold" fill="#374151">Blue: v1 (idle, kept for rollback)</text>
+  <rect x="540" y="400" width="240" height="50" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="660" y="430" text-anchor="middle" font-size="14" font-weight="bold" fill="#166534">Green: v2 (100% traffic)</text>
+  <line x1="480" y1="384" x2="600" y2="398" stroke="#16a34a" stroke-width="3" marker-end="url(#arr)"/>
+  <line x1="420" y1="384" x2="300" y2="398" stroke="#9ca3af" stroke-width="2" stroke-dasharray="5 4"/>
+  <text x="790" y="370" text-anchor="end" font-size="12" fill="#92400e">watch out: double infrastructure</text>
+
+  <!-- CANARY -->
+  <rect x="30" y="480" width="840" height="200" rx="14" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="50" y="506" font-size="18" font-weight="bold" fill="#1f2937">Canary</text>
+  <text x="50" y="528" font-size="13" fill="#6b7280">send a small share of users to v2; grow it only if metrics stay healthy</text>
+  <g font-size="13" font-weight="bold">
+    <text x="70" y="568" fill="#374151">5%</text>
+    <rect x="120" y="552" width="700" height="22" rx="4" fill="#9ca3af"/>
+    <rect x="120" y="552" width="35"  height="22" rx="4" fill="#16a34a"/>
+    <text x="70" y="604" fill="#374151">25%</text>
+    <rect x="120" y="588" width="700" height="22" rx="4" fill="#9ca3af"/>
+    <rect x="120" y="588" width="175" height="22" rx="4" fill="#16a34a"/>
+    <text x="70" y="640" fill="#374151">100%</text>
+    <rect x="120" y="624" width="700" height="22" rx="4" fill="#16a34a"/>
+  </g>
+  <text x="450" y="668" text-anchor="middle" font-size="12" fill="#991b1b">error rate or latency above SLO at any step → automatic rollback to 0%</text>
+</svg>

@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 720" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4b5563"/>
+    </marker>
+  </defs>
+  <rect width="900" height="720" fill="#ffffff"/>
+  <text x="450" y="44" text-anchor="middle" font-size="26" font-weight="bold" fill="#1f2937">Phase 1: Planning</text>
+  <text x="450" y="72" text-anchor="middle" font-size="15" fill="#6b7280">From scattered needs to one approved document</text>
+
+  <!-- four requirement steps -->
+  <g font-size="16" font-weight="bold" text-anchor="middle">
+    <rect x="40" y="100" width="185" height="56" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="132" y="134" fill="#1e40af">Gather</text>
+    <rect x="255" y="100" width="185" height="56" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="347" y="134" fill="#1e40af">Analyze</text>
+    <rect x="470" y="100" width="185" height="56" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="562" y="134" fill="#1e40af">Document</text>
+    <rect x="685" y="100" width="175" height="56" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="772" y="134" fill="#1e40af">Prioritize</text>
+  </g>
+  <line x1="225" y1="128" x2="250" y2="128" stroke="#4b5563" stroke-width="2.5" marker-end="url(#arr)"/>
+  <line x1="440" y1="128" x2="465" y2="128" stroke="#4b5563" stroke-width="2.5" marker-end="url(#arr)"/>
+  <line x1="655" y1="128" x2="680" y2="128" stroke="#4b5563" stroke-width="2.5" marker-end="url(#arr)"/>
+  <text x="450" y="182" text-anchor="middle" font-size="14" fill="#374151">requirements</text>
+  <line x1="450" y1="190" x2="450" y2="215" stroke="#4b5563" stroke-width="2.5" marker-end="url(#arr)"/>
+
+  <!-- factors box -->
+  <rect x="40" y="220" width="820" height="230" rx="14" fill="#f9fafb" stroke="#9ca3af" stroke-width="2"/>
+  <text x="450" y="250" text-anchor="middle" font-size="18" font-weight="bold" fill="#1f2937">Factors to consider</text>
+  <g font-size="15" fill="#1f2937">
+    <rect x="65" y="270" width="180" height="70" rx="8" fill="#ffffff" stroke="#d1d5db"/>
+    <text x="155" y="300" text-anchor="middle" font-weight="bold">Users</text>
+    <text x="155" y="322" text-anchor="middle" font-size="12" fill="#6b7280">who will use it?</text>
+    <rect x="260" y="270" width="180" height="70" rx="8" fill="#ffffff" stroke="#d1d5db"/>
+    <text x="350" y="300" text-anchor="middle" font-weight="bold">Purpose</text>
+    <text x="350" y="322" text-anchor="middle" font-size="12" fill="#6b7280">why does it exist?</text>
+    <rect x="455" y="270" width="180" height="70" rx="8" fill="#ffffff" stroke="#d1d5db"/>
+    <text x="545" y="300" text-anchor="middle" font-weight="bold">Data in / out</text>
+    <text x="545" y="322" text-anchor="middle" font-size="12" fill="#6b7280">what goes in and out?</text>
+    <rect x="650" y="270" width="185" height="70" rx="8" fill="#ffffff" stroke="#d1d5db"/>
+    <text x="742" y="300" text-anchor="middle" font-weight="bold">Compliance</text>
+    <text x="742" y="322" text-anchor="middle" font-size="12" fill="#6b7280">legal and regulatory</text>
+    <rect x="65" y="355" width="180" height="70" rx="8" fill="#ffffff" stroke="#d1d5db"/>
+    <text x="155" y="385" text-anchor="middle" font-weight="bold">Risks</text>
+    <text x="155" y="407" text-anchor="middle" font-size="12" fill="#6b7280">what could go wrong?</text>
+    <rect x="260" y="355" width="180" height="70" rx="8" fill="#ffffff" stroke="#d1d5db"/>
+    <text x="350" y="385" text-anchor="middle" font-weight="bold">QA needs</text>
+    <text x="350" y="407" text-anchor="middle" font-size="12" fill="#6b7280">quality level required</text>
+    <rect x="455" y="355" width="180" height="70" rx="8" fill="#ffffff" stroke="#d1d5db"/>
+    <text x="545" y="385" text-anchor="middle" font-weight="bold">Resources</text>
+    <text x="545" y="407" text-anchor="middle" font-size="12" fill="#6b7280">people and money</text>
+    <rect x="650" y="355" width="185" height="70" rx="8" fill="#ffffff" stroke="#d1d5db"/>
+    <text x="742" y="385" text-anchor="middle" font-weight="bold">Schedule</text>
+    <text x="742" y="407" text-anchor="middle" font-size="12" fill="#6b7280">when is it due?</text>
+  </g>
+
+  <line x1="450" y1="450" x2="450" y2="475" stroke="#4b5563" stroke-width="2.5" marker-end="url(#arr)"/>
+
+  <!-- cost / team + prototype -->
+  <rect x="40" y="480" width="400" height="80" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text x="240" y="510" text-anchor="middle" font-size="15" font-weight="bold" fill="#92400e">Estimate labor + material costs</text>
+  <text x="240" y="532" text-anchor="middle" font-size="13" fill="#78350f">weighed against time constraints</text>
+  <text x="240" y="550" text-anchor="middle" font-size="13" fill="#78350f">identify teams, propose roles</text>
+  <rect x="460" y="480" width="400" height="80" rx="10" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+  <text x="660" y="510" text-anchor="middle" font-size="15" font-weight="bold" fill="#5b21b6">Prototype (if needed)</text>
+  <text x="660" y="532" text-anchor="middle" font-size="13" fill="#4c1d95">small-scale replica to get feedback</text>
+  <text x="660" y="550" text-anchor="middle" font-size="13" fill="#4c1d95">when stakeholders cannot define needs</text>
+
+  <line x1="240" y1="560" x2="400" y2="600" stroke="#4b5563" stroke-width="2.5" marker-end="url(#arr)"/>
+  <line x1="660" y1="560" x2="500" y2="600" stroke="#4b5563" stroke-width="2.5" marker-end="url(#arr)"/>
+
+  <!-- SRS -->
+  <rect x="250" y="605" width="400" height="90" rx="12" fill="#dcfce7" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="450" y="638" text-anchor="middle" font-size="20" font-weight="bold" fill="#166534">SRS</text>
+  <text x="450" y="660" text-anchor="middle" font-size="13" fill="#14532d">Software Requirements Specification</text>
+  <text x="450" y="680" text-anchor="middle" font-size="13" fill="#14532d">understood + approved by all stakeholders; developers involved</text>
+</svg>

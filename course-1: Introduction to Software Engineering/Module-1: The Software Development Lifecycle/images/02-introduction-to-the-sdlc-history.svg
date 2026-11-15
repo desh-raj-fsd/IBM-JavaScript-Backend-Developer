@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4b5563"/>
+    </marker>
+  </defs>
+  <rect width="900" height="600" fill="#ffffff"/>
+  <text x="450" y="44" text-anchor="middle" font-size="26" font-weight="bold" fill="#1f2937">History of the SDLC</text>
+  <text x="450" y="72" text-anchor="middle" font-size="15" fill="#6b7280">From linear Waterfall to iterative methods</text>
+
+  <line x1="200" y1="110" x2="200" y2="560" stroke="#9ca3af" stroke-width="4"/>
+
+  <g font-size="15" fill="#1f2937">
+    <circle cx="200" cy="130" r="13" fill="#ef4444"/>
+    <text x="235" y="126" font-weight="bold">Mid-1960s — software grows complex</text>
+    <text x="235" y="148">Large corporations manage complex business systems with heavy computing needs.</text>
+
+    <circle cx="200" cy="220" r="13" fill="#60a5fa"/>
+    <text x="235" y="216" font-weight="bold">SDLC takes shape</text>
+    <text x="235" y="238">A more deliberate, systematic approach replaces ad hoc development.</text>
+
+    <circle cx="200" cy="310" r="13" fill="#2563eb"/>
+    <text x="235" y="306" font-weight="bold">1970s — Waterfall method</text>
+    <text x="235" y="328">Linear pattern through discrete stages. Finish one stage, then start the next.</text>
+  </g>
+
+  <!-- mini waterfall -->
+  <g font-size="12" fill="#1e3a8a">
+    <rect x="240" y="345" width="90" height="26" rx="5" fill="#dbeafe" stroke="#2563eb"/>
+    <text x="285" y="363" text-anchor="middle">Requirements</text>
+    <rect x="340" y="375" width="90" height="26" rx="5" fill="#dbeafe" stroke="#2563eb"/>
+    <text x="385" y="393" text-anchor="middle">Design</text>
+    <rect x="440" y="405" width="90" height="26" rx="5" fill="#dbeafe" stroke="#2563eb"/>
+    <text x="485" y="423" text-anchor="middle">Code</text>
+    <rect x="540" y="435" width="90" height="26" rx="5" fill="#dbeafe" stroke="#2563eb"/>
+    <text x="585" y="453" text-anchor="middle">Test</text>
+    <path d="M330 358 L360 358 L360 372" fill="none" stroke="#4b5563" stroke-width="2" marker-end="url(#arr)"/>
+    <path d="M430 388 L460 388 L460 402" fill="none" stroke="#4b5563" stroke-width="2" marker-end="url(#arr)"/>
+    <path d="M530 418 L560 418 L560 432" fill="none" stroke="#4b5563" stroke-width="2" marker-end="url(#arr)"/>
+  </g>
+
+  <g font-size="15" fill="#1f2937">
+    <circle cx="200" cy="510" r="13" fill="#22c55e"/>
+    <text x="235" y="506" font-weight="bold">Later — iterative methods</text>
+    <text x="235" y="528">Adapted to customer needs and shifting requirements. The cycle repeats.</text>
+  </g>
+  <path d="M700 520 A 40 40 0 1 1 760 520" fill="none" stroke="#16a34a" stroke-width="3" marker-end="url(#arr)"/>
+  <text x="730" y="575" text-anchor="middle" font-size="13" fill="#166534" font-weight="bold">repeat &amp; improve</text>
+</svg>

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 660" font-family="Helvetica, Arial, sans-serif">
+  <rect width="900" height="660" fill="#ffffff"/>
+  <text x="450" y="44" text-anchor="middle" font-size="26" font-weight="bold" fill="#1f2937">7 Key Advantages of the SDLC</text>
+  <text x="450" y="72" text-anchor="middle" font-size="15" fill="#6b7280">Why businesses follow a systematic process</text>
+
+  <g font-size="15">
+    <rect x="60" y="100" width="780" height="68" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="90" y="142" font-size="26" font-weight="bold" fill="#1e40af">1</text>
+    <text x="130" y="128" font-weight="bold" fill="#1e3a8a">A process to follow, not ad hoc</text>
+    <text x="130" y="151" fill="#374151">Improves efficiency and reduces risk.</text>
+
+    <rect x="60" y="178" width="780" height="68" rx="10" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+    <text x="90" y="220" font-size="26" font-weight="bold" fill="#5b21b6">2</text>
+    <text x="130" y="206" font-weight="bold" fill="#4c1d95">Discrete, well-defined phases</text>
+    <text x="130" y="229" fill="#374151">Everyone knows what to work on, and when.</text>
+
+    <rect x="60" y="256" width="780" height="68" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+    <text x="90" y="298" font-size="26" font-weight="bold" fill="#92400e">3</text>
+    <text x="130" y="284" font-weight="bold" fill="#78350f">Better communication</text>
+    <text x="130" y="307" fill="#374151">Customer, stakeholders and team see the whole process and where they fit.</text>
+
+    <rect x="60" y="334" width="780" height="68" rx="10" fill="#fce7f3" stroke="#db2777" stroke-width="2"/>
+    <text x="90" y="376" font-size="26" font-weight="bold" fill="#9d174d">4</text>
+    <text x="130" y="362" font-weight="bold" fill="#831843">Clear phase completion</text>
+    <text x="130" y="385" fill="#374151">Cross-domain teams know when tasks are done and when to move on.</text>
+
+    <rect x="60" y="412" width="780" height="68" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <text x="90" y="454" font-size="26" font-weight="bold" fill="#166534">5</text>
+    <text x="130" y="440" font-weight="bold" fill="#14532d">Room for iteration</text>
+    <text x="130" y="463" fill="#374151">At the end of a cycle, circle back to add new requirements.</text>
+
+    <rect x="60" y="490" width="780" height="68" rx="10" fill="#cffafe" stroke="#0891b2" stroke-width="2"/>
+    <text x="90" y="532" font-size="26" font-weight="bold" fill="#155e75">6</text>
+    <text x="130" y="518" font-weight="bold" fill="#164e63">Early problem solving</text>
+    <text x="130" y="541" fill="#374151">Fix problems in the design phase, not during coding.</text>
+
+    <rect x="60" y="568" width="780" height="68" rx="10" fill="#f3f4f6" stroke="#4b5563" stroke-width="2"/>
+    <text x="90" y="610" font-size="26" font-weight="bold" fill="#1f2937">7</text>
+    <text x="130" y="596" font-weight="bold" fill="#111827">Well-defined roles</text>
+    <text x="130" y="619" fill="#374151">Less conflict and no overlapping responsibilities.</text>
+  </g>
+</svg>

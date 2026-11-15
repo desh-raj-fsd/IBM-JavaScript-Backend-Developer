@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 640" font-family="Helvetica, Arial, sans-serif">
+  <rect width="900" height="640" fill="#ffffff"/>
+  <text x="450" y="42" text-anchor="middle" font-size="26" font-weight="bold" fill="#1f2937">URS, SRS and SysRS: What Each Document Covers</text>
+  <text x="450" y="68" text-anchor="middle" font-size="15" fill="#6b7280">The SysRS is the widest. The SRS covers the software. The URS gives the users' view.</text>
+  <rect x="40" y="95" width="560" height="500" rx="20" fill="#ede9fe" stroke="#7c3aed" stroke-width="2.5"/>
+  <text x="65" y="128" font-size="20" font-weight="bold" fill="#5b21b6">SysRS — entire system</text>
+  <text x="65" y="150" font-size="12" fill="#4c1d95">(ISO 29148 name: SyRS)</text>
+  <g font-size="13" fill="#4c1d95">
+    <text x="65" y="180">▸ system capabilities · interfaces · user characteristics</text>
+    <text x="65" y="202">▸ policy · regulation · personnel requirements</text>
+    <text x="65" y="224">▸ performance · security · system acceptance criteria</text>
+    <text x="65" y="246">▸ hardware expectations</text>
+  </g>
+  <rect x="70" y="270" width="500" height="300" rx="16" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+  <text x="95" y="302" font-size="20" font-weight="bold" fill="#1e40af">SRS — the software</text>
+  <text x="95" y="324" font-size="12" fill="#1e3a8a">most common · functions + benchmarks / service levels</text>
+  <g font-size="13" fill="#1e3a8a">
+    <text x="95" y="352">▸ purpose and scope</text>
+    <text x="95" y="374">▸ constraints · assumptions · dependencies</text>
+    <text x="95" y="396">▸ functional · external interface</text>
+    <text x="95" y="418">▸ system features · non-functional</text>
+  </g>
+  <rect x="100" y="440" width="440" height="110" rx="14" fill="#dcfce7" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="125" y="470" font-size="18" font-weight="bold" fill="#166534">URS — users' needs</text>
+  <text x="125" y="492" font-size="13" fill="#14532d">business need + user expectations</text>
+  <text x="125" y="512" font-size="13" fill="#14532d">user stories / use cases: who · what · why</text>
+  <text x="125" y="532" font-size="12" fill="#166534">often combined into the SRS · checked by UAT</text>
+  <g font-size="13">
+    <rect x="625" y="110" width="245" height="150" rx="12" fill="#f5f3ff" stroke="#7c3aed"/>
+    <text x="747" y="135" text-anchor="middle" font-weight="bold" fill="#5b21b6">Checked by</text>
+    <text x="747" y="160" text-anchor="middle" fill="#4c1d95">system acceptance</text>
+    <text x="747" y="182" text-anchor="middle" fill="#4c1d95">criteria</text>
+    <text x="747" y="215" text-anchor="middle" font-size="12" fill="#6b7280">needed when hardware, people</text>
+    <text x="747" y="233" text-anchor="middle" font-size="12" fill="#6b7280">or rules are part of the system</text>
+    <rect x="625" y="285" width="245" height="130" rx="12" fill="#eff6ff" stroke="#2563eb"/>
+    <text x="747" y="310" text-anchor="middle" font-weight="bold" fill="#1e40af">Checked by</text>
+    <text x="747" y="335" text-anchor="middle" fill="#1e3a8a">software testing</text>
+    <text x="747" y="357" text-anchor="middle" fill="#1e3a8a">against the SRS</text>
+    <text x="747" y="390" text-anchor="middle" font-size="12" fill="#6b7280">Agile: PRD + NFRs + API contract</text>
+    <rect x="625" y="440" width="245" height="110" rx="12" fill="#f0fdf4" stroke="#16a34a"/>
+    <text x="747" y="465" text-anchor="middle" font-weight="bold" fill="#166534">Checked by</text>
+    <text x="747" y="490" text-anchor="middle" fill="#14532d">UAT (User Acceptance</text>
+    <text x="747" y="510" text-anchor="middle" fill="#14532d">Testing)</text>
+    <text x="747" y="536" text-anchor="middle" font-size="12" fill="#6b7280">Agile: user stories + criteria</text>
+  </g>
+  <text x="450" y="620" text-anchor="middle" font-size="12" fill="#6b7280">ISO/IEC/IEEE 29148:2018 also defines a BRS (Business Requirements Specification) above these</text>
+</svg>

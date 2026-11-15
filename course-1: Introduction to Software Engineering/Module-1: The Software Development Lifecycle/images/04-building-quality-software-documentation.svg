@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" font-family="Helvetica, Arial, sans-serif">
+  <rect width="900" height="520" fill="#ffffff"/>
+  <text x="450" y="44" text-anchor="middle" font-size="26" font-weight="bold" fill="#1f2937">Software Documentation: Two Audiences</text>
+  <rect x="330" y="70" width="240" height="46" rx="10" fill="#e5e7eb" stroke="#6b7280"/>
+  <text x="450" y="99" text-anchor="middle" font-size="16" font-weight="bold" fill="#374151">Documentation</text>
+  <g stroke="#6b7280" stroke-width="2" fill="none"><path d="M400,116 L230,150"/><path d="M500,116 L670,150"/></g>
+  <rect x="40" y="150" width="380" height="330" rx="14" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+  <text x="230" y="185" text-anchor="middle" font-size="20" font-weight="bold" fill="#5b21b6">System documentation</text>
+  <text x="230" y="210" text-anchor="middle" font-size="13" fill="#4c1d95">for TECHNICAL users</text>
+  <text x="230" y="230" text-anchor="middle" font-size="13" fill="#4c1d95">engineers · developers · architects</text>
+  <g font-size="14" fill="#4c1d95">
+    <text x="80" y="275">▸ README files</text>
+    <text x="80" y="305">▸ Inline comments</text>
+    <text x="80" y="335">▸ Architecture and design documents</text>
+    <text x="80" y="365">▸ Verification information</text>
+    <text x="80" y="395">▸ Maintenance guides</text>
+  </g>
+  <text x="230" y="450" text-anchor="middle" font-size="12" fill="#6d28d9">today: docs as code · OpenAPI · ADRs · runbooks</text>
+  <rect x="480" y="150" width="380" height="330" rx="14" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+  <text x="670" y="185" text-anchor="middle" font-size="20" font-weight="bold" fill="#075985">User documentation</text>
+  <text x="670" y="210" text-anchor="middle" font-size="13" fill="#0c4a6e">for NON-TECHNICAL end users</text>
+  <text x="670" y="230" text-anchor="middle" font-size="13" fill="#0c4a6e">helps them use the product</text>
+  <g font-size="14" fill="#0c4a6e">
+    <text x="520" y="275">▸ User guides</text>
+    <text x="520" y="305">▸ Instructional videos and manuals</text>
+    <text x="520" y="335">▸ Online help</text>
+    <text x="520" y="365">▸ Inline help (tooltips, hints)</text>
+  </g>
+  <text x="670" y="450" text-anchor="middle" font-size="12" fill="#0369a1">today: help center · release notes · in-app guidance</text>
+</svg>

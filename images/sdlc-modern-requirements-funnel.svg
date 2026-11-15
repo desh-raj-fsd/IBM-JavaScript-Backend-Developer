@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4b5563"/>
+    </marker>
+  </defs>
+  <rect width="900" height="600" fill="#ffffff"/>
+  <text x="450" y="42" text-anchor="middle" font-size="26" font-weight="bold" fill="#1f2937">Planning: Broad First, Detail Later</text>
+  <text x="450" y="68" text-anchor="middle" font-size="15" fill="#6b7280">Know the whole map first; draw the detailed roads just before you travel them</text>
+
+  <!-- funnel layers -->
+  <polygon points="80,100 640,100 600,190 120,190" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="360" y="138" text-anchor="middle" font-size="19" font-weight="bold" fill="#1e40af">Vision and scope (light SRS)</text>
+  <text x="360" y="164" text-anchor="middle" font-size="13" fill="#1e3a8a">"Readers can share and read book reviews"</text>
+
+  <polygon points="125,200 595,200 555,290 165,290" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+  <text x="360" y="238" text-anchor="middle" font-size="19" font-weight="bold" fill="#5b21b6">Epics</text>
+  <text x="360" y="264" text-anchor="middle" font-size="13" fill="#4c1d95">User accounts • Reviews • Search</text>
+
+  <polygon points="170,300 550,300 510,390 210,390" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="360" y="338" text-anchor="middle" font-size="19" font-weight="bold" fill="#166534">User stories</text>
+  <text x="360" y="364" text-anchor="middle" font-size="13" fill="#14532d">"As a reader, I want to rate a book 1–5"</text>
+
+  <polygon points="215,400 505,400 465,490 255,490" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text x="360" y="438" text-anchor="middle" font-size="18" font-weight="bold" fill="#92400e">Acceptance criteria</text>
+  <text x="360" y="464" text-anchor="middle" font-size="13" fill="#78350f">rating 0 or 6 → 400; no login → 401</text>
+
+  <!-- arrow out -->
+  <line x1="360" y1="490" x2="360" y2="530" stroke="#4b5563" stroke-width="2.5" marker-end="url(#arr)"/>
+  <rect x="250" y="535" width="220" height="44" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+  <text x="360" y="563" text-anchor="middle" font-size="16" font-weight="bold" fill="#991b1b">Build in this sprint</text>
+
+  <!-- right side: when -->
+  <g font-size="14" fill="#374151">
+    <text x="670" y="140" font-weight="bold">When written</text>
+    <text x="670" y="162">project start</text>
+    <text x="670" y="240" font-weight="bold">When written</text>
+    <text x="670" y="262">project start, roughly</text>
+    <text x="670" y="340" font-weight="bold">When written</text>
+    <text x="670" y="362">backlog refinement</text>
+    <text x="670" y="440" font-weight="bold">When written</text>
+    <text x="670" y="462">with each story</text>
+  </g>
+  <!-- detail axis -->
+  <line x1="40" y1="110" x2="40" y2="480" stroke="#9ca3af" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="30" y="300" text-anchor="middle" font-size="13" fill="#6b7280" transform="rotate(-90 30 300)">more detail, later in time</text>
+
+  <!-- feedback loop -->
+  <path d="M470 557 Q 860 557 860 300 Q 860 112 645 112" fill="none" stroke="#dc2626" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arr)"/>
+  <text x="740" y="530" font-size="13" fill="#991b1b">feedback adds, changes,</text>
+  <text x="740" y="547" font-size="13" fill="#991b1b">removes backlog items</text>
+</svg>

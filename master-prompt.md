@@ -33,8 +33,10 @@ Analyze the provided transcript, lecture subtitles, or rough notes (see [Source 
 | 2 | **Images** — conceptual visuals embedded in the notes | `images/` | `01-[topic]-[short-name].svg` (or `.png` / `.jpg`) |
 
 - Extract **every detail** from the source text, no matter how minor, and supplement it with your expert knowledge where necessary.
-- If the source text contains inaccuracies, outdated practices, or oversimplifications, explicitly flag them with:
+- **The lecture is the starting point, not the limit.** Lectures may have been recorded years ago or may simplify the topic, so they can miss practices that the industry adopted later. Actively **add any important industry concept, practice, tool or standard that is missing from the lecture** — anything a professional backend engineer is expected to know or would be asked in an interview about this topic. Mark these additions clearly (for example "not in the lecture — industry practice") so lecture facts and additions stay distinguishable.
+- If the source text contains a **factual error or a confusing/contradictory statement**, explicitly flag it with:
   ⚠️ **Correction:** [What's wrong] → [What's correct and why]
+- If the source text teaches an **outdated practice or an oversimplified view of how the industry works today**, do **not** only flag it. **Update the notes to teach the current industry best practice** in a dedicated block (see [Modern Best Practice Blocks](#64-modern-best-practice-blocks)). Keep the lecture's original statement visible, because course quizzes test the lecture wording.
 
 ---
 
@@ -44,7 +46,7 @@ Because the output requirements are highly detailed, follow this strict, step-by
 
 1. **Analyze:** Thoroughly read and analyze the provided transcript.
 2. **Generate First Section:** Generate the first major section of the notes (following the order in [Output 1](#6-output-1-the-notes-01-topicmd)).
-3. **Verify & Refactor:** Immediately compare the generated section against the raw transcript. If it misses any details or deviates from the structure, refactor it before moving on.
+3. **Verify & Refactor:** Immediately compare the generated section against the raw transcript. If it misses any details or deviates from the structure, refactor it before moving on. Also check the section against current industry best practice and add any needed **Modern Best Practice** blocks (see [6.4](#64-modern-best-practice-blocks)).
 4. **Iterate:** Move to the next section and generate it. Again, check it against the transcript and refactor if needed. Repeat this process strictly section-by-section.
 5. **Generate Images:** Create the images described in [Output 2](#7-output-2-the-images-images) and confirm every embedded image path in the notes points to a real file.
 6. **Final Audit:** Once the entire file is generated, do a final comprehensive comparison of the complete file against the original transcript. If anything was missed, refactor the final file to ensure 100% coverage.
@@ -75,11 +77,30 @@ Do **NOT** provide high-level summaries. Extract every single detail, nuance, an
   - At least **one Mermaid architectural or flow diagram per major topic** (follow the [Mermaid Diagram Rules](#8-mermaid-diagram-rules)).
   - Conceptual images from [Output 2](#7-output-2-the-images-images), embedded where they make the most sense.
 
-### 6.4 Concrete Examples
+### 6.4 Modern Best Practice Blocks
+
+These blocks are part of the Deep Dive (6.3), not a separate section. Whenever a concept in the lecture is taught in an outdated, purely traditional, or oversimplified way, add a block **directly under that concept** so the notes teach how professional teams work **today**:
+
+- **Heading:** give it its own heading, for example `#### 3.5.3 ✅ Modern Best Practice: shift-left testing`.
+- **Lecture vs. industry:** open with a two-line quote:
+
+  ```markdown
+  > **Lecture says:** [the lecture's statement, kept for quiz/exam purposes]
+  > **Industry today:** [one-sentence summary of current practice]
+  ```
+
+- **How it is done today:** nested bullets with the concrete practices, named tools (for example GitHub Actions, ESLint, OpenTelemetry), and the **why** (what problem the modern practice solves that the old one did not).
+- **Visuals and code:** add a comparison table (old vs. modern), a Mermaid diagram, or a short config/code example (for example a CI workflow YAML or an OpenAPI snippet) where it helps.
+- **Coverage areas to always check:** Agile and iterative delivery, CI/CD and DevOps, shift-left testing and TDD, security by design (OWASP, DevSecOps, secret management, dependency scanning), observability (logs, metrics, traces, SLOs), cloud-native deployment (containers, Kubernetes, safe release strategies), current Node.js/Express versions and APIs, and responsible use of AI coding tools.
+- **Summary table:** if the lecture has a summary table, add a `✅ Modern best practice` column to it.
+- **Gap check:** after covering the lecture, ask "what would a senior engineer add that the lecture never mentions?" and add it in its own clearly labeled subsection (for example "Often-missed parts" or "The areas a complete design must cover"), followed by a "done enough when…" checklist for the topic.
+- **Accuracy:** only describe practices that are widely adopted in the industry now. Do not invent tools, versions, or statistics.
+
+### 6.5 Concrete Examples
 
 Provide real-world or conceptual examples to anchor the theoretical points. Where possible, relate examples to the projects in this course: REST APIs, Express middleware, Dockerfiles, Kubernetes manifests, or database schemas.
 
-### 6.5 Code Blocks
+### 6.6 Code Blocks
 
 Provide code examples in **JavaScript/Node.js** (primary), along with JSON, SQL, or YAML — only where code is actually needed to explain the logic, not everywhere. Each code example must include:
 
@@ -88,7 +109,7 @@ Provide code examples in **JavaScript/Node.js** (primary), along with JSON, SQL,
 - A **"What happens if..."** variation showing a common mistake or edge case (e.g., missing error handling in async routes).
 - For Docker/Kubernetes/CLI-related topics, shell commands in `bash` code blocks.
 
-### 6.6 Related Concepts
+### 6.7 Related Concepts
 
 List **5** closely related backend engineering, JavaScript, or DevOps concepts and briefly explain how each one connects to this topic.
 
