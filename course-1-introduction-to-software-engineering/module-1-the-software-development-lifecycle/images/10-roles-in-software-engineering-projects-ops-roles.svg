@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" font-family="Helvetica, Arial, sans-serif">
+  <rect width="900" height="560" fill="#ffffff"/>
+  <text x="450" y="36" text-anchor="middle" font-size="24" font-weight="bold" fill="#1f2937">Four Jobs Around Running Software</text>
+  <text x="450" y="60" text-anchor="middle" font-size="14" fill="#6b7280">An SRE is not an ops engineer - each role has a different focus</text>
+  <rect x="40" y="84" width="400" height="46" rx="8" fill="#374151"/>
+  <text x="240" y="113" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">Ops engineer / system administrator</text>
+  <rect x="40" y="138" width="400" height="130" rx="8" fill="#f3f4f6" stroke="#374151" stroke-width="1.5"/>
+  <text x="64" y="174" font-size="14" fill="#1f2937">• Keeps servers and systems running</text>
+  <text x="64" y="208" font-size="14" fill="#1f2937">• Installs, patches, backs up, monitors</text>
+  <text x="64" y="242" font-size="14" fill="#1f2937">• Much of the work is done by hand</text>
+  <rect x="460" y="84" width="400" height="46" rx="8" fill="#1e40af"/>
+  <text x="660" y="113" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">SRE - Site Reliability Engineer</text>
+  <rect x="460" y="138" width="400" height="130" rx="8" fill="#dbeafe" stroke="#1e40af" stroke-width="1.5"/>
+  <text x="484" y="174" font-size="14" fill="#1e3a8a">• Software engineer for reliability</text>
+  <text x="484" y="208" font-size="14" fill="#1e3a8a">• SLIs, SLOs, error budgets, on-call</text>
+  <text x="484" y="242" font-size="14" fill="#1e3a8a">• Automates toil; blameless postmortems</text>
+  <rect x="40" y="290" width="400" height="46" rx="8" fill="#047857"/>
+  <text x="240" y="319" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">DevOps engineer (job title)</text>
+  <rect x="40" y="344" width="400" height="130" rx="8" fill="#d1fae5" stroke="#047857" stroke-width="1.5"/>
+  <text x="64" y="380" font-size="14" fill="#065f46">• Builds the delivery pipeline</text>
+  <text x="64" y="414" font-size="14" fill="#065f46">• CI/CD, Infrastructure as Code</text>
+  <text x="64" y="448" font-size="14" fill="#065f46">• Containers and cloud automation</text>
+  <rect x="460" y="290" width="400" height="46" rx="8" fill="#7c3aed"/>
+  <text x="660" y="319" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">Platform engineer</text>
+  <rect x="460" y="344" width="400" height="130" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="484" y="380" font-size="14" fill="#4c1d95">• Builds an internal developer platform</text>
+  <text x="484" y="414" font-size="14" fill="#4c1d95">• Self-service environments, templates</text>
+  <text x="484" y="448" font-size="14" fill="#4c1d95">• Treats other teams as its customers</text>
+  <rect x="40" y="496" width="820" height="48" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <text x="450" y="516" text-anchor="middle" font-size="13" fill="#78350f">DevOps is a culture all four share: build it, run it, and improve it together.</text>
+  <text x="450" y="535" text-anchor="middle" font-size="13" fill="#78350f">Google caps an SRE’s manual ops work at 50% - the rest is engineering.</text>
+</svg>

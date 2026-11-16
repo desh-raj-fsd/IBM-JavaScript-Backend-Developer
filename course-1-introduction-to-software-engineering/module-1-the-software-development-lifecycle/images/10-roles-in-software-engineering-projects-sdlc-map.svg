@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" font-family="Helvetica, Arial, sans-serif">
+  <rect width="900" height="620" fill="#ffffff"/>
+  <text x="450" y="36" text-anchor="middle" font-size="24" font-weight="bold" fill="#1f2937">Who Leads Each SDLC Phase</text>
+  <text x="450" y="60" text-anchor="middle" font-size="14" fill="#6b7280">The nine lecture roles across the life cycle - one person can wear several hats</text>
+  <text x="140" y="96" text-anchor="middle" font-size="13" font-weight="bold" fill="#374151">Phase</text>
+  <text x="430" y="96" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e3a8a">Leads</text>
+  <text x="740" y="96" text-anchor="middle" font-size="13" font-weight="bold" fill="#065f46">Supports</text>
+  <rect x="40" y="108" width="200" height="56" rx="8" fill="#374151"/>
+  <text x="140" y="142" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">1. Planning</text>
+  <rect x="260" y="108" width="340" height="56" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="430" y="142" text-anchor="middle" font-size="14" fill="#1e3a8a">Product owner, stakeholders</text>
+  <rect x="620" y="108" width="240" height="56" rx="8" fill="#d1fae5" stroke="#059669" stroke-width="1.5"/>
+  <text x="740" y="142" text-anchor="middle" font-size="13" fill="#065f46">Scrum Master, architect</text>
+  <rect x="40" y="174" width="200" height="56" rx="8" fill="#374151"/>
+  <text x="140" y="208" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">2. Design</text>
+  <rect x="260" y="174" width="340" height="56" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="430" y="208" text-anchor="middle" font-size="14" fill="#1e3a8a">Architect, UX designer</text>
+  <rect x="620" y="174" width="240" height="56" rx="8" fill="#d1fae5" stroke="#059669" stroke-width="1.5"/>
+  <text x="740" y="208" text-anchor="middle" font-size="13" fill="#065f46">Developers, QA, tech writer</text>
+  <rect x="40" y="240" width="200" height="56" rx="8" fill="#374151"/>
+  <text x="140" y="274" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">3. Development</text>
+  <rect x="260" y="240" width="340" height="56" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="430" y="274" text-anchor="middle" font-size="14" fill="#1e3a8a">Developers</text>
+  <rect x="620" y="240" width="240" height="56" rx="8" fill="#d1fae5" stroke="#059669" stroke-width="1.5"/>
+  <text x="740" y="274" text-anchor="middle" font-size="13" fill="#065f46">UX designer, architect, QA</text>
+  <rect x="40" y="306" width="200" height="56" rx="8" fill="#374151"/>
+  <text x="140" y="340" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">4. Testing</text>
+  <rect x="260" y="306" width="340" height="56" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="430" y="340" text-anchor="middle" font-size="14" fill="#1e3a8a">QA engineers + the whole team</text>
+  <rect x="620" y="306" width="240" height="56" rx="8" fill="#d1fae5" stroke="#059669" stroke-width="1.5"/>
+  <text x="740" y="340" text-anchor="middle" font-size="13" fill="#065f46">Stakeholders - beta and UAT</text>
+  <rect x="40" y="372" width="200" height="56" rx="8" fill="#374151"/>
+  <text x="140" y="406" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">5. Deployment</text>
+  <rect x="260" y="372" width="340" height="56" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="430" y="406" text-anchor="middle" font-size="14" fill="#1e3a8a">Developers, SRE</text>
+  <rect x="620" y="372" width="240" height="56" rx="8" fill="#d1fae5" stroke="#059669" stroke-width="1.5"/>
+  <text x="740" y="406" text-anchor="middle" font-size="13" fill="#065f46">Product owner, tech writer</text>
+  <rect x="40" y="438" width="200" height="56" rx="8" fill="#374151"/>
+  <text x="140" y="472" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">6. Maintenance</text>
+  <rect x="260" y="438" width="340" height="56" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="430" y="472" text-anchor="middle" font-size="14" fill="#1e3a8a">SRE, developers</text>
+  <rect x="620" y="438" width="240" height="56" rx="8" fill="#d1fae5" stroke="#059669" stroke-width="1.5"/>
+  <text x="740" y="472" text-anchor="middle" font-size="13" fill="#065f46">Product owner, tech writer</text>
+  <rect x="40" y="508" width="820" height="66" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <text x="450" y="534" text-anchor="middle" font-size="14" font-weight="bold" fill="#78350f">In every phase: a project manager (traditional) runs the plan, or a Scrum Master coaches;</text>
+  <text x="450" y="556" text-anchor="middle" font-size="14" font-weight="bold" fill="#78350f">the product owner owns the value; stakeholders give feedback every sprint</text>
+  <text x="450" y="600" text-anchor="middle" font-size="12" fill="#6b7280">In Scrum the phases repeat in every sprint, so all roles work together all the time - not one after another</text>
+</svg>
