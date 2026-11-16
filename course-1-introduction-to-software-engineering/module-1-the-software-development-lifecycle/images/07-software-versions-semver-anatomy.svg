@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4b5563"/>
+    </marker>
+  </defs>
+  <rect width="900" height="600" fill="#ffffff"/>
+  <text x="450" y="38" text-anchor="middle" font-size="25" font-weight="bold" fill="#1f2937">Anatomy of a Semantic Version (SemVer 2.0.0)</text>
+  <text x="450" y="62" text-anchor="middle" font-size="14" fill="#6b7280">Three required parts, plus two optional labels — the numbers describe compatibility, not size</text>
+
+  <!-- the version string -->
+  <g font-family="Menlo, Consolas, monospace" font-size="46" font-weight="bold" text-anchor="middle">
+    <rect x="70" y="96" width="90" height="70" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="2.5"/>
+    <text x="115" y="148" fill="#991b1b">2</text>
+    <text x="178" y="148" fill="#6b7280">.</text>
+    <rect x="196" y="96" width="90" height="70" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
+    <text x="241" y="148" fill="#92400e">4</text>
+    <text x="304" y="148" fill="#6b7280">.</text>
+    <rect x="322" y="96" width="90" height="70" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2.5"/>
+    <text x="367" y="148" fill="#166534">1</text>
+    <rect x="426" y="96" width="210" height="70" rx="10" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+    <text x="531" y="146" font-size="36" fill="#5b21b6">-beta.2</text>
+    <rect x="650" y="96" width="190" height="70" rx="10" fill="#f3f4f6" stroke="#6b7280" stroke-width="2"/>
+    <text x="745" y="146" font-size="36" fill="#374151">+b.817</text>
+  </g>
+
+  <!-- labels -->
+  <g font-size="14" font-weight="bold" text-anchor="middle">
+    <text x="115" y="192" fill="#991b1b">MAJOR</text>
+    <text x="241" y="192" fill="#92400e">MINOR</text>
+    <text x="367" y="192" fill="#166534">PATCH</text>
+    <text x="531" y="192" fill="#5b21b6">pre-release (optional)</text>
+    <text x="745" y="192" fill="#374151">build metadata (optional)</text>
+  </g>
+
+  <!-- meaning boxes -->
+  <g font-size="12">
+    <rect x="24" y="210" width="182" height="150" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+    <text x="115" y="234" text-anchor="middle" font-weight="bold" fill="#991b1b">Breaking change</text>
+    <text x="36" y="258" fill="#7f1d1d">• removed or renamed API</text>
+    <text x="36" y="278" fill="#7f1d1d">• changed field type</text>
+    <text x="36" y="298" fill="#7f1d1d">• required field added</text>
+    <text x="36" y="326" fill="#7f1d1d" font-weight="bold">resets MINOR and</text>
+    <text x="36" y="344" fill="#7f1d1d" font-weight="bold">PATCH to 0</text>
+
+    <rect x="214" y="210" width="182" height="150" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+    <text x="305" y="234" text-anchor="middle" font-weight="bold" fill="#92400e">New feature</text>
+    <text x="226" y="258" fill="#78350f">• new endpoint</text>
+    <text x="226" y="278" fill="#78350f">• new optional field</text>
+    <text x="226" y="298" fill="#78350f">• old code still works</text>
+    <text x="226" y="326" fill="#78350f" font-weight="bold">resets PATCH to 0</text>
+
+    <rect x="404" y="210" width="182" height="150" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="495" y="234" text-anchor="middle" font-weight="bold" fill="#166534">Bug fix only</text>
+    <text x="416" y="258" fill="#14532d">• crash fixed</text>
+    <text x="416" y="278" fill="#14532d">• security patch</text>
+    <text x="416" y="298" fill="#14532d">• nothing new, nothing</text>
+    <text x="416" y="314" fill="#14532d">  broken</text>
+
+    <rect x="594" y="210" width="282" height="150" rx="10" fill="#f9fafb" stroke="#9ca3af" stroke-width="1.5"/>
+    <text x="735" y="234" text-anchor="middle" font-weight="bold" fill="#374151">The optional labels</text>
+    <text x="606" y="258" fill="#5b21b6"><tspan font-weight="bold">-beta.2</tspan> = not stable yet;</text>
+    <text x="606" y="276" fill="#5b21b6">lower than 2.4.1 itself</text>
+    <text x="606" y="304" fill="#374151"><tspan font-weight="bold">+b.817</tspan> = build number or date;</text>
+    <text x="606" y="322" fill="#374151">IGNORED when deciding which</text>
+    <text x="606" y="340" fill="#374151">version is newer</text>
+  </g>
+
+  <!-- precedence line -->
+  <text x="450" y="398" text-anchor="middle" font-size="15" font-weight="bold" fill="#1f2937">Order (lowest → highest)</text>
+  <line x1="60" y1="440" x2="850" y2="440" stroke="#4b5563" stroke-width="2" marker-end="url(#arr)"/>
+  <g font-family="Menlo, Consolas, monospace" font-size="12" text-anchor="middle" fill="#374151">
+    <circle cx="90" cy="440" r="6" fill="#7c3aed"/><text x="90" y="466">1.0.0-alpha</text>
+    <circle cx="215" cy="440" r="6" fill="#7c3aed"/><text x="215" y="424">1.0.0-beta.2</text>
+    <circle cx="335" cy="440" r="6" fill="#7c3aed"/><text x="335" y="466">1.0.0-beta.11</text>
+    <circle cx="450" cy="440" r="6" fill="#7c3aed"/><text x="450" y="424">1.0.0-rc.1</text>
+    <circle cx="555" cy="440" r="7" fill="#16a34a"/><text x="555" y="466">1.0.0</text>
+    <circle cx="640" cy="440" r="7" fill="#16a34a"/><text x="640" y="424">1.9.0</text>
+    <circle cx="725" cy="440" r="7" fill="#16a34a"/><text x="725" y="466">1.10.0</text>
+    <circle cx="810" cy="440" r="7" fill="#dc2626"/><text x="810" y="424">2.0.0</text>
+  </g>
+
+  <!-- not semver -->
+  <rect x="24" y="494" width="852" height="88" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="1.5"/>
+  <text x="44" y="520" font-size="14" font-weight="bold" fill="#92400e">Four parts? That is a different scheme, not SemVer</text>
+  <text x="44" y="544" font-size="13" fill="#78350f">Chrome: MAJOR.MINOR.BUILD.PATCH (120.0.6099.109) · Windows / .NET: major.minor.build.revision</text>
+  <text x="44" y="566" font-size="13" fill="#78350f">Numbers are compared as numbers: 1.10.0 is newer than 1.9.0 · a released version is never changed</text>
+</svg>

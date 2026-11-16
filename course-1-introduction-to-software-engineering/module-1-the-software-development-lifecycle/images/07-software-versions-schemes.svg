@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4b5563"/>
+    </marker>
+  </defs>
+  <rect width="900" height="600" fill="#ffffff"/>
+  <text x="450" y="38" text-anchor="middle" font-size="25" font-weight="bold" fill="#1f2937">Three Common Version Schemes</text>
+  <text x="450" y="62" text-anchor="middle" font-size="14" fill="#6b7280">The scheme decides how many parts there are — not the number of releases</text>
+
+  <!-- SemVer -->
+  <rect x="24" y="86" width="852" height="140" rx="12" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="44" y="114" font-size="17" font-weight="bold" fill="#166534">SemVer — 3 parts: MAJOR.MINOR.PATCH</text>
+  <text x="44" y="134" font-size="12" fill="#14532d">npm packages, Node.js, Express, most libraries and APIs</text>
+  <g font-family="Menlo, Consolas, monospace" font-size="26" font-weight="bold" fill="#166534">
+    <text x="44" y="186">5.1.0</text>
+  </g>
+  <g font-size="12" fill="#14532d">
+    <text x="190" y="170">• 5 = breaking changes since 4.x</text>
+    <text x="190" y="190">• 1 = backward-compatible features</text>
+    <text x="190" y="210">• 0 = no fixes yet in this minor</text>
+    <text x="520" y="170" font-weight="bold">Answers the question:</text>
+    <text x="520" y="190">"Will upgrading break my code?"</text>
+    <text x="520" y="210">Optional: -beta.1 (pre-release), +build.7</text>
+  </g>
+
+  <!-- 4-part -->
+  <rect x="24" y="240" width="852" height="140" rx="12" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="44" y="268" font-size="17" font-weight="bold" fill="#1e40af">Four-part — MAJOR.MINOR.BUILD.PATCH (Chrome)</text>
+  <text x="44" y="288" font-size="12" fill="#1e3a8a">browsers; Windows and .NET use major.minor.build.revision</text>
+  <g font-family="Menlo, Consolas, monospace" font-size="26" font-weight="bold" fill="#1e40af">
+    <text x="44" y="340">120.0.6099.109</text>
+  </g>
+  <g font-size="12" fill="#1e3a8a">
+    <text x="330" y="324">• 120 = major release</text>
+    <text x="330" y="344">• 6099 = build number</text>
+    <text x="330" y="364">• 109 = patch of that build</text>
+    <text x="580" y="324" font-weight="bold">Answers the question:</text>
+    <text x="580" y="344">"Which exact build am I running?"</text>
+    <text x="580" y="364">Find it: ⋮ → Help → About Google Chrome</text>
+  </g>
+
+  <!-- CalVer -->
+  <rect x="24" y="394" width="852" height="190" rx="12" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text x="44" y="422" font-size="17" font-weight="bold" fill="#92400e">CalVer — date-based: YY.MM (+ point release)</text>
+  <text x="44" y="442" font-size="12" fill="#78350f">Ubuntu, pip (YY.N), JetBrains IDEs (2024.3) — answers "how old is it?"</text>
+  <line x1="70" y1="510" x2="840" y2="510" stroke="#4b5563" stroke-width="2" marker-end="url(#arr)"/>
+  <g font-size="12" text-anchor="middle" fill="#78350f">
+    <circle cx="140" cy="510" r="9" fill="#d97706"/>
+    <text x="140" y="488" font-family="Menlo, Consolas, monospace" font-size="16" font-weight="bold" fill="#92400e">18.04</text>
+    <text x="140" y="538">April 2018</text>
+    <text x="140" y="556">LTS release</text>
+    <circle cx="400" cy="510" r="7" fill="#f59e0b"/>
+    <text x="400" y="488" font-family="Menlo, Consolas, monospace" font-size="16" font-weight="bold" fill="#92400e">18.04.1</text>
+    <text x="400" y="538">July 2018</text>
+    <text x="400" y="556">1st point release</text>
+    <circle cx="660" cy="510" r="7" fill="#f59e0b"/>
+    <text x="660" y="488" font-family="Menlo, Consolas, monospace" font-size="16" font-weight="bold" fill="#92400e">18.04.2</text>
+    <text x="660" y="538">February 2019</text>
+    <text x="660" y="556">2nd point release</text>
+  </g>
+  <text x="840" y="574" text-anchor="end" font-size="11" fill="#78350f">18 = year, 04 = month; the third part counts point releases</text>
+</svg>

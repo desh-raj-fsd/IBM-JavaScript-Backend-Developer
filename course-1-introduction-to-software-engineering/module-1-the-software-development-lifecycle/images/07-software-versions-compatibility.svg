@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrg" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/>
+    </marker>
+    <marker id="arrb" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/>
+    </marker>
+  </defs>
+  <rect width="900" height="600" fill="#ffffff"/>
+  <text x="450" y="38" text-anchor="middle" font-size="25" font-weight="bold" fill="#1f2937">Compatibility Between Versions</text>
+  <text x="450" y="62" text-anchor="middle" font-size="14" fill="#6b7280">Old and new versions often run at the same time — design so they keep working together</text>
+
+  <!-- backward -->
+  <rect x="24" y="84" width="420" height="230" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="234" y="112" text-anchor="middle" font-size="17" font-weight="bold" fill="#166534">Backward compatibility</text>
+  <text x="234" y="132" text-anchor="middle" font-size="12" fill="#14532d">the NEW version works with OLD clients, files, data</text>
+  <rect x="54" y="160" width="140" height="56" rx="8" fill="#ffffff" stroke="#6b7280" stroke-width="2"/>
+  <text x="124" y="184" text-anchor="middle" font-size="13" font-weight="bold" fill="#374151">Old client</text>
+  <text x="124" y="203" text-anchor="middle" font-size="11" fill="#4b5563">built for API 2.0</text>
+  <rect x="274" y="160" width="140" height="56" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="344" y="184" text-anchor="middle" font-size="13" font-weight="bold" fill="#166534">New server</text>
+  <text x="344" y="203" text-anchor="middle" font-size="11" fill="#14532d">API 2.3</text>
+  <line x1="196" y1="188" x2="270" y2="188" stroke="#16a34a" stroke-width="2.5" marker-end="url(#arrg)"/>
+  <text x="234" y="246" text-anchor="middle" font-size="12" fill="#14532d">✔ still works: 2.3 only ADDED things</text>
+  <text x="234" y="266" text-anchor="middle" font-size="12" fill="#14532d">(new endpoint, new optional field)</text>
+  <text x="234" y="294" text-anchor="middle" font-size="11" fill="#6b7280">like a new DVD player that plays old DVDs</text>
+
+  <!-- forward -->
+  <rect x="456" y="84" width="420" height="230" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="666" y="112" text-anchor="middle" font-size="17" font-weight="bold" fill="#1e40af">Forward compatibility</text>
+  <text x="666" y="132" text-anchor="middle" font-size="12" fill="#1e3a8a">the OLD version copes with NEW data or messages</text>
+  <rect x="486" y="160" width="140" height="56" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="556" y="184" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e40af">New server</text>
+  <text x="556" y="203" text-anchor="middle" font-size="11" fill="#1e3a8a">adds "badges" field</text>
+  <rect x="706" y="160" width="140" height="56" rx="8" fill="#ffffff" stroke="#6b7280" stroke-width="2"/>
+  <text x="776" y="184" text-anchor="middle" font-size="13" font-weight="bold" fill="#374151">Old mobile app</text>
+  <text x="776" y="203" text-anchor="middle" font-size="11" fill="#4b5563">from last year</text>
+  <line x1="628" y1="188" x2="702" y2="188" stroke="#2563eb" stroke-width="2.5" marker-end="url(#arrb)"/>
+  <text x="666" y="246" text-anchor="middle" font-size="12" fill="#1e3a8a">✔ still works: the app IGNORES</text>
+  <text x="666" y="266" text-anchor="middle" font-size="12" fill="#1e3a8a">fields it does not know (tolerant reader)</text>
+  <text x="666" y="294" text-anchor="middle" font-size="11" fill="#6b7280">like an old radio playing a new station</text>
+
+  <!-- breaking -->
+  <rect x="24" y="330" width="852" height="170" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="450" y="358" text-anchor="middle" font-size="17" font-weight="bold" fill="#991b1b">A breaking change (rename "isbn" → "bookId") needs a new MAJOR version</text>
+  <rect x="54" y="380" width="170" height="52" rx="8" fill="#ffffff" stroke="#6b7280" stroke-width="2"/>
+  <text x="139" y="411" text-anchor="middle" font-size="13" font-weight="bold" fill="#374151">Old clients</text>
+  <rect x="364" y="372" width="170" height="40" rx="8" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+  <text x="449" y="397" text-anchor="middle" font-size="13" font-weight="bold" fill="#991b1b">/v1 — deprecated</text>
+  <rect x="364" y="420" width="170" height="40" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="449" y="445" text-anchor="middle" font-size="13" font-weight="bold" fill="#166534">/v2 — new contract</text>
+  <rect x="674" y="420" width="170" height="40" rx="8" fill="#ffffff" stroke="#6b7280" stroke-width="2"/>
+  <text x="759" y="445" text-anchor="middle" font-size="13" font-weight="bold" fill="#374151">New clients</text>
+  <line x1="226" y1="400" x2="360" y2="392" stroke="#dc2626" stroke-width="2" marker-end="url(#arrr)"/>
+  <line x1="672" y1="440" x2="538" y2="440" stroke="#16a34a" stroke-width="2" marker-end="url(#arrg)"/>
+  <text x="560" y="392" font-size="12" fill="#7f1d1d">headers: Deprecation + Sunset (removal date)</text>
+  <text x="450" y="486" text-anchor="middle" font-size="12" fill="#7f1d1d">both run in parallel until the sunset date and until /v1 traffic has dropped — then /v1 is removed</text>
+
+  <!-- troubleshooting -->
+  <rect x="24" y="514" width="852" height="70" rx="10" fill="#f9fafb" stroke="#9ca3af" stroke-width="1.5"/>
+  <text x="44" y="540" font-size="14" font-weight="bold" fill="#374151">Troubleshooting: check the versions first</text>
+  <text x="44" y="562" font-size="13" fill="#374151">outdated or end-of-life? → read the release notes, then update · just moved to a new MAJOR? → follow the migration guide</text>
+</svg>
