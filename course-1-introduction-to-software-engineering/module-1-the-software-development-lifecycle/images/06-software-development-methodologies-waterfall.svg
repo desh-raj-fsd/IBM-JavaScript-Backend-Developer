@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4b5563"/>
+    </marker>
+    <marker id="arrr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/>
+    </marker>
+  </defs>
+  <rect width="900" height="600" fill="#ffffff"/>
+  <text x="450" y="38" text-anchor="middle" font-size="25" font-weight="bold" fill="#1f2937">Waterfall: One Phase at a Time, Top to Bottom</text>
+  <text x="450" y="62" text-anchor="middle" font-size="14" fill="#6b7280">The output of each phase is the input of the next; a phase starts only when the one before is complete</text>
+
+  <!-- up-front bracket -->
+  <rect x="24" y="84" width="420" height="132" rx="12" fill="none" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="34" y="104" font-size="12" font-weight="bold" fill="#1e40af">ALL PLANNING UP FRONT</text>
+
+  <!-- steps -->
+  <g font-size="16" font-weight="bold" text-anchor="middle">
+    <rect x="44" y="112" width="190" height="46" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="139" y="141" fill="#1e40af">1. Planning</text>
+    <rect x="164" y="166" width="190" height="46" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="259" y="195" fill="#1e40af">2. Design</text>
+    <rect x="284" y="232" width="190" height="46" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <text x="379" y="261" fill="#166534">3. Development</text>
+    <rect x="404" y="298" width="190" height="46" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
+    <text x="499" y="327" fill="#92400e">4. Testing</text>
+    <rect x="524" y="364" width="190" height="46" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+    <text x="619" y="393" fill="#5b21b6">5. Deployment</text>
+    <rect x="644" y="430" width="190" height="46" rx="8" fill="#f3f4f6" stroke="#6b7280" stroke-width="2"/>
+    <text x="739" y="459" fill="#374151">6. Maintenance</text>
+  </g>
+  <g stroke="#4b5563" stroke-width="2" fill="none" marker-end="url(#arr)">
+    <path d="M234 135 L 259 135 L 259 164"/>
+    <path d="M354 189 L 379 189 L 379 230"/>
+    <path d="M474 255 L 499 255 L 499 296"/>
+    <path d="M594 321 L 619 321 L 619 362"/>
+    <path d="M714 387 L 739 387 L 739 428"/>
+  </g>
+
+  <!-- outputs on the right of each step -->
+  <g font-size="12" fill="#4b5563">
+    <text x="270" y="128">→ requirements document (SRS)</text>
+    <text x="390" y="182">→ architecture + design docs</text>
+    <text x="510" y="248">→ source code</text>
+  </g>
+
+  <!-- customer callout -->
+  <rect x="604" y="210" width="272" height="72" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="740" y="236" text-anchor="middle" font-size="14" font-weight="bold" fill="#92400e">The customer usually sees</text>
+  <text x="740" y="256" text-anchor="middle" font-size="14" font-weight="bold" fill="#92400e">the product for the first time</text>
+  <text x="740" y="274" text-anchor="middle" font-size="12" fill="#78350f">here, in testing</text>
+  <line x1="660" y1="282" x2="600" y2="306" stroke="#d97706" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- change is hard -->
+  <rect x="24" y="300" width="300" height="104" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+  <text x="174" y="326" text-anchor="middle" font-size="14" font-weight="bold" fill="#991b1b">A requirement changes in testing?</text>
+  <text x="174" y="350" text-anchor="middle" font-size="12" fill="#7f1d1d">go back up through design and coding;</text>
+  <text x="174" y="368" text-anchor="middle" font-size="12" fill="#7f1d1d">the later a problem is found,</text>
+  <text x="174" y="386" text-anchor="middle" font-size="12" fill="#7f1d1d">the more it costs to fix</text>
+  <line x1="402" y1="330" x2="328" y2="340" stroke="#dc2626" stroke-width="2" marker-end="url(#arrr)"/>
+  <path d="M120 300 L 120 240 L 196 214" fill="none" stroke="#dc2626" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrr)"/>
+  <text x="64" y="262" font-size="11" fill="#991b1b">go back</text>
+
+  <!-- release timeline -->
+  <line x1="60" y1="530" x2="840" y2="530" stroke="#9ca3af" stroke-width="2" marker-end="url(#arr)"/>
+  <g font-size="12" fill="#374151" text-anchor="middle">
+    <circle cx="120" cy="530" r="9" fill="#7c3aed"/>
+    <text x="120" y="556">Version 1.0</text>
+    <circle cx="450" cy="530" r="9" fill="#7c3aed"/>
+    <text x="450" y="556">Version 2.0</text>
+    <circle cx="780" cy="530" r="9" fill="#7c3aed"/>
+    <text x="780" y="556">Version 3.0</text>
+    <text x="285" y="518" fill="#6b7280">the whole process again — often years</text>
+    <text x="615" y="518" fill="#6b7280">the whole process again — often years</text>
+  </g>
+  <text x="450" y="584" text-anchor="middle" font-size="13" fill="#374151">Pros: easy to follow, clear roles, budget estimated up front · Cons: inflexible, late feedback, slow releases</text>
+</svg>

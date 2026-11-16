@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4b5563"/>
+    </marker>
+  </defs>
+  <rect width="900" height="600" fill="#ffffff"/>
+  <text x="450" y="38" text-anchor="middle" font-size="25" font-weight="bold" fill="#1f2937">The V-Shape Model</text>
+  <text x="450" y="62" text-anchor="middle" font-size="14" fill="#6b7280">Each phase down the left has a matching test phase up the right</text>
+
+  <text x="40" y="92" font-size="15" font-weight="bold" fill="#1e40af">SPECIFY AND DESIGN (tests are written)</text>
+  <text x="40" y="106" font-size="11" fill="#6b7280">lecture label: "verification"</text>
+  <text x="860" y="92" text-anchor="end" font-size="15" font-weight="bold" fill="#166534">TEST (tests are run)</text>
+  <text x="860" y="106" text-anchor="end" font-size="11" fill="#6b7280">lecture label: "validation"</text>
+
+  <!-- left side -->
+  <g font-size="14" font-weight="bold" text-anchor="middle" fill="#1e40af">
+    <rect x="40" y="112" width="170" height="52" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="125" y="135">Requirements</text>
+    <text x="125" y="153" font-size="11" font-weight="normal" fill="#1e3a8a">analysis (lecture: planning)</text>
+    <rect x="95" y="202" width="170" height="52" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="180" y="233">System design</text>
+    <rect x="150" y="292" width="170" height="52" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="235" y="315">Architecture design</text>
+    <text x="235" y="333" font-size="11" font-weight="normal" fill="#1e3a8a">high-level design</text>
+    <rect x="205" y="382" width="170" height="52" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="290" y="405">Module design</text>
+    <text x="290" y="423" font-size="11" font-weight="normal" fill="#1e3a8a">low-level design</text>
+  </g>
+
+  <!-- right side -->
+  <g font-size="14" font-weight="bold" text-anchor="middle" fill="#166534">
+    <rect x="690" y="112" width="170" height="52" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <text x="775" y="135">Acceptance testing</text>
+    <text x="775" y="153" font-size="11" font-weight="normal" fill="#14532d">validation: right thing?</text>
+    <rect x="635" y="202" width="170" height="52" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <text x="720" y="225">System testing</text>
+    <text x="720" y="243" font-size="11" font-weight="normal" fill="#14532d">verification: built right?</text>
+    <rect x="580" y="292" width="170" height="52" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <text x="665" y="315">Integration testing</text>
+    <text x="665" y="333" font-size="11" font-weight="normal" fill="#14532d">modules together</text>
+    <rect x="525" y="382" width="170" height="52" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <text x="610" y="405">Unit testing</text>
+    <text x="610" y="423" font-size="11" font-weight="normal" fill="#14532d">each module alone</text>
+  </g>
+
+  <!-- bottom -->
+  <rect x="350" y="472" width="200" height="54" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
+  <text x="450" y="505" text-anchor="middle" font-size="16" font-weight="bold" fill="#92400e">Coding</text>
+
+  <!-- down and up arrows -->
+  <g stroke="#4b5563" stroke-width="2" marker-end="url(#arr)">
+    <line x1="125" y1="164" x2="150" y2="200"/>
+    <line x1="180" y1="254" x2="205" y2="290"/>
+    <line x1="235" y1="344" x2="260" y2="380"/>
+    <line x1="300" y1="434" x2="370" y2="470"/>
+    <line x1="530" y1="470" x2="600" y2="436"/>
+    <line x1="640" y1="380" x2="665" y2="346"/>
+    <line x1="695" y1="290" x2="720" y2="256"/>
+    <line x1="750" y1="200" x2="775" y2="166"/>
+  </g>
+
+  <!-- test-plan links -->
+  <g stroke="#7c3aed" stroke-width="1.8" stroke-dasharray="6 4" fill="none" marker-end="url(#arr)">
+    <line x1="212" y1="138" x2="686" y2="138"/>
+    <line x1="267" y1="228" x2="631" y2="228"/>
+    <line x1="322" y1="318" x2="576" y2="318"/>
+    <line x1="377" y1="408" x2="521" y2="408"/>
+  </g>
+  <g font-size="12" text-anchor="middle" fill="#5b21b6">
+    <text x="450" y="130">acceptance test plan</text>
+    <text x="450" y="220">system test plan</text>
+    <text x="450" y="310">integration test plan</text>
+    <text x="450" y="400">unit test plan</text>
+  </g>
+
+  <text x="450" y="560" text-anchor="middle" font-size="13" fill="#374151">Pros: simple; early test plans save time · Cons: even more rigid than Waterfall; changes after testing starts are very hard</text>
+  <text x="450" y="582" text-anchor="middle" font-size="12" fill="#6b7280">Modern teams keep the idea (test written with the design) but automate all four test levels and run them on every commit</text>
+</svg>
