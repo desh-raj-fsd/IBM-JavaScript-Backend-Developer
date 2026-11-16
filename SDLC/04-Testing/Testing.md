@@ -2,7 +2,7 @@
 
 **SDLC series — Phase 4 of 6.** How professional backend teams do **Testing** today: the lecture's core tasks, the Waterfall way vs. the modern way, and the industry practices the lecture does not cover.
 
-> **Last reviewed:** 2026-11-13 · **Next review due:** 2027-05-13 · **Review owner:** QA Engineer · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
+> **Last reviewed:** 2026-11-16 · **Next review due:** 2027-05-16 · **Review owner:** QA Engineer · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
 
 [← Development](../03-Development/Development.md) · [Guide README](../README.md) · [Overview](../../6-Phases-of-SDLC-Modern-Best-Practices.md) · [Deployment →](../05-Deployment/Deployment.md)
 
@@ -371,6 +371,7 @@ The release goes to [G4 in Deployment](../05-Deployment/Deployment.md#6-lumenven
 8. **should** — Coverage minimum of **80%** for new code, used as a warning light, not a goal.
 9. **should** — Exploratory testing by QA each sprint for new user-facing features.
 10. **may** — Mutation testing on critical modules; preview environments per PR; **property-based tests** for validation and parsing logic; **fuzzing** for public parsers and APIs.
+11. **should** (**must** on regulated projects) — **Requirement traceability check in CI:** test names carry the requirement ID (for example `test("REQ-09: 3 reports hide the review")`), and a CI step fails when a **Must** requirement has no test, or a test names an ID that does not exist. It proves **coverage of requirements**, not test quality — code review still checks the tests. See [Planning §4.12](../01-Planning/Planning.md#412-writing-requirements-that-can-be-tested).
 
 ### 6.5 Templates
 

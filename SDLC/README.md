@@ -181,9 +181,9 @@ Every project keeps its documents **in its Git repository**, next to the code, s
 | Phase | Template | Use |
 |-------|----------|-----|
 | Planning | [project-brief.md](01-Planning/templates/project-brief.md) | Vision, scope, stakeholders, 8 factors, feasibility |
-| Planning | [stakeholder-register.md](01-Planning/templates/stakeholder-register.md) | Who the stakeholders are, what they need, who signs off |
+| Planning | [stakeholder-register.md](01-Planning/templates/stakeholder-register.md) | Who the stakeholders are, power / interest, what they need, who signs off |
 | Planning | [risk-register.md](01-Planning/templates/risk-register.md) | Living list of risks |
-| Planning | [user-story.md](01-Planning/templates/user-story.md) | Story + acceptance criteria + DoR |
+| Planning | [user-story.md](01-Planning/templates/user-story.md) | Story + objective, source, priority + acceptance criteria (and EARS rules) + DoR |
 | Planning | [change-request.md](01-Planning/templates/change-request.md) | Scope changes (client and regulated projects) |
 | Planning | [discovery-proposal.md](01-Planning/templates/discovery-proposal.md) | Offer a paid discovery phase to a client with a vague idea |
 | Planning | [discovery-questions.md](01-Planning/templates/discovery-questions.md) | Question list for the first client discovery meeting |
@@ -280,7 +280,8 @@ The external standards, laws and specifications this guide relies on. **Review o
 | **OWASP SAMM** (security maturity model) | v2 | Optional reference for measuring how mature our security practices are | next review |
 | **NIST SSDF** (Secure Software Development Framework) | SP 800-218 | Whole guide | next review |
 | **SLSA** (supply-chain levels) | v1.x — check slsa.dev | Deployment | next review |
-| **ISO/IEC/IEEE 29148** (requirements / SRS) | 2018 edition (replaced IEEE 830) | Planning (regulated projects) | 2026-11-13 |
+| **ISO/IEC/IEEE 29148** (requirements / SRS) | 2018 edition (replaced IEEE 830); document levels BRS, StRS, SyRS, SRS | Planning — requirement quality characteristics (all projects); full SRS (regulated projects) | 2026-11-13 |
+| **GAMP 5** (validation of computerized systems, GxP) | 2nd edition (2022) | Planning — URS for pharmaceutical / medical clients only | next review |
 | **ISO/IEC 25010** (software quality model) | 2023 edition | Planning (NFRs), Testing | next review |
 | **WCAG** (accessibility) | 2.2, level AA as default target | Planning, Testing | next review |
 | **European Accessibility Act** | Applies since 28 June 2025 | Planning | next review |

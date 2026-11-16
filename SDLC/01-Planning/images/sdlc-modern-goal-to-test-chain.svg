@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4b5563"/>
+    </marker>
+    <marker id="arrr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/>
+    </marker>
+  </defs>
+  <rect width="900" height="620" fill="#ffffff"/>
+  <text x="450" y="38" text-anchor="middle" font-size="25" font-weight="bold" fill="#1f2937">From Goal to Test: One Traceable Chain</text>
+  <text x="450" y="62" text-anchor="middle" font-size="14" fill="#6b7280">Every requirement links up to an objective and down to a test (Book Review API example)</text>
+
+  <!-- left labels -->
+  <g font-size="12" fill="#6b7280" text-anchor="end">
+    <text x="180" y="117">WHY (broad)</text>
+    <text x="180" y="199">HOW WE MEASURE</text>
+    <text x="180" y="281">BIG FEATURE</text>
+    <text x="180" y="363">WHAT IT SHALL DO</text>
+    <text x="180" y="445">PROOF IT WORKS</text>
+    <text x="180" y="527">PROOF IT HELPED</text>
+  </g>
+
+  <!-- chain boxes -->
+  <rect x="200" y="88" width="420" height="56" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="410" y="112" text-anchor="middle" font-size="15" font-weight="bold" fill="#1e40af">Goal: "Readers trust our reviews"</text>
+  <text x="410" y="132" text-anchor="middle" font-size="12" fill="#1e3a8a">long-term outcome — not measurable on its own</text>
+
+  <rect x="200" y="170" width="420" height="56" rx="10" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+  <text x="410" y="194" text-anchor="middle" font-size="15" font-weight="bold" fill="#5b21b6">OBJ-2 (key result): spam under 1% by 30 June</text>
+  <text x="410" y="214" text-anchor="middle" font-size="12" fill="#4c1d95">SMART: specific, measurable, achievable, relevant, time-bound</text>
+
+  <rect x="200" y="252" width="420" height="56" rx="10" fill="#f3f4f6" stroke="#6b7280" stroke-width="2"/>
+  <text x="410" y="276" text-anchor="middle" font-size="15" font-weight="bold" fill="#374151">Epic: Review moderation</text>
+  <text x="410" y="296" text-anchor="middle" font-size="12" fill="#4b5563">in the backlog, ordered by value</text>
+
+  <rect x="200" y="334" width="420" height="56" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="410" y="358" text-anchor="middle" font-size="14" font-weight="bold" fill="#166534">REQ-09: If a review is reported 3 times,</text>
+  <text x="410" y="378" text-anchor="middle" font-size="14" font-weight="bold" fill="#166534">then the system shall hide it for moderation.</text>
+
+  <rect x="200" y="416" width="420" height="56" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text x="410" y="440" text-anchor="middle" font-size="14" font-weight="bold" fill="#92400e" font-family="Menlo, Consolas, monospace">test("REQ-09: 3 reports hide the review")</text>
+  <text x="410" y="460" text-anchor="middle" font-size="12" fill="#78350f">runs in CI on every pull request</text>
+
+  <rect x="200" y="498" width="420" height="56" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+  <text x="410" y="522" text-anchor="middle" font-size="15" font-weight="bold" fill="#991b1b">Release, then measure spam rate in production</text>
+  <text x="410" y="542" text-anchor="middle" font-size="12" fill="#7f1d1d">product analytics / dashboard</text>
+
+  <g stroke="#4b5563" stroke-width="2" marker-end="url(#arr)">
+    <line x1="410" y1="144" x2="410" y2="168"/>
+    <line x1="410" y1="226" x2="410" y2="250"/>
+    <line x1="410" y1="308" x2="410" y2="332"/>
+    <line x1="410" y1="390" x2="410" y2="414"/>
+    <line x1="410" y1="472" x2="410" y2="496"/>
+  </g>
+
+  <!-- feedback loop -->
+  <path d="M620 526 L 650 526 L 650 198 L 624 198" fill="none" stroke="#dc2626" stroke-width="2.5" stroke-dasharray="6 4" marker-end="url(#arrr)"/>
+  <text x="660" y="372" font-size="13" fill="#991b1b" transform="rotate(-90 660 372)" text-anchor="middle">did the key result move?</text>
+
+  <!-- callouts -->
+  <rect x="682" y="170" width="200" height="138" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="782" y="194" text-anchor="middle" font-size="14" font-weight="bold" fill="#92400e">Supports no objective?</text>
+  <text x="782" y="220" text-anchor="middle" font-size="12" fill="#78350f">then it is a "could have"</text>
+  <text x="782" y="238" text-anchor="middle" font-size="12" fill="#78350f">or "won't have this time"</text>
+  <text x="782" y="270" text-anchor="middle" font-size="12" fill="#78350f">outcome (spam fell)</text>
+  <text x="782" y="288" text-anchor="middle" font-size="12" fill="#78350f">beats output (we shipped)</text>
+
+  <rect x="682" y="334" width="200" height="138" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="782" y="358" text-anchor="middle" font-size="14" font-weight="bold" fill="#166534">Trace check in CI</text>
+  <text x="782" y="384" text-anchor="middle" font-size="12" fill="#14532d">fails the build when a</text>
+  <text x="782" y="402" text-anchor="middle" font-size="12" fill="#14532d">"must" requirement ID</text>
+  <text x="782" y="420" text-anchor="middle" font-size="12" fill="#14532d">has no test, or a test</text>
+  <text x="782" y="438" text-anchor="middle" font-size="12" fill="#14532d">names an unknown ID</text>
+
+  <text x="450" y="596" text-anchor="middle" font-size="13" fill="#374151">The same ID (REQ-09) appears in the backlog, the commit, the pull request, the test name and the release notes.</text>
+</svg>

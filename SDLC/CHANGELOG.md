@@ -3,6 +3,19 @@
 > One entry per review or significant change, **newest first**. Rules: [README §9.1 Review schedule](README.md#91-review-schedule).
 > Each entry lists the date, the files, the reviewers, what changed (or "no changes needed") and the sources checked.
 
+## 2026-11-16 — Planning (+ Testing): note-05 "Requirements" findings
+
+- **Files:** `01-Planning/Planning.md`, `01-Planning/templates/` (`user-story.md`, `stakeholder-register.md`, `project-brief.md`), `01-Planning/images/` (4 new SVGs), `04-Testing/Testing.md` (rule 11), `README.md` (§8 template list, §10 standards table)
+- **Scope:** a **targeted** change: add the requirement practices from the course note "05 Requirements" that the guide was missing. Not a full review of either phase file.
+- **Reviewers:** <Product Owner>, <Delivery Lead>; Testing rule: <QA Engineer> — *to be filled in when the pull request is approved*
+- **What changed:**
+  - **Planning:** new §2.1 **six-step requirements process** (stakeholders → goals → elicit → document → confirm → prioritize) and the three moments it runs; §4.1 expanded with the **power / interest grid**, personas, often-forgotten groups and the one-decision-maker rule; §4.4 constraint vs. assumption (an assumption is a risk); new §4.10 **goals, SMART objectives, OKRs**, outcome over output, `OBJ-n` IDs; §4.11 **elicitation toolbox** + interview rules; §4.12 **EARS** patterns, vague vs. testable, the four SRS categories; §4.13 **ISO 29148 quality characteristics**, validation vs. verification, written approval and baseline; §4.14 **RICE, WSJF, Kano**, value vs. effort; §4.15 **URS / SRS / SysRS** vs. ISO names (BRS, StRS, SyRS, SRS) and what LumenVenture writes; GAMP 5 URS for GxP clients; §4.16 often-missed requirement areas. Jargon, §7 checklist, §8.2 outputs, Gate G1 and rules 18–22 updated.
+  - **Templates:** user story gets type, priority, objective, source, EARS rules and a quality-check DoR item; stakeholder register gets power / interest / strategy, a named decision-maker and the forgotten-groups checklist; project brief §2 becomes goals → `OBJ-n` key results.
+  - **Testing:** rule 11 — requirement traceability check in CI (should; must on regulated projects).
+  - **Diagrams:** `sdlc-modern-requirements-six-steps.svg`, `sdlc-modern-stakeholder-grid.svg`, `sdlc-modern-goal-to-test-chain.svg`, `sdlc-modern-requirement-documents.svg`, plus Mermaid flows in §2.1 and §4.13.
+- **Sources checked:** the course note `05-requirements.md` (which cites ISO/IEC/IEEE 29148:2018, EARS — Mavin et al., Rolls-Royce 2009, GAMP 5 2nd edition 2022, MoSCoW / DSDM, RICE, WSJF / SAFe, Kano). **Not re-checked against primary sources in this change** — GAMP 5 is marked "next review" in README §10.
+- **Next review due:** Planning 2027-05-16; Testing 2027-05-16.
+
 ## 2026-11-13 — Targeted review of all phases: note-04 findings + current facts
 
 - **Files:** all six phase files, `README.md` (new §10 Standards table), templates `project-brief.md`, `pipeline-checklist.md`, `service-review.md`

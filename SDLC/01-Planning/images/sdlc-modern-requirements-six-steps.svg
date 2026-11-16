@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 640" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4b5563"/>
+    </marker>
+    <marker id="arrg" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/>
+    </marker>
+  </defs>
+  <rect width="900" height="640" fill="#ffffff"/>
+  <text x="450" y="38" text-anchor="middle" font-size="25" font-weight="bold" fill="#1f2937">The Six Requirement Steps — and When They Run</text>
+  <text x="450" y="62" text-anchor="middle" font-size="14" fill="#6b7280">The lecture's six steps stay the same; modern teams repeat them at three moments</text>
+
+  <!-- loop over steps 3-5 -->
+  <path d="M664 128 C 640 84, 400 84, 376 128" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-dasharray="6 4" marker-end="url(#arrg)"/>
+  <text x="520" y="98" text-anchor="middle" font-size="13" fill="#166534">repeat until consistent, clear and complete</text>
+
+  <!-- six step boxes -->
+  <g font-size="14" text-anchor="middle">
+    <rect x="24" y="130" width="128" height="92" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="88" y="156" font-weight="bold" fill="#1e40af">1. Identify</text>
+    <text x="88" y="174" font-weight="bold" fill="#1e40af">stakeholders</text>
+    <text x="88" y="200" font-size="12" fill="#1e3a8a">register + grid</text>
+
+    <rect x="168" y="130" width="128" height="92" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="232" y="156" font-weight="bold" fill="#1e40af">2. Goals and</text>
+    <text x="232" y="174" font-weight="bold" fill="#1e40af">objectives</text>
+    <text x="232" y="200" font-size="12" fill="#1e3a8a">SMART / OKRs</text>
+
+    <rect x="312" y="130" width="128" height="92" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <text x="376" y="156" font-weight="bold" fill="#166534">3. Elicit</text>
+    <text x="376" y="174" font-weight="bold" fill="#166534">needs</text>
+    <text x="376" y="200" font-size="12" fill="#14532d">ask + watch + data</text>
+
+    <rect x="456" y="130" width="128" height="92" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <text x="520" y="156" font-weight="bold" fill="#166534">4. Document</text>
+    <text x="520" y="174" font-weight="bold" fill="#166534">requirements</text>
+    <text x="520" y="200" font-size="12" fill="#14532d">IDs, Gherkin, EARS</text>
+
+    <rect x="600" y="130" width="128" height="92" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <text x="664" y="156" font-weight="bold" fill="#166534">5. Analyze</text>
+    <text x="664" y="174" font-weight="bold" fill="#166534">and confirm</text>
+    <text x="664" y="200" font-size="12" fill="#14532d">quality check + OK</text>
+
+    <rect x="744" y="130" width="128" height="92" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+    <text x="808" y="156" font-weight="bold" fill="#92400e">6. Prioritize</text>
+    <text x="808" y="174" font-weight="bold" fill="#92400e">the backlog</text>
+    <text x="808" y="200" font-size="12" fill="#78350f">MoSCoW, RICE</text>
+  </g>
+  <g stroke="#4b5563" stroke-width="2" marker-end="url(#arr)">
+    <line x1="152" y1="176" x2="166" y2="176"/>
+    <line x1="296" y1="176" x2="310" y2="176"/>
+    <line x1="440" y1="176" x2="454" y2="176"/>
+    <line x1="584" y1="176" x2="598" y2="176"/>
+    <line x1="728" y1="176" x2="742" y2="176"/>
+  </g>
+
+  <!-- cadence bands -->
+  <text x="24" y="262" font-size="16" font-weight="bold" fill="#1f2937">When each step runs</text>
+
+  <rect x="24" y="274" width="848" height="84" rx="10" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="38" y="296" font-size="14" font-weight="bold" fill="#1e40af">A. Project start — broad (before Gate G1)</text>
+  <g font-size="12" text-anchor="middle" fill="#1e3a8a">
+    <text x="88" y="330">all groups found</text>
+    <text x="232" y="330">goals + key results</text>
+    <text x="376" y="330">kickoff workshops</text>
+    <text x="520" y="330">brief / PRD + epics</text>
+    <text x="664" y="330">written approval</text>
+    <text x="808" y="330">order the epics</text>
+    <text x="664" y="346" fill="#6b7280">= baseline</text>
+  </g>
+
+  <rect x="24" y="370" width="848" height="84" rx="10" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
+  <text x="38" y="392" font-size="14" font-weight="bold" fill="#166534">B. Every sprint — backlog refinement (detail only the next few stories)</text>
+  <g font-size="12" text-anchor="middle" fill="#14532d">
+    <text x="88" y="426">update register</text>
+    <text x="232" y="426">story links to a KR</text>
+    <text x="376" y="426">example mapping</text>
+    <text x="520" y="426">story + criteria</text>
+    <text x="664" y="426">Definition of Ready</text>
+    <text x="808" y="426">PO reorders</text>
+  </g>
+
+  <rect x="24" y="466" width="848" height="84" rx="10" fill="#fffbeb" stroke="#fcd34d" stroke-width="1.5"/>
+  <text x="38" y="488" font-size="14" font-weight="bold" fill="#92400e">C. After every release — learn from real use</text>
+  <g font-size="12" text-anchor="middle" fill="#78350f">
+    <text x="88" y="522">new users? new rules?</text>
+    <text x="232" y="522">did the KR move?</text>
+    <text x="376" y="522">analytics, tickets</text>
+    <text x="520" y="522">new backlog items</text>
+    <text x="664" y="522">change control</text>
+    <text x="808" y="522">re-score ideas</text>
+  </g>
+
+  <!-- outputs -->
+  <rect x="24" y="568" width="848" height="52" rx="10" fill="#f3f4f6" stroke="#9ca3af" stroke-width="1.5"/>
+  <text x="450" y="590" text-anchor="middle" font-size="13" font-weight="bold" fill="#374151">Outputs</text>
+  <text x="450" y="608" text-anchor="middle" font-size="13" fill="#374151">stakeholder register · project brief with key results · one ordered backlog with IDs and acceptance criteria · approved baseline (client PRD / SRS)</text>
+</svg>

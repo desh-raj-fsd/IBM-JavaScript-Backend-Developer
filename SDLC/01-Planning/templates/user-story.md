@@ -1,6 +1,14 @@
 # Story: <short title> (<ID, e.g. REQ-07>)
 
-**Epic:** <epic name>
+| Field | Value |
+|-------|-------|
+| **Epic** | <epic name> |
+| **Type** | Functional / External interface / Non-functional |
+| **Priority** | Must / Should / Could / Won't (this time) |
+| **Objective** | <OBJ-n — the key result this story helps move; or the source law / ASVS level / SLO for legal, security and operational needs> |
+| **Source** | <who asked, how and when — e.g. "Moderator workshop, 2026-11-04"> |
+| **Client PRD feature** (client projects) | <F-nn> |
+
 **As a** <user/persona>, **I want** <goal>, **so that** <reason>.
 
 ## Acceptance criteria
@@ -16,16 +24,23 @@ Scenario: <error / edge case>
   Then <exact, testable result>
 ```
 
+## System rules (EARS — optional, for system behavior)
+- When <trigger>, the <system> shall <response>.
+- If <unwanted condition>, then the <system> shall <response>.
+
 ## Non-functional notes
-- Performance / security / accessibility / privacy points that apply to this story.
+- Performance / security / accessibility / privacy points that apply to this story — as **numbers**, not words like "fast" or "secure".
 
 ## Notes and links
 - Design doc / ADR / API contract:
 - Dependencies:
+- Assumptions (each with an owner and a date to confirm):
 
 ## Definition of Ready (all must be ticked before the sprint starts)
-- [ ] Clear user value (the "so that" is real)
-- [ ] Acceptance criteria are exact and testable (numbers, status codes, messages)
+- [ ] Clear user value (the "so that" is real) and a linked **objective or source**
+- [ ] Acceptance criteria are exact and testable (numbers, status codes, messages) — no vague words
+- [ ] Passes the quality check: necessary, unambiguous, singular, feasible, verifiable, consistent ([Planning §4.13](../Planning.md#413-checking-and-confirming-requirements))
+- [ ] Checked by a developer ("can I build it?") and a tester ("can I test it?")
 - [ ] Small enough to finish in one sprint (split it if not)
 - [ ] Estimated by the team
 - [ ] Dependencies and open questions resolved (or a spike planned)

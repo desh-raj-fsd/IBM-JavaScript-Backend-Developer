@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" font-family="Helvetica, Arial, sans-serif">
+  <rect width="900" height="620" fill="#ffffff"/>
+  <text x="450" y="38" text-anchor="middle" font-size="25" font-weight="bold" fill="#1f2937">Requirement Documents: Which One, and When?</text>
+  <text x="450" y="62" text-anchor="middle" font-size="14" fill="#6b7280">ISO/IEC/IEEE 29148 levels, the lecture's names, and what LumenVenture writes instead</text>
+
+  <!-- header -->
+  <g font-size="13" font-weight="bold" fill="#374151">
+    <text x="30" y="98">ISO 29148 name</text>
+    <text x="214" y="98">Lecture name</text>
+    <text x="364" y="98">What it covers</text>
+    <text x="624" y="98">At LumenVenture</text>
+  </g>
+  <line x1="24" y1="108" x2="876" y2="108" stroke="#9ca3af" stroke-width="1.5"/>
+
+  <!-- BRS -->
+  <rect x="24" y="116" width="852" height="104" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="34" y="144" font-size="18" font-weight="bold" fill="#1e40af">BRS</text>
+  <text x="34" y="164" font-size="12" fill="#1e3a8a">Business</text>
+  <text x="34" y="180" font-size="12" fill="#1e3a8a">Requirements Spec.</text>
+  <text x="214" y="144" font-size="13" fill="#1e3a8a">(scope part of</text>
+  <text x="214" y="162" font-size="13" fill="#1e3a8a">the SRS)</text>
+  <g font-size="12" fill="#1e3a8a">
+    <text x="364" y="144">business purpose, goals, objectives,</text>
+    <text x="364" y="162">business processes, success metrics</text>
+  </g>
+  <g font-size="12" fill="#1e3a8a">
+    <text x="624" y="144" font-weight="bold">Every project:</text>
+    <text x="624" y="162">project brief §1–2 (vision,</text>
+    <text x="624" y="180">goals, key results)</text>
+  </g>
+
+  <!-- StRS -->
+  <rect x="44" y="228" width="832" height="104" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="54" y="256" font-size="18" font-weight="bold" fill="#166534">StRS</text>
+  <text x="54" y="276" font-size="12" fill="#14532d">Stakeholder</text>
+  <text x="54" y="292" font-size="12" fill="#14532d">Requirements Spec.</text>
+  <text x="214" y="256" font-size="13" font-weight="bold" fill="#14532d">URS</text>
+  <text x="214" y="274" font-size="12" fill="#14532d">User Requirements</text>
+  <text x="214" y="290" font-size="12" fill="#14532d">Specification</text>
+  <g font-size="12" fill="#14532d">
+    <text x="364" y="256">needs of users and other stakeholders,</text>
+    <text x="364" y="274">as user stories or use cases</text>
+    <text x="364" y="292">(who, what, why) — checked by UAT</text>
+  </g>
+  <g font-size="12" fill="#14532d">
+    <text x="624" y="256" font-weight="bold">Client: client PRD + user stories</text>
+    <text x="624" y="274">Internal: user stories + personas</text>
+    <text x="624" y="292">Pharma / medical (GxP): a real</text>
+    <text x="624" y="310">URS, as GAMP 5 expects</text>
+  </g>
+
+  <!-- SyRS -->
+  <rect x="64" y="340" width="812" height="104" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text x="74" y="368" font-size="18" font-weight="bold" fill="#92400e">SyRS</text>
+  <text x="74" y="388" font-size="12" fill="#78350f">System</text>
+  <text x="74" y="404" font-size="12" fill="#78350f">Requirements Spec.</text>
+  <text x="214" y="368" font-size="13" font-weight="bold" fill="#78350f">SysRS</text>
+  <text x="214" y="386" font-size="12" fill="#78350f">broader than</text>
+  <text x="214" y="402" font-size="12" fill="#78350f">the SRS</text>
+  <g font-size="12" fill="#78350f">
+    <text x="364" y="368">whole system: software + hardware +</text>
+    <text x="364" y="386">people + policy + regulation;</text>
+    <text x="364" y="404">system acceptance criteria</text>
+  </g>
+  <g font-size="12" fill="#78350f">
+    <text x="624" y="368" font-weight="bold">Only with devices or operators</text>
+    <text x="624" y="386">(IoT, kiosks, embedded).</text>
+    <text x="624" y="404">Cloud-only: design doc + C4 +</text>
+    <text x="624" y="422">infrastructure as code + SLOs</text>
+  </g>
+
+  <!-- SRS -->
+  <rect x="84" y="452" width="792" height="104" rx="10" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+  <text x="94" y="480" font-size="18" font-weight="bold" fill="#5b21b6">SRS</text>
+  <text x="94" y="500" font-size="12" fill="#4c1d95">Software</text>
+  <text x="94" y="516" font-size="12" fill="#4c1d95">Requirements Spec.</text>
+  <text x="214" y="480" font-size="13" font-weight="bold" fill="#4c1d95">SRS</text>
+  <text x="214" y="498" font-size="12" fill="#4c1d95">most common</text>
+  <g font-size="12" fill="#4c1d95">
+    <text x="364" y="480">functional, external interface,</text>
+    <text x="364" y="498">system features, non-functional;</text>
+    <text x="364" y="516">constraints, assumptions, dependencies</text>
+  </g>
+  <g font-size="12" fill="#4c1d95">
+    <text x="624" y="480" font-weight="bold">Default: backlog + NFRs as</text>
+    <text x="624" y="498" font-weight="bold">numbers + OpenAPI contract</text>
+    <text x="624" y="516">Regulated or contract asks:</text>
+    <text x="624" y="534">full SRS + traceability matrix</text>
+  </g>
+
+  <text x="450" y="584" text-anchor="middle" font-size="13" fill="#374151">Each level is narrower than the one above. The standard lets you combine levels when that is simpler</text>
+  <text x="450" y="602" text-anchor="middle" font-size="13" fill="#374151">(for example, user stories inside the SRS). Keep all of them as Markdown in Git, reviewed by pull request.</text>
+</svg>

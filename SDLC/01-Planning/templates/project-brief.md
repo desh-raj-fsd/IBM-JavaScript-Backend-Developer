@@ -18,15 +18,24 @@
 - **Vision:** <one sentence: what the product will do for them>
 - **Why now:** <business reason>
 
-## 2. Success metrics
-| Metric (KPI / key result) | Today | Target | By when |
-|---------------------------|-------|--------|---------|
-| | | | |
+## 2. Goals, objectives and success metrics
+> A **goal** is broad and long-term. Each goal has 2–5 **measurable objectives** (SMART or OKR key results). Measure **outcomes** (what changed for users or the business), not **outputs** (features shipped). Stories link to these IDs ([Planning §4.10](../Planning.md#410-goals-objectives-and-success-metrics)).
+
+**Goal 1:** <broad outcome, e.g. "Readers trust our reviews">
+
+| ID | Objective / key result | Today | Target | By when | How we measure |
+|----|------------------------|-------|--------|---------|----------------|
+| OBJ-1 | | | | | <analytics event, dashboard> |
+| OBJ-2 | | | | | |
 
 ## 3. Stakeholders
-| Stakeholder | Interest / need | Influence (H/M/L) | How we involve them |
-|-------------|-----------------|-------------------|---------------------|
-| | | | |
+> Summary only — the full list, with power / interest and strategy, is in the [stakeholder register](stakeholder-register.md).
+
+**Decision-maker:** <name, role>
+
+| Stakeholder | Interest / need | Power (H/L) | Interest (H/L) | How we involve them |
+|-------------|-----------------|-------------|----------------|---------------------|
+| | | | | |
 
 ## 4. Scope
 - **In scope:**

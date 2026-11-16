@@ -2,7 +2,7 @@
 
 **SDLC series — Phase 1 of 6.** How professional backend teams do **Planning** today: the lecture's core tasks, the Waterfall way vs. the modern way, and the industry practices the lecture does not cover.
 
-> **Last reviewed:** 2026-11-13 · **Next review due:** 2027-05-13 · **Review owner:** Product Owner · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
+> **Last reviewed:** 2026-11-16 · **Next review due:** 2027-05-16 · **Review owner:** Product Owner · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
 
 [← Overview](../../6-Phases-of-SDLC-Modern-Best-Practices.md) · [Guide README](../README.md) · [Overview](../../6-Phases-of-SDLC-Modern-Best-Practices.md) · [Design →](../02-Design/Design.md)
 
@@ -36,6 +36,14 @@
 | **MoSCoW** | A way to prioritize: **M**ust have, **S**hould have, **C**ould have, **W**on't have (this time). | Sort features into four boxes by importance. | Packing for a trip: passport (must), jacket (should), book (could), surfboard (won't). |
 | **Assumption** | Something we believe is true but the client has not confirmed yet. | "We guessed this — please check." | Assuming a guest eats meat because nobody said otherwise. |
 | **Decision-maker** | The one named person on the client side who can approve scope and budget. | The person whose "yes" counts. | At a wedding, the couple, not every guest, chooses the menu. |
+| **Elicitation** | Drawing out requirements from stakeholders with techniques such as interviews, workshops, observation and prototypes. | Asking and watching to find the real needs. | A doctor asking questions to find the real problem. |
+| **Goal / objective** | A **goal** is a broad, long-term outcome. An **objective** is a specific, measurable result that shows progress toward it. | Goal = the big "why"; objective = a number with a date. | "Get fit" vs. "run 5 km in under 30 minutes by June". |
+| **OKR (Objectives and Key Results)** | A goal-setting format: a qualitative **objective** plus 2–5 measurable **key results**. | What we want, and the numbers that prove we got it. | "Be a strong runner" → "5 km under 30 min; 3 runs a week". |
+| **Power / interest grid** | A 2×2 grid that sorts stakeholders by their power over the project and their interest in it. | A map that shows who to involve, and how much. | Seating plan for a wedding: family at the front, neighbors at the back. |
+| **EARS (Easy Approach to Requirements Syntax)** | Five sentence patterns (*always / When / While / If…then / Where*) for writing clear system requirements. | Fill-in-the-blank sentences that remove vague words. | A form with fixed boxes instead of a blank page. |
+| **Validation vs. verification** | **Validation:** are we building the **right** thing? **Verification:** is it written / built **right**? | Right thing vs. thing done right. | Right recipe for the guests vs. recipe followed correctly. |
+| **Baseline** | An approved version of the requirements; later changes go through change control. | The "official" version everyone agreed on. | The signed version of a contract. |
+| **URS / SRS / SysRS** | **User**, **Software** and **System** Requirements Specification. In ISO/IEC/IEEE 29148 the names are StRS, SRS and SyRS. | User needs / what the software does / what the whole system (with hardware and people) does. | The family's wish list / the architect's plan / the plan for the whole house with plumbing and power. |
 
 ---
 
@@ -105,6 +113,36 @@ flowchart TD
 
 > **Remember:** the four steps are **timeless**. Waterfall runs them **once, in full detail**. Modern teams run them **broadly at the start, then in detail every sprint**.
 
+### 2.1 The full six-step requirements process
+
+The four core steps above are the middle of a longer process. The full **requirement gathering** process has **six steps**: two **before** gathering starts, and the four core steps. Steps 3–5 **loop**: each check finds gaps, so the team asks again.
+
+| # | Step | Main question | Output | Details |
+|---|------|---------------|--------|---------|
+| 1 | **Identify stakeholders** | Who cares about this product? | Stakeholder register, power/interest grid | [4.1](#41-stakeholder-identification-and-analysis) |
+| 2 | **Establish goals and objectives** | Why build it? How do we measure success? | Goals + measurable objectives (key results) in the project brief | [4.10](#410-goals-objectives-and-success-metrics) |
+| 3 | **Elicit** (= gather) | What do people need? | Interview notes, workshop results, data | [4.11](#411-elicitation-toolbox) |
+| 4 | **Document** | How do we write it so it can be tested? | Stories with IDs and acceptance criteria; EARS sentences | [4.12](#412-writing-requirements-that-can-be-tested) |
+| 5 | **Analyze and confirm** | Is it clear, consistent, complete? Do stakeholders agree? | Approved requirements = **baseline** | [4.13](#413-checking-and-confirming-requirements) |
+| 6 | **Prioritize** | What comes first? | One ordered backlog | [4.14](#414-prioritization-frameworks) |
+
+**The modern way:** the six steps run at **three moments** — broadly at project start, in detail for the next few stories every sprint, and again after each release, when real use gives new input.
+
+![The six requirement steps and the three moments they run: project start, every sprint, after each release](images/sdlc-modern-requirements-six-steps.svg)
+
+```mermaid
+flowchart TD
+    S1["1. Identify stakeholders"] --> S2["2. Goals and objectives"]
+    S2 --> S3["3. Elicit"]
+    S3 --> S4["4. Document"]
+    S4 --> S5{"5. Consistent, clear, complete and approved?"}
+    S5 -->|no - gaps or conflicts| S3
+    S5 -->|yes - baseline| S6["6. Prioritize the backlog"]
+    S6 --> B["Build in the sprint"]
+    B --> R["Release and measure"]
+    R -->|new needs and data| S3
+```
+
 ## 3. The eight planning factors: then and now
 
 The lecture lists eight factors to consider. All eight are still required today. What changed is **how** teams work them out.
@@ -133,10 +171,23 @@ The lecture lists eight factors to consider. All eight are still required today.
 
 These are not named in the lecture, but professional teams treat them as part of planning.
 
-### 4.1 Stakeholder identification
+### 4.1 Stakeholder identification and analysis
 
 - **List every stakeholder** before gathering requirements: users, customers, product owner, developers, testers, operations, security, legal, support.
 - Note what each one **needs** and how much **influence** they have. Missing a stakeholder (for example the legal team) means missing their requirements.
+- Have a **representative from every group the product affects**. A group nobody asked = requirements nobody wrote. Example: if support is not asked, the product may have no way to look up a customer's account — and support finds out after launch.
+- **Analyze, don't only list.** Place each stakeholder on a **power / interest grid**; the box tells you how to involve them:
+
+  | | **Low interest** | **High interest** |
+  |---|---|---|
+  | **High power** | **Keep satisfied** — short updates, ask at key decisions (finance director) | **Manage closely** — every decision and demo; they sign off (sponsor, client decision-maker) |
+  | **Low power** | **Monitor** — check now and then (vendor account manager) | **Keep informed** — user research, demos, release notes (end users, support, operations) |
+
+- **Describe end users as personas** built from research, not guesses ("Asha, 28, reads reviews on her phone during her commute").
+- **Groups people often forget:** security and compliance, legal and privacy, accessibility, operations / SRE (Site Reliability Engineering), data and analytics, customer support, users who are **not** employees (the public), regulators and partners.
+- **One named decision-maker.** Many people give input; **one** person approves scope and priorities. Record them in the [stakeholder register](templates/stakeholder-register.md).
+
+![Power / interest grid with the groups people forget, and the one-decision-maker rule](images/sdlc-modern-stakeholder-grid.svg)
 
 ### 4.2 Feasibility study
 
@@ -169,6 +220,13 @@ Every requirements list must contain **both** kinds:
 - **Assumptions:** things you believe are true but have not proven (for example "users already have an account"). Check them early.
 - **Constraints:** fixed limits (budget, deadline, required technology, laws).
 - **Dependencies:** things you need from others (a payment provider's API, another team's service).
+- **Do not mix up constraints and assumptions.** A **constraint** is a fixed fact ("must run on the client's Azure subscription"). An **assumption** is a **guess** we act on ("we assume every user already has a company account"). An assumption is a **risk**: if it is wrong, the plan changes — so each one gets an owner and a date to confirm it (client projects: in the [assumptions and decisions log](templates/assumptions-and-decisions-log.md)).
+
+| Statement | Type |
+|-----------|------|
+| "The site must meet WCAG 2.2 AA." | **Constraint** (conformance to a standard) |
+| "We assume readers already have an email address." | **Assumption** (not confirmed — a risk) |
+| "Book details come from the Open Library API." | **Dependency** (another software product) |
 
 ### 4.5 Definition of Ready and traceability
 
@@ -235,6 +293,163 @@ Scenario: Reviews work well
 | **Example mapping** | For one story, the PO, a developer and a tester write the **rules** and concrete **examples** on cards (about 25 minutes); open questions get their own cards | Before a complex story enters a sprint; the examples become the acceptance criteria |
 | **EventStorming** | The team and business people map the process as a timeline of **domain events** ("Review posted", "Review reported") on sticky notes | Complex business processes; finding module boundaries for the design (see [Design 4.2](../02-Design/Design.md#42-choose-an-architecture-style)) |
 
+### 4.10 Goals, objectives and success metrics
+
+- **Goals come before requirements.** Every requirement should help reach an objective. A requested feature that supports **no** objective is a "could have" or "won't have this time".
+- **Goal** = broad, long-term outcome (a customer outcome or a business goal). **Objective** = specific, measurable result that shows progress toward the goal.
+- An objective is a **result**, not an action: "run an ad campaign" is an action; "50,000 monthly active users by December" is the objective.
+- **Write objectives as SMART** targets — **S**pecific, **M**easurable, **A**chievable, **R**elevant, **T**ime-bound — or as **OKR key results**:
+
+  ```text
+  Objective (OKR):  Readers trust our reviews.
+  Key result 1:     30% of visitors read at least one full review per visit (today 12%).
+  Key result 2:     Fewer than 1% of reviews are reported as spam, by 30 June.
+  Key result 3:     App store rating of 4.5 or higher by 31 December.
+  ```
+
+  - Watch the words: in OKRs the "objective" is the **qualitative** part, and the **key results** are what the lecture calls "objectives".
+- **Outcome over output.** "We shipped search" is **output**. "Users find a book 40% faster" is an **outcome**. Set targets on outcomes, and check them after each release with product analytics.
+- **Give objectives IDs** (`OBJ-1`, `OBJ-2`) so stories can point to them. This gives one chain from **goal → objective → epic → requirement → test → measured result**:
+
+![From goal to test: one traceable chain from a goal down to a CI test and back to the measured key result](images/sdlc-modern-goal-to-test-chain.svg)
+
+| | Goal | Objective / key result |
+|---|---|---|
+| **Level** | Broad | Specific |
+| **Time** | Long-term | Has a date |
+| **Measurable?** | Not directly | **Yes** — has a number |
+| **Example** | "Readers find good books faster." | "Users find a book with 4+ stars in under 30 seconds by Q3." |
+
+### 4.11 Elicitation toolbox
+
+Surveys, questionnaires and interviews capture what people **say**. Add techniques that show what people **do**, and that make ideas **visible**. Use **more than one** technique on every project.
+
+| Technique | How it works | Best for | Watch out |
+|-----------|--------------|----------|-----------|
+| **Interviews** | Talk with one person or a small group | Deep understanding; asking "why?" | Slow; depends on the interviewer |
+| **Surveys / questionnaires** | The same written questions to many people | Numbers from many users, cheaply | Shallow; no follow-up questions |
+| **Workshops** (story mapping, example mapping, EventStorming — [4.9](#49-workshops-that-turn-vague-ideas-into-clear-requirements)) | Stakeholders and the team in one session | Agreeing scope and rules fast; settling conflicts | Needs a good facilitator |
+| **Observation** (contextual inquiry) | Watch users do their real work, where they do it | Needs users forget to mention (work-arounds) | Takes time; ask permission |
+| **Prototypes** | Clickable mock-ups users try (for example Figma) | Non-technical stakeholders; UI needs | People may think it is "almost done" |
+| **Document analysis** | Read manuals, forms, laws, old system specs | Business rules; legal rules | Old documents can be out of date |
+| **Product analytics** | Look at real usage: funnels, drop-off points | What really happens, not what people say | Shows *what*, not *why* |
+| **Support tickets and reviews** | Read complaints and app-store reviews | Pain points; missing features | Only hears from unhappy users |
+| **Competitor analysis** | Study similar products | Features users expect as "basic" | Do not copy blindly |
+| **JTBD (Jobs To Be Done) interviews** | Ask what "job" the user is trying to get done, and what they use today | The real motivation behind a request | Needs practice |
+
+**Interview rules:**
+
+1. Ask about **past behavior** ("Tell me about the last time you…"), not the future ("Would you use…?"). People are poor at predicting what they will do.
+2. Keep asking **"why?"** to find the need behind the requested feature.
+3. Ask for **examples** and **exceptions** ("What happens when it goes wrong?").
+4. **Record** (with permission) and **send a written summary the same day** ([meeting summary template](templates/meeting-summary.md)).
+
+### 4.12 Writing requirements that can be tested
+
+Every requirement has an **ID**, a **source** (who asked, when), a **priority**, a link to an **objective**, and **acceptance criteria** ([user story template](templates/user-story.md)). Write it in a fixed **pattern** so it has only one meaning:
+
+- **User-facing needs → user story + Given/When/Then** ([4.7](#47-writing-acceptance-criteria-that-can-be-tested)).
+- **System behavior and non-functional needs → EARS** (Easy Approach to Requirements Syntax, from Rolls-Royce, 2009). Five patterns:
+
+  | Pattern | Keyword | Template | Example |
+  |---------|---------|----------|---------|
+  | **Ubiquitous** (always true) | — | The `<system>` shall `<response>`. | The API shall return all dates in ISO 8601 format. |
+  | **Event-driven** | **When** | When `<trigger>`, the `<system>` shall `<response>`. | When a review is reported 3 times, the system shall hide it for moderation. |
+  | **State-driven** | **While** | While `<state>`, the `<system>` shall `<response>`. | While the database is in maintenance mode, the API shall return HTTP 503 with a `Retry-After` header. |
+  | **Unwanted behavior** | **If … then** | If `<condition>`, then the `<system>` shall `<response>`. | If a login fails 5 times in 10 minutes, then the system shall lock the account for 15 minutes. |
+  | **Optional feature** | **Where** | Where `<feature is included>`, the `<system>` shall `<response>`. | Where single sign-on is enabled, the system shall redirect users to the identity provider. |
+
+- **Vague vs. testable:**
+
+  | ❌ Vague | ✅ Testable |
+  |---------|-------------|
+  | "The system should be fast." | "95% of search requests shall respond in under 300 ms with 1,000 concurrent users." |
+  | "The app must be secure." | "Passwords shall be hashed with Argon2id; the API shall meet OWASP ASVS 5.0 level 2." |
+  | "Users can easily find books." | "A user shall find a book by title, author or ISBN from the home page in at most 2 clicks." |
+  | "The system should handle errors." | "If the payment provider does not respond within 5 s, then the system shall show 'Payment delayed' and retry once." |
+
+- **Words to avoid** (they cannot be tested): *fast, easy, user-friendly, flexible, robust, etc., and/or, as appropriate, should* (when you mean "must").
+- **Cover the four SRS categories** so nothing is missed: **functional**, **external interface** (users, hardware, other software), **system features** (groups of related functional requirements), **non-functional** (performance, safety, security, quality — use **ISO/IEC 25010** as the checklist of quality areas).
+- **Keep requirements as docs as code** where it helps: a `requirements.json` or Markdown file in Git, reviewed by pull request, so a CI script can check traceability (see [Testing rule 11](../04-Testing/Testing.md#64-rules)).
+
+### 4.13 Checking and confirming requirements
+
+**Step 5** checks the requirements, then gets stakeholder approval. Check **each requirement** against these quality characteristics (based on ISO/IEC/IEEE 29148):
+
+| Characteristic | Question to ask |
+|----------------|-----------------|
+| **Necessary** | If we remove it, is something important missing? |
+| **Unambiguous** (clear) | Can it be read only one way? |
+| **Complete** | Does it contain everything needed to build and test it? |
+| **Singular** | Does it state **one** thing (no "and/or")? |
+| **Feasible** | Can we build it with the time, money and technology we have? |
+| **Verifiable** | Can we prove it with a test, inspection, demonstration or analysis? |
+| **Correct** | Is it what the stakeholder really needs? |
+| **Consistent** (as a set) | Does it agree with all other requirements? |
+
+- **Two different checks:**
+  - **Validation** — "Are we building the **right** thing?" Check against real needs: walkthroughs, prototype reviews, demos.
+  - **Verification** — "Are the requirements **written right**?" Check against the table above: peer review by a developer ("can I build it?") and a tester ("can I test it?").
+- **Approval is written**, not only spoken: a signed document, an approval in the tracking tool, or an email.
+- **The approved set is the baseline.** Changes after that follow the change process ([4.6](#46-change-management)): a backlog edit by the PO on internal projects; a [change request](templates/change-request.md) with cost and time on client and regulated projects.
+
+```mermaid
+flowchart TD
+    D["Documented requirements"] --> V{"Verified - quality characteristics pass?"}
+    V -->|no| FIX["Rewrite or ask stakeholders again"]
+    V -->|yes| VA{"Validated - right thing, seen in prototype or demo?"}
+    VA -->|no| FIX
+    VA -->|yes| AP{"Approved in writing?"}
+    AP -->|no - comments| FIX
+    FIX --> D
+    AP -->|yes| BASE["Baseline - later changes go through change control"]
+```
+
+### 4.14 Prioritization frameworks
+
+**MoSCoW** is our default (it is the modern form of "must-have / highly desired / nice to have", plus an explicit "won't have this time" list). Other frameworks help when there are many ideas to compare:
+
+| Framework | How it works | Use it when |
+|-----------|--------------|-------------|
+| **MoSCoW** | **M**ust, **S**hould, **C**ould, **W**on't have (this time). Guideline: Musts are no more than about 60% of the effort | Agreeing scope with a client; fixed-date projects |
+| **RICE** | Score = **R**each × **I**mpact × **C**onfidence ÷ **E**ffort | Product teams comparing many feature ideas |
+| **WSJF** (Weighted Shortest Job First) | Cost of delay ÷ job size — small, urgent, valuable work first (from SAFe, the Scaled Agile Framework) | Many teams sharing one roadmap |
+| **Kano model** | Sorts features into **basic** (expected — missing them makes users angry), **performance** (more is better) and **delighters** | Deciding what users expect vs. what makes them happy |
+| **Value vs. effort matrix** | 2×2 grid; quick wins (high value, low effort) first | Fast decisions in a workshop |
+
+- **Labels are not the end.** In the end there is **one ordered backlog**, owned by the PO, re-ordered every sprint.
+- **Prioritize by objective:** a story that moves a key result beats one that does not.
+- **Risky or uncertain items early**, while problems are still cheap to fix.
+- A score **supports** the decision; the **PO still decides**.
+
+### 4.15 Which requirement documents to write
+
+The course names three documents: **URS** (user needs), **SRS** (software — the most common) and **SysRS** (the whole system, including hardware and people). The standard **ISO/IEC/IEEE 29148:2018** uses four levels and lets you **combine** them when that is simpler.
+
+| ISO 29148 | Course name | Covers | **At LumenVenture** |
+|-----------|-------------|--------|---------------------|
+| **BRS** — Business Requirements Specification | (scope part of the SRS) | Business purpose, goals, processes | [Project brief](templates/project-brief.md) §1–2 — every project |
+| **StRS** — Stakeholder Requirements Specification | **URS** | User and stakeholder needs as stories or use cases; checked by **UAT** | Client: [client PRD](templates/client-prd.md) + user stories. Internal: stories + personas. GxP clients: a real URS |
+| **SyRS** — System Requirements Specification | **SysRS** | Software + hardware + people + policy + regulation; system acceptance criteria | Only when the product includes **devices, hardware or operators** (IoT, kiosks). Cloud-only: design doc + C4 + infrastructure as code + SLOs |
+| **SRS** — Software Requirements Specification | **SRS** | Functional, external interface, system features, non-functional; constraints, assumptions, dependencies | Default: backlog + NFRs as numbers + OpenAPI contract. Regulated or contract asks: full SRS + traceability matrix |
+
+![Requirement documents: ISO 29148 levels, course names, and what LumenVenture writes for each](images/sdlc-modern-requirement-documents.svg)
+
+- **Pharmaceutical and medical clients (GxP — "good practice" rules such as good manufacturing practice):** regulators expect computer systems to be **validated**. The industry guide **GAMP 5** (2nd edition, 2022) starts validation from a **URS** with objective, verifiable requirements. It also supports Agile, iterative work. On such projects the URS is a **must** (see [8.2](#82-required-outputs)).
+- **Use cases vs. user stories:** a use case states **who** (actor) and **what** (steps), but often not **why** — add the business reason when you use them.
+- **UAT is still needed** even when acceptance criteria run automatically in CI. Automated tests prove the software does what was **written**; UAT proves that what was written is what users **need**.
+
+### 4.16 Often-missed requirement areas
+
+| Area | What to add | Why |
+|------|-------------|-----|
+| **Operational** | SLOs, logging, monitoring, backups, support hours | The system must be **run**, not only built |
+| **Data** | Data sources, volumes, quality rules, migration of old data | Data problems are a top reason projects are late |
+| **Privacy** | Each piece of personal data: purpose, retention, deletion | GDPR duty; users' trust |
+| **Accessibility** | WCAG 2.2 AA as a written requirement | Legal duty in many markets (EAA in the EU) |
+| **Security** | ASVS level + abuse cases ([6](#6-modern-planning-practices-checklist)) | Security added late is expensive and weak |
+| **Infrastructure** (cloud "hardware") | Capacity and scaling limits, regions, RPO (Recovery Point Objective) and RTO (Recovery Time Objective) | Becomes the SysRS content for cloud systems |
+
 ## 5. How modern teams do it
 
 - **Know the whole map first, but draw the detailed roads only just before you travel them.**
@@ -281,6 +496,10 @@ flowchart TD
 ## 7. Planning is "done enough" when...
 
 - [ ] All **stakeholders** are identified, and they agree on the **vision, scope and success metrics**.
+- [ ] Every affected group has a **representative**, stakeholders are placed on the **power / interest grid**, and **one decision-maker** is named.
+- [ ] **Goals** have **measurable objectives** (SMART or OKR key results) with IDs.
+- [ ] Elicitation used **more than one technique** (for example interviews + prototype + data).
+- [ ] Requirements pass the **quality check** (necessary, unambiguous, singular, feasible, verifiable, consistent, complete) and are **approved in writing** — this is the **baseline**.
 - [ ] The project is **feasible** (technical, economic, legal, operational, schedule).
 - [ ] All **eight planning factors** are answered.
 - [ ] **Functional and non-functional** requirements exist (non-functional ones written as numbers).
@@ -320,6 +539,9 @@ flowchart TD
 | Client PRD, approved in writing ([template](templates/client-prd.md)) | — | **must** | — | **must** (if client), plus the full SRS |
 | Signed scope / SOW (Statement of Work)                                                          | —        | **must**                       | —                 | —                                  |
 | Full SRS + traceability matrix                                                                  | —        | **may** (if the contract asks) | —                 | **must**                           |
+| Goals with measurable objectives / key results, with IDs (in the project brief)                  | **must** | **must**                       | **should**        | **must**                           |
+| SyRS (System Requirements Specification) — only if the product includes devices, hardware or operators (§4.15) | **must** if it applies | **must** if it applies | —     | **must** if it applies             |
+| URS validated per GAMP 5 — only for pharmaceutical / medical (GxP) clients (§4.15)              | —        | **must** if it applies         | —                 | **must** if it applies             |
 | Stakeholder register ([template](templates/stakeholder-register.md))                            | **must** | **must**                       | **should**        | **must**                           |
 | Risk register ([template](templates/risk-register.md))                                          | **must** | **must**                       | **should**        | **must**                           |
 | Backlog of epics + first stories with acceptance criteria ([template](templates/user-story.md)) | **must** | **must**                       | **should**        | **must**                           |
@@ -333,6 +555,9 @@ flowchart TD
 
 - [ ] Project type and tailoring are recorded in the brief
 - [ ] Vision, scope (in / out), MVP and **success metrics** are agreed
+- [ ] Every goal has **measurable objectives** (key results) with IDs; every epic links to at least one
+- [ ] Stakeholders are on the **power / interest grid**; none of the "often forgotten" groups (§4.1) is missing without a reason
+- [ ] The approved requirements are recorded as the **baseline** (client PRD, brief + backlog, or SRS)
 - [ ] **Client projects:** discovery done (§8.6); every assumption that changes cost or time is **confirmed**; the **client PRD** is **approved in writing** by the named decision-maker
 - [ ] All **stakeholders** are listed; the client contact is named (client projects)
 - [ ] The **eight planning factors** are answered
@@ -363,6 +588,11 @@ flowchart TD
 15. **should** — Client changes after approval are handled as a **swap** (same size, no price change) or a **change request** (extra cost and time) — never as an unwritten "quick change".
 16. **should** — Every epic that handles **accounts, money or user content** has at least one **abuse case**, and every requirement that touches **personal data** says why the data is needed and how long it is kept.
 17. **should** — Run **example mapping** for any story with more than a few business rules before it enters a sprint.
+18. **must** — Every requirement has an **ID**, a **source**, a **priority** and a link to an **objective** (`OBJ-n`). A feature that supports no objective cannot be a Must. (Legal, security and operational requirements link to their **source** instead — the law, the ASVS level or the SLO.)
+19. **must** — Non-functional and system-behavior requirements are written as **numbers** or as **EARS** sentences; the vague words in §4.12 are not allowed in acceptance criteria.
+20. **should** — In refinement, a developer and a tester check each story against the **quality characteristics** in §4.13 ("can I build it? can I test it?").
+21. **should** — Use **more than one elicitation technique** per epic; at least one must show what users **do** (observation, prototype test or analytics), not only what they say.
+22. **should** — After each release, check whether the linked **key results moved**, and feed the result back into the backlog.
 
 ### 8.5 Templates
 
