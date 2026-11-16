@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 540" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4b5563"/>
+    </marker>
+  </defs>
+  <rect width="900" height="540" fill="#ffffff"/>
+  <text x="450" y="36" text-anchor="middle" font-size="25" font-weight="bold" fill="#1f2937">Docs as Code: Keeping Documentation Up to Date</text>
+  <text x="450" y="60" text-anchor="middle" font-size="14" fill="#6b7280">Docs change in the same pull request as the code, in every phase, not later</text>
+
+  <g font-size="14" font-weight="bold" fill="#1e3a8a">
+    <rect x="80" y="88" width="440" height="50" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="100" y="119">1. Change the code in a branch</text>
+    <rect x="80" y="158" width="440" height="50" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="100" y="189">2. Update the docs in the same PR</text>
+    <rect x="80" y="228" width="440" height="50" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="100" y="259">3. CI checks lint, links, OpenAPI, dates</text>
+    <rect x="80" y="298" width="440" height="50" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="100" y="329">4. Review by the code owner</text>
+    <rect x="80" y="368" width="440" height="50" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <text x="100" y="399" fill="#166534">5. Release: docs go live with the code</text>
+    <rect x="80" y="438" width="440" height="50" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+    <text x="100" y="469" fill="#78350f">6. Review date, e.g. every 6 months</text>
+  </g>
+  <g stroke="#4b5563" stroke-width="2" fill="none" marker-end="url(#arr)">
+    <line x1="300" y1="138" x2="300" y2="156"/>
+    <line x1="300" y1="208" x2="300" y2="226"/>
+    <line x1="300" y1="278" x2="300" y2="296"/>
+    <line x1="300" y1="348" x2="300" y2="366"/>
+    <line x1="300" y1="418" x2="300" y2="436"/>
+    <path d="M80,463 L50,463 L50,113 L78,113"/>
+  </g>
+  <text x="44" y="300" font-size="12" fill="#374151" transform="rotate(-90 44 300)" text-anchor="middle">out of date? start again</text>
+
+  <rect x="560" y="88" width="300" height="170" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+  <g font-size="13" fill="#7f1d1d">
+    <text x="580" y="116" font-size="14" font-weight="bold">OLD WAY</text>
+    <text x="580" y="142">Code changes now,</text>
+    <text x="580" y="164">docs "later", in maintenance</text>
+    <text x="580" y="190">→ users read wrong docs</text>
+    <text x="580" y="212">→ support tickets</text>
+    <text x="580" y="234">→ nobody trusts the docs</text>
+  </g>
+
+  <rect x="560" y="278" width="300" height="210" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <g font-size="13" fill="#14532d">
+    <text x="580" y="306" font-size="14" font-weight="bold">WHY IT WORKS</text>
+    <text x="580" y="334">Docs and code ship together</text>
+    <text x="580" y="360">CI blocks broken links and</text>
+    <text x="580" y="380">lint errors</text>
+    <text x="580" y="406">Owners review their pages</text>
+    <text x="580" y="432">Review dates catch slow drift</text>
+    <text x="580" y="458">Overdue pages are raised</text>
+    <text x="580" y="478">in the retrospective</text>
+  </g>
+</svg>

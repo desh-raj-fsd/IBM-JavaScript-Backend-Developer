@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4b5563"/>
+    </marker>
+  </defs>
+  <rect width="900" height="560" fill="#ffffff"/>
+  <text x="450" y="36" text-anchor="middle" font-size="25" font-weight="bold" fill="#1f2937">One SOP, Three Forms</text>
+  <text x="450" y="60" text-anchor="middle" font-size="14" fill="#6b7280">The lecture's example: our organization's steps to merge code into main</text>
+
+  <!-- Column 1: step-by-step -->
+  <rect x="40" y="84" width="260" height="400" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="170" y="112" text-anchor="middle" font-size="15" font-weight="bold" fill="#1e40af">Step-by-step</text>
+  <g font-size="12" fill="#1e3a8a">
+    <text x="58" y="150">1. Branch from main</text>
+    <text x="58" y="180">2. Commit (Conventional Commits)</text>
+    <text x="58" y="210">3. Open PR with the template</text>
+    <text x="58" y="240">4. Wait for green CI</text>
+    <text x="58" y="270">5. Get approval + code owner</text>
+    <text x="58" y="300">6. Squash-merge, delete branch</text>
+  </g>
+
+  <!-- Column 2: hierarchical outline -->
+  <rect x="320" y="84" width="260" height="400" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="450" y="112" text-anchor="middle" font-size="15" font-weight="bold" fill="#166534">Hierarchical outline</text>
+  <g font-size="12" fill="#14532d">
+    <text x="338" y="150" font-weight="bold">1. Prepare</text>
+    <text x="358" y="172">1.1 Branch from main</text>
+    <text x="358" y="194">1.2 Commit with conventions</text>
+    <text x="338" y="226" font-weight="bold">2. Review</text>
+    <text x="358" y="248">2.1 Open PR, link the ticket</text>
+    <text x="358" y="270">2.2 CI green, owner approval</text>
+    <text x="338" y="302" font-weight="bold">3. Merge</text>
+    <text x="358" y="324">3.1 Squash-merge</text>
+    <text x="358" y="346">3.2 Delete the branch</text>
+  </g>
+
+  <!-- Column 3: flowchart -->
+  <rect x="600" y="84" width="260" height="400" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="730" y="112" text-anchor="middle" font-size="15" font-weight="bold" fill="#92400e">Flowchart</text>
+  <g font-size="12" fill="#78350f" text-anchor="middle">
+    <rect x="625" y="130" width="130" height="36" rx="6" fill="#ffffff" stroke="#d97706" stroke-width="1.5"/>
+    <text x="690" y="153">Open PR</text>
+    <polygon points="690,193 755,225 690,257 625,225" fill="#ffffff" stroke="#d97706" stroke-width="1.5"/>
+    <text x="690" y="229">CI green?</text>
+    <polygon points="690,288 755,320 690,352 625,320" fill="#ffffff" stroke="#d97706" stroke-width="1.5"/>
+    <text x="690" y="324">Approved?</text>
+    <rect x="625" y="380" width="130" height="36" rx="6" fill="#ffffff" stroke="#d97706" stroke-width="1.5"/>
+    <text x="690" y="403">Squash-merge</text>
+    <rect x="625" y="436" width="130" height="36" rx="6" fill="#ffffff" stroke="#d97706" stroke-width="1.5"/>
+    <text x="690" y="459">Delete branch</text>
+    <rect x="772" y="252" width="78" height="40" rx="6" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+    <text x="811" y="276" fill="#7f1d1d">Fix, push</text>
+  </g>
+  <g stroke="#4b5563" stroke-width="1.5" fill="none" marker-end="url(#arr)">
+    <line x1="690" y1="166" x2="690" y2="191"/>
+    <line x1="690" y1="257" x2="690" y2="286"/>
+    <line x1="690" y1="352" x2="690" y2="378"/>
+    <line x1="690" y1="416" x2="690" y2="434"/>
+    <path d="M755,225 L790,225 L790,250"/>
+    <path d="M755,320 L790,320 L790,294"/>
+    <path d="M830,252 L830,148 L757,148"/>
+  </g>
+  <g font-size="11" fill="#374151">
+    <text x="698" y="276">yes</text>
+    <text x="698" y="370">yes</text>
+    <text x="760" y="218">no</text>
+    <text x="760" y="336">no</text>
+  </g>
+
+  <!-- captions -->
+  <g font-size="13" text-anchor="middle" fill="#374151">
+    <text x="170" y="510">Best for short, straight tasks</text>
+    <text x="450" y="510">Best for long tasks with details</text>
+    <text x="730" y="510">Best when there are decisions</text>
+  </g>
+  <text x="450" y="542" text-anchor="middle" font-size="12" fill="#6b7280">Enforce what a tool can check (branch protection, CODEOWNERS, CI); the SOP keeps the why and the human steps</text>
+</svg>
