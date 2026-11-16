@@ -585,6 +585,7 @@ flowchart TD
 | SyRS (System Requirements Specification) — only if the product includes devices, hardware or operators (§4.15) | **must** if it applies | **must** if it applies | —     | **must** if it applies             |
 | URS validated per GAMP 5 — only for pharmaceutical / medical (GxP) clients (§4.15)              | —        | **must** if it applies         | —                 | **must** if it applies             |
 | Stakeholder register ([template](templates/stakeholder-register.md))                            | **must** | **must**                       | **should**        | **must**                           |
+| Team roles with backups ([template](templates/team-roles.md), README §3.3)                       | **must** | **must**                       | **should**        | **must**                           |
 | Risk register ([template](templates/risk-register.md))                                          | **must** | **must**                       | **should**        | **must**                           |
 | Backlog of epics + first stories with acceptance criteria ([template](templates/user-story.md)) | **must** | **must**                       | **should**        | **must**                           |
 | Change requests ([template](templates/change-request.md))                                       | —        | **must**                       | —                 | **must**                           |
@@ -607,7 +608,7 @@ flowchart TD
 - [ ] **Non-functional requirements** have measurable targets
 - [ ] **Risk register** started; every high risk (score 6–9) has an owner and a mitigation
 - [ ] **Estimate** given as a range, with confidence
-- [ ] Team and **roles** named (PO, DL, TL, QA at least)
+- [ ] Team and **roles** named (PO, DL, TL, QA at least) in `docs/team-roles.md`, with backups for PO and TL (on-call backup from go-live) ([README §3.3](../README.md#33-role-rules))
 - [ ] First stories meet the **Definition of Ready**
 - [ ] Change process agreed (backlog for internal; change requests for client/regulated)
 
@@ -644,6 +645,7 @@ flowchart TD
 | ------------------------------------------------------------ | ----------------------------------- |
 | [project-brief.md](templates/project-brief.md)               | `docs/project-brief.md`             |
 | [stakeholder-register.md](templates/stakeholder-register.md) | `docs/stakeholder-register.md`      |
+| [team-roles.md](templates/team-roles.md)                     | `docs/team-roles.md`                |
 | [risk-register.md](templates/risk-register.md)               | `docs/risk-register.md`             |
 | [user-story.md](templates/user-story.md)                     | Your tracking tool (issue template) |
 | [change-request.md](templates/change-request.md)             | `docs/change-requests/CR-<n>.md`    |

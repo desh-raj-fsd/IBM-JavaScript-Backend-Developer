@@ -39,7 +39,7 @@ Each phase file has the same shape:
 
 | # | Step | Owner | Output | Template |
 |---|------|-------|--------|----------|
-| 1 | Name the **Product Owner**, **Tech Lead** and **Delivery Lead**; book the kickoff | Sponsor | Named roles | — |
+| 1 | Name the **Product Owner**, **Tech Lead** and **Delivery Lead** (and any optional roles, [§3.2](#32-optional-and-shared-roles)); book the kickoff | Sponsor | Named roles and backups in `docs/team-roles.md` | [team-roles.md](01-Planning/templates/team-roles.md) |
 | 2 | Pick the **project type(s)** and tailoring level | Delivery Lead + Product Owner | Recorded in the project brief | [§4](#4-project-types-and-tailoring) |
 | 2a | **Client projects: run Client Discovery** — discovery meeting, same-day summaries, prototype, MVP workshop, client PRD (paid discovery phase if the idea is vague) | Product Owner + Delivery Lead | `docs/discovery/` | [Planning §8.6](01-Planning/Planning.md#86-client-discovery-client-projects) |
 | 3 | Write the **project brief**: vision, scope, stakeholders, success metrics, the 8 planning factors, feasibility | Product Owner | `docs/project-brief.md` | [project-brief.md](01-Planning/templates/project-brief.md) |
@@ -76,14 +76,14 @@ flowchart TD
 |------|-------|-----------------|---------|
 | **Sponsor** | SP | Budget, priorities across projects, final go/no-go at G1 and G2 | LumenVenture leadership, or the client's sponsor |
 | **Product Owner** | PO | **What** to build and in which order; the backlog; accepting stories | 1 person (on client projects: ours, working closely with the client) |
-| **Delivery Lead** | DL | **How** the team works: sprints, risks, blockers, reporting, change requests | 1 person; may be the Scrum Master; in small teams may be combined with another role |
+| **Delivery Lead** | DL | **How** the team works: sprints, risks, blockers, team-level reporting, change requests | 1 person; may be the Scrum Master; in small teams may be combined with another role |
 | **Tech Lead** | TL | Architecture, ADRs, technical quality, repo standards, release decisions | A senior developer who also codes |
 | **Developers** | DEV | Code, unit/integration tests, code review, running what they build (on call) | 2–5 people |
 | **QA Engineer** | QA | Test strategy, test automation, exploratory testing, release test sign-off | 1 person (in a 4-person team, a developer may hold this role) |
 | **Security Champion** | SEC | Threat models, security checks, dependency and vulnerability follow-up | One developer, as an extra hat |
 | **Client / Stakeholders** | CL | Requirements input, UAT, sign-offs (client projects) | The client's named contact |
 
-> **One person may hold two roles** in a small team (for example Tech Lead + Security Champion). **Must:** the **author and the reviewer of a change are never the same person**, and the **Product Owner does not also act as the only tester**.
+> **One person may hold several roles** in a small team (at most 3, [§3.3 rule 6](#33-role-rules)) (for example Tech Lead + Security Champion). **Must:** the **author and the reviewer of a change are never the same person**, and the **Product Owner does not also act as the only tester**.
 
 ### 3.1 Who does what (RACI)
 
@@ -101,6 +101,47 @@ flowchart TD
 | UAT / acceptance | I | **A** | C | C | C | R | R |
 | Release go/no-go (G4) | I | C | C | **A** | C | R | C |
 | Incidents and postmortems | I | I | C | **A** | R | C | I |
+| UX design and usability tests ¹ | — | **A** | I | C | R | C | C |
+| User documentation ² | — | **A** | I | C | R | C | C |
+
+¹ **R** = the UX / product designer when the project has one ([§3.2](#32-optional-and-shared-roles)), otherwise developers. ² **R** = the technical writer when the project has one, otherwise developers; owner and rules in [§7.1](#71-documentation-map-what-we-keep-who-owns-it-when-it-changes) and [§7.2 rule 9](#72-documentation-rules).
+
+### 3.2 Optional and shared roles
+
+Not every project has every role. These roles join **when the project needs them**, often shared with other projects. Record who holds which hat in [`docs/team-roles.md`](01-Planning/templates/team-roles.md).
+
+| Role | Short | Responsible for | We add it when… | If absent, who covers |
+|------|-------|-----------------|-----------------|-----------------------|
+| **UX (User Experience) / product designer** | UX | User research, flows, prototypes, usability tests, design system, accessibility ([Design §4.9](02-Design/Design.md#49-uiux-design-and-prototypes)) | The product has screens for end users | PO + developers, using the company design system |
+| **Technical writer** | TW (Technical Writer) | User and developer documentation, release notes, docs in Git ([§7](#7-where-project-documents-live)) | Many end users, a public API, or the contract requires manuals | Developers + PO (PO stays owner of user docs) |
+| **SRE (Site Reliability Engineering) / platform team** (shared; a "platform team" in Team Topologies terms) | SRE | Platform, CI/CD (Continuous Integration / Continuous Delivery) and observability tooling, SLO (Service Level Objective) coaching, help in big incidents | The company runs a shared platform (for example Kubernetes) | The team itself |
+| **Business analyst** | BA (Business Analyst) | Eliciting and writing requirements, modeling client business processes | Client projects with complex business rules or many client departments | PO |
+| **Solution architect** | SA (Solution Architect) | How the product fits into the client's other systems and vendors | Client projects that integrate several client systems | TL |
+| **Line manager / engineering manager** | — | People management: hiring, 1:1s (one-to-one meetings), growth, performance | Always — **outside** the project team | — |
+
+- **SRE is not "ops":** an SRE (Site Reliability Engineer) improves reliability **with software** — SLOs, automation, postmortems. A shared SRE or platform team gives the team tools and a platform; it does **not** take over the team's on-call ("you build it, you run it", [Maintenance rule 1](06-Maintenance/Maintenance.md#65-rules)).
+- **The Delivery Lead is not a project manager who assigns tasks.** In Scrum, the project-management work is split: the **PO** owns scope and order, the **Developers** plan and estimate their work, and the **DL** (Scrum Master) owns the team's effectiveness and blockers. Budget and contracts stay with the **Sponsor**. When a client has its own **project manager**, the DL is their single contact for dates, budget and change requests.
+- **Product manager ≠ Product Owner:** a client's or the company's **product manager** owns product strategy, market and outcomes across releases; our **PO** owns this project's backlog and its order. On internal products one person often does both; on client projects the PO works with the client's product manager or decision-maker.
+
+```mermaid
+flowchart TD
+    Q{"What kind of decision?"}
+    Q -->|what to build and in which order| PO["Product Owner"]
+    Q -->|how to build it| TL["Tech Lead and Developers"]
+    Q -->|how the team works and what blocks it| DL["Delivery Lead - Scrum Master"]
+    Q -->|budget, contract, go or no-go| SP["Sponsor - with the client on client projects"]
+    Q -->|hiring, growth, performance| LM["Line manager - outside the team"]
+```
+
+### 3.3 Role rules
+
+1. **must** (prototypes: **should**) — Every project records who holds each role in `docs/team-roles.md` ([template](01-Planning/templates/team-roles.md)) at kickoff, and updates it the same day a person joins, leaves or changes hats. **PO** and **TL** have a named **backup** from kickoff; the **on-call** rotation has a backup from go-live (Gate G5), when the project has an on-call rotation ([Maintenance §6.2](06-Maintenance/Maintenance.md#62-required-outputs)).
+2. **must** — The **PO** decides **what** is built and in which order; the **TL and Developers** decide **how it is built** (technical design). The PO does not assign technical tasks, and the TL does not re-order the backlog.
+3. **must** — The **DL** (Scrum Master) does **not** assign tasks to developers or report on individual people's hours or speed; the team plans its own work in Sprint Planning.
+4. **must** — The team that builds a service is on call for it ([Maintenance rule 1](06-Maintenance/Maintenance.md#65-rules)). A shared SRE or platform team may provide tooling and help, but takes over on-call **only** if a written support agreement says so.
+5. **should** — **People management** (hiring, performance reviews) stays with each person's **line manager outside the team**, and never with the PO or DL of the same project. Small-company exceptions are written in the project brief §10.
+6. **should** — Nobody holds more than **3 hats** on one project (Developer work, on-call duty and backup duty do **not** count as hats), and nobody is planned for more than 100% of their time across projects. The PO and DL should be different people where the team size allows.
+7. **should** — Projects with end-user screens have a **UX / product designer** (shared is fine) for at least part of every sprint in which screens change; if none, `docs/team-roles.md` records the reason and the fallback from §3.2. Client projects that integrate several client systems name a **solution architect** (may be the TL) in `docs/team-roles.md`.
 
 ---
 
@@ -237,6 +278,7 @@ Every project keeps its documents **in its Git repository**, next to the code, s
 ├── README.md                     # what it is, how to run, test and deploy
 ├── docs/
 │   ├── project-brief.md          # Planning
+│   ├── team-roles.md             # Planning: who wears which hat, backups (§3.3)
 │   ├── stakeholder-register.md   # Planning
 │   ├── risk-register.md          # Planning
 │   ├── change-requests/          # Planning (client projects)
@@ -309,6 +351,7 @@ flowchart TD
 |-------|----------|-----|
 | Planning | [project-brief.md](01-Planning/templates/project-brief.md) | Vision, scope, stakeholders, 8 factors, feasibility |
 | Planning | [stakeholder-register.md](01-Planning/templates/stakeholder-register.md) | Who the stakeholders are, power / interest, what they need, who signs off |
+| Planning | [team-roles.md](01-Planning/templates/team-roles.md) | Who holds each role (hat), share of time, backups, optional roles (filled example) |
 | Planning | [risk-register.md](01-Planning/templates/risk-register.md) | Living list of risks |
 | Planning | [user-story.md](01-Planning/templates/user-story.md) | Story + objective, source, priority + acceptance criteria (and EARS rules) + DoR |
 | Planning | [change-request.md](01-Planning/templates/change-request.md) | Scope changes (client and regulated projects) |
@@ -412,7 +455,7 @@ The external standards, laws and specifications this guide relies on. **Review o
 | **SLSA** (supply-chain levels) | v1.x — check slsa.dev | Deployment | next review |
 | **ISO/IEC/IEEE 29148** (requirements / SRS) | 2018 edition (replaced IEEE 830); document levels BRS, StRS, SyRS, SRS | Planning — requirement quality characteristics (all projects); full SRS (regulated projects) | 2026-11-13 |
 | **GAMP 5** (validation of computerized systems, GxP) | 2nd edition (2022) | Planning — URS for pharmaceutical / medical clients only | next review |
-| **Scrum Guide** | 2020 edition — 3 accountabilities, 5 events, 3 artifacts with commitments (Product Goal, Sprint Goal, Definition of Done) | README §6 working rhythm | next review |
+| **Scrum Guide** | 2020 edition (still the official current version) — 3 accountabilities, 5 events, 3 artifacts with commitments (Product Goal, Sprint Goal, Definition of Done). The 2025 *Scrum Guide Expansion Pack* is an optional companion, **not** a new edition | README §3.2–§3.3 roles, §6 working rhythm | 2026-11-16 |
 | **Agile Manifesto** | 2001 — 4 values, 12 principles | README §6 | — (fixed text) |
 | **Semantic Versioning** | 2.0.0 (semver.org) — `MAJOR.MINOR.PATCH`, pre-release `-…`, build metadata `+…` | Development, Design, Deployment | next review |
 | **Conventional Commits** | 1.0.0 | Development | next review |
