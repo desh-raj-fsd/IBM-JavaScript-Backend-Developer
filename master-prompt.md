@@ -44,8 +44,17 @@ Analyze the provided transcript, lecture subtitles, or rough notes (see [Source 
 
 - Extract **every detail** from the source text, no matter how minor, and supplement it with your expert knowledge where necessary.
 - **The lecture is the starting point, not the limit.** Lectures may have been recorded years ago or may simplify the topic, so they can miss practices that the industry adopted later. Actively **add any important industry concept, practice, tool or standard that is missing from the lecture** — anything a professional backend engineer is expected to know or would be asked in an interview about this topic. Mark these additions clearly (for example "not in the lecture — industry practice") so lecture facts and additions stay distinguishable.
-- If the source text contains a **factual error or a confusing/contradictory statement**, explicitly flag it with:
-  ⚠️ **Correction:** [What's wrong] → [What's correct and why]
+- If the source text contains a **factual error, an outdated term, or a confusing/contradictory statement**, do **two** things:
+  1. **Flag it** with a correction badge, directly under the concept:
+
+     ```markdown
+     > ⚠️ **Correction:** [What's wrong] → [What's correct and why]
+     > **Lecture wording (for the quiz):** "[the lecture's exact words]"
+     ```
+
+  2. **Update the notes to the corrected version everywhere.** The badge alone is not enough. The main text, headings, tables, jargon entries, Mermaid diagrams, images (SVG labels and captions), examples, code comments, the topics list and the summary must all teach the **correct** fact or term. The lecture's original wording appears **only** inside the badge's "Lecture wording (for the quiz)" line, and in the "Lecture" column of comparison tables.
+  - **This applies to your own additions too.** Check every fact you add (dates, names, versions, standards, tool behavior). If you find a mistake in content you wrote, fix it directly in place — do not leave the wrong version with a badge next to it.
+  - Use **one** badge type for anything that changes a fact or term: ⚠️ **Correction**. Do not use a softer "Clarification" badge for something that is actually wrong; if the lecture is only incomplete (not wrong), add the missing part as a Modern Best Practice block instead.
 - If the source text teaches an **outdated practice or an oversimplified view of how the industry works today**, do **not** only flag it. **Update the notes to teach the current industry best practice** in a dedicated block (see [Modern Best Practice Blocks](#64-modern-best-practice-blocks)). Keep the lecture's original statement visible, because course quizzes test the lecture wording.
 
 ---
@@ -57,9 +66,12 @@ Because the output requirements are highly detailed, follow this strict, step-by
 1. **Analyze:** Thoroughly read and analyze the provided transcript.
 2. **Generate First Section:** Generate the first major section of the notes (following the order in [Output 1](#6-output-1-the-notes-01-topicmd)).
 3. **Verify & Refactor:** Immediately compare the generated section against the raw transcript. If it misses any details or deviates from the structure, refactor it before moving on. Also check the section against current industry best practice and add any needed **Modern Best Practice** blocks (see [6.4](#64-modern-best-practice-blocks)).
+   - **Correction sweep:** for every ⚠️ Correction you add, search the **whole note and its images** for the wrong fact or term (text, tables, jargon, Mermaid labels, SVG text and captions, examples, code comments, topics list, summary) and replace it with the correct one. Only the badge's "Lecture wording (for the quiz)" line keeps the lecture's words.
 4. **Iterate:** Move to the next section and generate it. Again, check it against the transcript and refactor if needed. Repeat this process strictly section-by-section.
 5. **Generate Images:** Create the images described in [Output 2](#7-output-2-the-images-images) and confirm every embedded image path in the notes points to a real file.
-6. **Final Audit:** Once the entire file is generated, do a final comprehensive comparison of the complete file against the original transcript. If anything was missed, refactor the final file to ensure 100% coverage.
+6. **Final Audit:** Once the entire file is generated, do a final comprehensive comparison of the complete file against the original transcript. If anything was missed, refactor the final file to ensure 100% coverage. Then check that:
+   - every ⚠️ Correction has a "Lecture wording (for the quiz)" line, and the corrected version is used **everywhere else** in the note and its images (repeat the correction sweep from step 3);
+   - every fact you added yourself (dates, names, versions, standards, tool behavior) is correct; fix any mistake in place.
 7. **Topic Summary:** After successfully generating the MD file, provide a numbered list in the chat summarizing all the major topics introduced in the lecture transcript.
 
 ---
@@ -159,6 +171,7 @@ List **5** closely related backend engineering, JavaScript, or DevOps concepts a
 1. **No Fluff:** Provide only the structural elements requested above. Do not add any conversational filler, introductory pleasantries, meta-commentary, or concluding remarks. Keep the output strictly focused on the technical notes and images.
 2. **Expand Acronyms:** Whenever using an acronym or shorthand (e.g., SRS, UAT, SDLC), provide the full form in parentheses (e.g., `SRS (Software Requirements Specification)`) to ensure clarity for the reader.
 3. **B1 English:** Keep all explanations in simple, B1-level English (see [Learner Profile](#3-learner-profile)).
+4. **Notes teach the correct version:** a reader who skips every ⚠️ badge must still learn only correct facts and current terms. The lecture's exact wording is kept only where it is labeled for the quiz.
 
 ---
 
