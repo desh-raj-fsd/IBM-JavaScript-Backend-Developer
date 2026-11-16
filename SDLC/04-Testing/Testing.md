@@ -307,6 +307,33 @@ test('review date uses the current time', (t) => {
 - **Review generated tests carefully:** AI often writes tests that only repeat what the code already does, so they pass even when the code is wrong. Make sure each test checks a **requirement**.
 - If the product **itself uses an AI model**, normal assertions are not enough because answers vary. Teams add **evaluations ("evals")**: a fixed set of example inputs with scoring rules, run on every change to the prompt or model.
 
+### 4.12 The V-model idea: each design artifact gets its test
+
+- The **V-model** pairs every specify-and-design step with a test level: requirements ↔ acceptance, system design ↔ system, architecture ↔ integration, module design ↔ unit. Its best idea — **write the test together with the thing it checks** — is what we keep.
+- Its weakness — tests **run only at the end**, so changes after testing starts are very hard — is what we remove: all four levels run **on every push** in CI.
+- **Verification vs. validation:** unit, integration and system tests **verify** ("did we build it right, as specified?"); acceptance tests and UAT **validate** ("did we build the right thing for the user?").
+
+| What we specify | Its test is written… | It runs in CI as… | Tools (examples) |
+|-----------------|----------------------|-------------------|------------------|
+| **Story + acceptance criteria** (requirements) | With the story, before or with the code | **Acceptance** tests on staging + PO / client UAT | Gherkin/Cucumber, Playwright |
+| **NFRs + system design** (SLOs, ASVS level) | When the NFR is written | **System** tests: E2E, load, DAST | Playwright, k6, OWASP ZAP |
+| **Architecture + API contract** (OpenAPI, ADRs) | In the same PR as the contract change | **Integration** and **contract** tests | Supertest, Testcontainers, Pact |
+| **Module design** (function behavior) | First (TDD: red → green → refactor) | **Unit** tests | `node:test`, Vitest |
+
+![The V-model idea done continuously: each design artifact gets its test in the same sprint, and CI runs all four levels on every push](images/sdlc-modern-v-model-in-ci.svg)
+
+```mermaid
+flowchart TD
+    R["Story and acceptance criteria"] -. acceptance tests .-> AT["CI stage 4 - acceptance on staging"]
+    SD["NFRs and system design"] -. system tests .-> ST["CI stage 3 - E2E, load, DAST"]
+    AD["Architecture and API contract"] -. contract tests .-> IT["CI stage 2 - integration and contract"]
+    MD["Module design"] -. unit tests first .-> UT["CI stage 1 - unit"]
+    R --> SD --> AD --> MD --> C["Code and pull request"]
+    C --> UT --> IT --> ST --> AT
+```
+
+- **Regulated projects** (the "+ Regulated data" add-on, or safety-critical clients — for example automotive **ISO 26262**, medical device software **IEC 62304**, pharma **GAMP 5**): run the **full V** with a **traceability matrix** and **signed test records** — but as **one small V per increment**, not one big V for the whole product.
+
 ## 5. Testing is "done enough" when... (exit criteria)
 
 - [ ] Every **acceptance criterion** has a passing test (automated where possible).
@@ -372,6 +399,7 @@ The release goes to [G4 in Deployment](../05-Deployment/Deployment.md#6-lumenven
 9. **should** — Exploratory testing by QA each sprint for new user-facing features.
 10. **may** — Mutation testing on critical modules; preview environments per PR; **property-based tests** for validation and parsing logic; **fuzzing** for public parsers and APIs.
 11. **should** (**must** on regulated projects) — **Requirement traceability check in CI:** test names carry the requirement ID (for example `test("REQ-09: 3 reports hide the review")`), and a CI step fails when a **Must** requirement has no test, or a test names an ID that does not exist. It proves **coverage of requirements**, not test quality — code review still checks the tests. See [Planning §4.12](../01-Planning/Planning.md#412-writing-requirements-that-can-be-tested).
+12. **must** — Each test level is written **in the same sprint** as the artifact it checks (§4.12): acceptance tests with the story, contract tests with the API change, unit tests with the code. No testing-only sprint or phase at the end.
 
 ### 6.5 Templates
 

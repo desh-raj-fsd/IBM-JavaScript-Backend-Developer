@@ -2,7 +2,7 @@
 
 **SDLC series — Phase 5 of 6.** How professional backend teams do **Deployment** today: the lecture's core tasks, the Waterfall way vs. the modern way, and the industry practices the lecture does not cover.
 
-> **Last reviewed:** 2026-11-13 · **Next review due:** 2027-05-13 · **Review owner:** Tech Lead · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
+> **Last reviewed:** 2026-11-16 · **Next review due:** 2027-05-16 · **Review owner:** Tech Lead · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
 
 [← Testing](../04-Testing/Testing.md) · [Guide README](../README.md) · [Overview](../../6-Phases-of-SDLC-Modern-Best-Practices.md) · [Maintenance →](../06-Maintenance/Maintenance.md)
 
@@ -282,7 +282,7 @@ process.on('SIGTERM', () => {
 
 ### 4.5 Verify after every deployment
 
-- **Smoke tests** run automatically right after each deploy.
+- **Smoke tests** run automatically right after each deploy. The first check calls **`GET /version`** and confirms it returns the **version and commit SHA that were just deployed** — so you know the new code is really the code that is running.
 - **Automated canary analysis:** tools such as **Argo Rollouts** or **Flagger** compare the new version's error rate and latency with the old one, and **roll back automatically** if the SLOs are broken.
 - **Watch dashboards** for the first minutes after a release; link each deploy to its version in your monitoring tool (a "deploy marker").
 
@@ -298,7 +298,9 @@ process.on('SIGTERM', () => {
 
 ### 4.7 Release management
 
-- **Version and tag** each release (SemVer, git tags), with **release notes** generated from Conventional Commits.
+- **Version and tag** each release (SemVer, git tags), with **release notes** generated from Conventional Commits. The rules for choosing the number are in [Development §4.2.1](../03-Development/Development.md#421-our-versioning-policy-details).
+- **Image tags:** tag every image with the **version** (`book-api:2.5.0`) **and** the **commit SHA** (`book-api:a1b2c3d`). Deployment manifests reference the version tag or, in production, the **digest** (`book-api@sha256:…`), which can never point to different content. **`latest` is never deployed** — it changes over time, so you cannot tell or repeat what is running.
+- **Pre-release builds** (`3.0.0-rc.1`) may go to staging, but **only final versions** are promoted to production.
 - **Supply-chain evidence:** many teams **sign** images (Sigstore **cosign**) and attach an **SBOM** (CycloneDX or SPDX format) and **provenance** (who built it, from which commit — see the **SLSA** framework), so production only runs trusted images.
 - **Pre-release names:** `2.0.0-alpha.1` → `2.0.0-beta.1` → `2.0.0-rc.1` (**RC — Release Candidate**, may become the final version if no serious bugs are found) → `2.0.0`. Keep a human-readable **CHANGELOG.md** (for example in the "Keep a Changelog" format).
 - **Publishing packages (npm):** npm **revoked all classic tokens on 9 December 2025**; write tokens are now short-lived (granular, **at most 90 days**). Publish from CI with **trusted publishing** (OIDC, supported for GitHub Actions and GitLab CI/CD), which needs no stored token and adds **provenance** automatically.
@@ -394,6 +396,8 @@ The **DORA (DevOps Research and Assessment)** research program measures software
 11. **should** — Every release has an **SBOM** (CycloneDX or SPDX) stored with the release.
 12. **must** — Packages are published to registries (for example npm) **only from CI** with **trusted publishing** (OIDC) or a short-lived token; no long-lived publish tokens.
 13. **must** — For client products sold in the EU, the **CRA** scope is checked in the project brief; if in scope, the vulnerability-reporting and security-update process is agreed with the client before go-live.
+14. **must** — Releases are **not tied to the sprint end**. A change that passes the pipeline is deployed when it is ready (internal: automatically; client: after the approval gate). The Sprint Review inspects the work; it is never a release gate ([README §6.4](../README.md#64-releases-are-not-tied-to-sprints)).
+15. **must** — Images are tagged with the **version and the commit SHA**; production manifests use the version tag or the **digest** — **never `latest`**. Only final (non-pre-release) versions reach production, and the post-deploy smoke test checks `/version`.
 
 ### 6.5 Templates
 

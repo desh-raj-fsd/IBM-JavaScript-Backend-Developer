@@ -3,6 +3,35 @@
 > One entry per review or significant change, **newest first**. Rules: [README §9.1 Review schedule](README.md#91-review-schedule).
 > Each entry lists the date, the files, the reviewers, what changed (or "no changes needed") and the sources checked.
 
+## 2026-11-16 — Versioning and compatibility: note-07 "Software Versions" findings
+
+- **Files:** `03-Development/Development.md` (§4.2.1, §4.8, §4.11, §6.2, rules 8 and 14–17, §6.5), new template `03-Development/templates/versioning-policy.md`, `02-Design/Design.md` (§4.4.1, rules 12–13), `05-Deployment/Deployment.md` (§4.5, §4.7, rule 15), `05-Deployment/templates/release-checklist.md`, `06-Maintenance/Maintenance.md` (§4.9), `README.md` (§7 docs tree, §8 templates, §10 standards); new diagrams `03-Development/images/sdlc-modern-one-version-everywhere.svg`, `02-Design/images/sdlc-modern-api-compatibility.svg`
+- **Scope:** a **targeted** change: add the versioning and compatibility practices from the course note "07 Software Versions" that the guide was missing. Not a full review of the phase files.
+- **Reviewers:** <Tech Lead>, <a developer>; Design: <Security Champion>; Deployment: <Delivery Lead> — *to be filled in when the pull request is approved*
+- **What changed:**
+  - **Development:** §4.2.1 versioning policy — SemVer is **3 parts** and is about **compatibility, not size**; pre-release labels and npm dist-tags; build metadata after `+` (four-part numbers are not SemVer); `0.y.z` only before the first client; released versions are immutable; one version everywhere; compare versions with a SemVer library; a `/version` route example. §4.8 version-range table (`^`, `~`, exact, `^0.x`) and runtime version (`engines`, `.nvmrc`, Docker base image, CI matrix). §4.11 AI tools suggest outdated APIs and versions. Rules 14–17; rule 8 now points to the versioning policy.
+  - **New template:** `versioning-policy.md` (what is versioned and how, bump rules, supported versions, deprecation periods, how to see the running version) — required on internal, client and regulated projects.
+  - **Design:** §4.4.1 API compatibility — backward vs. forward compatibility (tolerant reader for responses and events; requests still reject unknown fields), breaking-change table, `/v2` in parallel, notice periods (≥ 6 months external, ≥ 1 month internal), usage tracking, OpenAPI diff in CI. Rules 12–13.
+  - **Deployment:** post-deploy smoke test checks `/version`; image tags = version + commit SHA, production by tag or digest, never `latest`; pre-releases never reach production; rule 15. Release checklist: release types now **Major / Minor / Patch** (the old "Minor / Major / Hotfix" list had no Patch), Git tag field, version and `/version` checks.
+  - **Maintenance:** §4.9 usage per API version and client; errors split by `service.version`; supported-versions list checked in the service review.
+- **Sources checked:** the course note `07-software-versions.md` (SemVer 2.0.0 rules and precedence; npm range semantics, checked by running the `semver` package; RFC 9745 / RFC 8594 headers; Ubuntu 18.04 point-release dates). **Not re-checked against primary sources in this change** — the SemVer and Conventional Commits rows in README §10 are marked "next review".
+- **Next review due:** Development, Design, Deployment, Maintenance 2027-05-16.
+
+## 2026-11-16 — Working rhythm and methodology: note-06 "Software Development Methodologies" findings
+
+- **Files:** `README.md` (§6 rewritten and extended, §10 standards table), `01-Planning/Planning.md` (§4.17, step 7 of §8.6.2, rules 23–24), `01-Planning/templates/project-brief.md` (§9), `04-Testing/Testing.md` (§4.12, rule 12), `05-Deployment/Deployment.md` (rule 14), `06-Maintenance/Maintenance.md` (rule 15); new diagrams `images/sdlc-modern-methodology-by-project-type.svg`, `images/sdlc-modern-sprint-cadence.svg`, `01-Planning/images/sdlc-modern-fixed-time-flex-scope.svg`, `04-Testing/images/sdlc-modern-v-model-in-ci.svg`
+- **Scope:** a **targeted** change: write down **how LumenVenture works** (methodology), using the practices from the course note "06 Software Development Methodologies". Not a full review of the phase files.
+- **Reviewers:** <Delivery Lead>, <Tech Lead>; Planning: <Product Owner>; Testing: <QA Engineer> — *to be filled in when the pull request is approved*
+- **What changed:**
+  - **README §6:** rhythm table corrected to Scrum Guide 2020 terms (**Sprint Review**, **Sprint Goal**, Sprint Retrospective; refinement is an activity, not an event); the sprint is **no longer called a "planning-to-release loop"** — releases follow the pipeline. New §6.1 methodology by project type (default Scrum; Kanban for prototypes and after go-live; V-model discipline for regulated work; phase gates kept as governance, not as Waterfall delivery); §6.2 Scrum accountabilities and artifacts mapped to our roles; §6.3 Kanban lane with WIP limit; §6.4 releases are not tied to sprints; §6.5 anti-patterns (Water-Scrum-Fall, mini-waterfall, cargo-cult Agile, velocity as a target); §6.6 six working-rhythm rules.
+  - **Planning:** §4.17 fix time and cost, flex scope; cone of uncertainty; throughput (Monte Carlo) forecasting with the 85% date; contract models for client projects; rules 23–24. Discovery step 7 now says Sprint Review instead of "demo".
+  - **Project brief template:** §9 now records the methodology, the delivery / contract model and the forecast method.
+  - **Testing:** §4.12 the V-model idea done continuously (each design artifact gets its test in the same sprint; verification vs. validation; full V per increment for ISO 26262 / IEC 62304 / GAMP 5 work); rule 12 — no testing-only sprint or phase.
+  - **Deployment:** rule 14 — releases are not tied to the sprint end.
+  - **Maintenance:** rule 15 — maintenance and support in a Kanban lane with a WIP limit, same backlog.
+- **Sources checked:** the course note `06-software-development-methodologies.md` (Scrum Guide 2020 accountabilities, events, timeboxes and "Sprint Review is not a gate to releasing value"; Agile Manifesto 2001; Royce 1970; Kanban, XP, Lean). **Not re-checked against primary sources in this change** — the Scrum Guide row in README §10 is marked "next review".
+- **Next review due:** README §6 at the next full-guide review (2027-05-13); Planning, Testing, Deployment, Maintenance 2027-05-16.
+
 ## 2026-11-16 — Planning (+ Testing): note-05 "Requirements" findings
 
 - **Files:** `01-Planning/Planning.md`, `01-Planning/templates/` (`user-story.md`, `stakeholder-register.md`, `project-brief.md`), `01-Planning/images/` (4 new SVGs), `04-Testing/Testing.md` (rule 11), `README.md` (§8 template list, §10 standards table)

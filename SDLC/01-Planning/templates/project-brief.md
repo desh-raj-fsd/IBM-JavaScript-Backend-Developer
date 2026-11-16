@@ -77,9 +77,12 @@
 - **Constraints:**
 - **Dependencies:**
 
-## 9. Estimate
+## 9. Estimate, forecast and delivery model
+- **Methodology:** Scrum, 2-week sprints (default) / Kanban / Scrum + V-model traceability (regulated) — see [README §6.1](../../README.md#61-our-methodology-by-project-type)
+- **Delivery / contract model:** fixed budget, flexible scope / fixed price per phase / time and materials with a cap / paid discovery first ([Planning §4.17](../Planning.md#417-forecasting-and-budgeting-fix-time-and-cost-flex-scope))
 - **Effort / cost range:** <low – high>
 - **Confidence:** low / medium / high — re-estimated every sprint
+- **Forecast method:** range from relative sizes until Sprint 3; then throughput forecast, reporting the **85% date**
 
 ## 10. Tailoring decisions
 <Which "should" rules from the LumenVenture SDLC Guide we skip or change, and why.>

@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" font-family="Helvetica, Arial, sans-serif">
+  <rect width="900" height="600" fill="#ffffff"/>
+  <text x="450" y="38" text-anchor="middle" font-size="25" font-weight="bold" fill="#1f2937">Fix Time and Cost, Flex Scope</text>
+  <text x="450" y="62" text-anchor="middle" font-size="14" fill="#6b7280">What is fixed and what is estimated — and how we answer "when will it be done?"</text>
+
+  <!-- plan-driven triangle -->
+  <text x="225" y="100" text-anchor="middle" font-size="16" font-weight="bold" fill="#1e40af">Plan-driven (Waterfall)</text>
+  <polygon points="225,120 85,330 365,330" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+  <text x="225" y="190" text-anchor="middle" font-size="15" font-weight="bold" fill="#1e40af">SCOPE</text>
+  <text x="225" y="208" text-anchor="middle" font-size="12" fill="#1e3a8a">fixed up front</text>
+  <text x="160" y="310" text-anchor="middle" font-size="14" font-weight="bold" fill="#991b1b">time?</text>
+  <text x="290" y="310" text-anchor="middle" font-size="14" font-weight="bold" fill="#991b1b">cost?</text>
+  <text x="225" y="352" text-anchor="middle" font-size="12" fill="#7f1d1d">estimated when we know the least</text>
+  <text x="225" y="370" text-anchor="middle" font-size="12" fill="#7f1d1d">→ overruns and change requests</text>
+
+  <!-- agile triangle (inverted) -->
+  <text x="675" y="100" text-anchor="middle" font-size="16" font-weight="bold" fill="#166534">Agile (LumenVenture default)</text>
+  <polygon points="535,120 815,120 675,330" fill="#dcfce7" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="610" y="150" text-anchor="middle" font-size="14" font-weight="bold" fill="#166534">TIME</text>
+  <text x="610" y="166" text-anchor="middle" font-size="11" fill="#14532d">fixed</text>
+  <text x="740" y="150" text-anchor="middle" font-size="14" font-weight="bold" fill="#166534">COST</text>
+  <text x="740" y="166" text-anchor="middle" font-size="11" fill="#14532d">fixed (team size)</text>
+  <text x="675" y="262" text-anchor="middle" font-size="15" font-weight="bold" fill="#92400e">scope?</text>
+  <text x="675" y="352" text-anchor="middle" font-size="12" fill="#14532d">the ordered backlog decides what fits:</text>
+  <text x="675" y="370" text-anchor="middle" font-size="12" fill="#14532d">most valuable first; quality is never cut</text>
+
+  <!-- forecast histogram -->
+  <rect x="24" y="394" width="852" height="190" rx="10" fill="#f9fafb" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="44" y="420" font-size="14" font-weight="bold" fill="#374151">Forecast from measured throughput (Monte Carlo, 10,000 runs, 40 items left)</text>
+  <line x1="80" y1="550" x2="520" y2="550" stroke="#6b7280" stroke-width="1.5"/>
+  <g fill="#93c5fd" stroke="#2563eb">
+    <rect x="100" y="530" width="60" height="20"/>
+    <rect x="180" y="440" width="60" height="110"/>
+    <rect x="260" y="452" width="60" height="98" fill="#fcd34d" stroke="#d97706"/>
+    <rect x="340" y="516" width="60" height="34"/>
+    <rect x="420" y="544" width="60" height="6"/>
+  </g>
+  <g font-size="12" fill="#374151" text-anchor="middle">
+    <text x="130" y="568">8 wk</text><text x="210" y="568">9 wk</text><text x="290" y="568">10 wk</text><text x="370" y="568">11 wk</text><text x="450" y="568">12 wk</text>
+  </g>
+  <g font-size="13" fill="#374151">
+    <text x="560" y="456"><tspan font-weight="bold">50%</tspan> chance: done in 9 weeks or less</text>
+    <text x="560" y="482" fill="#92400e"><tspan font-weight="bold">85%</tspan> chance: done in 10 weeks or less</text>
+    <text x="560" y="508"><tspan font-weight="bold">95%</tspan> chance: done in 10–11 weeks</text>
+    <text x="560" y="540" font-weight="bold" fill="#92400e">Tell the sponsor / client the 85% date;</text>
+    <text x="560" y="558" fill="#374151">re-run every week; if too late, the PO</text>
+    <text x="560" y="576" fill="#374151">removes or splits low-value items</text>
+  </g>
+</svg>

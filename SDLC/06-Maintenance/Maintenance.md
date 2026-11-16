@@ -2,7 +2,7 @@
 
 **SDLC series — Phase 6 of 6.** How professional backend teams do **Maintenance** today: the lecture's core tasks, the Waterfall way vs. the modern way, and the industry practices the lecture does not cover.
 
-> **Last reviewed:** 2026-11-13 · **Next review due:** 2027-05-13 · **Review owner:** Tech Lead · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
+> **Last reviewed:** 2026-11-16 · **Next review due:** 2027-05-16 · **Review owner:** Tech Lead · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
 
 [← Deployment](../05-Deployment/Deployment.md) · [Guide README](../README.md) · [Overview](../../6-Phases-of-SDLC-Modern-Best-Practices.md) · [Overview →](../../6-Phases-of-SDLC-Modern-Best-Practices.md)
 
@@ -298,8 +298,10 @@ groups:
 - Features and API versions also need a **planned end**:
   1. Announce the deprecation (docs, changelog, emails).
   2. Mark responses with the **`Deprecation`** header (RFC 9745) and the **`Sunset`** header (RFC 8594 — the date it will stop working; it must not be earlier than the deprecation date), plus a link to the migration guide.
-  3. Watch usage metrics; contact remaining users.
-  4. Remove it after the sunset date.
+  3. Watch usage metrics **per API version and per client**; contact remaining users.
+  4. Remove it after the sunset date **and** when its traffic is near zero (notice periods: [Design §4.4.1](../02-Design/Design.md#441-api-compatibility-and-versioning)).
+- **Errors by version:** dashboards split error rate and latency by **`service.version`**, so a problem that starts with one release is visible at once — and so you can see which **client app versions** still call old API versions.
+- **Supported versions list:** the [versioning policy](../03-Development/templates/versioning-policy.md) §3 lists the supported runtime, API and framework versions with their end-of-support dates; it is checked in the monthly service review.
 
 ### 4.10 Legacy systems and modernization
 
@@ -393,6 +395,7 @@ groups:
 12. **should** — Page on **SLO burn-rate** alerts where possible, instead of fixed thresholds.
 13. **should** — Every public service publishes a **`security.txt`** and a vulnerability disclosure policy.
 14. **must** — Where the **EU Cyber Resilience Act** applies, the on-call and incident process includes the **24-hour / 72-hour** reporting steps, with a named owner.
+15. **should** — Maintenance and support work (bugs, tickets, upgrades, security fixes) runs in a **Kanban lane** with a **WIP limit** (default 2), in the **same backlog** as features, and the team tracks its **cycle time** ([README §6.3](../README.md#63-kanban-for-continuous-work)).
 
 ### 6.6 Templates
 

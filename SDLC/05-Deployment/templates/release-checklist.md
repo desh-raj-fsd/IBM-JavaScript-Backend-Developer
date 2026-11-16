@@ -5,7 +5,8 @@
 | Field | Value |
 |-------|-------|
 | **Version / image tag or digest** | |
-| **Release type** | Minor / Major / Hotfix |
+| **Release type** | Major (breaking) / Minor (feature) / Patch (fix or hotfix) — per the [versioning policy](../../03-Development/templates/versioning-policy.md) |
+| **Git tag / commit SHA** | `v…` / |
 | **Planned date and time** | (avoid late Friday and known peak periods) |
 | **Release owner** | |
 
@@ -17,7 +18,9 @@
 - [ ] **UAT / acceptance signed** (PO; client on client projects) — link:
 
 ## Safety
-- [ ] The **same image** that passed staging is being promoted
+- [ ] The **same image** that passed staging is being promoted (by version tag or digest — never `latest`)
+- [ ] The version number matches the changes (breaking → MAJOR; API breaking changes have a new API version); `CHANGELOG.md` entry written; not a pre-release
+- [ ] After deploy: `GET /version` returns this version and commit SHA
 - [ ] Release strategy chosen: rolling / canary / blue-green; feature flags set
 - [ ] Database migrations backward compatible; tested on staging with realistic data
 - [ ] **Rollback plan** written and possible: <how, and how long it takes>

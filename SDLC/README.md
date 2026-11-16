@@ -139,13 +139,92 @@ Every project picks **one base type** and adds **"Regulated data"** if it applie
 
 | Event | Default | Purpose |
 |-------|---------|---------|
-| **Sprint** | 2 weeks | One planning-to-release loop |
-| **Sprint planning** | Start of sprint, max 2 h | Pick stories that meet DoR; split into tasks |
-| **Daily stand-up** | 15 min | Progress, plans, blockers |
-| **Backlog refinement** | Weekly, 1 h | Detail the next stories (DoR) |
-| **Sprint review / demo** | End of sprint | Show working software to PO and stakeholders (client on client projects) |
-| **Retrospective** | End of sprint | Improve how we work — and propose changes to this guide |
+| **Sprint** | 2 weeks | One plan → build → inspect loop with one **Sprint Goal**. Releases are **not** tied to the sprint end — the pipeline releases whenever a change is ready ([6.4](#64-releases-are-not-tied-to-sprints)) |
+| **Sprint Planning** | Start of sprint, max 2 h | Agree the **Sprint Goal**; pick stories that meet DoR; plan how to build them |
+| **Daily Scrum** (stand-up) | 15 min | Progress toward the Sprint Goal; adjust the plan; raise blockers |
+| **Backlog refinement** | Weekly, 1 h (an ongoing activity, not a formal Scrum event) | Detail the next stories (DoR) |
+| **Sprint Review** | End of sprint, max 2 h | Inspect the working increment with the PO and stakeholders (client on client projects) and **adapt the backlog**. It is a working session, not a release gate |
+| **Sprint Retrospective** | After the Sprint Review, max 1.5 h | Improve how we work — at least one action with an owner; propose changes to this guide |
 | **Service review** | Monthly, after go-live | SLOs, incidents, costs, security, tech debt |
+
+![One LumenVenture sprint: Scrum events, daily scrums, continuous releases through the pipeline, and a Kanban lane for support work](images/sdlc-modern-sprint-cadence.svg)
+
+### 6.1 Our methodology by project type
+
+> **Default:** **Scrum** (as in the Scrum Guide 2020) with **2-week sprints**, plus the engineering practices in this guide (TDD, CI/CD, trunk-based development, feature flags). It is **iterative** (we repeat and improve) and **incremental** (each sprint adds a working piece). Record any change from the default in the project brief §10.
+
+| Project type | How we run it | Release to users |
+|--------------|---------------|------------------|
+| **Internal product** | Scrum, 2-week sprints; forecasts from measured throughput | **Continuous Deployment** — any time the pipeline is green |
+| **Client project** | **Paid discovery** (when the idea is vague) → Scrum; the client joins **every Sprint Review**; contract model from [Planning §4.17](01-Planning/Planning.md#417-forecasting-and-budgeting-fix-time-and-cost-flex-scope) | **Continuous Delivery** with a client approval gate |
+| **Prototype** | **Kanban** or 1-week sprints, time-boxed, answering named questions | Demo environment only — never real users or real data |
+| **After go-live** (support and maintenance) | A **Kanban lane** with a WIP limit, in the **same backlog** as features ([6.3](#63-kanban-for-continuous-work)) | Hotfixes through the normal pipeline |
+| **+ Regulated data** (add-on) | Scrum **plus V-model discipline**: every requirement traced to a test, signed test records, run as **one small V per increment** ([Testing §4.12](04-Testing/Testing.md#412-the-v-model-idea-each-design-artifact-gets-its-test)) | Approval gate + change record |
+
+![Methodology by project type, and the anti-patterns we never accept](images/sdlc-modern-methodology-by-project-type.svg)
+
+```mermaid
+flowchart TD
+    Q1{"Are the requirements clear and stable?"}
+    Q1 -->|no - they will change| Q2{"Planned features or a stream of requests?"}
+    Q2 -->|planned features| SC["Scrum - 2-week sprints"]
+    Q2 -->|stream of requests| KB["Kanban lane - WIP limit"]
+    Q1 -->|yes| Q3{"Regulated or safety-critical?"}
+    Q3 -->|yes| VM["Scrum plus V-model traceability - one small V per increment"]
+    Q3 -->|no| SM["Scrum or Kanban - still release in small steps"]
+    SC --> PB["Record the choice in the project brief"]
+    KB --> PB
+    VM --> PB
+    SM --> PB
+```
+
+> **Why not Waterfall?** We do **not** run projects as one long sequence (plan everything → build everything → test everything). Requirements change, and late feedback is expensive. Where a client or regulator needs **phase gates**, we keep the gates (G1–G5) as **governance** on top of Scrum delivery — we do not stop delivering in small steps.
+
+### 6.2 Scrum accountabilities in our roles
+
+| Scrum Guide 2020 | LumenVenture role ([§3](#3-roles-default-for-a-48-person-team)) | Notes |
+|------------------|------------------------------------------------------------------|-------|
+| **Product Owner** — maximizes value; orders the Product Backlog | **Product Owner** | One person, never a committee; on client projects works closely with the client decision-maker |
+| **Scrum Master** — the team's effectiveness; coaches Scrum; removes blockers | **Delivery Lead** | A coach, **not** a manager of the developers |
+| **Developers** — build a usable increment every sprint | **Tech Lead, Developers, QA Engineer** (and designers) | Everyone who does the work; testers are part of the team, not a later phase |
+
+| Scrum artifact | Its commitment | At LumenVenture |
+|----------------|----------------|-----------------|
+| **Product Backlog** | **Product Goal** | The goal and key results in the project brief §2 (`OBJ-n`) |
+| **Sprint Backlog** | **Sprint Goal** | One sentence, agreed in Sprint Planning |
+| **Increment** | **Definition of Done** | The [DoD template](03-Development/templates/definition-of-done.md) (Gate G3) |
+
+### 6.3 Kanban for continuous work
+
+- Work that **arrives unpredictably** — bugs, support tickets, small upgrades, security fixes — cannot always wait for the next sprint.
+- It runs in a **Kanban lane** on the same board: **To do → In progress → Review → Done**, with a **WIP (work in progress) limit** (default: **2** items in progress for the lane). Finish before you start.
+- It lives in the **same backlog** as features, so the PO sees all the work in one place. Maintenance rule 8 reserves **10–20%** of sprint capacity for it ([Maintenance §6.5](06-Maintenance/Maintenance.md#65-rules)).
+- Measure **cycle time** (start → done) and **throughput** (items done per week); discuss them in the retrospective.
+
+### 6.4 Releases are not tied to sprints
+
+- The Sprint Review **inspects** the work; it is **not** the moment code reaches users (Scrum Guide 2020: the Sprint Review should never be a gate to releasing value).
+- Every merged change goes through the pipeline. **Internal products** deploy automatically; **client projects** deploy after the client approval gate. Unfinished features are hidden with **feature flags** ([Deployment rule 9](05-Deployment/Deployment.md#64-rules)).
+
+### 6.5 Anti-patterns we do not accept
+
+| ❌ Anti-pattern | What it looks like | ✅ What we do instead |
+|----------------|--------------------|----------------------|
+| **Water-Scrum-Fall** | Big requirements up front, then "sprints" for coding, then a long test and release phase | Broad plan first ([Planning §2](01-Planning/Planning.md#2-the-four-core-steps-waterfall-way-vs-modern-way)), then test and release **inside** every sprint |
+| **Mini-waterfall in the sprint** | Developers code for 9 days; QA tests on day 10 | Developer and QA work on the same story together; tests are written with the code |
+| **Cargo-cult Agile** | Stand-ups and sprints happen, but nothing reaches users and nothing changes from feedback | Ship working software; feedback changes the backlog |
+| **"Agile means no documentation / no plan"** | No ADRs, no roadmap, no forecast | Just enough docs in Git; Product Goal, roadmap with ranges, data-based forecasts |
+| **Velocity as a target** | Teams compared by story points; points inflate | Velocity and throughput are only for the team's own forecasting |
+| **Retrospectives that change nothing** | Same problems every sprint | At least one improvement action with an owner, checked next retro |
+
+### 6.6 Working rhythm rules
+
+1. **must** — Every project records its **methodology** (default Scrum; or the variant from §6.1) and any deviation in the project brief §10.
+2. **must** — Every sprint has a **Sprint Goal**, ends with a **Sprint Review** with stakeholders (the client on client projects) and a **Sprint Retrospective** with at least one improvement action.
+3. **must** — Testing is done **inside** the sprint, in the same story and PR as the code; no "testing sprint" or testing-only phase at the end.
+4. **must** — The Sprint Review is never the only path to production; releases follow the pipeline rules in [Deployment §6.4](05-Deployment/Deployment.md#64-rules).
+5. **should** — Unplanned work (bugs, support, upgrades) runs in a **Kanban lane** with a WIP limit, in the same backlog.
+6. **should** — Velocity and throughput are used **only** for the team's own forecasting, never to compare teams or people.
 
 ---
 
@@ -165,6 +244,7 @@ Every project keeps its documents **in its Git repository**, next to the code, s
 │   ├── design/                   # Design docs (one per significant feature)
 │   ├── adr/                      # 0001-short-title.md, 0002-...
 │   ├── threat-model.md           # Design
+│   ├── versioning-policy.md      # Development (Sprint 0)
 │   ├── test-strategy.md          # Testing
 │   ├── releases/                 # Release checklists / notes
 │   ├── slo.md                    # Maintenance
@@ -197,6 +277,7 @@ Every project keeps its documents **in its Git repository**, next to the code, s
 | Development | [repo-setup-checklist.md](03-Development/templates/repo-setup-checklist.md) | New repository / walking skeleton |
 | Development | [pull_request_template.md](03-Development/templates/pull_request_template.md) | Copy to `.github/` |
 | Development | [definition-of-done.md](03-Development/templates/definition-of-done.md) | Team DoD |
+| Development | [versioning-policy.md](03-Development/templates/versioning-policy.md) | Version scheme, bump rules, supported versions, deprecation periods |
 | Testing | [test-strategy.md](04-Testing/templates/test-strategy.md) | How the project proves quality |
 | Testing | [bug-report.md](04-Testing/templates/bug-report.md) | Reporting a bug |
 | Testing | [uat-signoff.md](04-Testing/templates/uat-signoff.md) | Acceptance by PO / client |
@@ -282,6 +363,10 @@ The external standards, laws and specifications this guide relies on. **Review o
 | **SLSA** (supply-chain levels) | v1.x — check slsa.dev | Deployment | next review |
 | **ISO/IEC/IEEE 29148** (requirements / SRS) | 2018 edition (replaced IEEE 830); document levels BRS, StRS, SyRS, SRS | Planning — requirement quality characteristics (all projects); full SRS (regulated projects) | 2026-11-13 |
 | **GAMP 5** (validation of computerized systems, GxP) | 2nd edition (2022) | Planning — URS for pharmaceutical / medical clients only | next review |
+| **Scrum Guide** | 2020 edition — 3 accountabilities, 5 events, 3 artifacts with commitments (Product Goal, Sprint Goal, Definition of Done) | README §6 working rhythm | next review |
+| **Agile Manifesto** | 2001 — 4 values, 12 principles | README §6 | — (fixed text) |
+| **Semantic Versioning** | 2.0.0 (semver.org) — `MAJOR.MINOR.PATCH`, pre-release `-…`, build metadata `+…` | Development, Design, Deployment | next review |
+| **Conventional Commits** | 1.0.0 | Development | next review |
 | **ISO/IEC 25010** (software quality model) | 2023 edition | Planning (NFRs), Testing | next review |
 | **WCAG** (accessibility) | 2.2, level AA as default target | Planning, Testing | next review |
 | **European Accessibility Act** | Applies since 28 June 2025 | Planning | next review |

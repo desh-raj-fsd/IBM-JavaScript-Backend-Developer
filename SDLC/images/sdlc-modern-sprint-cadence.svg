@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" font-family="Helvetica, Arial, sans-serif">
+  <rect width="900" height="560" fill="#ffffff"/>
+  <text x="450" y="38" text-anchor="middle" font-size="25" font-weight="bold" fill="#1f2937">One LumenVenture Sprint (2 Weeks)</text>
+  <text x="450" y="62" text-anchor="middle" font-size="14" fill="#6b7280">Events plan and inspect the work; the pipeline releases it — at any time</text>
+
+  <!-- day grid -->
+  <g font-size="12" fill="#6b7280" text-anchor="middle">
+    <text x="183" y="96">Day 1</text><text x="251" y="96">2</text><text x="319" y="96">3</text><text x="387" y="96">4</text><text x="455" y="96">5</text>
+    <text x="523" y="96">6</text><text x="591" y="96">7</text><text x="659" y="96">8</text><text x="727" y="96">9</text><text x="795" y="96">10</text>
+  </g>
+  <g fill="#f9fafb" stroke="#e5e7eb">
+    <rect x="150" y="104" width="66" height="330"/><rect x="218" y="104" width="66" height="330"/>
+    <rect x="286" y="104" width="66" height="330"/><rect x="354" y="104" width="66" height="330"/>
+    <rect x="422" y="104" width="66" height="330"/><rect x="490" y="104" width="66" height="330"/>
+    <rect x="558" y="104" width="66" height="330"/><rect x="626" y="104" width="66" height="330"/>
+    <rect x="694" y="104" width="66" height="330"/><rect x="762" y="104" width="66" height="330"/>
+  </g>
+
+  <!-- lane labels -->
+  <g font-size="13" font-weight="bold" fill="#374151">
+    <text x="24" y="140">Scrum events</text>
+    <text x="24" y="226">Daily Scrum</text>
+    <text x="24" y="296">Releases</text>
+    <text x="24" y="312" font-size="11" font-weight="normal" fill="#6b7280">pipeline</text>
+    <text x="24" y="386">Kanban lane</text>
+    <text x="24" y="402" font-size="11" font-weight="normal" fill="#6b7280">support, bugs</text>
+  </g>
+
+  <!-- events -->
+  <rect x="152" y="116" width="62" height="54" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="183" y="138" text-anchor="middle" font-size="11" font-weight="bold" fill="#1e40af">Sprint</text>
+  <text x="183" y="152" text-anchor="middle" font-size="11" font-weight="bold" fill="#1e40af">Planning</text>
+  <text x="183" y="165" text-anchor="middle" font-size="10" fill="#1e3a8a">≤ 2 h</text>
+
+  <rect x="492" y="116" width="62" height="54" rx="6" fill="#f3f4f6" stroke="#6b7280" stroke-width="2"/>
+  <text x="523" y="138" text-anchor="middle" font-size="11" font-weight="bold" fill="#374151">Refine-</text>
+  <text x="523" y="152" text-anchor="middle" font-size="11" font-weight="bold" fill="#374151">ment</text>
+  <text x="523" y="165" text-anchor="middle" font-size="10" fill="#4b5563">1 h / week</text>
+
+  <rect x="764" y="112" width="62" height="34" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="795" y="127" text-anchor="middle" font-size="10" font-weight="bold" fill="#166534">Sprint Review</text>
+  <text x="795" y="140" text-anchor="middle" font-size="10" fill="#14532d">≤ 2 h</text>
+  <rect x="764" y="150" width="62" height="34" rx="6" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+  <text x="795" y="165" text-anchor="middle" font-size="10" font-weight="bold" fill="#5b21b6">Retro</text>
+  <text x="795" y="178" text-anchor="middle" font-size="10" fill="#4c1d95">≤ 1.5 h</text>
+
+  <!-- daily scrum dots -->
+  <g fill="#2563eb">
+    <circle cx="251" cy="222" r="9"/><circle cx="319" cy="222" r="9"/><circle cx="387" cy="222" r="9"/><circle cx="455" cy="222" r="9"/>
+    <circle cx="523" cy="222" r="9"/><circle cx="591" cy="222" r="9"/><circle cx="659" cy="222" r="9"/><circle cx="727" cy="222" r="9"/><circle cx="795" cy="222" r="9"/>
+  </g>
+  <text x="490" y="250" text-anchor="middle" font-size="11" fill="#1e3a8a">15 minutes · progress toward the Sprint Goal</text>
+
+  <!-- releases -->
+  <g fill="#16a34a">
+    <polygon points="251,292 261,306 241,306"/><polygon points="319,292 329,306 309,306"/><polygon points="365,292 375,306 355,306"/>
+    <polygon points="455,292 465,306 445,306"/><polygon points="540,292 550,306 530,306"/><polygon points="591,292 601,306 581,306"/>
+    <polygon points="680,292 690,306 670,306"/><polygon points="727,292 737,306 717,306"/>
+  </g>
+  <text x="490" y="334" text-anchor="middle" font-size="11" fill="#166534">▲ = a small change reaches staging / production when the pipeline is green (internal: automatic; client: after approval)</text>
+
+  <!-- kanban lane -->
+  <rect x="152" y="362" width="674" height="56" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="1.5"/>
+  <g font-size="11" fill="#78350f">
+    <rect x="170" y="374" width="110" height="32" rx="5" fill="#ffffff" stroke="#d97706"/>
+    <text x="225" y="394" text-anchor="middle">bug #212</text>
+    <rect x="400" y="374" width="110" height="32" rx="5" fill="#ffffff" stroke="#d97706"/>
+    <text x="455" y="394" text-anchor="middle">npm upgrade</text>
+    <rect x="620" y="374" width="110" height="32" rx="5" fill="#ffffff" stroke="#d97706"/>
+    <text x="675" y="394" text-anchor="middle">support ticket</text>
+  </g>
+  <text x="815" y="398" text-anchor="end" font-size="11" font-weight="bold" fill="#92400e">WIP ≤ 2</text>
+
+  <!-- bottom notes -->
+  <rect x="24" y="452" width="420" height="92" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="234" y="476" text-anchor="middle" font-size="13" font-weight="bold" fill="#166534">Sprint Review = inspect and adapt</text>
+  <text x="234" y="498" text-anchor="middle" font-size="12" fill="#14532d">stakeholders (and the client) see working software,</text>
+  <text x="234" y="516" text-anchor="middle" font-size="12" fill="#14532d">and the backlog changes — it is NOT a release gate</text>
+  <rect x="456" y="452" width="420" height="92" rx="10" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="666" y="476" text-anchor="middle" font-size="13" font-weight="bold" fill="#5b21b6">Retrospective = change one thing</text>
+  <text x="666" y="498" text-anchor="middle" font-size="12" fill="#4c1d95">at least one improvement action with an owner;</text>
+  <text x="666" y="516" text-anchor="middle" font-size="12" fill="#4c1d95">guide changes are proposed by pull request</text>
+</svg>

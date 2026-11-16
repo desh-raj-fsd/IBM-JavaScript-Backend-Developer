@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4b5563"/>
+    </marker>
+  </defs>
+  <rect width="900" height="600" fill="#ffffff"/>
+  <text x="450" y="38" text-anchor="middle" font-size="25" font-weight="bold" fill="#1f2937">One Version, Seen Everywhere</text>
+  <text x="450" y="62" text-anchor="middle" font-size="14" fill="#6b7280">The release tool picks the number once; every place that shows a version shows the same one</text>
+
+  <!-- commits -->
+  <rect x="24" y="96" width="250" height="150" rx="10" fill="#f3f4f6" stroke="#6b7280" stroke-width="2"/>
+  <text x="149" y="122" text-anchor="middle" font-size="15" font-weight="bold" fill="#374151">Commits since v2.4.3</text>
+  <g font-family="Menlo, Consolas, monospace" font-size="12" fill="#374151">
+    <text x="40" y="152">fix: 404 for missing book</text>
+    <text x="40" y="176">feat: search by author</text>
+    <text x="40" y="200">docs: update README</text>
+  </g>
+  <text x="149" y="230" text-anchor="middle" font-size="12" fill="#6b7280">highest type wins: feat → MINOR</text>
+
+  <!-- bump rules -->
+  <rect x="24" y="270" width="250" height="140" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="1.5"/>
+  <text x="149" y="296" text-anchor="middle" font-size="14" font-weight="bold" fill="#92400e">Bump rules (SemVer)</text>
+  <g font-size="12" fill="#78350f">
+    <text x="40" y="322"><tspan font-family="Menlo, Consolas, monospace">fix:</tspan> → PATCH  2.4.3 → 2.4.4</text>
+    <text x="40" y="346"><tspan font-family="Menlo, Consolas, monospace">feat:</tspan> → MINOR  2.4.3 → 2.5.0</text>
+    <text x="40" y="370"><tspan font-family="Menlo, Consolas, monospace">feat!:</tspan> → MAJOR  2.4.3 → 3.0.0</text>
+    <text x="40" y="394"><tspan font-family="Menlo, Consolas, monospace">docs: test:</tspan> → no release</text>
+  </g>
+
+  <!-- hub -->
+  <circle cx="450" cy="300" r="78" fill="#dcfce7" stroke="#16a34a" stroke-width="3"/>
+  <text x="450" y="292" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="30" font-weight="bold" fill="#166534">2.5.0</text>
+  <text x="450" y="318" text-anchor="middle" font-size="12" fill="#14532d">+ commit a1b2c3d</text>
+  <line x1="276" y1="170" x2="384" y2="256" stroke="#4b5563" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="300" y="232" font-size="11" fill="#6b7280">release tool</text>
+
+  <!-- spokes -->
+  <g font-size="12">
+    <rect x="620" y="92" width="256" height="50" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="634" y="113" font-weight="bold" fill="#1e40af">package.json  "version"</text>
+    <text x="634" y="131" font-family="Menlo, Consolas, monospace" fill="#1e3a8a">"version": "2.5.0"</text>
+
+    <rect x="620" y="152" width="256" height="50" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="634" y="173" font-weight="bold" fill="#1e40af">Git tag</text>
+    <text x="634" y="191" font-family="Menlo, Consolas, monospace" fill="#1e3a8a">v2.5.0 → commit a1b2c3d</text>
+
+    <rect x="620" y="212" width="256" height="50" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="634" y="233" font-weight="bold" fill="#1e40af">CHANGELOG.md</text>
+    <text x="634" y="251" fill="#1e3a8a">## 2.5.0 — Added: search by author</text>
+
+    <rect x="620" y="272" width="256" height="50" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+    <text x="634" y="293" font-weight="bold" fill="#5b21b6">Container image tags</text>
+    <text x="634" y="311" font-family="Menlo, Consolas, monospace" fill="#4c1d95">book-api:2.5.0, :a1b2c3d</text>
+
+    <rect x="620" y="332" width="256" height="50" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+    <text x="634" y="353" font-weight="bold" fill="#5b21b6">GET /version</text>
+    <text x="634" y="371" font-family="Menlo, Consolas, monospace" fill="#4c1d95">{"version":"2.5.0","commit":…}</text>
+
+    <rect x="620" y="392" width="256" height="50" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+    <text x="634" y="413" font-weight="bold" fill="#92400e">Logs and telemetry</text>
+    <text x="634" y="431" font-family="Menlo, Consolas, monospace" fill="#78350f">service.version = 2.5.0</text>
+
+    <rect x="620" y="452" width="256" height="50" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+    <text x="634" y="473" font-weight="bold" fill="#92400e">Release notes, SBOM, deploy marker</text>
+    <text x="634" y="491" fill="#78350f">same number, linked to the tag</text>
+  </g>
+  <g stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arr)">
+    <line x1="518" y1="262" x2="616" y2="117"/>
+    <line x1="524" y1="276" x2="616" y2="177"/>
+    <line x1="528" y1="290" x2="616" y2="237"/>
+    <line x1="528" y1="300" x2="616" y2="297"/>
+    <line x1="526" y1="314" x2="616" y2="357"/>
+    <line x1="518" y1="330" x2="616" y2="417"/>
+    <line x1="506" y1="344" x2="616" y2="477"/>
+  </g>
+
+  <!-- rules -->
+  <rect x="24" y="520" width="852" height="64" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="44" y="546" font-size="13" font-weight="bold" fill="#991b1b">Never: change a released version · reuse a number · deploy an image tagged only "latest"</text>
+  <text x="44" y="568" font-size="13" fill="#7f1d1d">A fix is always a new version (2.5.1). Pre-releases (3.0.0-beta.1) never reach production.</text>
+</svg>

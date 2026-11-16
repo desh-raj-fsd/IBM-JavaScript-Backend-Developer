@@ -2,7 +2,7 @@
 
 **SDLC series — Phase 3 of 6.** How professional backend teams do **Development** today: the lecture's core tasks, the Waterfall way vs. the modern way, and the industry practices the lecture does not cover.
 
-> **Last reviewed:** 2026-11-13 · **Next review due:** 2027-05-13 · **Review owner:** Tech Lead · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
+> **Last reviewed:** 2026-11-16 · **Next review due:** 2027-05-16 · **Review owner:** Tech Lead · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
 
 [← Design](../02-Design/Design.md) · [Guide README](../README.md) · [Overview](../../6-Phases-of-SDLC-Modern-Best-Practices.md) · [Testing →](../04-Testing/Testing.md)
 
@@ -146,13 +146,43 @@ const db2 = connect(process.env.DATABASE_URL);
   - **MAJOR:** breaking change (clients must change).
   - **MINOR:** new feature, backward compatible.
   - **PATCH:** bug fix, backward compatible.
-- Conventional Commits can **generate the changelog and the next version number automatically** (tools like semantic-release or release-please).
+- Conventional Commits can **generate the changelog and the next version number automatically** (tools like semantic-release, release-please or Changesets).
 
 ```bash
 git commit -m "feat(reviews): add rating 1-5 to book reviews (REQ-07)"
 git commit -m "fix(reviews): return 409 when user already reviewed the book"
 git commit -m "docs(api): document 409 response in openapi.yaml"
-# feat = MINOR bump, fix = PATCH bump, "BREAKING CHANGE:" in the body = MAJOR bump
+# feat = MINOR bump, fix = PATCH bump, "feat!:" or a "BREAKING CHANGE:" footer = MAJOR bump
+```
+
+#### 4.2.1 Our versioning policy (details)
+
+Every project writes down its rules in a [versioning policy](templates/versioning-policy.md) in Sprint 0. The defaults:
+
+- **Scheme: SemVer** (semver.org 2.0.0) for services, APIs and packages — **three** parts, `MAJOR.MINOR.PATCH`. What matters is **compatibility**, not size: a small rename is MAJOR; a large new feature that breaks nothing is MINOR. (CalVer — date-based versions such as `2026.11` — is allowed only for products **no other code depends on**, with an ADR.)
+- **Optional labels:**
+  - **Pre-release** after `-`: `3.0.0-alpha.1` → `-beta.1` → `-rc.1` → `3.0.0`. A pre-release is **lower** than the final version and **never reaches production**. Shared npm packages publish pre-releases with a **dist-tag** (`npm publish --tag beta`), so normal installs do not pick them up.
+  - **Build metadata** after `+` (`2.5.0+build.812`) records a build number or date; SemVer **ignores it** when ordering versions. Four-part numbers like `2.5.0.812` are **not** SemVer — do not use them.
+- **`0.y.z`** only until the first real client; the first version real clients use is **`1.0.0`**.
+- **A released version is never changed.** No re-tagging, no re-publishing, no new image under an old tag — a fix is always a new version.
+- **One version everywhere:** the same number appears in `package.json`, the Git tag (`v2.5.0`), `CHANGELOG.md` (for example in the "Keep a Changelog" format), the image tag, the `/version` endpoint and the telemetry attribute `service.version`.
+- **Compare versions with a SemVer library** (for example the `semver` package), never as strings: `"1.10.0" > "1.9.0"` is **false** in JavaScript.
+
+![One version, seen everywhere: from commit types to package.json, Git tag, changelog, image tags, /version endpoint and telemetry](images/sdlc-modern-one-version-everywhere.svg)
+
+```js
+// src/routes/version.js — every service reports what is running (Express 5)
+import { readFile } from "node:fs/promises";
+const pkg = JSON.parse(await readFile(new URL("../../package.json", import.meta.url), "utf8"));
+
+export function versionRoute(app) {
+  app.get("/version", (req, res) =>
+    res.json({
+      version: pkg.version,                     // the SemVer release, e.g. "2.5.0"
+      commit: process.env.GIT_SHA ?? "unknown", // injected by CI at image build time
+      node: process.versions.node,              // runtime version, useful when debugging
+    }));
+}
 ```
 
 ### 4.3 Code review
@@ -280,6 +310,17 @@ module.exports = errorHandler;
 - **Choose packages carefully:** active maintenance, many users, small size, a clear license that your company allows (MIT, Apache-2.0, BSD are usually fine; check **copyleft** licenses like GPL with your legal team).
 - **Fewer dependencies = smaller attack surface.** Do not add a package for a 3-line function.
 - **Lockfile + `npm ci`** so every machine installs the **exact** same versions.
+- **Version ranges in `package.json`:**
+
+  | Range | Allows | Our default for |
+  |-------|--------|-----------------|
+  | `^5.1.0` (caret) | Any `5.x.y` from `5.1.0` — never `6.0.0` | Normal runtime dependencies (npm's default) |
+  | `~5.1.0` (tilde) | Only `5.1.x` patches | Packages known to break in minor versions |
+  | `5.1.0` (exact) | Only this version | Build and release tools where every change must be deliberate |
+  | `^0.4.2` (caret on `0.x`) | Only `0.4.x` — `0.y.z` may break anytime | Treat `0.x` packages as risky; prefer stable ones |
+
+  The range says what **may** be installed; the **lockfile** says what **is** installed. Upgrades arrive as pull requests from the update bot and pass CI first.
+- **Runtime version:** declare supported Node.js versions in `package.json` → `"engines"` (for example `">=24"`), pin the local version in `.nvmrc`, use the same LTS line in the Docker base image, and run CI on every supported line. A service may also **check `engines` at startup** and exit with a clear message if the runtime is too old.
 - **Automated updates and scanning:** Dependabot or Renovate, `npm audit`.
 - **Supply-chain attacks are real:** typosquatting (a fake package with a similar name) and hijacked maintainer accounts. Check names carefully; prefer packages with **npm provenance**; be careful with packages that run **install scripts**.
 - **SBOM (Software Bill of Materials):** a list of every component in your software (formats **CycloneDX** or **SPDX**; `npm sbom` creates one); required by many enterprise and government customers.
@@ -347,6 +388,7 @@ services:
 - **Never paste secrets** or confidential customer data into tools your company has not approved.
 - Watch for **licensing**: follow your company's policy on AI-generated code.
 - Keep AI changes **small**, like any other PR.
+- **Check versions in AI suggestions.** AI tools learn from older code, so they often suggest **outdated APIs** or old package versions (for example Express 4 patterns in an Express 5 project). Check the version you actually use and its official docs.
 - **Check every new package an AI suggests.** AI tools sometimes invent package names that do not exist, and attackers register those names with malware ("slopsquatting"). Confirm the package exists, is popular and is maintained **before** installing it.
 - **AI agents that run commands** (in your editor or CI) get the **least privilege** they need: no production credentials, no access to secrets they do not need, and every change still goes through a PR.
 - **If your product itself uses an LLM (Large Language Model)**, also follow the **OWASP Top 10 for LLM Applications (2025)** — for example **prompt injection**: never let model output decide permissions or run commands without checks.
@@ -394,6 +436,7 @@ services:
 | Team Definition of Done ([template](templates/definition-of-done.md)) | **must** | **must** | **may** | **must** |
 | README (run, test, deploy) | **must** | **must** | **must** | **must** |
 | CHANGELOG + SemVer releases | **should** | **must** | — | **must** |
+| Versioning policy ([template](templates/versioning-policy.md)) | **must** | **must** | — | **must** |
 | SBOM per release | **may** | **should** | — | **must** |
 
 ### 6.3 Gate G3 — Story done
@@ -415,12 +458,16 @@ services:
 5. **must** — Dependencies are installed from the **lockfile**; new dependencies need a check of maintenance, license and security.
 6. **must** — AI-assisted code is **read, understood, tested and reviewed** like any other code; no confidential data in unapproved AI tools.
 7. **should** — PRs stay small (aim for a few hundred changed lines at most) and focused on one concern.
-8. **should** — Commits follow **Conventional Commits**; releases use **SemVer**.
+8. **should** — Commits follow **Conventional Commits**; releases follow the project's **versioning policy** (SemVer by default, §4.2.1).
 9. **should** — Reviews start within **one working day**.
 10. **should** — Config is validated at startup; errors go through one central handler; logs are structured with request IDs.
 11. **may** — Pair or mob programming for complex or risky work and for onboarding.
 12. **should** — Lint rules limit **complexity** (for example `complexity`, `max-depth`, `max-lines-per-function`), checked in CI.
 13. **should** — Dependency updates wait a short **cooldown** (for example 3–7 days) before they are merged, **except security fixes**; new packages suggested by AI are checked to exist and be trusted before install.
+14. **must** — Every deployable service reports its **version and commit SHA** (a `/version` or health endpoint) and sets **`service.version`** in its logs and telemetry.
+15. **must** — A released version is **never changed or re-published**; tags and published packages are immutable, and a fix is always a new version.
+16. **should** — `package.json` declares `"engines"`; `.nvmrc`, the Docker base image and the CI matrix use the same supported **LTS** Node.js line(s).
+17. **should** — Code compares versions with a **SemVer library**, never with string comparison.
 
 ### 6.5 Templates
 
@@ -429,6 +476,7 @@ services:
 | [repo-setup-checklist.md](templates/repo-setup-checklist.md) | Use once at project start (track as a Sprint 0 story) |
 | [pull_request_template.md](templates/pull_request_template.md) | `.github/pull_request_template.md` |
 | [definition-of-done.md](templates/definition-of-done.md) | `docs/definition-of-done.md` |
+| [versioning-policy.md](templates/versioning-policy.md) | `docs/versioning-policy.md` (Sprint 0) |
 
 ---
 

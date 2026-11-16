@@ -73,7 +73,7 @@
 
 | Step              | Waterfall way (once, up front)                              | Modern way (start + every sprint)                                                                                                                                    | Modern tools and methods                                                                                            |
 | ----------------- | ----------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| **1. Gather**     | Long interviews and workshops before any work starts        | Kick-off workshops at the start, then continuous input: sprint reviews (demos), user feedback, analytics, support tickets                                            | Story mapping workshops, user interviews, product analytics                                                         |
+| **1. Gather**     | Long interviews and workshops before any work starts        | Kick-off workshops at the start, then continuous input: Sprint Reviews, user feedback, analytics, support tickets                                            | Story mapping workshops, user interviews, product analytics                                                         |
 | **2. Analyze**    | Analysts check the whole list once                          | Each story is checked in **backlog refinement**: is it clear, possible, testable, not in conflict with others? Developers and testers take part.                     | **INVEST** checklist (Independent, Negotiable, Valuable, Estimable, Small, Testable), spikes (short research tasks) |
 | **3. Document**   | One large SRS document, signed off                          | A **light SRS** or product brief for the big picture, plus **user stories with acceptance criteria** in a tracking tool. The documents change as the project learns. | Jira, GitHub Issues, Azure Boards, Markdown docs in Git                                                             |
 | **4. Prioritize** | Fixed once in the SRS; changes need a formal change request | **Re-prioritized every sprint** by the product owner, based on value, risk and feedback                                                                              | **MoSCoW** (Must, Should, Could, Won't), value vs. effort matrix                                                    |
@@ -450,6 +450,48 @@ The course names three documents: **URS** (user needs), **SRS** (software — th
 | **Security** | ASVS level + abuse cases ([6](#6-modern-planning-practices-checklist)) | Security added late is expensive and weak |
 | **Infrastructure** (cloud "hardware") | Capacity and scaling limits, regions, RPO (Recovery Point Objective) and RTO (Recovery Time Objective) | Becomes the SysRS content for cloud systems |
 
+### 4.17 Forecasting and budgeting: fix time and cost, flex scope
+
+- **The problem:** in Agile, the full scope is not known on day one, so a single up-front price and date are hard to give. Waterfall seems easier — but its up-front estimate is made when the team knows the **least** (the **cone of uncertainty**), so it often ends in overruns and change requests.
+- **Our default: fix time and cost, flex scope.** "4 developers for 6 months" is fixed. The PO orders the backlog so the **most valuable** work is built first. If time runs out, the **least valuable** items are left out — **never** the testing or security work.
+
+![Fix time and cost, flex scope: what is fixed in plan-driven vs. Agile work, and a throughput forecast with 50%, 85% and 95% dates](images/sdlc-modern-fixed-time-flex-scope.svg)
+
+| | Plan-driven (Waterfall) | Our way |
+|---|---|---|
+| **Fixed** | Scope | Time and cost (team size) |
+| **Estimated** | Time and cost | Scope that fits — decided by the ordered backlog |
+| **When the estimate is wrong** | Overrun or change request | The PO cuts or splits low-value items; the date holds |
+
+- **How we forecast:**
+  1. **Before Sprint 1:** a **range** from relative sizes (T-shirt sizes or story points) — for example "4–6 months, low confidence".
+  2. **From Sprint 3 on:** a **throughput forecast**. Count the items finished per week, then simulate the remaining backlog many times (**Monte Carlo forecasting**) to get dates with probabilities.
+  3. **Report the 85% date** to the sponsor or client ("85% chance we finish by 14 June"), not the 50% date.
+  4. **Re-run every week** with the current backlog size. If the backlog grows, the old date is wrong.
+
+```mermaid
+flowchart TD
+    S["Before Sprint 1 - range from relative sizes"] --> M["Sprints 1 to 3 - measure throughput"]
+    M --> F["Monte Carlo forecast - 50, 85, 95 percent dates"]
+    F --> R["Report the 85 percent date"]
+    R --> C{"Date too late?"}
+    C -->|yes| CUT["PO removes or splits low-value items"]
+    C -->|no| W["Keep building"]
+    CUT --> W
+    W -->|every week| F
+```
+
+- **Contract models for client projects:**
+
+  | Model | How it works | Use it when |
+  |-------|--------------|-------------|
+  | **Paid discovery first** | A short fixed-price phase to turn the idea into a PRD and a real estimate ([§8.6](#86-client-discovery-client-projects)) | The client's idea is vague |
+  | **Fixed price per phase** | Each phase (MVP, phase 2…) has its own price and approved scope; swaps allowed inside a phase | The client needs a firm budget |
+  | **Time and materials with a cap** | The client pays for time used, up to a budget limit; scope is ordered by value | Scope will change a lot |
+  | **Fixed budget, flexible scope** | Team and dates fixed; the backlog decides what is delivered | Internal products; trusted long-term clients |
+
+  - **Avoid:** one fixed price for a large, unclear scope after the first call (see [§8.6.4](#864-common-mistakes)).
+
 ## 5. How modern teams do it
 
 - **Know the whole map first, but draw the detailed roads only just before you travel them.**
@@ -593,6 +635,8 @@ flowchart TD
 20. **should** — In refinement, a developer and a tester check each story against the **quality characteristics** in §4.13 ("can I build it? can I test it?").
 21. **should** — Use **more than one elicitation technique** per epic; at least one must show what users **do** (observation, prototype test or analytics), not only what they say.
 22. **should** — After each release, check whether the linked **key results moved**, and feed the result back into the backlog.
+23. **must** — Dates and budgets are given as **ranges with a confidence level**; from Sprint 3 on, forecasts come from **measured throughput**, and the **85% date** is the one reported to the sponsor or client.
+24. **must** — Client projects record their **contract model** (§4.17) in the project brief §9 before Gate G1; when time or budget runs short, **scope** is cut by the PO — testing, security and the Definition of Done are never cut.
 
 ### 8.5 Templates
 
@@ -649,7 +693,7 @@ flowchart TD
 | 4 | **Prototype review + MVP workshop** — client clicks through; sort features with **MoSCoW**; fit the Must list to budget and date | PO (facilitator), TL (sizes) | Agreed MVP feature list + phase 2 list | [mvp-workshop.md](templates/mvp-workshop.md) |
 | 5 | **Write two versions** — client PRD in plain words; first epics and user stories for the team | PO (+ team) | `client-prd.md`, backlog | [client-prd.md](templates/client-prd.md), [user-story.md](templates/user-story.md) |
 | 6 | **Written agreement** — client approves the PRD and the scope / SOW (in/out, assumptions, price, feedback deadline, change rules) → **Gate G1** | Client decision-maker, SP | Signed PRD + SOW | client-prd.md §12, project brief §11 |
-| 7 | **Build in sprints, demo every 2 weeks** — working software is the best requirements tool | Team | Sprint reviews with the client | — |
+| 7 | **Build in sprints, Sprint Review with the client every 2 weeks** — working software is the best requirements tool | Team | Sprint Reviews with the client | — |
 | 8 | **Handle changes fairly** — **swap** (same size, no price change) or **change request** (extra cost and time, approved first) | PO + DL | Updated log / CR | [change-request.md](templates/change-request.md) |
 
 ```mermaid

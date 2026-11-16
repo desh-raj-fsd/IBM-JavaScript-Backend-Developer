@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4b5563"/>
+    </marker>
+  </defs>
+  <rect width="900" height="600" fill="#ffffff"/>
+  <text x="450" y="38" text-anchor="middle" font-size="25" font-weight="bold" fill="#1f2937">The V-Model Idea, Done Continuously</text>
+  <text x="450" y="62" text-anchor="middle" font-size="14" fill="#6b7280">Each design artifact gets its test in the same sprint; CI runs all four levels on every push</text>
+
+  <text x="40" y="96" font-size="14" font-weight="bold" fill="#1e40af">WHAT WE SPECIFY (test is written)</text>
+  <text x="860" y="96" text-anchor="end" font-size="14" font-weight="bold" fill="#166534">CI STAGE (test is run)</text>
+
+  <g font-size="13" text-anchor="middle">
+    <rect x="40" y="112" width="200" height="56" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="140" y="136" font-weight="bold" fill="#1e40af">Story + acceptance criteria</text>
+    <text x="140" y="155" font-size="11" fill="#1e3a8a">Given / When / Then</text>
+    <rect x="95" y="202" width="200" height="56" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="195" y="226" font-weight="bold" fill="#1e40af">NFRs + system design</text>
+    <text x="195" y="245" font-size="11" fill="#1e3a8a">SLOs, security level (ASVS)</text>
+    <rect x="150" y="292" width="200" height="56" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="250" y="316" font-weight="bold" fill="#1e40af">Architecture + API contract</text>
+    <text x="250" y="335" font-size="11" fill="#1e3a8a">OpenAPI, C4, ADRs</text>
+    <rect x="205" y="382" width="200" height="56" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="305" y="406" font-weight="bold" fill="#1e40af">Module design</text>
+    <text x="305" y="425" font-size="11" fill="#1e3a8a">function / class behavior</text>
+
+    <rect x="660" y="112" width="200" height="56" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <text x="760" y="136" font-weight="bold" fill="#166534">Acceptance on staging</text>
+    <text x="760" y="155" font-size="11" fill="#14532d">validation + PO / client UAT</text>
+    <rect x="605" y="202" width="200" height="56" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <text x="705" y="226" font-weight="bold" fill="#166534">System: E2E, load, DAST</text>
+    <text x="705" y="245" font-size="11" fill="#14532d">Playwright, k6, OWASP ZAP</text>
+    <rect x="550" y="292" width="200" height="56" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <text x="650" y="316" font-weight="bold" fill="#166534">Integration + contract</text>
+    <text x="650" y="335" font-size="11" fill="#14532d">Supertest, Testcontainers, Pact</text>
+    <rect x="495" y="382" width="200" height="56" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <text x="595" y="406" font-weight="bold" fill="#166534">Unit (TDD)</text>
+    <text x="595" y="425" font-size="11" fill="#14532d">node:test, Vitest</text>
+  </g>
+
+  <rect x="350" y="470" width="200" height="50" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
+  <text x="450" y="492" text-anchor="middle" font-size="14" font-weight="bold" fill="#92400e">Code + pull request</text>
+  <text x="450" y="510" text-anchor="middle" font-size="11" fill="#78350f">tests in the same PR</text>
+
+  <g stroke="#4b5563" stroke-width="2" marker-end="url(#arr)">
+    <line x1="140" y1="168" x2="170" y2="200"/>
+    <line x1="195" y1="258" x2="225" y2="290"/>
+    <line x1="250" y1="348" x2="280" y2="380"/>
+    <line x1="330" y1="438" x2="380" y2="468"/>
+    <line x1="520" y1="468" x2="570" y2="440"/>
+    <line x1="620" y1="380" x2="650" y2="350"/>
+    <line x1="675" y1="290" x2="705" y2="260"/>
+    <line x1="730" y1="200" x2="760" y2="170"/>
+  </g>
+  <g stroke="#7c3aed" stroke-width="1.6" stroke-dasharray="6 4" marker-end="url(#arr)">
+    <line x1="242" y1="140" x2="656" y2="140"/>
+    <line x1="297" y1="230" x2="601" y2="230"/>
+    <line x1="352" y1="320" x2="546" y2="320"/>
+    <line x1="407" y1="410" x2="491" y2="410"/>
+  </g>
+  <g font-size="11" text-anchor="middle" fill="#5b21b6">
+    <text x="449" y="132">REQ-ID in the test name</text>
+    <text x="449" y="222">NFR numbers become checks</text>
+    <text x="449" y="312">contract tests</text>
+  </g>
+
+  <text x="450" y="556" text-anchor="middle" font-size="13" fill="#374151">Unit, integration and system tests VERIFY (built right?) · acceptance tests VALIDATE (right thing?)</text>
+  <text x="450" y="578" text-anchor="middle" font-size="12" fill="#6b7280">+ Regulated projects: the same V, plus a traceability matrix and signed test records for every increment</text>
+</svg>

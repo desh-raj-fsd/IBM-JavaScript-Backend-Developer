@@ -2,7 +2,7 @@
 
 **SDLC series — Phase 2 of 6.** How professional backend teams do **Design** today: the lecture's core tasks, the Waterfall way vs. the modern way, and the industry practices the lecture does not cover.
 
-> **Last reviewed:** 2026-11-13 · **Next review due:** 2027-05-13 · **Review owner:** Tech Lead · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
+> **Last reviewed:** 2026-11-16 · **Next review due:** 2027-05-16 · **Review owner:** Tech Lead · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
 
 [← Planning](../01-Planning/Planning.md) · [Guide README](../README.md) · [Overview](../../6-Phases-of-SDLC-Modern-Best-Practices.md) · [Development →](../03-Development/Development.md)
 
@@ -251,8 +251,46 @@ try {
 - **One consistent error format** for every endpoint — the standard is **RFC 9457 "Problem Details"** (`application/problem+json`).
 - **Pagination** for every list endpoint (`?limit=20&cursor=...`).
 - **Idempotency** for retries: `PUT` and `DELETE` are idempotent by design; for `POST` payments or orders, accept an **`Idempotency-Key`** header.
-- **Versioning and evolution plan:** add fields without breaking clients; use a new version (for example `/v2`) only for breaking changes; announce deprecations with the **`Deprecation`** header (RFC 9745) and the **`Sunset`** header (RFC 8594, the date it stops working).
+- **Versioning and evolution plan:** add fields without breaking clients; use a new version (for example `/v2`) only for breaking changes; announce deprecations with the **`Deprecation`** header (RFC 9745) and the **`Sunset`** header (RFC 8594, the date it stops working). Details in [4.4.1](#441-api-compatibility-and-versioning).
 - **API contract first:** REST APIs are described in **OpenAPI** (current version **3.2**, released September 2025; 3.1 is still widely supported by tools). Event and message APIs (queues, Kafka topics, webhooks) are described in **AsyncAPI**.
+
+#### 4.4.1 API compatibility and versioning
+
+- **Why it matters:** web apps, mobile apps that users have not updated, partner systems and our own services all call the API, and they **cannot all upgrade at the same moment**. During a rolling deployment, even old and new copies of **our own** service run side by side.
+- **Backward compatibility (our promise):** inside one API version we **only add** things. Old clients keep working.
+- **Forward compatibility (tolerant reader):** our clients and services **ignore fields they do not know** and use defaults for missing optional fields, so the other side can add fields safely. Note: our **input validation** still rejects unknown fields in **requests** (no mass assignment, [Development rule 4](../03-Development/Development.md#64-rules)) — being tolerant applies to **reading responses and events**.
+
+| Change | Breaking? | What we do |
+|--------|-----------|------------|
+| Add an endpoint, an optional request field, or a response field | No | Same API version; service MINOR bump |
+| Fix a bug so the API matches its OpenAPI contract | Usually no | PATCH bump; note it in the changelog |
+| Add an enum value | Only for strict clients | Document that clients must handle unknown values |
+| Remove or rename an endpoint or field | **Yes** | New API version (`/v2`) |
+| Make an optional field required; change a type or format | **Yes** | New API version |
+| Change status codes or the error format clients rely on | **Yes** | New API version |
+
+- **A breaking change gets a new major API version**, which runs **in parallel** with the old one:
+  1. Release `/v2`; mark `/v1` with `Deprecation` and `Sunset` headers and a `Link` to the migration guide.
+  2. Give notice: **at least 6 months** for external or partner clients, **at least 1 month** for internal-only clients (the project's [versioning policy](../03-Development/templates/versioning-policy.md) may set longer periods).
+  3. **Track `/v1` calls per client** and contact the ones still using it.
+  4. Remove `/v1` after the sunset date **and** when its traffic is near zero.
+- **Catch breaking changes automatically:** compare the OpenAPI file of the pull request with the one on `main` in CI (an OpenAPI diff tool, for example **oasdiff**), and fail the build on a breaking change inside the same API version.
+
+![API compatibility: non-breaking vs. breaking changes, and the /v1 to /v2 lifecycle with Deprecation and Sunset](images/sdlc-modern-api-compatibility.svg)
+
+```mermaid
+flowchart TD
+    C["API change in a pull request"] --> D{"OpenAPI diff - breaking?"}
+    D -->|no| SAME["Same API version - service MINOR or PATCH"]
+    D -->|yes| Q{"Can it be made additive instead?"}
+    Q -->|yes| SAME
+    Q -->|no| V2["New API version v2 - service MAJOR"]
+    V2 --> DEP["v1 gets Deprecation and Sunset headers"]
+    DEP --> TR["Track v1 usage per client"]
+    TR --> RM{"Sunset date passed and traffic near zero?"}
+    RM -->|no| TR
+    RM -->|yes| DEL["Remove v1"]
+```
 
 ### 4.5 Security design
 
@@ -419,6 +457,8 @@ Many companies write a short design doc, often called an **RFC (Request for Comm
 9. **may** — Use AI tools to suggest options or review designs; the Tech Lead owns the decision and the ADR.
 10. **should** — Module boundaries are **enforced in CI** (an architecture fitness function), and business logic does not import framework or database code directly (ports and adapters).
 11. **should** — Event and message APIs are documented in **AsyncAPI**, like REST APIs in OpenAPI.
+12. **must** — Inside one API version, changes are **additive only** (§4.4.1). A breaking change gets a **new API version** that runs in parallel with the old one, which gets `Deprecation`/`Sunset` headers and the notice period from the versioning policy.
+13. **should** — CI runs an **OpenAPI diff** against `main` and fails on breaking changes inside the same API version.
 
 ### 6.5 Templates
 

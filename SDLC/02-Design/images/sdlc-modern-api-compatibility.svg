@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4b5563"/>
+    </marker>
+  </defs>
+  <rect width="900" height="620" fill="#ffffff"/>
+  <text x="450" y="38" text-anchor="middle" font-size="25" font-weight="bold" fill="#1f2937">API Compatibility: Add Freely, Break Only in a New Version</text>
+  <text x="450" y="62" text-anchor="middle" font-size="14" fill="#6b7280">Inside one API version only add things; a breaking change gets /v2, run in parallel until the sunset date</text>
+
+  <!-- non-breaking -->
+  <rect x="24" y="84" width="420" height="220" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="234" y="112" text-anchor="middle" font-size="16" font-weight="bold" fill="#166534">✔ Not breaking — same API version</text>
+  <g font-size="13" fill="#14532d">
+    <text x="44" y="142">• add a new endpoint</text>
+    <text x="44" y="166">• add an optional request field</text>
+    <text x="44" y="190">• add a field to a response</text>
+    <text x="44" y="214">• add a new enum value (if clients are tolerant)</text>
+    <text x="44" y="238">• fix a bug so the API matches its contract</text>
+  </g>
+  <text x="234" y="280" text-anchor="middle" font-size="12" fill="#166534">service version: MINOR or PATCH</text>
+
+  <!-- breaking -->
+  <rect x="456" y="84" width="420" height="220" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="666" y="112" text-anchor="middle" font-size="16" font-weight="bold" fill="#991b1b">✘ Breaking — needs a new API version</text>
+  <g font-size="13" fill="#7f1d1d">
+    <text x="476" y="142">• remove or rename an endpoint or field</text>
+    <text x="476" y="166">• make an optional field required</text>
+    <text x="476" y="190">• change a field's type or format</text>
+    <text x="476" y="214">• change status codes or error format</text>
+    <text x="476" y="238">• change behavior clients rely on</text>
+  </g>
+  <text x="666" y="280" text-anchor="middle" font-size="12" fill="#991b1b">service version: MAJOR · OpenAPI diff in CI catches it</text>
+
+  <!-- timeline -->
+  <text x="24" y="346" font-size="15" font-weight="bold" fill="#1f2937">Lifecycle of a breaking change</text>
+  <line x1="60" y1="420" x2="860" y2="420" stroke="#4b5563" stroke-width="2" marker-end="url(#arr)"/>
+  <rect x="60" y="370" width="560" height="26" rx="6" fill="#fecaca" stroke="#dc2626"/>
+  <text x="70" y="388" font-size="12" font-weight="bold" fill="#991b1b">/v1</text>
+  <rect x="300" y="436" width="560" height="26" rx="6" fill="#bbf7d0" stroke="#16a34a"/>
+  <text x="310" y="454" font-size="12" font-weight="bold" fill="#166534">/v2</text>
+  <g font-size="12" text-anchor="middle" fill="#374151">
+    <circle cx="300" cy="420" r="7" fill="#16a34a"/>
+    <text x="300" y="486" font-weight="bold">/v2 released</text>
+    <text x="300" y="502">/v1 gets Deprecation +</text>
+    <text x="300" y="518">Sunset headers</text>
+    <circle cx="460" cy="420" r="6" fill="#d97706"/>
+    <text x="460" y="486" font-weight="bold">notice period</text>
+    <text x="460" y="502">≥ 6 months external,</text>
+    <text x="460" y="518">≥ 1 month internal</text>
+    <circle cx="620" cy="420" r="7" fill="#dc2626"/>
+    <text x="620" y="486" font-weight="bold">sunset date</text>
+    <text x="620" y="502">and /v1 traffic ≈ 0</text>
+    <text x="620" y="518">→ /v1 removed</text>
+  </g>
+  <text x="460" y="362" text-anchor="middle" font-size="11" fill="#7f1d1d">track /v1 calls per client; contact the ones still using it</text>
+
+  <!-- tolerant reader -->
+  <rect x="24" y="540" width="852" height="64" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="44" y="566" font-size="13" font-weight="bold" fill="#1e40af">Forward compatibility (tolerant reader): clients and services ignore fields they do not know</text>
+  <text x="44" y="588" font-size="13" fill="#1e3a8a">and use defaults for missing optional fields — so the server can add fields without breaking anyone.</text>
+</svg>
