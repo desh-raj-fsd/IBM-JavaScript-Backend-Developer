@@ -22,6 +22,7 @@
 - [ ] Runtime / framework / base image end-of-life dates checked
 - [ ] Certificates and secrets rotation OK
 - [ ] Access review done (quarterly)
+- [ ] Documents past their **Next review due** date (SOPs, runbooks, README, user docs) listed, with an owner ([README §7.2](../../README.md#72-documentation-rules), rule 7)
 
 ## 5. Cost
 - Cloud cost this month vs. budget; actions:

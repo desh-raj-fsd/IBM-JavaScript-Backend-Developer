@@ -398,6 +398,23 @@ services:
 - **Pair programming** (two developers, one task) and **mob/ensemble programming** (the whole team, one task) spread knowledge and catch mistakes early.
 - **Docs as code:** a **README** (what it is, how to run it, how to test it), API docs generated from OpenAPI, JSDoc on public functions, ADRs, and a **CHANGELOG** — all in Git and reviewed in PRs.
 - **Comments explain *why*, not *what*.** The code shows *what*.
+- **Docs change in the same PR as the code.** Documentation is updated **with** each change, in every phase — not "later" or "in the maintenance phase". If users read the old docs for weeks, the docs are wrong ([README §7.2](../README.md#72-documentation-rules), rule 2).
+- **Product vs. process docs:** product docs describe the software (requirements, design, technical, QA, user); process docs describe how we work (plans, standards, reports, **SOPs**). Working papers and meeting notes are **process** docs — move any decision in them into an ADR. The full map with owners is in [README §7.1](../README.md#71-documentation-map-what-we-keep-who-owns-it-when-it-changes).
+- **SOPs (Standard Operating Procedures)** describe a repeated, project-specific procedure step by step — for example **how we merge to `main`** ([SOP template with this filled example](templates/sop.md)). Put every step a tool can check **into the tool** (branch protection, `CODEOWNERS`, the PR template, CI); the SOP keeps the reasons and the human steps.
+- **Generate and check docs:** the API reference comes from OpenAPI; CI should run Markdown lint, a link check and an OpenAPI lint on every PR ([README §7.2](../README.md#72-documentation-rules), rule 5). Pin the tools in `devDependencies` and run them as npm scripts, so CI uses the lockfile versions (rule 5).
+
+```yaml
+# .github/workflows/docs.yml (excerpt) — docs are checked like code
+on:
+  pull_request:
+    paths: ["**/*.md", "openapi.yaml"]
+# ... checkout and setup-node ...
+      - run: npm ci                                            # tools pinned in devDependencies
+      - run: npx --no-install markdownlint-cli2 "**/*.md" "#node_modules"   # Markdown format rules
+      - run: npx --no-install @redocly/cli lint openapi.yaml   # the API contract is valid
+      - uses: lycheeverse/lychee-action@<pinned version or SHA> # broken-link check
+# Not a required status check: with a paths filter, PRs without docs changes never run it.
+```
 
 ## 5. Development is "done" when... (a typical Definition of Done)
 
@@ -407,7 +424,7 @@ services:
 - [ ] **Security checks** pass: input validated, authorization checked, no secrets, parameterized queries, dependency scan clean.
 - [ ] Errors go through the **central error handler**; logs are structured with no sensitive data.
 - [ ] The **PR is small**, has a clear description, and is **approved** by at least one reviewer.
-- [ ] **Docs** (README, OpenAPI, CHANGELOG) are updated where needed.
+- [ ] **Docs** (README, OpenAPI, user help, runbooks, SOPs, CHANGELOG) are updated **in the same PR** (help-center content: in the same release) — or the PR says "no docs change".
 - [ ] Database **migrations** are backward compatible.
 - [ ] Unfinished user-facing work is hidden behind a **feature flag**.
 - [ ] The change is **merged to `main`** and deployable.
@@ -438,6 +455,8 @@ services:
 | CHANGELOG + SemVer releases | **should** | **must** | — | **must** |
 | Versioning policy ([template](templates/versioning-policy.md)) | **must** | **must** | — | **must** |
 | SBOM per release | **may** | **should** | — | **must** |
+| SOPs for repeated project-specific procedures ([template](templates/sop.md)) — at least "merge to `main`" (the release checklist is the release SOP) | **should** | **must** | — | **must** |
+| Docs checks in CI (Markdown lint, links, OpenAPI lint) | **should** | **should** | — | **must** |
 
 ### 6.3 Gate G3 — Story done
 
@@ -450,6 +469,9 @@ services:
 - [ ] Product Owner accepted the story against its acceptance criteria
 
 ### 6.4 Rules
+
+> Documentation rules for all phases (same PR, SOPs, docs checks, review dates) are in [README §7.2](../README.md#72-documentation-rules).
+
 
 1. **must** — `main` is protected: PR, ≥ 1 approval, green CI; no direct pushes, no force-push.
 2. **must** — **Trunk-based** or **GitHub Flow**: branches live ≤ 2 days where possible; unfinished work hides behind feature flags. (GitFlow only with an ADR, for example for versioned libraries.)
@@ -477,6 +499,7 @@ services:
 | [pull_request_template.md](templates/pull_request_template.md) | `.github/pull_request_template.md` |
 | [definition-of-done.md](templates/definition-of-done.md) | `docs/definition-of-done.md` |
 | [versioning-policy.md](templates/versioning-policy.md) | `docs/versioning-policy.md` (Sprint 0) |
+| [sop.md](templates/sop.md) | `docs/sop/<short-name>.md` (filled example: merging to `main`) |
 
 ---
 

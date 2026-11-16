@@ -15,6 +15,6 @@
 - [ ] Tests added or updated (unit / integration); CI is green
 - [ ] Input validated; authorization checked; no secrets in code or logs
 - [ ] Errors go through the central error handler
-- [ ] API contract / docs / CHANGELOG updated if needed
+- [ ] Docs updated in this PR (API contract / README / user help / runbook / SOP / CHANGELOG) — or: no docs change, because …
 - [ ] PR is small and focused (one concern)
 - [ ] AI-assisted code (if any) was read, understood and tested like my own code

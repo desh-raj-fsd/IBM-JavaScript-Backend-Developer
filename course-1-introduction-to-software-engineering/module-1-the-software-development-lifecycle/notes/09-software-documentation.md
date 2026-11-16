@@ -534,7 +534,7 @@ jobs:
 
 ```text
 # .github/CODEOWNERS — who must review changes to which files
-# With branch protection (or a ruleset) "Require review from Code Owners", a code owner must approve.
+# With branch protection "Require review from Code Owners" (or the same option in a ruleset), a code owner must approve.
 # Several owners on one line: ONE approval from any of them is enough.
 # The LAST matching pattern wins: /docs/runbooks/ is owned only by @lumenventure/sre.
 *                 @lumenventure/backend-team

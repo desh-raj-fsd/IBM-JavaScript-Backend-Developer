@@ -12,6 +12,7 @@
 ## Pipeline stages
 - [ ] Install with lockfile → lint → type check → unit tests → integration tests
 - [ ] Security: dependency scan, secret scan, SAST; container image scan
+- [ ] Docs checks: Markdown lint, broken links, OpenAPI lint ([README §7.2](../../README.md#72-documentation-rules), rule 5)
 - [ ] Build **once**; tag with commit SHA (and version); push to the registry
 - [ ] Deploy to staging automatically → smoke tests
 - [ ] Production: approval gate (client and regulated projects **must**) or Continuous Deployment (internal products **may**)

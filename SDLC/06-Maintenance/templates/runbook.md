@@ -8,6 +8,7 @@
 | **Severity** | page / ticket |
 | **Owner** | |
 | **Last tested** | |
+| **Last reviewed / next review due** | <YYYY-MM-DD> / <+ 6 months> ([README §7.2](../../README.md#72-documentation-rules), rule 7) |
 
 ## What this alert means
 <In plain words: what is broken and who is affected.>

@@ -27,7 +27,7 @@
 - [ ] Unfinished user-facing work is behind a feature flag
 
 ## Docs
-- [ ] README / API docs / CHANGELOG updated where needed
+- [ ] ★ Docs affected by the change (README, OpenAPI, user help, runbook, SOP, CHANGELOG) updated **in this PR** (help-center content: in the same release) — or "no docs change" stated ([README §7.2](../../README.md#72-documentation-rules), rule 2)
 - [ ] ADR written for any significant decision
 
 ## Delivery

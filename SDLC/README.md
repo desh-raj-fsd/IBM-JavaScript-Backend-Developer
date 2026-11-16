@@ -250,10 +250,56 @@ Every project keeps its documents **in its Git repository**, next to the code, s
 │   ├── releases/                 # Release checklists / notes
 │   ├── slo.md                    # Maintenance
 │   ├── runbooks/                 # One per alert
+│   ├── sop/                      # SOPs: repeated, project-specific procedures (§7.2)
+│   ├── user/                     # User docs (help, FAQ, guides), unless they live in a help center
 │   └── postmortems/              # One per SEV1/SEV2 incident
 ├── .github/pull_request_template.md
 └── CHANGELOG.md
 ```
+
+### 7.1 Documentation map: what we keep, who owns it, when it changes
+
+Documentation has two categories. **Product documentation** describes the product (five types below). **Process documentation** describes and records **how we work** — plans, standards, reports, and **SOPs (Standard Operating Procedures)** for repeated, project-specific tasks. Every document has **one owner role** and a named **audience**.
+
+| Category / type | Documents (template) | Owner | Audience | Updated when |
+|-----------------|----------------------|-------|----------|--------------|
+| Product — **requirements** | Project brief, backlog stories, client PRD (Product Requirements Document), SRS (Software Requirements Specification) on regulated projects ([Planning §8](01-Planning/Planning.md#8-lumenventure-standard)) | PO | Team, client, QA | Every refinement; scope changes by change request |
+| Product — **design** | Design docs, ADRs, C4 diagrams (context, containers, components, code), OpenAPI / AsyncAPI, threat model ([Design §6](02-Design/Design.md#6-lumenventure-standard)) | TL | Developers, reviewers, client (the HLD — high-level design) | In the PR that changes the design or contract |
+| Product — **technical** | README, code comments ("why"), generated API reference, `.env.example`, versioning policy | TL | Developers, AI coding assistants | In the same PR as the code |
+| Product — **QA** | Test strategy, test cases, test reports, UAT sign-off ([Testing §6](04-Testing/Testing.md#6-lumenventure-standard)) | QA (UAT sign-off: PO) | Team, PO, client, auditors | With each story; per release |
+| Product — **user** | Help pages, FAQ (Frequently Asked Questions), installation guide, release notes (sorted as tutorial / how-to / reference / explanation — the Diátaxis framework) | PO | End users, client's staff, API consumers | In the same release as the change they describe |
+| Process — **plans and standards** | Sprint goals, Definition of Done, the project's tailoring and deviations (project brief §10), risk register | DL | Team, sponsor | Sprint events; retrospectives |
+| Process — **reports and notes** | Client meeting summaries and the assumptions and decisions log (owner: PO); service reviews and postmortems (owner: TL); other team notes (owner: DL) | PO / TL / DL as listed | Team, client, sponsor | Same day (meetings); monthly (service review); after incidents |
+| Process — **SOPs and runbooks** | SOPs ([template](03-Development/templates/sop.md)), runbooks ([template](06-Maintenance/templates/runbook.md)) | TL | Team, on-call | When the procedure changes; reviewed every 6 months |
+
+```mermaid
+flowchart TD
+    D["Project documentation in Git"] --> P["Product docs - about the product"]
+    D --> PR["Process docs - about how we work"]
+    P --> R["Requirements - PO"]
+    P --> DE["Design - TL"]
+    P --> T["Technical - TL"]
+    P --> Q["QA - QA Engineer"]
+    P --> U["User - PO"]
+    PR --> PS["Plans and standards - DL"]
+    PR --> RN["Reports and notes - DL"]
+    PR --> SOP["SOPs and runbooks - TL"]
+    U --> SAME["Changed in the same PR or release as the software"]
+    T --> SAME
+    DE --> SAME
+```
+
+### 7.2 Documentation rules
+
+1. **must** — Project documents live in the project's Git repository as in §7 (user docs may live in a help center that links to the release); each document in §7.1 has its owner role.
+2. **must** — A change that alters behavior, the API, operations or a procedure **updates the affected documents in the same pull request** (or, for help-center content, in the same release). The PR states "no docs change" when none is needed. Documentation is **never** left for "later" or "the maintenance phase".
+3. **must** — No secrets, credentials, internal-only hostnames or real personal data in any document, screenshot, video or example. This extends [Development rule 3](03-Development/Development.md#64-rules) and [Testing rule 3](04-Testing/Testing.md#64-rules) to documentation.
+4. **should** — The API reference is **generated** from the OpenAPI contract, never maintained as a separate hand-written copy. This extends [Testing rule 16](04-Testing/Testing.md#64-rules) (API docs checked against the contract in CI).
+5. **should** (**must** on regulated projects) — CI (Continuous Integration) checks documentation on every PR: Markdown lint, broken links, and OpenAPI lint (tools, for example: markdownlint, lychee, Spectral or Redocly CLI). Pin the tools in `devDependencies` (Development rule 5). A check with a `paths:` filter is not made a required status check — a PR that does not touch those files would never run it and could not merge.
+6. **should** (**must** on client and regulated projects, at least for "merge to `main`") — A procedure the team repeats and that is **specific to this project or client** (merging, releasing, onboarding, rotating secrets, restoring a backup, client hand-over) has an **SOP** written with the [SOP template](03-Development/templates/sop.md). Every step a tool can enforce **is** enforced (branch protection, CODEOWNERS, CI, the pipeline); the SOP keeps the reasons and the human steps. The [release checklist](05-Deployment/templates/release-checklist.md) is the release SOP — do not write a second one.
+7. **should** — **SOPs and runbooks** show **Last reviewed** and **Next review due** and are reviewed **at least every 6 months**, and at once when an incident or a new team member shows they are wrong; the monthly service review lists overdue ones. The README and user docs stay current through rule 2 and are checked in the monthly service review.
+8. **should** — Working papers and meeting notes are **process** documents. [Design rule 1](02-Design/Design.md#64-rules) (hard-to-change decisions are ADRs **before** building on them) and [Planning rule 12](01-Planning/Planning.md#8-lumenventure-standard) (assumptions that change cost or time go into the decisions log) still apply; any **other** decision taken in them is moved into an ADR or the decisions log in the same sprint.
+9. **must** on client projects, **should** on internal products — User-facing features ship with **user documentation** for a named audience (help, FAQ or guide, and release notes); its scope is agreed in the project brief (or SOW — Statement of Work), and it meets the same accessibility target as the product (default WCAG 2.2 AA).
 
 ---
 
@@ -279,6 +325,7 @@ Every project keeps its documents **in its Git repository**, next to the code, s
 | Development | [pull_request_template.md](03-Development/templates/pull_request_template.md) | Copy to `.github/` |
 | Development | [definition-of-done.md](03-Development/templates/definition-of-done.md) | Team DoD |
 | Development | [versioning-policy.md](03-Development/templates/versioning-policy.md) | Version scheme, bump rules, supported versions, deprecation periods |
+| Development | [sop.md](03-Development/templates/sop.md) | Standard Operating Procedure for a repeated, project-specific task (filled example: merging to `main`) |
 | Testing | [test-strategy.md](04-Testing/templates/test-strategy.md) | How the project proves quality |
 | Testing | [bug-report.md](04-Testing/templates/bug-report.md) | Reporting a bug |
 | Testing | [uat-signoff.md](04-Testing/templates/uat-signoff.md) | Acceptance by PO / client |
