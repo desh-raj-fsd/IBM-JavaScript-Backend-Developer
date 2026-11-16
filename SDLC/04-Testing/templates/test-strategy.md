@@ -14,6 +14,19 @@
 | System — non-functional | Load, security, accessibility | | QA + TL + Security Champion | Before releases; regularly |
 | Acceptance | Acceptance criteria / UAT | | QA + PO (+ client) | Per story; before release |
 
+### 2.1 Regression schedule ([Testing §4.15](../Testing.md#415-regression-testing-what-runs-when), rule 14)
+| When | What runs | Command / CI job |
+|------|-----------|------------------|
+| Every pull request | All tests. Affected tests only when: <e.g. the suite takes more than 10 minutes> | |
+| Every merge to `main` | Full automated suite | |
+| Nightly (rule 14) | Full suite + <slow E2E, fuzz, visual, short load test> | |
+| Before every release | Full suite on the release commit + <load, DAST, accessibility> | |
+
+### 2.2 Test design
+- Techniques we use: equivalence partitioning and boundary values for every validated input; decision tables for: <rules>; state-transition tests for: <status fields>
+- Supported platforms tested in the CI matrix (rule 16; the list comes from `docs/versioning-policy.md`): <Node.js LTS lines, browsers, API client versions>
+- Tests that stay manual (written with the [test-case template](test-case.md)): <UAT scripts, OAT, manual accessibility checks>
+
 ## 3. Coverage and quality targets
 - Minimum line/branch coverage: <e.g. 80%> (a warning light, not a goal)
 - Critical paths that need extra tests: <auth, payments, data changes…>
@@ -31,6 +44,9 @@
 | Security (SAST / DAST / dependency) | No high/critical open | | |
 | Penetration test | Required? (regulated / client contract) | | |
 | Accessibility | e.g. WCAG 2.2 AA | | |
+| Compatibility | All supported platforms in §2.2 | | Every PR (CI matrix) |
+| Recovery (restore drill) | Within the documented RPO / RTO ([Maintenance §4.6](../../06-Maintenance/Maintenance.md#46-backups-and-disaster-recovery)) | | At least every quarter |
+| Documentation | API docs match the OpenAPI contract | | Every PR |
 
 ## 6. Bugs
 - Tracking tool:

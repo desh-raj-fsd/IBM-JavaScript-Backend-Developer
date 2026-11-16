@@ -246,6 +246,7 @@ Every project keeps its documents **in its Git repository**, next to the code, s
 │   ├── threat-model.md           # Design
 │   ├── versioning-policy.md      # Development (Sprint 0)
 │   ├── test-strategy.md          # Testing
+│   ├── test-cases/               # Testing: written test cases for manual, UAT and OAT tests (client and regulated projects)
 │   ├── releases/                 # Release checklists / notes
 │   ├── slo.md                    # Maintenance
 │   ├── runbooks/                 # One per alert
@@ -281,6 +282,7 @@ Every project keeps its documents **in its Git repository**, next to the code, s
 | Testing | [test-strategy.md](04-Testing/templates/test-strategy.md) | How the project proves quality |
 | Testing | [bug-report.md](04-Testing/templates/bug-report.md) | Reporting a bug |
 | Testing | [uat-signoff.md](04-Testing/templates/uat-signoff.md) | Acceptance by PO / client |
+| Testing | [test-case.md](04-Testing/templates/test-case.md) | Written test cases and execution record for tests that cannot be automated (UAT, OAT, regulated) |
 | Deployment | [release-checklist.md](05-Deployment/templates/release-checklist.md) | Gate G4 for each release |
 | Deployment | [pipeline-checklist.md](05-Deployment/templates/pipeline-checklist.md) | Setting up CI/CD and environments |
 | Maintenance | [slo.md](06-Maintenance/templates/slo.md) | SLIs, SLOs, error budget |
@@ -367,7 +369,8 @@ The external standards, laws and specifications this guide relies on. **Review o
 | **Agile Manifesto** | 2001 — 4 values, 12 principles | README §6 | — (fixed text) |
 | **Semantic Versioning** | 2.0.0 (semver.org) — `MAJOR.MINOR.PATCH`, pre-release `-…`, build metadata `+…` | Development, Design, Deployment | next review |
 | **Conventional Commits** | 1.0.0 | Development | next review |
-| **ISO/IEC 25010** (software quality model) | 2023 edition | Planning (NFRs), Testing | next review |
+| **ISO/IEC 25010** (software quality model) | 2023 edition — usability renamed **interaction capability** (accessibility split into *inclusivity* and *user assistance*); **safety** added; portability renamed **flexibility** | Planning (NFRs), Testing | 2026-11-16 |
+| **ISTQB Foundation Level syllabus** (testing terms and principles) | CTFL (Certified Tester Foundation Level) **v4.0** (April 2023; errata release v4.0.1, Sept 2024) — seven testing principles ("tests wear out" was called the "pesticide paradox" in older editions); maintenance testing = checking the change + regression | Testing §4.13 | 2026-11-16 |
 | **WCAG** (accessibility) | 2.2, level AA as default target | Planning, Testing | next review |
 | **European Accessibility Act** | Applies since 28 June 2025 | Planning | next review |
 | **GDPR** (EU data protection) | Regulation (EU) 2016/679 | Planning, Design, Maintenance | next review |

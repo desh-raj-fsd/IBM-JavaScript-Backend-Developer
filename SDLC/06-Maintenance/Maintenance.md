@@ -263,7 +263,7 @@ groups:
 
 - A hotfix is a **small, urgent fix** to production — but it still goes through the **same pipeline**: a PR, a review (it can be quick), **tests**, and staging.
 - **Skipping tests for "just a one-line fix"** is a common cause of a second incident.
-- Always add a **regression test** for the bug, and make sure the fix also lands on `main` so the next release does not bring the bug back.
+- Always add a **regression test** for the bug — named with the bug ID and red without the fix ([Testing rule 15](../04-Testing/Testing.md#64-rules)) — and make sure the fix also lands on `main` so the next release does not bring the bug back.
 
 ### 4.6 Backups and disaster recovery
 
@@ -321,7 +321,7 @@ groups:
 - [ ] **Logs, metrics, traces and error tracking** are in place; dashboards show RED/golden signals.
 - [ ] **Alerts** are actionable, link to **runbooks**, and page the **on-call** person only when users are hurt.
 - [ ] **Incidents** are handled with clear roles and followed by **blameless postmortems** whose action items are done.
-- [ ] **Hotfixes** use the normal pipeline and always add a **regression test**.
+- [ ] **Hotfixes** use the normal pipeline and always add a **regression test** named with the bug ID.
 - [ ] **Backups** meet RPO/RTO and **restores are tested**.
 - [ ] **Dependencies, Node.js LTS, base images and certificates** are kept up to date; vulnerabilities are fixed on time.
 - [ ] **Data** retention, deletion requests and database health are managed.
@@ -385,7 +385,7 @@ groups:
 2. **must** — Every alert is **actionable** and links to a **runbook**; noisy alerts are fixed or deleted.
 3. **must** — **Mitigate first** (rollback, flag off, scale), then find the root cause.
 4. **must** — SEV1/SEV2 incidents get a **blameless postmortem** within 5 working days; action items have owners and due dates.
-5. **must** — Hotfixes go through the **normal pipeline** (fast review, tests, staging) and include a **regression test**.
+5. **must** — Hotfixes go through the **normal pipeline** (fast review, tests, staging) and include a **regression test** named with the bug ID that fails without the fix ([Testing rule 15](../04-Testing/Testing.md#64-rules)).
 6. **must** — Backups meet the documented **RPO/RTO**, and a **restore is tested at least every quarter**.
 7. **must** — Security fixes by severity (default): **critical within 7 days**, **high within 30 days**, others planned.
 8. **should** — Reserve about **10–20%** of each sprint for preventive and adaptive maintenance (tech debt, upgrades).

@@ -24,4 +24,4 @@
 <Frequency, workaround, suspected cause.>
 
 ---
-**Fix checklist:** [ ] root cause found · [ ] regression test added · [ ] fix verified by someone other than the author · [ ] fixed on `main`
+**Fix checklist:** [ ] root cause found · [ ] automated test named `BUG-<id>: …` added — red without the fix, green with it (confirmation + regression; Testing rule 15) · [ ] fix verified by someone other than the author · [ ] fixed on `main`

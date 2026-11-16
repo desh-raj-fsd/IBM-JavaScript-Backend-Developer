@@ -12,7 +12,7 @@
 
 ## Quality
 - [ ] All stories in the release meet the **Definition of Done**
-- [ ] CI green on the exact commit being released
+- [ ] CI green on the exact commit being released — the **full** regression suite ran on it, not only the affected tests ([Testing rule 14](../../04-Testing/Testing.md#64-rules))
 - [ ] Testing exit criteria met (system, non-functional, security scans) — see test strategy
 - [ ] No open S1/S2 bugs, or each has an agreed plan
 - [ ] **UAT / acceptance signed** (PO; client on client projects) — link:

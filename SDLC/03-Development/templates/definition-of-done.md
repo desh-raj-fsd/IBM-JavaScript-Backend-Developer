@@ -11,7 +11,7 @@
 
 ## Tests
 - [ ] ★ Unit and integration tests written and passing in CI
-- [ ] ★ Every bug fix includes a regression test
+- [ ] ★ Every bug fix includes an automated test named with the bug ID that fails without the fix (Testing rule 15)
 - [ ] Acceptance criteria automated where practical
 - [ ] No new flaky tests
 
