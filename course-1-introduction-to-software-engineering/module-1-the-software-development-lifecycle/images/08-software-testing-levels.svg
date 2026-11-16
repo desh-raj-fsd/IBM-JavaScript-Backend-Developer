@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" font-family="Helvetica, Arial, sans-serif">
+  <rect width="900" height="600" fill="#ffffff"/>
+  <text x="450" y="38" text-anchor="middle" font-size="25" font-weight="bold" fill="#1f2937">The Four Testing Levels</text>
+  <text x="450" y="62" text-anchor="middle" font-size="14" fill="#6b7280">Each level has its own scope and goal; the pyramid shows how many tests each level gets</text>
+
+  <!-- pyramid -->
+  <polygon points="250,92 300,92 360,182 190,182" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <polygon points="190,186 360,186 410,276 140,276" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+  <polygon points="140,280 410,280 460,370 90,370" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <polygon points="90,374 460,374 510,464 40,464" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <g text-anchor="middle" font-weight="bold">
+    <text x="275" y="150" font-size="13" fill="#92400e">Acceptance</text>
+    <text x="275" y="236" font-size="15" fill="#5b21b6">System</text>
+    <text x="275" y="330" font-size="16" fill="#1e40af">Integration</text>
+    <text x="275" y="424" font-size="17" fill="#166534">Unit</text>
+  </g>
+  <g text-anchor="middle" font-size="11">
+    <text x="275" y="168" fill="#78350f">few, per story / release</text>
+    <text x="275" y="256" fill="#4c1d95">fewer · minutes</text>
+    <text x="275" y="350" fill="#1e3a8a">some · seconds</text>
+    <text x="275" y="444" fill="#14532d">many · milliseconds</text>
+  </g>
+
+  <!-- details -->
+  <g font-size="12">
+    <rect x="530" y="92" width="346" height="90" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="1.5"/>
+    <text x="544" y="114" font-weight="bold" fill="#92400e">Acceptance — VALIDATION ("right thing?")</text>
+    <text x="544" y="134" fill="#78350f">user needs, business processes · black-box</text>
+    <text x="544" y="152" fill="#78350f">customer, users, PO (UAT) · staging / UAT env</text>
+    <text x="544" y="170" fill="#78350f" font-weight="bold">done BEFORE release</text>
+
+    <rect x="530" y="186" width="346" height="90" rx="10" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1.5"/>
+    <text x="544" y="208" font-weight="bold" fill="#5b21b6">System — VERIFICATION ("built right?")</text>
+    <text x="544" y="228" fill="#4c1d95">complete system vs. specified requirements</text>
+    <text x="544" y="246" fill="#4c1d95">functional AND non-functional · QA</text>
+    <text x="544" y="264" fill="#4c1d95">staging, close to production · black-box</text>
+
+    <rect x="530" y="280" width="346" height="90" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="544" y="302" font-weight="bold" fill="#1e40af">Integration — verification</text>
+    <text x="544" y="322" fill="#1e3a8a">modules + database + external services</text>
+    <text x="544" y="340" fill="#1e3a8a">black-box OR white-box (often grey-box)</text>
+    <text x="544" y="358" fill="#1e3a8a">developers · CI with real dependencies</text>
+
+    <rect x="530" y="374" width="346" height="90" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="544" y="396" font-weight="bold" fill="#166534">Unit — verification</text>
+    <text x="544" y="416" fill="#14532d">one function or module · mostly white-box</text>
+    <text x="544" y="434" fill="#14532d">developers, during development</text>
+    <text x="544" y="452" fill="#14532d">removes construction errors early</text>
+  </g>
+
+  <!-- bottom -->
+  <rect x="24" y="488" width="852" height="96" rx="10" fill="#f9fafb" stroke="#9ca3af" stroke-width="1.5"/>
+  <text x="44" y="514" font-size="14" font-weight="bold" fill="#374151">Why four levels? Each finds different defects, as early and cheaply as possible</text>
+  <text x="44" y="538" font-size="13" fill="#374151">A logic error: seconds to find in a unit test, hours to trace in a system test. Avoiding duplicate tests is a side benefit.</text>
+  <text x="44" y="562" font-size="13" fill="#374151">Modern teams run all four levels in every sprint; the automated ones run in CI on every change.</text>
+</svg>

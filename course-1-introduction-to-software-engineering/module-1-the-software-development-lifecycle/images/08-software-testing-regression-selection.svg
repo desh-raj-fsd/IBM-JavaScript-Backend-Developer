@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4b5563"/>
+    </marker>
+  </defs>
+  <rect width="900" height="600" fill="#ffffff"/>
+  <text x="450" y="38" text-anchor="middle" font-size="25" font-weight="bold" fill="#1f2937">Regression Testing: What Runs When</text>
+  <text x="450" y="62" text-anchor="middle" font-size="14" fill="#6b7280">After any change, select by risk — but run the full suite regularly</text>
+
+  <!-- selection reasons -->
+  <rect x="24" y="84" width="330" height="300" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="189" y="110" text-anchor="middle" font-size="15" font-weight="bold" fill="#92400e">Pick tests that cover…</text>
+  <g font-size="13" fill="#78350f">
+    <text x="44" y="140">• features with frequent defects</text>
+    <text x="44" y="166">• frequently used functionality</text>
+    <text x="44" y="192">• features with recent changes</text>
+    <text x="44" y="218">• complex flows</text>
+    <text x="44" y="244">• edge cases</text>
+    <text x="44" y="270">• tests that recently found</text>
+    <text x="56" y="288">a real defect</text>
+  </g>
+  <rect x="40" y="306" width="298" height="64" rx="8" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="189" y="330" text-anchor="middle" font-size="13" font-weight="bold" fill="#991b1b">Flaky (random pass/fail)?</text>
+  <text x="189" y="352" text-anchor="middle" font-size="12" fill="#7f1d1d">fix it or quarantine it — never select it</text>
+
+  <!-- cadence -->
+  <g font-size="13">
+    <rect x="384" y="84" width="492" height="66" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <text x="400" y="108" font-weight="bold" fill="#166534">Every pull request — minutes</text>
+    <text x="400" y="132" fill="#14532d">affected unit + integration tests, smoke tests of key journeys</text>
+
+    <rect x="384" y="162" width="492" height="66" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="400" y="186" font-weight="bold" fill="#1e40af">Every merge to main</text>
+    <text x="400" y="210" fill="#1e3a8a">the full automated suite</text>
+
+    <rect x="384" y="240" width="492" height="66" rx="10" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+    <text x="400" y="264" font-weight="bold" fill="#5b21b6">Every night</text>
+    <text x="400" y="288" fill="#4c1d95">full suite + slow end-to-end + some non-functional tests</text>
+
+    <rect x="384" y="318" width="492" height="66" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+    <text x="400" y="342" font-weight="bold" fill="#92400e">Before a release</text>
+    <text x="400" y="366" fill="#78350f">full suite + load, security and accessibility checks on staging</text>
+  </g>
+
+  <!-- bug fix flow -->
+  <text x="24" y="424" font-size="15" font-weight="bold" fill="#1f2937">Every bug fix adds two checks</text>
+  <g font-size="13" text-anchor="middle">
+    <rect x="24" y="440" width="200" height="60" rx="10" fill="#f3f4f6" stroke="#6b7280" stroke-width="2"/>
+    <text x="124" y="466" font-weight="bold" fill="#374151">BUG-212 fixed</text>
+    <text x="124" y="486" font-size="11" fill="#4b5563">duplicate reviews</text>
+    <rect x="290" y="440" width="270" height="60" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+    <text x="425" y="466" font-weight="bold" fill="#92400e">Confirmation test</text>
+    <text x="425" y="486" font-size="11" fill="#78350f">the failing case now passes</text>
+    <rect x="606" y="440" width="270" height="60" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+    <text x="741" y="466" font-weight="bold" fill="#991b1b">New regression test</text>
+    <text x="741" y="486" font-size="11" fill="#7f1d1d">test("BUG-212: …") — guards forever</text>
+  </g>
+  <g stroke="#4b5563" stroke-width="2" marker-end="url(#arr)">
+    <line x1="224" y1="470" x2="286" y2="470"/>
+    <line x1="560" y1="470" x2="602" y2="470"/>
+  </g>
+  <text x="450" y="540" text-anchor="middle" font-size="13" fill="#374151">Regression testing is part of maintenance testing for live software — and runs on every change during development too.</text>
+  <text x="450" y="562" text-anchor="middle" font-size="12" fill="#6b7280">Triggers: fixes, features, refactoring, dependency and runtime upgrades, configuration and infrastructure changes</text>
+</svg>
