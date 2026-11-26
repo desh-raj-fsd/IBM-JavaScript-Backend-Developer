@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 540" font-family="Helvetica, Arial, sans-serif">
+<rect width="900" height="540" fill="#ffffff"/>
+<text x="450" y="40" text-anchor="middle" font-size="24" font-weight="bold" fill="#1f2937">The Three Layers of a Web Page</text>
+<text x="450" y="66" text-anchor="middle" font-size="14" fill="#6b7280">Example: the Log in button of an online shop</text>
+<!-- HTML -->
+<rect x="40" y="95" width="260" height="400" rx="14" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+<rect x="40" y="95" width="260" height="50" rx="14" fill="#ffedd5"/>
+<text x="170" y="127" text-anchor="middle" font-size="18" font-weight="bold" fill="#9a3412">HTML = Structure</text>
+<text x="170" y="170" text-anchor="middle" font-size="12" font-style="italic" fill="#9a3412">The walls and rooms of the house</text>
+<rect x="60" y="190" width="220" height="62" rx="8" fill="#ffffff" stroke="#fdba74"/>
+<text x="70" y="212" font-size="12" font-family="Courier, monospace" fill="#7c2d12">&lt;button type="button"&gt;</text>
+<text x="70" y="232" font-size="12" font-family="Courier, monospace" fill="#7c2d12">  Log in</text>
+<text x="70" y="248" font-size="12" font-family="Courier, monospace" fill="#7c2d12">&lt;/button&gt;</text>
+<text x="170" y="285" text-anchor="middle" font-size="12" fill="#6b7280">What the browser shows:</text>
+<rect x="100" y="300" width="140" height="40" fill="#e5e7eb" stroke="#9ca3af"/>
+<text x="170" y="326" text-anchor="middle" font-size="14" fill="#111827">Log in</text>
+<text x="170" y="375" text-anchor="middle" font-size="12" fill="#7c2d12">Says WHAT it is: a button</text>
+<text x="170" y="395" text-anchor="middle" font-size="12" fill="#7c2d12">Keyboard and screen readers</text>
+<text x="170" y="413" text-anchor="middle" font-size="12" fill="#7c2d12">understand it</text>
+<!-- CSS -->
+<rect x="320" y="95" width="260" height="400" rx="14" fill="#f0fdfa" stroke="#0d9488" stroke-width="2"/>
+<rect x="320" y="95" width="260" height="50" rx="14" fill="#ccfbf1"/>
+<text x="450" y="127" text-anchor="middle" font-size="18" font-weight="bold" fill="#115e59">CSS = Style</text>
+<text x="450" y="170" text-anchor="middle" font-size="12" font-style="italic" fill="#115e59">The paint and furniture</text>
+<rect x="340" y="190" width="220" height="62" rx="8" fill="#ffffff" stroke="#99f6e4"/>
+<text x="350" y="212" font-size="12" font-family="Courier, monospace" fill="#134e4a">.btn { background: #0d9488;</text>
+<text x="350" y="232" font-size="12" font-family="Courier, monospace" fill="#134e4a">  border-radius: 8px; }</text>
+<text x="450" y="285" text-anchor="middle" font-size="12" fill="#6b7280">What the browser shows:</text>
+<rect x="380" y="300" width="140" height="40" rx="8" fill="#0d9488"/>
+<text x="450" y="326" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">Log in</text>
+<text x="450" y="375" text-anchor="middle" font-size="12" fill="#115e59">Says HOW it looks: color, shape,</text>
+<text x="450" y="395" text-anchor="middle" font-size="12" fill="#115e59">size, and layout on phone and PC</text>
+<!-- JS -->
+<rect x="600" y="95" width="260" height="400" rx="14" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<rect x="600" y="95" width="260" height="50" rx="14" fill="#dbeafe"/>
+<text x="730" y="127" text-anchor="middle" font-size="18" font-weight="bold" fill="#1e3a8a">JavaScript = Behavior</text>
+<text x="730" y="170" text-anchor="middle" font-size="12" font-style="italic" fill="#1e3a8a">The wiring and the switches</text>
+<rect x="620" y="190" width="220" height="62" rx="8" fill="#ffffff" stroke="#93c5fd"/>
+<text x="630" y="212" font-size="12" font-family="Courier, monospace" fill="#1e3a8a">btn.addEventListener(</text>
+<text x="630" y="232" font-size="12" font-family="Courier, monospace" fill="#1e3a8a">  'click', sendLogin);</text>
+<text x="730" y="285" text-anchor="middle" font-size="12" fill="#6b7280">What happens on click:</text>
+<rect x="650" y="300" width="160" height="40" rx="8" fill="#0d9488"/>
+<text x="730" y="326" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">Log in</text>
+<line x1="730" y1="342" x2="730" y2="366" stroke="#2563eb" stroke-width="2"/>
+<polygon points="730,372 724,360 736,360" fill="#2563eb"/>
+<rect x="640" y="374" width="180" height="34" rx="6" fill="#ffffff" stroke="#2563eb"/>
+<text x="730" y="396" text-anchor="middle" font-size="12" fill="#1e3a8a">POST /login to the server</text>
+<text x="730" y="435" text-anchor="middle" font-size="12" fill="#1e3a8a">Says WHAT HAPPENS. The server</text>
+<text x="730" y="453" text-anchor="middle" font-size="12" fill="#1e3a8a">still checks the password.</text>
+<text x="450" y="520" text-anchor="middle" font-size="13" fill="#374151">Good practice: all three work together, and the server never trusts the browser.</text>
+</svg>

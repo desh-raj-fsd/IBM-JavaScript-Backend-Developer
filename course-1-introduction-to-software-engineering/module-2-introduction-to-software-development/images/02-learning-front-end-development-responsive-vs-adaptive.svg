@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" font-family="Helvetica, Arial, sans-serif">
+<rect width="900" height="560" fill="#ffffff"/>
+<text x="450" y="40" text-anchor="middle" font-size="24" font-weight="bold" fill="#1f2937">Adaptive vs. Responsive Design</text>
+<text x="450" y="66" text-anchor="middle" font-size="14" fill="#6b7280">Both serve phones, tablets and PCs. They do it in different ways.</text>
+<!-- Adaptive -->
+<rect x="30" y="90" width="400" height="420" rx="14" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+<text x="230" y="122" text-anchor="middle" font-size="18" font-weight="bold" fill="#9a3412">Adaptive: pick one fixed layout</text>
+<text x="230" y="144" text-anchor="middle" font-size="12" fill="#9a3412">Several versions, one per screen size</text>
+<rect x="55" y="180" width="70" height="120" rx="8" fill="#ffffff" stroke="#ea580c" stroke-width="2"/>
+<rect x="62" y="190" width="56" height="20" fill="#fdba74"/><rect x="62" y="218" width="56" height="30" fill="#fed7aa"/><rect x="62" y="256" width="56" height="30" fill="#fed7aa"/>
+<text x="90" y="322" text-anchor="middle" font-size="12" fill="#7c2d12">Phone</text>
+<text x="90" y="338" text-anchor="middle" font-size="11" fill="#7c2d12">layout A</text>
+<rect x="150" y="170" width="120" height="140" rx="8" fill="#ffffff" stroke="#ea580c" stroke-width="2"/>
+<rect x="158" y="180" width="104" height="20" fill="#fdba74"/><rect x="158" y="208" width="48" height="40" fill="#fed7aa"/><rect x="214" y="208" width="48" height="40" fill="#fed7aa"/><rect x="158" y="256" width="104" height="38" fill="#fed7aa"/>
+<text x="210" y="332" text-anchor="middle" font-size="12" fill="#7c2d12">Tablet</text>
+<text x="210" y="348" text-anchor="middle" font-size="11" fill="#7c2d12">layout B</text>
+<rect x="295" y="160" width="115" height="150" rx="8" fill="#ffffff" stroke="#ea580c" stroke-width="2"/>
+<rect x="302" y="170" width="101" height="18" fill="#fdba74"/><rect x="302" y="196" width="30" height="100" fill="#fed7aa"/><rect x="338" y="196" width="65" height="46" fill="#fed7aa"/><rect x="338" y="250" width="65" height="46" fill="#fed7aa"/>
+<text x="352" y="332" text-anchor="middle" font-size="12" fill="#7c2d12">PC</text>
+<text x="352" y="348" text-anchor="middle" font-size="11" fill="#7c2d12">layout C</text>
+<text x="230" y="395" text-anchor="middle" font-size="12" fill="#7c2d12">More work: each version is built and kept up to date.</text>
+<text x="230" y="415" text-anchor="middle" font-size="12" fill="#7c2d12">Sizes between the versions can look wrong.</text>
+<text x="230" y="448" text-anchor="middle" font-size="12" font-style="italic" fill="#7c2d12">Lecture: more information on a PC than on a phone.</text>
+<text x="230" y="480" text-anchor="middle" font-size="12" font-weight="bold" fill="#9a3412">Today: keep the same content on every device.</text>
+<!-- Responsive -->
+<rect x="470" y="90" width="400" height="420" rx="14" fill="#f0fdfa" stroke="#0d9488" stroke-width="2"/>
+<text x="670" y="122" text-anchor="middle" font-size="18" font-weight="bold" fill="#115e59">Responsive: one flexible layout</text>
+<text x="670" y="144" text-anchor="middle" font-size="12" fill="#115e59">The same page re-flows at any width</text>
+<rect x="495" y="180" width="70" height="120" rx="8" fill="#ffffff" stroke="#0d9488" stroke-width="2"/>
+<rect x="502" y="190" width="56" height="20" fill="#5eead4"/><rect x="502" y="218" width="56" height="30" fill="#99f6e4"/><rect x="502" y="256" width="56" height="30" fill="#99f6e4"/>
+<text x="530" y="322" text-anchor="middle" font-size="12" fill="#134e4a">Narrow</text>
+<text x="530" y="338" text-anchor="middle" font-size="11" fill="#134e4a">1 column</text>
+<rect x="595" y="170" width="120" height="140" rx="8" fill="#ffffff" stroke="#0d9488" stroke-width="2"/>
+<rect x="603" y="180" width="104" height="20" fill="#5eead4"/><rect x="603" y="208" width="48" height="40" fill="#99f6e4"/><rect x="659" y="208" width="48" height="40" fill="#99f6e4"/><rect x="603" y="256" width="104" height="38" fill="#99f6e4"/>
+<text x="655" y="332" text-anchor="middle" font-size="12" fill="#134e4a">Medium</text>
+<text x="655" y="348" text-anchor="middle" font-size="11" fill="#134e4a">2 columns</text>
+<rect x="740" y="160" width="115" height="150" rx="8" fill="#ffffff" stroke="#0d9488" stroke-width="2"/>
+<rect x="747" y="170" width="101" height="18" fill="#5eead4"/><rect x="747" y="196" width="30" height="100" fill="#99f6e4"/><rect x="783" y="196" width="65" height="46" fill="#99f6e4"/><rect x="783" y="250" width="65" height="46" fill="#99f6e4"/>
+<text x="797" y="332" text-anchor="middle" font-size="12" fill="#134e4a">Wide</text>
+<text x="797" y="348" text-anchor="middle" font-size="11" fill="#134e4a">sidebar + grid</text>
+<text x="670" y="395" text-anchor="middle" font-size="12" fill="#134e4a">Fluid grid, media queries, container queries.</text>
+<text x="670" y="415" text-anchor="middle" font-size="12" fill="#134e4a">Smooth at every width, less code to maintain.</text>
+<text x="670" y="448" text-anchor="middle" font-size="12" font-style="italic" fill="#134e4a">Lecture: resizes automatically to the device.</text>
+<text x="670" y="480" text-anchor="middle" font-size="12" font-weight="bold" fill="#115e59">Today: the default. Write mobile-first.</text>
+<text x="450" y="540" text-anchor="middle" font-size="12" fill="#6b7280">Do not forget: &lt;meta name="viewport" content="width=device-width"&gt; (and never block zoom)</text>
+</svg>

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="Helvetica, Arial, sans-serif">
+<rect width="900" height="480" fill="#ffffff"/>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#475569"/></marker></defs>
+<text x="450" y="40" text-anchor="middle" font-size="24" font-weight="bold" fill="#1f2937">Sass and Less Are Compiled to Plain CSS</text>
+<text x="450" y="66" text-anchor="middle" font-size="14" fill="#6b7280">The browser never sees Sass or Less. It only reads CSS.</text>
+<!-- sources -->
+<rect x="30" y="110" width="200" height="110" rx="10" fill="#fdf2f8" stroke="#db2777" stroke-width="2"/>
+<text x="130" y="135" text-anchor="middle" font-size="14" font-weight="bold" fill="#9d174d">app.scss (Sass)</text>
+<text x="42" y="160" font-size="11" font-family="Courier, monospace" fill="#831843">$brand: #0d9488;</text>
+<text x="42" y="178" font-size="11" font-family="Courier, monospace" fill="#831843">.btn { background: $brand;</text>
+<text x="42" y="196" font-size="11" font-family="Courier, monospace" fill="#831843">  &amp;:hover { ... } }</text>
+<rect x="30" y="260" width="200" height="110" rx="10" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+<text x="130" y="285" text-anchor="middle" font-size="14" font-weight="bold" fill="#5b21b6">app.less (Less)</text>
+<text x="42" y="310" font-size="11" font-family="Courier, monospace" fill="#4c1d95">@brand: #0d9488;</text>
+<text x="42" y="328" font-size="11" font-family="Courier, monospace" fill="#4c1d95">.btn { background: @brand;</text>
+<text x="42" y="346" font-size="11" font-family="Courier, monospace" fill="#4c1d95">  &amp;:hover { ... } }</text>
+<!-- compilers -->
+<rect x="320" y="110" width="210" height="110" rx="10" fill="#ffffff" stroke="#db2777" stroke-width="2"/>
+<text x="425" y="150" text-anchor="middle" font-size="15" font-weight="bold" fill="#9d174d">Dart Sass compiler</text>
+<text x="425" y="175" text-anchor="middle" font-size="12" fill="#475569">npx sass in.scss out.css</text>
+<text x="425" y="198" text-anchor="middle" font-size="12" fill="#475569">use @use, not @import</text>
+<rect x="320" y="260" width="210" height="110" rx="10" fill="#ffffff" stroke="#7c3aed" stroke-width="2"/>
+<text x="425" y="300" text-anchor="middle" font-size="15" font-weight="bold" fill="#5b21b6">lessc or less.js</text>
+<text x="425" y="325" text-anchor="middle" font-size="12" fill="#475569">npx lessc in.less out.css</text>
+<text x="425" y="348" text-anchor="middle" font-size="12" fill="#475569">compile at build time</text>
+<!-- css -->
+<rect x="620" y="185" width="140" height="110" rx="10" fill="#f0fdfa" stroke="#0d9488" stroke-width="2"/>
+<text x="690" y="225" text-anchor="middle" font-size="15" font-weight="bold" fill="#115e59">app.css</text>
+<text x="690" y="250" text-anchor="middle" font-size="12" fill="#115e59">plain CSS</text>
+<text x="690" y="270" text-anchor="middle" font-size="12" fill="#115e59">works anywhere</text>
+<rect x="800" y="210" width="80" height="60" rx="10" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+<text x="840" y="236" text-anchor="middle" font-size="13" font-weight="bold" fill="#9a3412">Browser</text>
+<text x="840" y="256" text-anchor="middle" font-size="11" fill="#9a3412">reads CSS</text>
+<!-- arrows -->
+<line x1="232" y1="165" x2="316" y2="165" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<line x1="232" y1="315" x2="316" y2="315" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<line x1="532" y1="165" x2="600" y2="215" stroke="#475569" stroke-width="2"/>
+<line x1="532" y1="315" x2="600" y2="265" stroke="#475569" stroke-width="2"/>
+<line x1="600" y1="215" x2="616" y2="228" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<line x1="600" y1="265" x2="616" y2="252" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<line x1="762" y1="240" x2="796" y2="240" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<!-- note -->
+<rect x="60" y="400" width="780" height="56" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+<text x="450" y="424" text-anchor="middle" font-size="13" fill="#334155">Modern CSS now has custom properties (variables) and native nesting, so many new projects</text>
+<text x="450" y="444" text-anchor="middle" font-size="13" fill="#334155">skip the preprocessor. Sass and Less are still common in existing code bases.</text>
+</svg>
