@@ -16,6 +16,8 @@ Optional:
   --acronyms        course notes only: report acronyms that are never expanded in the note
                     (look for "ABC (Full Form)" or "Full Form (ABC)").
   --leak-file FILE  like --leak, one wrong phrase per line.
+  --rules           SDLC files: numbered rule lists ("N. **must|should|may**") must count 1,2,3... with no
+                    duplicate or skipped number inside one block (catches broken or renumbered rules).
 
 Exit code 1 if any problem is found. Run from the repo root:
   python .claude/skills/new-lecture/scripts/audit.py
@@ -34,7 +36,7 @@ SKIP_FILES = {"master-prompt.md"}  # contains example paths and rule text, not r
 BAD_NAME = re.compile(r'[:*?"<>|\\]')
 ACRO_IGNORE = {"OK", "PR", "TODO", "GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS", "NOT", "MUST", "ONLY",
                "NEVER", "AND", "OR", "WHAT", "HOW", "WHY", "SHOULD", "MAY", "ALWAYS", "NO", "YES", "UTF", "LF", "PX", "MS", "KB",
-               "MB", "GB", "ID", "TV", "AA", "AAA", "LEGO", "IBM", "AWS", "PHP", "NGINX", "WHATWG", "IDEA", "FAQ", "AI", "ES", "DB", "JS"}
+               "MB", "GB", "ID", "README", "CHANGELOG", "TV", "AA", "AAA", "LEGO", "IBM", "AWS", "PHP", "NGINX", "WHATWG", "IDEA", "FAQ", "AI", "ES", "DB", "JS"}
 ROMAN = re.compile(r"^[IVXL]+$")
 RESERVED = re.compile(r"^(CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9])(\.|$)", re.I)
 
@@ -87,6 +89,7 @@ def main() -> int:
     ap.add_argument("--note")
     ap.add_argument("--acronyms", action="store_true")
     ap.add_argument("--leak-file")
+    ap.add_argument("--rules", action="store_true")
     args = ap.parse_args()
 
     problems: list[str] = []
@@ -138,6 +141,21 @@ def main() -> int:
                 for n, line in enumerate(text.splitlines(), 1):
                     if phrase.lower() in line.lower() and "Lecture wording" not in line and not line.startswith("> ⚠️"):
                         problems.append(f"LEAK   {f}:{n}: '{phrase}' outside a quiz line (OK only in a 'Lecture' table column): {line[:100]}")
+
+    if args.rules:
+        for f in files:
+            if not f.endswith(".md"):
+                continue
+            prev = 0
+            for n, line in enumerate(open(f, encoding="utf-8").read().splitlines(), 1):
+                m = re.match(r"^(\d+)\. \*\*(must|should|may)", line)
+                if m:
+                    k = int(m.group(1))
+                    if k != prev + 1 and k != 1:
+                        problems.append(f"RULES  {f}:{n}: rule {k} follows rule {prev} (duplicate or skipped number)")
+                    prev = k
+                elif line.startswith(("#", "---")):
+                    prev = 0
 
     if args.acronyms:
         for f in files:

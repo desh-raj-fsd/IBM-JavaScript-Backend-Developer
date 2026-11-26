@@ -1,35 +1,35 @@
 ---
 name: new-lecture
-description: Fast path for one IBM course lecture — transcript to notes and SVG images following master-prompt.md, checked by scripts. The SDLC update, an independent review and commits are opt-in flags. Use when the user gives a lecture title and transcript. Flags on the first line - `--sdlc` (add the small SDLC delta), `--review` (one light review subagent), `--commit`, `--push`.
+description: Fast, checked path for one IBM course lecture — transcript to notes and SVG images following master-prompt.md. Facts are verified with a cheap script, risky claims are flagged by a script, and a light review runs automatically when the risk is high or the SDLC changes. Flags on the first line - `--sdlc` (add the SDLC delta), `--review` / `--no-review` (force or skip the review), `--commit`, `--push`.
 ---
 
-# /new-lecture — fast path (notes only by default)
+# /new-lecture — fast path, with checks that scale with risk
 
-Input: lecture title + transcript (ask and stop if missing). Flags on the first line, all optional: `--sdlc`, `--review`, `--commit`, `--push`.
+Input: lecture title + transcript (ask and stop if missing). Optional flags on the first line: `--sdlc`, `--review`, `--no-review`, `--commit`, `--push`.
 
-**Where the tokens go, so do the opposite:** long output (the note itself), web pages returned in full, subagents that browse, and the SDLC delta. Rules:
-- **Length budget.** Note ≈ 0.4 lines per transcript word (700 words → about 280 lines; hard cap 350). Jargon table ≤ 15 terms. One visual per topic: a Mermaid diagram **or** an image, never the same idea as table + diagram + image. 2 SVGs (3 only if the lecture has 3 separate ideas). A Modern Best Practice block **only** where the lecture is outdated, oversimplified or wrong; everything else goes in one "Often-missed parts" section. Keep master-prompt minimums (a Mermaid per major topic, ≥ 2 images, ≥ 5 related concepts, "What happens if" code where code exists); skip code for non-technical lectures except one tiny config example.
-- **Output once.** Write the note in **one** `Write` call (two at most). Never rewrite it; fix with `Edit`/Python replace. Do not read back files you wrote. Do not re-read `master-prompt.md` if it is already in context.
-- **Web budget: at most 6 fetches in one parallel batch.** Verify only numbers, dates, versions and named standards you will state as fact. For one-line facts use `WebSearch` (cheaper than guessing page URLs); one retry per failed URL, then drop the claim or write "not verified". Well-known process or people facts: hedge, do not fetch. Narrow prompts ("quote the sentence and the date").
-- **No subagent unless `--review`.** Scripts replace the model review.
+**Cost rules:** one `Write` for the note (fix with `Edit`); no read-back of files you wrote; do not re-read `master-prompt.md` if it is in context. **Length budget:** note ≈ 0.4 lines per transcript word (cap 350); jargon ≤ 15 terms; one visual per idea; 2 SVGs (3 if 3 separate ideas); Modern Best Practice blocks only where the lecture is wrong, outdated or oversimplified; the rest in one "Often-missed parts" section. Keep master-prompt minimums.
 
 ## Steps
 
-1. **Prep (1 call):** `python .claude/skills/new-lecture/scripts/prep.py <topic-slug>` — pulls, finds the newest module, next number, creates folders, prints the paths. Then save the transcript's **key points only (~300 words)** to the printed TRANSCRIPT path. Read `master-prompt.md` once if it is not already in context.
-2. **Plan in your head, write two small files in one call:** `keys.txt` (30–50 short transcript phrases, one per line, copied exactly) and `leaks.txt` (wrong phrases the note corrects, one per line). Decide corrections, the few real modern-practice blocks, and the facts to verify.
-3. **Verify (one parallel batch, ≤ 6 fetches).** Keep sources for the note and the CHANGELOG.
-4. **Write** the note and the SVGs (one `Write` each; SVGs in master-prompt style, text kept inside boxes). Run code examples only when the lecture is technical and needs no service; paste real output.
-5. **Check (one command, fix, rerun once):**
+1. **Prep:** `python .claude/skills/new-lecture/scripts/prep.py <slug>` (pull, module, number, folders). Save key points (~300 words) to the TRANSCRIPT path.
+2. **Plan, in one call write** `keys.txt` (30–50 exact transcript phrases) and `leaks.txt` (wrong phrases you will correct). List the corrections and the few real modern-practice blocks.
+3. **Verify facts cheaply and widely.** For every number, date, version, standard or quoted wording you plan to state, run
+   `python .claude/skills/new-lecture/scripts/fetchgrep.py <primary-url> "<regex>" …`
+   (a script: only the matching snippets enter the conversation; run several in parallel; **no fixed cap**, about 10–15 checks is normal). Use `WebSearch`/`WebFetch` only when a page fails or needs JavaScript. One retry per URL, then hedge or drop the claim.
+4. **Write** the note (one `Write`) and SVGs. Run code only for technical lectures (no external service); paste real output.
+5. **Check (fix, rerun once):**
    `python .claude/skills/new-lecture/scripts/audit.py <note> <svgs> --keys keys.txt --note <note> --leak-file leaks.txt --acronyms`
-   Allowed leftover: a wrong phrase in a summary-table "Lecture" column.
-6. **Finish.** Run `.githooks/pre-commit` only if committing. Report in ≤ 15 lines: numbered topic list, corrections (one line each), not verified, audit result, and "SDLC not updated: run `/sdlc-sync NN` (best for 3–4 notes at once)" unless `--sdlc`. Never commit `HANDOFF.md`. Commit only with `--commit`/`--push` (`notes: add NN <Title>`), push only with `--push`.
+   `python .claude/skills/new-lecture/scripts/riskcheck.py <note>` — every `??` line must become **verified** (add the source: "(official docs)", "per <source>"), **hedged** ("a common team choice", "general knowledge, not verified") or **removed**. Target: 0 unmarked.
+6. **Review (automatic when needed):** run one light review (below) if `--review`, or if riskcheck says `REVIEW RECOMMENDED` (12+ checkable claims), or if there are 3+ corrections, or with `--sdlc`. Skip only with `--no-review`.
+7. **Finish.** Report in ≤ 15 lines: numbered topics, corrections, **what was verified by source, what was hedged or not verified**, audit/riskcheck result, whether a review ran, and "SDLC not updated: run `/sdlc-sync NN`" unless `--sdlc`. Never commit `HANDOFF.md`. Commit only with `--commit`/`--push` (`notes: add NN <Title>`); push only with `--push`.
 
-## Optional: `--sdlc` (small delta, reuse step 3 facts)
+## Light review (one subagent, `model: "sonnet"`, no web)
 
-1. `python .claude/skills/new-lecture/scripts/gaps.py "pattern1|alt" "pattern2" …` — one call, one pattern per practice; `<- GAP` means add, hits mean extend or link, never duplicate. One more grep for the corrected wrong phrases.
-2. Edit only real gaps: ≤ 1 new subsection per affected phase file, appended numbered rules (must/should/may; never renumber), ≤ 1 template (register it in the phase table and README §8), no new SVG. Dates "Last reviewed/Next review due" only in changed files. README §10 row only for a new standard.
-3. CHANGELOG entry ≤ 10 lines (Files · Scope · What changed · Sources · Not re-checked). `audit.py SDLC` → 0 problems. Commit separately (`SDLC: add note-NN <topic> practices`) only with `--commit`.
+Give it: the note path(s), the transcript path, `git diff --stat`, and the audit and riskcheck output. Ask only: (a) transcript points missing or distorted; (b) wrong, outdated or invented claims, and any claim without a source or hedge; (c) with `--sdlc`: SDLC rules that contradict existing rules (README tables vs phase files, prototype/client tailoring, must/should strength) or are impractical for 4–8 people; (d) beginner confusion. Tell it not to browse or re-run scripts; findings only, ≤ 20, with line numbers. **Verify each finding yourself** (use `fetchgrep.py` for facts) before applying. Use a deeper web-checking review only if the user asks.
 
-## Optional: `--review` (one light subagent, `model: "sonnet"`, no web)
+## `--sdlc` (SDLC delta, checked)
 
-Give it the note path, the transcript path, the `git diff --stat` and the audit result. Ask only: (a) transcript points missing or distorted, (b) claims presented as fact that the note did not verify, (c) SDLC rules that contradict existing ones (with `--sdlc`), (d) beginner confusion. **Tell it not to browse or re-run scripts.** Findings only, ≤ 15, with line numbers. Check each claim yourself before applying. For a deep fact-check with web access, the user must ask for it (`--review` plus the words "verify online").
+1. `python .claude/skills/new-lecture/scripts/gaps.py "pattern|alt" …` (one pattern per practice; `<- GAP` = add, hits = extend or link, never duplicate) and one grep for the corrected wrong phrases.
+2. Edit only real gaps: ≤ 1 subsection per affected phase file; append rules **after the current last number of that list** (check with `grep -n "^[0-9]*\. \*\*" file`; never renumber); ≤ 1 template (register in the phase table and README §8); README §10 row only for a new standard; update "Last reviewed/Next review due" only in changed files.
+3. Re-verify the 5 riskiest new SDLC facts with `fetchgrep.py` (second round, cheap). CHANGELOG entry ≤ 10 lines with Sources and Not re-checked.
+4. `python .claude/skills/new-lecture/scripts/audit.py SDLC --rules` → 0 problems (the `--rules` flag catches duplicate or skipped rule numbers). The light review (step 6) always runs. Commit separately (`SDLC: add note-NN <topic> practices`) only with `--commit`.

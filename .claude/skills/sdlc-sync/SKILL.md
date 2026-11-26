@@ -31,7 +31,7 @@ Search every SDLC file for each corrected claim and outdated term; fix them firs
 
 ## Phase 3 — Implement, chunk by chunk
 
-For each chunk: edit → **pass 1** (checklist C) → **pass 2** (subagent: give it the changed file, the note, the gap table rows for this chunk and checklist C; ask what is wrong, missing, contradictory with other rules, or impractical for a 4–8 person team) → fix → `audit.py` on the file → next chunk.
+For each chunk: edit → **pass 1** (checklist C) → `audit.py <file> --rules` (rule numbers must continue the list: check the current last number first). After **all** chunks, run **one** pass-2 review for the whole change (a `model: "sonnet"` subagent, no web: give it `git diff`, the note, the gap table and checklist C; ask what is wrong, missing, contradictory with other rules — README tables vs phase files, prototype/client tailoring, must/should strength — or impractical for a 4–8 person team) → verify each finding yourself → fix. Use per-chunk subagents only for a very large change.
 
 What each chunk usually needs:
 - **Explanation** in the phase file's existing structure, in B1 English, linking to existing sections instead of repeating them.
@@ -43,14 +43,14 @@ What each chunk usually needs:
 ## Phase 4 — Internet verification (checklist D) — never skip
 
 1. List every time-sensitive fact you added or changed (standards and editions, laws and dates, tool and runtime versions and behavior, RFCs, statistics).
-2. Verify each against a **primary source** online (WebSearch; read the page with WebFetch / the web-fetch agent when needed).
+2. Verify each against a **primary source** online. Cheapest first: `python .claude/skills/new-lecture/scripts/fetchgrep.py <url> "<regex>"` (prints only matching snippets); then WebSearch / WebFetch when a page fails or needs JavaScript.
 3. Fix anything wrong in the SDLC **and** in the source note.
 4. Update README §10 "Last checked" for each verified standard; anything not verified stays "next review" and is listed under "Not re-checked".
-5. **Second verification round:** a fresh subagent re-checks the 5–10 riskiest facts independently (give it the list and the claimed sources; it reports agree / disagree with evidence). Resolve disagreements by reading the primary source yourself.
+5. **Second verification round:** re-check the 5–10 riskiest facts independently with `fetchgrep.py` on a different primary source where possible (or a fresh subagent with web access for hard cases). Resolve disagreements by reading the primary source yourself.
 
 ## Phase 5 — Record and ship
 
 1. CHANGELOG entry at the top, in the existing format: Files · Scope (targeted change, not a full review) · Reviewers (placeholders) · What changed (per file) · Sources checked · Not re-checked · Next review due.
-2. `python .claude/skills/new-lecture/scripts/audit.py SDLC` → 0 problems.
+2. `python .claude/skills/new-lecture/scripts/audit.py SDLC --rules` → 0 problems.
 3. Commit to `main` (`SDLC: add note-NN <topic> practices`), run `.githooks/pre-commit` first, push.
 4. Report: rules added (by number), templates and diagrams added, corrections made in the guide, sources verified, anything not verified.
