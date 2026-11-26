@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" font-family="Helvetica, Arial, sans-serif">
+<rect width="900" height="560" fill="#ffffff"/>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#475569"/></marker></defs>
+<text x="450" y="40" text-anchor="middle" font-size="24" font-weight="bold" fill="#1f2937">Teamwork Events in a Software Project</text>
+<text x="450" y="66" text-anchor="middle" font-size="14" fill="#6b7280">Lecture view (left) and what modern Agile teams add (right)</text>
+<rect x="30" y="90" width="400" height="440" rx="14" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+<text x="230" y="120" text-anchor="middle" font-size="18" font-weight="bold" fill="#9a3412">Lecture</text>
+<rect x="60" y="140" width="340" height="52" rx="8" fill="#ffffff" stroke="#fdba74"/>
+<text x="230" y="162" text-anchor="middle" font-size="13" font-weight="bold" fill="#7c2d12">Kick-off meeting</text>
+<text x="230" y="180" text-anchor="middle" font-size="11" fill="#7c2d12">Plan, assign tasks, agree goals</text>
+<rect x="60" y="214" width="340" height="52" rx="8" fill="#ffffff" stroke="#fdba74"/>
+<text x="230" y="236" text-anchor="middle" font-size="13" font-weight="bold" fill="#7c2d12">Whole-team and sub-team meetings</text>
+<text x="230" y="254" text-anchor="middle" font-size="11" fill="#7c2d12">Review progress and plans</text>
+<rect x="60" y="288" width="340" height="52" rx="8" fill="#ffffff" stroke="#fdba74"/>
+<text x="230" y="310" text-anchor="middle" font-size="13" font-weight="bold" fill="#7c2d12">Design and code reviews</text>
+<text x="230" y="328" text-anchor="middle" font-size="11" fill="#7c2d12">Done by whoever has availability</text>
+<rect x="60" y="362" width="340" height="52" rx="8" fill="#ffffff" stroke="#fdba74"/>
+<text x="230" y="384" text-anchor="middle" font-size="13" font-weight="bold" fill="#7c2d12">Walkthroughs</text>
+<text x="230" y="402" text-anchor="middle" font-size="11" fill="#7c2d12">To the team, and to stakeholders</text>
+<rect x="60" y="436" width="340" height="52" rx="8" fill="#ffffff" stroke="#fdba74"/>
+<text x="230" y="458" text-anchor="middle" font-size="13" font-weight="bold" fill="#7c2d12">Retrospective</text>
+<text x="230" y="476" text-anchor="middle" font-size="11" fill="#7c2d12">When the project is complete</text>
+<line x1="230" y1="193" x2="230" y2="212" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<line x1="230" y1="267" x2="230" y2="286" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<line x1="230" y1="341" x2="230" y2="360" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<line x1="230" y1="415" x2="230" y2="434" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<rect x="470" y="90" width="400" height="440" rx="14" fill="#f0fdfa" stroke="#0d9488" stroke-width="2"/>
+<text x="670" y="120" text-anchor="middle" font-size="18" font-weight="bold" fill="#115e59">Modern Agile practice</text>
+<rect x="500" y="140" width="340" height="52" rx="8" fill="#ffffff" stroke="#99f6e4"/>
+<text x="670" y="162" text-anchor="middle" font-size="13" font-weight="bold" fill="#134e4a">Kick-off, then the team pulls work</text>
+<text x="670" y="180" text-anchor="middle" font-size="11" fill="#0f766e">Goals, roles, working agreement</text>
+<rect x="500" y="214" width="340" height="52" rx="8" fill="#ffffff" stroke="#99f6e4"/>
+<text x="670" y="236" text-anchor="middle" font-size="13" font-weight="bold" fill="#134e4a">Few regular events</text>
+<text x="670" y="254" text-anchor="middle" font-size="11" fill="#0f766e">Planning, Daily Scrum, Review, Retrospective</text>
+<rect x="500" y="288" width="340" height="52" rx="8" fill="#ffffff" stroke="#99f6e4"/>
+<text x="670" y="310" text-anchor="middle" font-size="13" font-weight="bold" fill="#134e4a">Pull request review</text>
+<text x="670" y="328" text-anchor="middle" font-size="11" fill="#0f766e">CODEOWNERS, within one working day</text>
+<rect x="500" y="362" width="340" height="52" rx="8" fill="#ffffff" stroke="#99f6e4"/>
+<text x="670" y="384" text-anchor="middle" font-size="13" font-weight="bold" fill="#134e4a">Demos, tech talks, ADRs</text>
+<text x="670" y="402" text-anchor="middle" font-size="11" fill="#0f766e">Working software, recorded for newcomers</text>
+<rect x="500" y="436" width="340" height="52" rx="8" fill="#ffffff" stroke="#99f6e4"/>
+<text x="670" y="458" text-anchor="middle" font-size="13" font-weight="bold" fill="#134e4a">Retrospective every sprint</text>
+<text x="670" y="476" text-anchor="middle" font-size="11" fill="#0f766e">At least one owned improvement action</text>
+<line x1="670" y1="193" x2="670" y2="212" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<line x1="670" y1="267" x2="670" y2="286" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<line x1="670" y1="341" x2="670" y2="360" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<line x1="670" y1="415" x2="670" y2="434" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+</svg>

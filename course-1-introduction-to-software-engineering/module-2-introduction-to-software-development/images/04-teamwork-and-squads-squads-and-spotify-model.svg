@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" font-family="Helvetica, Arial, sans-serif">
+<rect width="900" height="560" fill="#ffffff"/>
+<text x="450" y="40" text-anchor="middle" font-size="24" font-weight="bold" fill="#1f2937">Squad, Tribe, Chapter and Guild</text>
+<text x="450" y="66" text-anchor="middle" font-size="14" fill="#6b7280">A squad is similar to a Scrum team. Most companies copy the ideas, not the exact structure.</text>
+<!-- squad -->
+<rect x="30" y="90" width="390" height="430" rx="14" fill="#f0fdfa" stroke="#0d9488" stroke-width="2"/>
+<text x="225" y="122" text-anchor="middle" font-size="18" font-weight="bold" fill="#115e59">One squad (small, cross-skilled)</text>
+<rect x="55" y="142" width="340" height="50" rx="8" fill="#ffffff" stroke="#99f6e4"/>
+<text x="225" y="163" text-anchor="middle" font-size="13" font-weight="bold" fill="#134e4a">Product owner</text>
+<text x="225" y="181" text-anchor="middle" font-size="11" fill="#0f766e">Decides priorities (Spotify: no formal squad leader)</text>
+<rect x="55" y="202" width="340" height="62" rx="8" fill="#ffffff" stroke="#99f6e4"/>
+<text x="225" y="224" text-anchor="middle" font-size="13" font-weight="bold" fill="#134e4a">A few software engineers</text>
+<text x="225" y="242" text-anchor="middle" font-size="11" fill="#0f766e">Build features and write tests;</text>
+<text x="225" y="256" text-anchor="middle" font-size="11" fill="#0f766e">may work in pairs (pair programming)</text>
+<rect x="55" y="274" width="340" height="50" rx="8" fill="#ffffff" stroke="#99f6e4"/>
+<text x="225" y="295" text-anchor="middle" font-size="13" font-weight="bold" fill="#134e4a">One or two UX designers</text>
+<text x="225" y="313" text-anchor="middle" font-size="11" fill="#0f766e">Screens, usability, accessibility</text>
+<rect x="55" y="334" width="340" height="50" rx="8" fill="#ffffff" stroke="#99f6e4" stroke-dasharray="6 4"/>
+<text x="225" y="355" text-anchor="middle" font-size="13" font-weight="bold" fill="#134e4a">Agile coach (access)</text>
+<text x="225" y="373" text-anchor="middle" font-size="11" fill="#0f766e">Helps the team improve how it works</text>
+<text x="225" y="415" text-anchor="middle" font-size="12" font-weight="bold" fill="#115e59">Size: 10 or fewer people in total</text>
+<text x="225" y="435" text-anchor="middle" font-size="12" fill="#115e59">(Scrum Guide). LumenVenture default: 4 to 8.</text>
+<text x="225" y="470" text-anchor="middle" font-size="12" font-style="italic" fill="#115e59">Self-managing: the team decides who does what.</text>
+<!-- spotify terms -->
+<rect x="450" y="90" width="420" height="430" rx="14" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="660" y="122" text-anchor="middle" font-size="18" font-weight="bold" fill="#1e3a8a">Spotify words for bigger groups</text>
+<rect x="475" y="142" width="370" height="66" rx="8" fill="#ffffff" stroke="#93c5fd"/>
+<text x="490" y="164" font-size="13" font-weight="bold" fill="#1e3a8a">Tribe</text>
+<text x="490" y="182" font-size="11" fill="#1d4ed8">A collection of squads in related areas.</text>
+<text x="490" y="198" font-size="11" fill="#1d4ed8">Kept below about 100 people (Dunbar number).</text>
+<rect x="475" y="218" width="370" height="66" rx="8" fill="#ffffff" stroke="#93c5fd"/>
+<text x="490" y="240" font-size="13" font-weight="bold" fill="#1e3a8a">Chapter</text>
+<text x="490" y="258" font-size="11" fill="#1d4ed8">People with a similar skill inside one tribe,</text>
+<text x="490" y="274" font-size="11" fill="#1d4ed8">for example the testing chapter.</text>
+<rect x="475" y="294" width="370" height="66" rx="8" fill="#ffffff" stroke="#93c5fd"/>
+<text x="490" y="316" font-size="13" font-weight="bold" fill="#1e3a8a">Guild</text>
+<text x="490" y="334" font-size="11" fill="#1d4ed8">A voluntary community of interest across the</text>
+<text x="490" y="350" font-size="11" fill="#1d4ed8">company. In general: a community of practice.</text>
+<rect x="475" y="378" width="370" height="108" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
+<text x="490" y="400" font-size="12" font-weight="bold" fill="#334155">What to copy for a 4 to 8 person team</text>
+<text x="490" y="420" font-size="11" fill="#334155">One stable, cross-skilled team with a clear mission</text>
+<text x="490" y="438" font-size="11" fill="#334155">A monthly shared-learning hour (guild habit)</text>
+<text x="490" y="456" font-size="11" fill="#334155">A regular team health check in the retrospective</text>
+<text x="490" y="474" font-size="11" fill="#334155">Do not build tribes and chapters for one team</text>
+</svg>
