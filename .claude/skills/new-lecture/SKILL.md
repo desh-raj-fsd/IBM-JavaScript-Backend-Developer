@@ -1,68 +1,35 @@
 ---
 name: new-lecture
-description: Lean pipeline for one IBM course lecture — turn a pasted transcript into notes and SVG images following master-prompt.md, add the matching modern practices to the LumenVenture SDLC guide, verify time-sensitive facts online once, check with scripts plus one independent review. Use when the user gives a lecture title and transcript. Flags on the first line - `--notes-only` (skip SDLC), `--commit` (commit when done), `--push` (commit and push).
+description: Fast path for one IBM course lecture — transcript to notes and SVG images following master-prompt.md, checked by scripts. The SDLC update, an independent review and commits are opt-in flags. Use when the user gives a lecture title and transcript. Flags on the first line - `--sdlc` (add the small SDLC delta), `--review` (one light review subagent), `--commit`, `--push`.
 ---
 
-# /new-lecture — transcript → notes → SDLC delta (lean)
+# /new-lecture — fast path (notes only by default)
 
-Input: a **lecture title** and the **transcript**. If either is missing, ask and stop. Optional flags on the first line: `--notes-only`, `--commit`, `--push`.
+Input: lecture title + transcript (ask and stop if missing). Flags on the first line, all optional: `--sdlc`, `--review`, `--commit`, `--push`.
 
-**Budget rules (why this skill is lean):**
-- Target about **40 tool calls** and **one subagent**. Do not read back files you just wrote. Patch with `Edit` or a short Python replace, never rewrite a whole note.
-- Deterministic checks (`audit.py`) replace most model review. A model reviews only what a script cannot.
-- Verify each time-sensitive fact **once**, in **one parallel batch**, with narrow `WebFetch` prompts (ask for the number, date or quote, nothing else).
-- The note is the product. The SDLC change is a **small delta**, not a second rewrite.
+**Where the tokens go, so do the opposite:** long output (the note itself), web pages returned in full, subagents that browse, and the SDLC delta. Rules:
+- **Length budget.** Note ≈ 0.4 lines per transcript word (700 words → about 280 lines; hard cap 350). Jargon table ≤ 15 terms. One visual per topic: a Mermaid diagram **or** an image, never the same idea as table + diagram + image. 2 SVGs (3 only if the lecture has 3 separate ideas). A Modern Best Practice block **only** where the lecture is outdated, oversimplified or wrong; everything else goes in one "Often-missed parts" section. Keep master-prompt minimums (a Mermaid per major topic, ≥ 2 images, ≥ 5 related concepts, "What happens if" code where code exists); skip code for non-technical lectures except one tiny config example.
+- **Output once.** Write the note in **one** `Write` call (two at most). Never rewrite it; fix with `Edit`/Python replace. Do not read back files you wrote. Do not re-read `master-prompt.md` if it is already in context.
+- **Web budget: at most 6 fetches in one parallel batch.** Verify only numbers, dates, versions and named standards you will state as fact. For one-line facts use `WebSearch` (cheaper than guessing page URLs); one retry per failed URL, then drop the claim or write "not verified". Well-known process or people facts: hedge, do not fetch. Narrow prompts ("quote the sentence and the date").
+- **No subagent unless `--review`.** Scripts replace the model review.
 
----
+## Steps
 
-## Phase 0 — Set up (3 calls)
+1. **Prep (1 call):** `python .claude/skills/new-lecture/scripts/prep.py <topic-slug>` — pulls, finds the newest module, next number, creates folders, prints the paths. Then save the transcript's **key points only (~300 words)** to the printed TRANSCRIPT path. Read `master-prompt.md` once if it is not already in context.
+2. **Plan in your head, write two small files in one call:** `keys.txt` (30–50 short transcript phrases, one per line, copied exactly) and `leaks.txt` (wrong phrases the note corrects, one per line). Decide corrections, the few real modern-practice blocks, and the facts to verify.
+3. **Verify (one parallel batch, ≤ 6 fetches).** Keep sources for the note and the CHANGELOG.
+4. **Write** the note and the SVGs (one `Write` each; SVGs in master-prompt style, text kept inside boxes). Run code examples only when the lecture is technical and needs no service; paste real output.
+5. **Check (one command, fix, rerun once):**
+   `python .claude/skills/new-lecture/scripts/audit.py <note> <svgs> --keys keys.txt --note <note> --leak-file leaks.txt --acronyms`
+   Allowed leftover: a wrong phrase in a summary-table "Lecture" column.
+6. **Finish.** Run `.githooks/pre-commit` only if committing. Report in ≤ 15 lines: numbered topic list, corrections (one line each), not verified, audit result, and "SDLC not updated: run `/sdlc-sync NN` (best for 3–4 notes at once)" unless `--sdlc`. Never commit `HANDOFF.md`. Commit only with `--commit`/`--push` (`notes: add NN <Title>`), push only with `--push`.
 
-1. `git pull`. Continue even if `HANDOFF.md` or other unrelated files are untracked; stop only if tracked files are modified in the folders you will touch.
-2. Read `master-prompt.md` once (it is the contract for notes; it wins over this skill for notes). Do **not** re-read it later.
-3. Target folder: continue the newest `course-N-*/module-N-*/` (ask only if the title clearly starts a new module). Next number `NN` = highest note number there + 1; names `notes/NN-<topic>.md`, `images/NN-<topic>-<short-name>.svg`.
-4. Save the transcript to `.transcripts/<course>/<module>/NN-<topic>.txt` (git-ignored).
+## Optional: `--sdlc` (small delta, reuse step 3 facts)
 
-## Phase 1 — Plan in one scratch file (`plan.md`, at most ~40 lines)
+1. `python .claude/skills/new-lecture/scripts/gaps.py "pattern1|alt" "pattern2" …` — one call, one pattern per practice; `<- GAP` means add, hits mean extend or link, never duplicate. One more grep for the corrected wrong phrases.
+2. Edit only real gaps: ≤ 1 new subsection per affected phase file, appended numbered rules (must/should/may; never renumber), ≤ 1 template (register it in the phase table and README §8), no new SVG. Dates "Last reviewed/Next review due" only in changed files. README §10 row only for a new standard.
+3. CHANGELOG entry ≤ 10 lines (Files · Scope · What changed · Sources · Not re-checked). `audit.py SDLC` → 0 problems. Commit separately (`SDLC: add note-NN <topic> practices`) only with `--commit`.
 
-Write only:
-1. **`keys.txt`** — 30–60 short phrases that must appear in the note (every definition, list item, example and number of the transcript, one phrase each, copied from the transcript). This replaces a full fact ledger.
-2. **Corrections** — lecture claim → correct version → source, one line each (these become badges and `--leak` phrases in `leaks.txt`).
-3. **Modern-practice topics** per lecture topic (master prompt §6.4 areas that apply; skip areas the lecture does not touch) plus what a senior engineer would add.
-4. **Facts to verify** — only versions, dates, numbers, standards, tool behavior you will write. Skip anything README §10 or a CHANGELOG entry already shows as verified in the last 30 days.
+## Optional: `--review` (one light subagent, `model: "sonnet"`, no web)
 
-Then **verify all facts in one parallel batch** of `WebFetch` calls (primary sources only). Record the sources; reuse them for the SDLC delta and the CHANGELOG. Unverifiable → leave the claim out or mark it "not verified".
-
-## Phase 2 — Write the note (about 4 chunks, self-check only)
-
-Chunks: (1) title, jargon, topics · (2–3) Deep Dive, grouped by topic · (4) examples, code, related concepts, summary table.
-- Follow `master-prompt.md` §6 order and rules (badge + quiz line + correction sweep, Modern Best Practice blocks, one Mermaid per major topic, B1 English, acronyms expanded, 5 related concepts, "What happens if" code).
-- After each chunk, tick it against `keys.txt` mentally; do not spawn a reviewer per chunk.
-- **Run code examples** when they need no external service (scratchpad only); paste the real output into the note.
-- **2–3 SVG images** (not more unless the lecture is dense), master-prompt style, embedded with `../images/…`.
-
-## Phase 3 — Scripted checks (one command, then fix)
-
-```
-python .claude/skills/new-lecture/scripts/audit.py <note> <images…> --keys keys.txt --note <note> --leak-file leaks.txt --acronyms
-```
-
-Fix everything it reports. Allowed leftovers: a wrong phrase in a summary-table "Lecture" column. Repeat until clean. This covers coverage, leaks, links, anchors, Mermaid rules, SVG validity, file names, badge/quiz-line count and acronym expansion.
-
-## Phase 4 — SDLC delta (skip with `--notes-only`)
-
-1. **Gap table with one grep command per topic** against `SDLC/` (use `grep -rniE "a|b|c" SDLC --include='*.md' | cut -d: -f1 | sort | uniq -c`). Mark each practice: already there / extend / add. **Never duplicate**; link to existing sections.
-2. **Correction sweep:** one grep for the note's wrong phrases over `SDLC/`.
-3. **Edit only where there is a real gap:** at most one new subsection per affected phase file, a few numbered rules (append; never renumber; must/should/may; owner by role; defaults stated; practical for 4–8 people), one template only if teams must produce an artifact (register it in the phase Templates table and README §8), no new SVG unless a diagram is essential. Update "Last reviewed / Next review due" (+6 months) in changed phase files only.
-4. Use the facts already verified in Phase 1. Verify only facts that are new to the SDLC text (one more parallel batch if needed). Add README §10 rows for new standards.
-5. CHANGELOG entry at the top (existing format: Files · Scope · Reviewers · What changed · Sources checked · Not re-checked · Next review due).
-6. `python .claude/skills/new-lecture/scripts/audit.py SDLC` → 0 problems.
-
-## Phase 5 — One independent review (one subagent, `model: "sonnet"`)
-
-Spawn **one** subagent for note **and** SDLC diff together. Give it: the file paths, `git diff --stat`, the transcript path, and the `audit.py` result (so it does not redo scripted checks). Ask only for: (a) transcript statements missing from the note, (b) wrong or outdated facts — verify **at most 8** of the riskiest online against primary sources, (c) SDLC rules that contradict existing rules or are impractical for a small team, (d) anything a beginner could misread. Findings only, numbered, with line numbers, no edits, under 30 items. **Verify its claims yourself before applying** (it can be wrong: check the source). Fix, re-run `audit.py`.
-
-## Phase 6 — Finish
-
-- Run `.githooks/pre-commit`. **Commit only with `--commit` or `--push`** (default: leave changes uncommitted and say so). One commit for notes (`notes: add NN <Title>`) and one for SDLC (`SDLC: add note-NN <topic> practices`); push only with `--push`. Never commit `HANDOFF.md`.
-- Final report (short): topic list (numbered), corrections (one line each), what was added to the SDLC (rules by number, templates), sources checked, what was **not** verified, audit result, and any shortcuts taken.
-- Offer the next step.
+Give it the note path, the transcript path, the `git diff --stat` and the audit result. Ask only: (a) transcript points missing or distorted, (b) claims presented as fact that the note did not verify, (c) SDLC rules that contradict existing ones (with `--sdlc`), (d) beginner confusion. **Tell it not to browse or re-run scripts.** Findings only, ≤ 15, with line numbers. Check each claim yourself before applying. For a deep fact-check with web access, the user must ask for it (`--review` plus the words "verify online").

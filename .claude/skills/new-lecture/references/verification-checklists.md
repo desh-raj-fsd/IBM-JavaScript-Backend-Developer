@@ -1,9 +1,6 @@
 # Verification Checklists (shared by /new-lecture, /sdlc-sync, /repo-audit)
 
-**How checking works in `/new-lecture` (lean):** scripts first, one model review last.
-- **Scripts (`scripts/audit.py`)** check coverage (`--keys`), leaks of corrected phrases (`--leak-file`), acronym expansion (`--acronyms`), links, anchors, Mermaid rules, SVG validity, file names and badge/quiz-line counts.
-- **One independent review** (one subagent, `model: "sonnet"`, whole note + SDLC diff) covers only what scripts cannot: missing transcript statements, wrong or outdated facts (verify at most 8 online), contradictions with existing SDLC rules, practicality, beginner clarity. It must not edit files. **Verify its claims yourself before applying them.**
-- `/sdlc-sync` and `/repo-audit` still use the stricter per-chunk passes (pass 1 self-check, pass 2 fresh subagent) below when the user asks for a deep review.
+**How checking works in `/new-lecture` (fast path):** `scripts/audit.py` (coverage via `--keys`, `--leak-file`, `--acronyms`, links, anchors, Mermaid, SVG, names, badge/quiz-line count) is the check. A model review is opt-in (`--review`, light, no web). `/sdlc-sync` and `/repo-audit` still use the stricter per-chunk passes below when the user asks for a deep review.
 
 ---
 
