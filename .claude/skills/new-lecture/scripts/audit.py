@@ -10,8 +10,12 @@ Checks, for every Markdown/SVG file under the given paths (default: whole repo):
 Optional:
   --leak "phrase"   report lines containing a wrong (corrected) phrase outside quiz lines,
                     badges and comparison tables' "Lecture" column (repeatable).
-  --keys FILE       one phrase per line; report phrases missing from the --note file.
+  --keys FILE       one phrase per line; report phrases missing from the --note file
+                    (cheap coverage check: list 30-60 key phrases of the transcript).
   --note FILE       the note used by --keys.
+  --acronyms        course notes only: report acronyms that are never expanded in the note
+                    (look for "ABC (Full Form)" or "Full Form (ABC)").
+  --leak-file FILE  like --leak, one wrong phrase per line.
 
 Exit code 1 if any problem is found. Run from the repo root:
   python .claude/skills/new-lecture/scripts/audit.py
@@ -28,6 +32,10 @@ import xml.dom.minidom
 SKIP_DIRS = {".git", "node_modules", ".claude", ".transcripts"}
 SKIP_FILES = {"master-prompt.md"}  # contains example paths and rule text, not real links or diagrams
 BAD_NAME = re.compile(r'[:*?"<>|\\]')
+ACRO_IGNORE = {"OK", "PR", "TODO", "GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS", "NOT", "MUST", "ONLY",
+               "NEVER", "AND", "OR", "WHAT", "HOW", "WHY", "SHOULD", "MAY", "ALWAYS", "NO", "YES", "UTF", "LF", "PX", "MS", "KB",
+               "MB", "GB", "ID", "TV", "AA", "AAA", "LEGO", "IBM", "AWS", "PHP", "NGINX", "WHATWG", "IDEA", "FAQ", "AI", "ES", "DB", "JS"}
+ROMAN = re.compile(r"^[IVXL]+$")
 RESERVED = re.compile(r"^(CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9])(\.|$)", re.I)
 
 
@@ -77,10 +85,14 @@ def main() -> int:
     ap.add_argument("--leak", action="append", default=[])
     ap.add_argument("--keys")
     ap.add_argument("--note")
+    ap.add_argument("--acronyms", action="store_true")
+    ap.add_argument("--leak-file")
     args = ap.parse_args()
 
     problems: list[str] = []
     files = collect(args.paths)
+    if args.leak_file:
+        args.leak += [l.strip() for l in open(args.leak_file, encoding="utf-8") if l.strip()]
 
     for f in files:
         for part in f.replace("\\", "/").split("/"):
@@ -126,6 +138,27 @@ def main() -> int:
                 for n, line in enumerate(text.splitlines(), 1):
                     if phrase.lower() in line.lower() and "Lecture wording" not in line and not line.startswith("> ⚠️"):
                         problems.append(f"LEAK   {f}:{n}: '{phrase}' outside a quiz line (OK only in a 'Lecture' table column): {line[:100]}")
+
+    if args.acronyms:
+        for f in files:
+            if not f.endswith(".md") or "/notes/" not in f.replace("\\", "/"):
+                continue
+            t = open(f, encoding="utf-8").read()
+            t = re.sub(r"```.*?```", "", t, flags=re.S)
+            t = re.sub(r"`[^`\n]*`", "", t)
+            t = re.sub(r"\]\([^)]*\)", "]", t)
+            t = re.sub(r"https?://\S+", "", t)
+            seen: set[str] = set()
+            for m in re.finditer(r"(?<![A-Za-z0-9_/.\-])([A-Z][A-Z0-9]{1,6})(?![A-Za-z0-9_/\-])", t):
+                a = m.group(1)
+                if a in seen or a in ACRO_IGNORE or ROMAN.match(a) or re.search(r"\d", a):
+                    continue
+                seen.add(a)
+                # expanded somewhere in the file: "ABC (Full Form)", "(ABC)", "(ABC," or "(the ABC, or ...)"
+                if re.search(r"\b" + a + r"\b[*_]*\s*\(|\([^)\n]{0,40}\b" + a + r"\b", t):
+                    continue
+                n = t.count("\n", 0, m.start()) + 1
+                problems.append(f"ACRONYM {f}: '{a}' (first used about line {n}) is never expanded")
 
     if args.keys:
         note = open(args.note, encoding="utf-8").read().lower() if args.note else ""

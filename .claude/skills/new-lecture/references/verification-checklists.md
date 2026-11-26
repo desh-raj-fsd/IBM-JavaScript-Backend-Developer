@@ -1,35 +1,26 @@
 # Verification Checklists (shared by /new-lecture, /sdlc-sync, /repo-audit)
 
-Every chunk of work is checked **twice**:
-
-- **Pass 1 — self-check:** you, right after writing the chunk, against the checklist below.
-- **Pass 2 — independent check:** a **fresh subagent** (general-purpose) that did not write the chunk. Give it the file paths, the source (transcript or note), the master prompt and the checklist. Ask it for a list of findings with line numbers, each marked "wrong fact", "missing", "outdated", "rule broken" or "unclear". It must not edit files. Fix every valid finding, then re-run `audit.py`.
-
-A chunk is done only when both passes find nothing left to fix and `audit.py` reports 0 problems for the files you touched.
+**How checking works in `/new-lecture` (lean):** scripts first, one model review last.
+- **Scripts (`scripts/audit.py`)** check coverage (`--keys`), leaks of corrected phrases (`--leak-file`), acronym expansion (`--acronyms`), links, anchors, Mermaid rules, SVG validity, file names and badge/quiz-line counts.
+- **One independent review** (one subagent, `model: "sonnet"`, whole note + SDLC diff) covers only what scripts cannot: missing transcript statements, wrong or outdated facts (verify at most 8 online), contradictions with existing SDLC rules, practicality, beginner clarity. It must not edit files. **Verify its claims yourself before applying them.**
+- `/sdlc-sync` and `/repo-audit` still use the stricter per-chunk passes (pass 1 self-check, pass 2 fresh subagent) below when the user asks for a deep review.
 
 ---
 
-## A. Notes chunk (one master-prompt section)
+## A. Notes — what a good note has (self-check while writing)
 
-- [ ] Follows the section order and format of `master-prompt.md` §6 (Jargon → Topics → Deep Dive → Examples → Code → Related Concepts).
-- [ ] Every fact in this part of the **fact ledger** (`ledger.md` in the scratchpad) appears in the chunk. Tick it in the ledger with the heading it went under.
-- [ ] Every jargon term: official definition + simple words + analogy. Every acronym expanded on first use.
-- [ ] B1 English: short sentences, simple words, technical terms explained.
-- [ ] Each major concept has its own heading, nested bullets/tables, and at least one Mermaid diagram per major topic (`flowchart TD`; quoted node labels with special characters; no `( ) < > "` in edge labels; margin node in `direction TB` subgraphs).
-- [ ] Modern Best Practice blocks open with the two-line "Lecture says / Industry today" quote and name real tools, the "why", and a table/diagram/code where useful.
-- [ ] **Corrections:** every wrong, outdated or confusing lecture statement has a `⚠️ **Correction:** wrong → right` badge **and** a `**Lecture wording (for the quiz):**` line — and the **correction sweep** is done: the correct version is used in the text, tables, jargon, Mermaid, SVG text and captions, examples, code comments, topics list and summary. The lecture's words appear only in the quiz line and in "Lecture" columns.
-- [ ] No softer "Clarification" badge for something that is actually wrong.
-- [ ] Every fact **you added** (names, dates, versions, standards, tool flags, API behavior) is correct. If unsure, check it on the web (section D).
-- [ ] Code: minimal working example, comments on significant lines, a "What happens if…" variation; JavaScript/Node.js first; current Node.js LTS / Express 5 APIs; run it in the scratchpad when it needs no external services.
+- [ ] Section order and rules of `master-prompt.md` §6 (Jargon → Topics → Deep Dive → Examples → Code → Related Concepts).
+- [ ] Every key phrase of the transcript is present (`--keys`).
+- [ ] Jargon: official definition + simple words + analogy; acronyms expanded; B1 English.
+- [ ] One Mermaid `flowchart TD` per major topic; no `( ) < > "` in edge labels.
+- [ ] Modern Best Practice blocks: "Lecture says / Industry today" quote, real tools, the why, a table or code.
+- [ ] Every corrected claim: `⚠️ **Correction:**` badge + `**Lecture wording (for the quiz):**` line, and the wrong wording nowhere else (`--leak-file`).
+- [ ] Every fact you added is correct (verified once online, Phase 1); code examples were run and their output pasted.
+- [ ] Often-missed parts and a "done enough when…" checklist; summary table with a `✅ Modern best practice` column; 2+ SVGs embedded.
 
-## B. Notes — final deep check (after all chunks)
+## B. Notes — final deep check
 
-- [ ] `audit.py <note> --leak "<each wrong phrase you corrected>"` → 0 problems (a leak inside a "Lecture" table column is allowed).
-- [ ] Fact ledger: **every** item ticked. Write the untouched ones in, then re-check.
-- [ ] **Modern-practice gap check** — for each coverage area in master prompt §6.4 ask "does this lecture topic touch it, and is it covered?": Agile and iterative delivery · CI/CD and DevOps · shift-left testing and TDD · security by design (OWASP, DevSecOps, secrets, dependency scanning) · observability (logs, metrics, traces, SLOs) · cloud-native deployment (containers, Kubernetes, safe releases) · current Node.js/Express versions and APIs · responsible use of AI tools. Then: "what would a senior engineer add that the lecture never mentions?" → an "Often-missed parts" section and a "done enough when…" checklist.
-- [ ] Summary table has a `✅ Modern best practice` column.
-- [ ] At least 2 SVG images, embedded with `../images/NN-topic-short-name.svg`, valid XML, no text overlapping boxes or lines (estimate text width ≈ 0.6 × font-size × characters).
-- [ ] Pass 2 (subagent) done on the **whole** note; findings fixed; `audit.py` re-run.
+Replaced by the scripted checks and the single review described at the top.
 
 ## C. SDLC chunk (one phase file, README, or template)
 
