@@ -247,7 +247,7 @@ try {
 (See [8 API Laws](../../8-API-Laws-of-Senior-Backend-Developer.md) for details.)
 
 - **Resources, not actions:** `POST /books/{isbn}/reviews`, not `POST /createReview`.
-- **Correct HTTP methods and status codes** (201 created, 400 bad input, 401 not logged in, 403 not allowed, 404 not found, 409 conflict).
+- **Correct HTTP methods and status codes** (`200` OK, `201` created, `400` bad input, `401` not logged in, `403` not allowed, `404` not found, `405` method not allowed, `409` conflict, `422` validation error, `429` too many requests for rate limiting — **OWASP API4:2023** Unrestricted Resource Consumption).
 - **One consistent error format** for every endpoint — the standard is **RFC 9457 "Problem Details"** (`application/problem+json`).
 - **Pagination** for every list endpoint (`?limit=20&cursor=...`).
 - **Idempotency** for retries: `PUT` and `DELETE` are idempotent by design; for `POST` payments or orders, accept an **`Idempotency-Key`** header.
@@ -297,7 +297,8 @@ flowchart TD
 (See [7 Authentication Concepts](../../7-Authentication-Concepts-Every-Senior-Developer-Should-Know.md) for details.)
 
 - **Authentication:** how users prove who they are (sessions, JWT, OAuth 2.0 / OpenID Connect).
-- **Authorization:** who may do what — check **ownership** on the server for every request (for example only the author can delete a review).
+- **Authorization:** who may do what — check **ownership** on the server for every request (for example only the author can delete a review), preventing **BOLA (Broken Object Level Authorization)** (**API1:2023** in the OWASP API Security Top 10:2023).
+- **Payment data (PCI DSS, Payment Card Industry Data Security Standard, v4.0.1):** **never** design application back-ends or databases to store raw credit card numbers (**PAN**, Primary Account Number) or security codes (**CVV**, Card Verification Value / **CVC**, Card Verification Code). Send card fields straight from the client to a PCI DSS-certified payment processor (such as Stripe or Adyen) and store only the returned **payment token** plus an `Idempotency-Key` for charges.
 - **Least privilege:** every user, service and database account gets only the permissions it needs.
 - **Defense in depth:** several layers of protection (validation, auth, rate limiting, database constraints), so one mistake is not enough for an attack.
 - **Secure defaults:** deny by default; HTTPS everywhere; secure cookie flags; no secrets in code.
@@ -533,6 +534,7 @@ Many companies write a short design doc, often called an **RFC (Request for Comm
 20. **should** — The front-end ADR (rule 5) lists the framework's **support window and end-of-life date**, and the chosen **rendering mode** (§4.12).
 21. **should** — Web UIs have **WCAG 2.2 AA** and **Core Web Vitals** targets (LCP ≤ 2.5 s, INP ≤ 200 ms, CLS ≤ 0.1 at the 75th percentile) written as quality attributes (§4.1).
 22. **should** — Products with many screens use **shared components and design tokens** instead of copied styles.
+23. **must** — Application back-ends and databases **never** store raw credit card numbers (PAN) or security codes (CVV/CVC); use **tokenization** via a PCI DSS-certified payment processor (§4.5).
 
 ### 6.5 Templates
 

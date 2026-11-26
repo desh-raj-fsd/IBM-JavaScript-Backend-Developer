@@ -448,7 +448,8 @@ The external standards, laws and specifications this guide relies on. **Review o
 |----------------|---------------------------|---------|--------------|
 | **OWASP Top 10** (web risks) | **2025** edition — new: A03 Software Supply Chain Failures, A10 Mishandling of Exceptional Conditions; SSRF merged into A01 | Planning, Design, Development, Testing | 2026-11-13 |
 | **OWASP ASVS** (security requirements) | **5.0** (May 2025), levels 1–3 | Planning, Design, Testing | 2026-11-13 |
-| **OWASP API Security Top 10** | 2023 edition | Design, Development | next review |
+| **OWASP API Security Top 10** | 2023 edition (`API1:2023` Broken Object Level Authorization / BOLA, `API4:2023` Unrestricted Resource Consumption) | Design, Development | 2026-11-26 |
+| **PCI DSS** (Payment Card Industry Data Security Standard) | **v4.0.1** — tokenization keeps raw credit card numbers and security codes out of app databases | Design, Development | 2026-11-26 |
 | **OWASP Top 10 for LLM Applications** | 2025 edition | Development (AI features) | next review |
 | **OWASP Password Storage Cheat Sheet** | Living document — Argon2id first choice; bcrypt for legacy | Design, Development | 2026-11-13 |
 | **OWASP SAMM** (security maturity model) | v2 | Optional reference for measuring how mature our security practices are | next review |
@@ -467,7 +468,7 @@ The external standards, laws and specifications this guide relies on. **Review o
 | **GDPR** (EU data protection) | Regulation (EU) 2016/679 | Planning, Design, Maintenance | next review |
 | **EU Cyber Resilience Act** | Reporting duties since **11 Sep 2026**; full application **11 Dec 2027** | Deployment, Maintenance | 2026-11-13 |
 | **OpenAPI** | **3.2** (Sept 2025); 3.1 still widely supported | Design | 2026-11-13 |
-| **RFC 9457** Problem Details / **RFC 9745** Deprecation / **RFC 8594** Sunset / **RFC 9116** security.txt | Published RFCs | Design, Development, Maintenance | 2026-11-13 (9745); others next review |
+| **RFC 9457** Problem Details / **RFC 9745** Deprecation / **RFC 8594** Sunset / **RFC 9116** security.txt | Published RFCs | Design, Development, Maintenance | 2026-11-26 (9457), 2026-11-13 (9745); others next review |
 | **DORA metrics** | **Five** metrics: change lead time, deployment frequency, failed deployment recovery time, change fail rate, deployment rework rate | Deployment, Maintenance | 2026-11-13 |
 | **Core Web Vitals** (web.dev) | LCP ≤ 2.5 s, INP ≤ 200 ms, CLS ≤ 0.1, measured at the 75th percentile of real page loads; INP replaced FID in 2024 | Design, Testing, Maintenance | 2026-11-26 |
 | **Browser security features** (MDN) | Cookies `HttpOnly`, `Secure`, `SameSite`; strict CSP with nonce or hash (test in Report-Only first); SRI with `integrity` + `crossorigin`; viewport meta `width=device-width` | Development, Deployment | 2026-11-26 |
@@ -475,5 +476,5 @@ The external standards, laws and specifications this guide relies on. **Review o
 | **HTTPS and TLS** — HSTS (RFC 6797), TLS 1.3 (RFC 8446), TLS 1.0/1.1 deprecated (RFC 8996), NIST SP 800-52 Rev. 2 | TLS 1.2 minimum, 1.3 preferred; HSTS `max-age` at least 1 year for preload. NIST has announced a Rev. 3 (not yet published): re-check at next review | Design, Deployment | 2026-11-26 (HSTS, NIST via MDN and NIST pages); RFC numbers next review |
 | **HTTP caching** (`Cache-Control`, `immutable`, RFC 9111 / RFC 8246) | Hashed files: long `max-age` + `immutable`; HTML: `no-cache`; personal data: `private` | Design, Deployment | 2026-11-26 (MDN) |
 | **Cloud shared responsibility** (provider "of the cloud", customer "in the cloud") and availability zones | AWS model used as the reference; other providers use the same idea | Design | 2026-11-26 (AWS docs) |
-| **Node.js release schedule** | Use an Active or Maintenance LTS line; from Node.js 27, one major per year and every major becomes LTS | Development, Maintenance | 2026-11-13 |
+| **Node.js release schedule** | Use an Active or Maintenance LTS line (v26 Active LTS, v24 & v22 Maintenance LTS; v20 EOL April 30, 2026); from Node.js 27, one major per year and every major becomes LTS | Development, Maintenance | 2026-11-26 |
 | **npm registry security** | Classic tokens revoked 9 Dec 2025; granular write tokens ≤ 90 days; trusted publishing (OIDC) recommended; `min-release-age` cooldown since npm 11.10.0 | Development, Deployment | 2026-11-13 |

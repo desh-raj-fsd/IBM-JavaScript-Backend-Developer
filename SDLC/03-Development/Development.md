@@ -357,16 +357,17 @@ module.exports = errorHandler;
 
 | Risk | Secure code habit |
 |------|-------------------|
-| **SQL / NoSQL injection** | Always use **parameterized queries** (`$1`, `?`) or a safe ORM; never build queries with string concatenation |
+| **SQL / NoSQL injection** | Always use **parameterized queries** (`$1`, `?`) or a safe **ORM (Object-Relational Mapping)** tool; never build queries with string concatenation |
 | **Broken access control** (#1 in the OWASP Top 10:2025) | Check **ownership/permissions on the server** for every request (for example only the author can delete a review) |
 | **Mass assignment** | Validate the body with a schema that **rejects unknown fields**; set owner fields (`userId`, `role`, `isApproved`) on the **server**, never from `req.body` |
 | **SSRF (Server-Side Request Forgery)** — now part of A01 | Never fetch a URL from user input without an **allow-list**; block internal addresses (for example the cloud metadata IP `169.254.169.254`) |
 | **Mishandling exceptional conditions** (new A10 in 2025) | **Fail closed**: if an auth or permission check throws, deny access; one central error handler; never leak stack traces |
 | **XSS (Cross-Site Scripting)** | Escape output; set a **Content-Security-Policy**; never put raw user HTML into pages |
 | **Weak headers** | Use **helmet** to set secure HTTP headers |
-| **Brute force / abuse** | **Rate limiting** on login and write endpoints |
+| **Brute force / abuse** | **Rate limiting** on login and write endpoints (**OWASP API4:2023**) |
 | **CORS (Cross-Origin Resource Sharing) mistakes** | Allow only known origins; never `*` together with credentials |
 | **Passwords** | Hash with **Argon2id** (OWASP's first choice; minimum settings in the OWASP Password Storage Cheat Sheet: 19 MiB memory, 2 iterations, 1 thread). **bcrypt** (work factor ≥ 10) only for existing systems; rehash to Argon2id at the next login. Use async functions |
+| **Payment and card data (PCI DSS, Payment Card Industry Data Security Standard, v4.0.1)** | **Never** store raw credit card numbers (**PAN**, Primary Account Number) or **CVV/CVC** (Card Verification Value / Code) in application databases or logs; tokenize via a PCI DSS-certified payment processor and send an `Idempotency-Key` header on charges |
 | **Sensitive data in errors and logs** | Generic messages to clients; redact secrets in logs |
 
 ```javascript
@@ -478,6 +479,16 @@ Set-Cookie: sid=<value>; Secure; HttpOnly; SameSite=Lax; Path=/
 - **Checklist for every UI change and release:** [frontend-checklist.md](templates/frontend-checklist.md).
 - Server-side counterparts (CORS, rate limiting, validation) are in [4.9](#49-secure-coding-checklist-code-level).
 
+### 4.15 Database access, ORMs, and migrations
+
+> From course note [module 2, 03 The Importance of Back-End Development](../../course-1-introduction-to-software-engineering/module-2-introduction-to-software-development/notes/03-the-importance-of-back-end-development.md). Using an **ORM (Object-Relational Mapping)** tool speeds up CRUD (Create, Read, Update, Delete) code, but does not remove the need to understand SQL and database performance.
+
+- **Use connection pooling:** Reuse a bounded pool of open database connections instead of opening a new connection on every HTTP request.
+- **Prevent N+1 query loops:** Never load a list of `N` records in one query and then run `N` separate queries inside a loop to fetch related rows. Inspect generated SQL logs in development and use **eager loading** (loading related rows upfront in one query instead of inside a loop) or an explicit SQL `JOIN`.
+- **Keep SQL fundamentals sharp:** Use typed ORMs or query builders (for example Prisma, Drizzle ORM, SQLAlchemy, or Django ORM) for standard queries and bound parameters, and drop to parameterized raw SQL when complex reports or tuned indexes need it.
+- **Bound every list and search:** Enforce pagination (`limit` and cursor/offset) on search and list endpoints, and back search filters with proper indexes (such as PostgreSQL full-text indexes) instead of unindexed `LIKE '%term%'` scans on large tables.
+- **Track every schema change with versioned migrations:** Store database schema changes as reviewed migration files in Git, keep them backward-compatible during rolling deploys (add new columns before dropping old ones), and run migrations as a controlled pipeline step before or alongside app rollout.
+
 ## 5. Development is "done" when... (a typical Definition of Done)
 
 - [ ] The code meets the story's **acceptance criteria** and follows the **design** (API contract, layers, ADRs).
@@ -561,6 +572,7 @@ Set-Cookie: sid=<value>; Secure; HttpOnly; SameSite=Lax; Path=/
 23. **should** — Every API call checks for HTTP errors, has a timeout, and the UI shows loading, empty and error states.
 24. **should** — New front-end code is **TypeScript** (or JavaScript with JSDoc types checked in CI); a project uses **one** styling approach; Sass code uses `@use`, not `@import`.
 25. **should** — Third-party scripts are approved by the Tech Lead or listed in the project's dependency list, and scripts and stylesheets loaded from a CDN use **SRI** (Subresource Integrity: `integrity` + `crossorigin`).
+26. **should** — Database access uses **connection pooling** and **versioned schema migrations**; developers inspect generated ORM queries in development to prevent `N+1` query loops (§4.15).
 
 ### 6.5 Templates
 
