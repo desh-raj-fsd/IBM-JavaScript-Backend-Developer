@@ -45,6 +45,7 @@ Each phase file has the same shape:
 | 3 | Write the **project brief**: vision, scope, stakeholders, success metrics, the 8 planning factors, feasibility | Product Owner | `docs/project-brief.md` | [project-brief.md](01-Planning/templates/project-brief.md) |
 | 4 | Fill in the **stakeholder register**; start the **risk register** | Product Owner / Delivery Lead | `docs/stakeholder-register.md`, `docs/risk-register.md` | [stakeholder-register.md](01-Planning/templates/stakeholder-register.md), [risk-register.md](01-Planning/templates/risk-register.md) |
 | 5 | Build the first **backlog**: epics, then the first stories with acceptance criteria | Product Owner + team | Backlog in the tracking tool | [user-story.md](01-Planning/templates/user-story.md) |
+| 5a | Agree the **working agreement** (communication, reviews, decisions, disagreement, knowledge sharing) and the first team health check | Delivery Lead + whole team | `docs/working-agreement.md` | [working-agreement.md](01-Planning/templates/working-agreement.md) |
 | 6 | **Gate G1 — Plan approved** | Sponsor (+ client) | Sign-off recorded | [Planning §8](01-Planning/Planning.md#8-lumenventure-standard) |
 | 7 | Write the **high-level design**, first **ADRs** and the **threat model** | Tech Lead | `docs/design/`, `docs/adr/` | [design-doc.md](02-Design/templates/design-doc.md), [adr.md](02-Design/templates/adr.md), [threat-model.md](02-Design/templates/threat-model.md) |
 | 8 | **Gate G2 — Architecture approved** | Tech Lead + Sponsor | Design review recorded | [Design §6](02-Design/Design.md#6-lumenventure-standard) |
@@ -142,6 +143,7 @@ flowchart TD
 5. **should** — **People management** (hiring, performance reviews) stays with each person's **line manager outside the team**, and never with the PO or DL of the same project. Small-company exceptions are written in the project brief §10.
 6. **should** — Nobody holds more than **3 hats** on one project (Developer work, on-call duty and backup duty do **not** count as hats), and nobody is planned for more than 100% of their time across projects. The PO and DL should be different people where the team size allows.
 7. **should** — Projects with end-user screens have a **UX / product designer** (shared is fine) for at least part of every sprint in which screens change; if none, `docs/team-roles.md` records the reason and the fallback from §3.2. Client projects that integrate several client systems name a **solution architect** (may be the TL) in `docs/team-roles.md`.
+8. **should** — If a client or another team says **"squad"**, we map it to our project team: a squad is a small cross-skilled Agile team, **similar to a Scrum team** (the word comes from the Spotify way of working). It has **10 or fewer people in total** (our default: 4–8) and **no extra "squad leader" role**: the **PO** sets priorities, the **TL** guides technical decisions and the **DL** coaches the process. The Scrum Guide's "10 or fewer" is a **ceiling, not a target**; 4–8 stays our default. Tribes, chapters and guilds are not needed for one team.
 
 ---
 
@@ -266,6 +268,9 @@ flowchart TD
 4. **must** — The Sprint Review is never the only path to production; releases follow the pipeline rules in [Deployment §6.4](05-Deployment/Deployment.md#64-rules).
 5. **should** — Unplanned work (bugs, support, upgrades) runs in a **Kanban lane** with a WIP limit, in the same backlog.
 6. **should** — Velocity and throughput are used **only** for the team's own forecasting, never to compare teams or people.
+7. **must** (prototypes: **should**) — Every project has a written **working agreement** ([template](01-Planning/templates/working-agreement.md)) made by the whole team at kickoff. It is reviewed in a Sprint Retrospective at least every **3 sprints** (Kanban teams: monthly) and when a person joins.
+8. **should** — The team runs a short **team health check** (the five questions in the working agreement) about every **3 sprints**, discusses the two lowest scores in the retrospective and turns them into an improvement action. Scores are collected **anonymously** (a poll tool or paper slips) and only the team average and spread are discussed; they are **never used to rate individuals**.
+9. **should** — **Knowledge is shared on purpose:** every important part of the system has at least **two people** who can change and operate it (**bus factor ≥ 2**); demos or tech talks are recorded for newcomers **when the content allows** (never record production data, secrets, personal data or client-confidential content; keep recordings in the project's access-controlled space); every new joiner gets a **buddy** and an onboarding checklist in their first week. A **monthly shared-learning hour** (a guild habit) is a good way to spread skills across teams (**may**). Parts with only one expert are listed in the working agreement with a plan to fix it.
 
 ---
 
@@ -279,6 +284,7 @@ Every project keeps its documents **in its Git repository**, next to the code, s
 ├── docs/
 │   ├── project-brief.md          # Planning
 │   ├── team-roles.md             # Planning: who wears which hat, backups (§3.3)
+│   ├── working-agreement.md      # Planning: how the team communicates, reviews, decides (§6.6)
 │   ├── stakeholder-register.md   # Planning
 │   ├── risk-register.md          # Planning
 │   ├── change-requests/          # Planning (client projects)
@@ -352,6 +358,7 @@ flowchart TD
 | Planning | [project-brief.md](01-Planning/templates/project-brief.md) | Vision, scope, stakeholders, 8 factors, feasibility |
 | Planning | [stakeholder-register.md](01-Planning/templates/stakeholder-register.md) | Who the stakeholders are, power / interest, what they need, who signs off |
 | Planning | [team-roles.md](01-Planning/templates/team-roles.md) | Who holds each role (hat), share of time, backups, optional roles (filled example) |
+| Planning | [working-agreement.md](01-Planning/templates/working-agreement.md) | The team's own rules for communication, reviews, decisions, knowledge sharing; includes a 5-question team health check |
 | Planning | [risk-register.md](01-Planning/templates/risk-register.md) | Living list of risks |
 | Planning | [user-story.md](01-Planning/templates/user-story.md) | Story + objective, source, priority + acceptance criteria (and EARS rules) + DoR |
 | Planning | [change-request.md](01-Planning/templates/change-request.md) | Scope changes (client and regulated projects) |
@@ -457,7 +464,7 @@ The external standards, laws and specifications this guide relies on. **Review o
 | **SLSA** (supply-chain levels) | v1.x — check slsa.dev | Deployment | next review |
 | **ISO/IEC/IEEE 29148** (requirements / SRS) | 2018 edition (replaced IEEE 830); document levels BRS, StRS, SyRS, SRS | Planning — requirement quality characteristics (all projects); full SRS (regulated projects) | 2026-11-13 |
 | **GAMP 5** (validation of computerized systems, GxP) | 2nd edition (2022) | Planning — URS for pharmaceutical / medical clients only | next review |
-| **Scrum Guide** | 2020 edition (still the official current version) — 3 accountabilities, 5 events, 3 artifacts with commitments (Product Goal, Sprint Goal, Definition of Done). The 2025 *Scrum Guide Expansion Pack* is an optional companion, **not** a new edition | README §3.2–§3.3 roles, §6 working rhythm | 2026-11-16 |
+| **Scrum Guide** | 2020 edition (still the official current version) — 3 accountabilities, 5 events, 3 artifacts with commitments (Product Goal, Sprint Goal, Definition of Done). The 2025 *Scrum Guide Expansion Pack* is an optional companion, **not** a new edition | README §3.2–§3.3 roles, §6 working rhythm | 2026-11-16; re-read 2026-11-26 for "self-managing", "no sub-teams or hierarchies", "10 or fewer people" and the Sprint Retrospective concluding the Sprint |
 | **Agile Manifesto** | 2001 — 4 values, 12 principles | README §6 | — (fixed text) |
 | **Semantic Versioning** | 2.0.0 (semver.org) — `MAJOR.MINOR.PATCH`, pre-release `-…`, build metadata `+…` | Development, Design, Deployment | next review |
 | **Conventional Commits** | 1.0.0 | Development | next review |
@@ -471,6 +478,7 @@ The external standards, laws and specifications this guide relies on. **Review o
 | **RFC 9457** Problem Details / **RFC 9745** Deprecation / **RFC 8594** Sunset / **RFC 9116** security.txt | Published RFCs | Design, Development, Maintenance | 2026-11-26 (9457), 2026-11-13 (9745); others next review |
 | **DORA metrics** | **Five** metrics: change lead time, deployment frequency, failed deployment recovery time, change fail rate, deployment rework rate | Deployment, Maintenance | 2026-11-13 |
 | **Core Web Vitals** (web.dev) | LCP ≤ 2.5 s, INP ≤ 200 ms, CLS ≤ 0.1, measured at the 75th percentile of real page loads; INP replaced FID in 2024 | Design, Testing, Maintenance | 2026-11-26 |
+| **Team effectiveness research** (Google re:Work, "Understand team effectiveness", Project Aristotle) | Five dynamics: psychological safety, dependability, structure and clarity, meaning, impact | README §6.6, working-agreement template | 2026-11-26 (re:Work page https://rework.withgoogle.com/intl/en/guides/understand-team-effectiveness read via a search result; not the full study) |
 | **Browser security features** (MDN) | Cookies `HttpOnly`, `Secure`, `SameSite`; strict CSP with nonce or hash (test in Report-Only first); SRI with `integrity` + `crossorigin`; viewport meta `width=device-width` | Development, Deployment | 2026-11-26 |
 | **The Twelve-Factor App** (12factor.net) | 12 factors (I Codebase … XII Admin processes); page last updated 2017; still the common cloud-service baseline | Design, Development, Deployment | 2026-11-26 |
 | **HTTPS and TLS** — HSTS (RFC 6797), TLS 1.3 (RFC 8446), TLS 1.0/1.1 deprecated (RFC 8996), NIST SP 800-52 Rev. 2 | TLS 1.2 minimum, 1.3 preferred; HSTS `max-age` at least 1 year for preload. NIST has announced a Rev. 3 (not yet published): re-check at next review | Design, Deployment | 2026-11-26 (HSTS, NIST via MDN and NIST pages); RFC numbers next review |

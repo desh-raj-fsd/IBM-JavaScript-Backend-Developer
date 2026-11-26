@@ -416,7 +416,7 @@ services:
 
 ### 4.12 Collaboration and documentation
 
-- **Pair programming** (two developers, one task) and **mob/ensemble programming** (the whole team, one task) spread knowledge and catch mistakes early.
+- **Pair programming** (two developers, one task) and **mob/ensemble programming** (the whole team, one task) spread knowledge and catch mistakes early. In a pair, the **driver** types and thinks about the small goal; the **navigator** reviews and keeps the bigger picture; **swap roles often** and do not pair all day (about 6 hours at most, with breaks). Good for onboarding and hard problems; for large unknowns do a short **spike** first. Details: [course note 04](../../course-1-introduction-to-software-engineering/module-2-introduction-to-software-development/notes/04-teamwork-and-squads.md).
 - **Docs as code:** a **README** (what it is, how to run it, how to test it), API docs generated from OpenAPI, JSDoc on public functions, ADRs, and a **CHANGELOG** — all in Git and reviewed in PRs.
 - **Comments explain *why*, not *what*.** The code shows *what*.
 - **Docs change in the same PR as the code.** Documentation is updated **with** each change, in every phase — not "later" or "in the maintenance phase". If users read the old docs for weeks, the docs are wrong ([README §7.2](../README.md#72-documentation-rules), rule 2).

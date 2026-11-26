@@ -3,6 +3,23 @@
 > One entry per review or significant change, **newest first**. Rules: [README §9.1 Review schedule](README.md#91-review-schedule).
 > Each entry lists the date, the files, the reviewers, what changed (or "no changes needed") and the sources checked.
 
+## 2026-11-26 — Teamwork: note-04 module-2 "Teamwork and Squads" findings
+
+- **Files:** `README.md` (§2 step 5a, §3.3 rule 8, §6.6 rules 7–9, §7 docs tree, §8 templates, §10 Scrum Guide and new team-research rows), `01-Planning/Planning.md` (§8 required output, Gate G1 item, template table), `03-Development/Development.md` (§4.12 pair programming detail), new template `01-Planning/templates/working-agreement.md`
+- **Scope:** **targeted** change: team practices from course note "04 Teamwork and Squads" that the guide was missing. Not a full review; README "Last reviewed" stays at the last full-guide review (2026-11-13). Planning review date moved to 2026-11-26. Correction sweep: "squad leader", "up to 10 developers" and "retrospective at project end" were not found in the guide.
+- **Reviewers:** <Delivery Lead>, <Tech Lead> — *to be filled in when the pull request is approved*
+- **What changed:**
+  - **README §6.6 rules 7–9:** written working agreement at kickoff (must), team health check about every 3 sprints (should; never to rate individuals), deliberate knowledge sharing with bus factor of at least 2, buddy and onboarding (should).
+  - **README §3.3 rule 8:** how to read "squad" (similar to a Scrum team; 10 or fewer people in total, default 4–8; no extra "squad leader" role: PO, TL and DL split the duties).
+  - **README §2 step 5a, §7, §8:** working agreement in the kickoff steps, the docs tree and the template list.
+  - **Planning:** working agreement as a required output (must for internal and client projects; should for prototypes) and a Gate G1 checklist item.
+  - **Development §4.12:** driver and navigator, swap often, at most about 6 hours a day, spike for large unknowns.
+  - **New template:** `working-agreement.md` (goal, communication, ways of working, treatment of each other, knowledge sharing, 5-question health check).
+  - **Already covered, so not added again:** retrospective every sprint (README §6.6 rule 2), review within one working day and CODEOWNERS (Development), pair and mob programming rule 11, blameless postmortems (Maintenance), team roles and backups (README §3.3).
+- **Sources checked (2026-11-26):** scrumguides.org Scrum Guide 2020 ("typically 10 or fewer people", "self-managing", "no sub-teams or hierarchies", Sprint Retrospective purpose and that it concludes the Sprint); Google re:Work "Understand team effectiveness" (five dynamics; read through a web-search result because the direct page URLs I tried returned 404); Spotify engineering model paper, 2012 (squad similar to a Scrum team, no formally appointed squad leader but a product owner, agile coach access, tribe, chapter, guild, Dunbar number); martinfowler.com "On Pair Programming" (driver, navigator, rotation, about 6 hours); Melvin Conway, "How Do Committees Invent?" (1968); GitHub Docs about code owners.
+- **Not re-checked:** Brooks's law and The Mythical Man-Month (1975); Tuckman's team stages; Team Topologies' four team types (checked in the 2026-11-16 roles entry); the Google study itself (only the re:Work summary was read).
+- **Next review due:** Planning, Development 2027-05-26; README §6.6 at the next full-guide review (2027-05-13).
+
 ## 2026-11-26 — Back-end baseline & payments: note-03 module-2 "The Importance of Back-End Development" findings
 
 - **Files:** `README.md` (§10 standards table: `OWASP API Security Top 10` updated, new `PCI DSS` row, `RFC 9457` and `Node.js release schedule` dates updated), `02-Design/Design.md` (§4.4 status codes + `API4:2023`, §4.5 BOLA `API1:2023` + PCI DSS v4.0.1 tokenization, rule 23), `03-Development/Development.md` (§4.9 ORM expansion, `API4:2023` rate limiting, payment/card data row, new §4.15 Database access, ORMs, and migrations, rule 26)
