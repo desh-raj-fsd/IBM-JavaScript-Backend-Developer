@@ -3,6 +3,17 @@
 > One entry per review or significant change, **newest first**. Rules: [README §9.1 Review schedule](README.md#91-review-schedule).
 > Each entry lists the date, the files, the reviewers, what changed (or "no changes needed") and the sources checked.
 
+## 2026-11-26 — Stacks: note 08 "Introduction to Software Stacks"
+
+- **Files:** `02-Design/Design.md` (new §4.14, rules 24–25), `03-Development/Development.md` (§4.8 license bullet, §4.10 Compose bullet)
+- **Scope:** **targeted**. Already covered: ADR for new dependencies (Design rule 5), layered structure, front-end framework choice (§4.13), build vs buy, managed services. Correction sweep: none of the lecture's wrong claims (LAMP tied to Linux, relational databases cannot hold unstructured data, MongoDB as open source, React as a framework, Vue as "much newer") was found in the guide.
+- **What changed:** Design §4.14 (software stack vs technology stack, layers, a criteria table for choosing a stack, data and license notes); rule 24 (stack ADR with two alternatives, license check, support dates; must on client and internal projects, should on prototypes; an acronym is not a decision), 25 (default to one primary database; extra store types need an ADR); source-available licenses such as SSPL can add duties (checked by the Tech Lead with the client's legal contact); Compose: containers use service names, `depends_on` does not wait for readiness.
+- **Sources checked (2026-11-26):** MongoDB docs (multi-document ACID transactions); OSI "The SSPL is Not an Open Source License"; MySQL 8.4 manual (JSON data type, via search); PostgreSQL docs (json and jsonb); Microsoft docs (ASP.NET Core cross-platform); Docker Compose docs (service-name networking; Compose "does not wait until a container is ready", `service_healthy`).
+- **Reviewers:** <Tech Lead> — *to be filled in when the pull request is approved*
+- **Review:** a light independent review (no web) was applied: rules 24–25 tailored by project type with an owner, checklist and gate items added, license wording softened (MongoDB's own text says the SSPL targets offering MongoDB as a service), a former rule 26 folded into rule 24.
+- **Not re-checked:** "default to one primary database" is a LumenVenture default, not an industry rule.
+- **Next review due:** Design, Development 2027-05-26.
+
 ## 2026-11-26 — Build and package tools: note 07 "More Application Development Tools" (notes 05–07 sync completed)
 
 - **Files:** `03-Development/Development.md` (§4.8 publishing bullet, §4.14 build-tool row, rule 30), `05-Deployment/Deployment.md` (§4.1 OS packages, rule 22)

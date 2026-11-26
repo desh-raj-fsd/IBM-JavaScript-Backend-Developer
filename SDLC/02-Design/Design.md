@@ -452,6 +452,26 @@ Many companies write a short design doc, often called an **RFC (Request for Comm
 - **The browser is not part of the trusted system.** Everything the user's browser holds can be read or changed, so design validation, authorization and secrets on the **server** (rule 3; [Development 4.14](../03-Development/Development.md#414-front-end-code-standards)).
 - **Checklist for the team:** [frontend-checklist.md](../03-Development/templates/frontend-checklist.md).
 
+### 4.14 Choosing the technology stack
+
+> From course note [module 2, 08 Introduction to Software Stacks](../../course-1-introduction-to-software-engineering/module-2-introduction-to-software-development/notes/08-introduction-to-software-stacks.md). A **software stack** is the layered set of languages, frameworks, runtime, web and application servers, messaging and database. A **technology stack** adds the hardware and infrastructure (virtual machines, containers, storage, load balancers). We record **both**: the software choices and who runs the infrastructure.
+
+- **Layers:** name the presentation, business logic and data layers of the product ([4.2](#42-choose-an-architecture-style)) and the technology in each. Use only the layers you need.
+- **Decide with criteria, not with a brand name** (acronyms such as LAMP, MEAN or MERN only describe one combination):
+
+| Criterion | Question |
+|-----------|----------|
+| **Team skills and hiring** | Can the team build and run it, and can we hire for it? |
+| **Data shape and access patterns** | Tables, documents or both? ([4.3](#43-data-design)) |
+| **Quality targets** | Scale, speed, availability ([4.1](#41-non-functional-requirements-drive-the-architecture)); these come from architecture, not from the stack's name |
+| **License and legal** | Is it open source (OSI-approved) or only "source available" (for example MongoDB's SSPL, which the OSI says is not open source)? Which duties does it add (often when you redistribute or offer the software as a service to others)? Does the client allow it? The Tech Lead decides with the client's legal contact (see the legal factor in [Planning](../01-Planning/Planning.md)) |
+| **Support** | Who maintains it, and what are the end-of-life dates? |
+| **Operation** | Who runs each part: our servers, a managed cloud service or a third party? What does it cost to run and watch? |
+
+- **Data:** relational databases can also hold flexible data (PostgreSQL `jsonb`, MySQL JSON columns), and MongoDB supports multi-document ACID transactions (on replica sets and sharded clusters), so "relational vs unstructured" is rarely a hard split. Prefer **one primary database** and add a second kind of store only when an access pattern needs it.
+- **One language end to end** (for example JavaScript or TypeScript with Node.js) is a convenience, not a rule. A front end can call a back end in any language through an API.
+- **Stack names age:** check what a name means today (for example ASP.NET today is ASP.NET Core, which is cross-platform).
+
 ## 5. Design is "done enough" when...
 
 - [ ] The **HLD** is agreed: components, technology choices and an **architecture style**, with a C4 context and container diagram.
@@ -463,6 +483,7 @@ Many companies write a short design doc, often called an **RFC (Request for Comm
 - [ ] **Integrations** have adapters; build-vs-buy is decided.
 - [ ] **Delivery and cloud baseline** (§4.12) is decided: delivery style per part, CDN and cache rules, service model, and the availability-zone setup.
 - [ ] **Front-end decisions** (§4.13) are decided for web UIs: approach (ADR with end-of-life date), responsive and mobile-first, browser support policy, WCAG and Core Web Vitals targets.
+- [ ] **Technology stack** (§4.14) is recorded in an ADR: alternatives, license check, support dates (rule 24).
 - [ ] A **rollout, migration and rollback** plan exists.
 - [ ] The design links back to the **requirement IDs** it serves.
 - [ ] The design was **reviewed** by the team (and stakeholders for big changes), and **prototypes** were shown where useful.
@@ -508,6 +529,7 @@ Many companies write a short design doc, often called an **RFC (Request for Comm
 - [ ] **Operations** planned: logs, metrics, traces, health checks, configuration and secrets
 - [ ] **Delivery and cloud baseline** recorded (§4.12): delivery style, CDN and cache headers, service model, availability zones
 - [ ] **Front-end decisions** recorded (§4.13) for web UIs: approach ADR, support policy, accessibility and performance targets
+- [ ] **Technology stack** recorded (§4.14): ADR with alternatives, license check and support dates
 - [ ] **Rollout, migration and rollback** approach known
 - [ ] Reviewed as a **pull request** by the Tech Lead and at least one other developer
 
@@ -536,6 +558,8 @@ Many companies write a short design doc, often called an **RFC (Request for Comm
 21. **should** — Web UIs have **WCAG 2.2 AA** and **Core Web Vitals** targets (LCP ≤ 2.5 s, INP ≤ 200 ms, CLS ≤ 0.1 at the 75th percentile) written as quality attributes (§4.1).
 22. **should** — Products with many screens use **shared components and design tokens** instead of copied styles.
 23. **must** — Application back-ends and databases **never** store raw credit card numbers (PAN) or security codes (CVV/CVC); use **tokenization** via a PCI DSS-certified payment processor (§4.5).
+24. **must** on client and internal projects, **should** on prototypes — The technology stack (languages, frameworks, runtime, database, hosting) is chosen in an **ADR** (owner: Tech Lead) that lists at least two alternatives, the criteria of §4.14, the **license check** result and the support and end-of-life dates. Who runs each part follows rule 17, and the exit plan is the one rule 5 asks for. If the client mandates the stack, record it as a **constraint** with the license and end-of-life check only. The ADR names real components and versions: an acronym such as LAMP or MEAN is not enough.
+25. **should** — Default to **one primary database**. Add another kind of store (document, search, queue) only when a named access pattern in §4.3 needs it, and record it in an ADR. A cache such as Redis needs no extra ADR unless it holds the only copy of data. Owner: Tech Lead.
 
 ### 6.5 Templates
 

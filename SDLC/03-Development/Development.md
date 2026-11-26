@@ -327,7 +327,7 @@ module.exports = errorHandler;
 
 ### 4.8 Dependencies and supply-chain security
 
-- **Choose packages carefully:** first ask whether the platform or a few lines of code can do the job; then check active maintenance, many users, small size, known vulnerabilities, a clear license that your company allows (MIT, Apache-2.0, BSD are usually fine; check **copyleft** licenses like GPL with your legal team), and **how hard it is to replace later** (exit plan, see [Design rule 5](../02-Design/Design.md#64-rules)).
+- **Choose packages carefully:** first ask whether the platform or a few lines of code can do the job; then check active maintenance, many users, small size, known vulnerabilities, a clear license that your company allows (MIT, Apache-2.0, BSD are usually fine; check **copyleft** licenses like GPL with your legal team), and **how hard it is to replace later** (exit plan, see [Design rule 5](../02-Design/Design.md#64-rules)). Licenses that are **"source available" but not OSI open source** (for example MongoDB's SSPL) can add duties, often when you redistribute the software or offer it as a service to others; the Tech Lead checks the terms with the client's legal contact (a database server is a stack decision: [Design §4.14](../02-Design/Design.md#414-choosing-the-technology-stack)).
 - **Fewer dependencies = smaller attack surface.** Do not add a package for a 3-line function.
 - **Lockfile + `npm ci`** so every machine installs the **exact** same versions.
 - **Version ranges in `package.json`:**
@@ -384,6 +384,7 @@ db.query('SELECT * FROM reviews WHERE isbn = $1', [req.params.isbn]);
 - **"Works on my machine" must not happen.** Every developer gets the same setup in minutes:
   - `.nvmrc` (Node version), `npm ci`, `.env.example`.
   - **Docker Compose** for the database, cache and other services.
+    - Containers reach each other by **service name** (`db`), not `localhost` (inside a container, `localhost` is that container). `depends_on` only waits until a container is **running**, not **ready**: if one service needs another, add a `healthcheck` and `condition: service_healthy`, or retry the connection.
   - **Seed data** and a one-command start (`npm run dev`).
   - Optional **dev containers** for a fully identical editor environment.
 
