@@ -447,6 +447,37 @@ on:
 - **Reproducible containerized environments (DevContainers):** teams should consider providing a `.devcontainer/devcontainer.json` configuration for complex services. DevContainers package the required Node.js LTS version, system libraries, database clients, and recommended editor extensions into a Docker container, eliminating machine-specific configuration drift.
 - **Retire unmaintained legacy editors:** developers must use actively maintained editors supporting the Language Server Protocol (LSP) and modern security tooling. Legacy tools like Atom (officially sunset on December 15, 2022) must not be used on company projects due to unpatched security vulnerabilities.
 
+### 4.14 Front-end code standards
+
+> From course note [module 2, 02 Learning Front-End Development](../../course-1-introduction-to-software-engineering/module-2-introduction-to-software-development/notes/02-learning-front-end-development.md). Design decisions for web UIs are in [Design 4.13](../02-Design/Design.md#413-front-end-design-decisions).
+
+| Habit | What to do | Why |
+|-------|-----------|-----|
+| **Native elements first** | `button` for actions, `a href` for navigation, `label` + `input` for forms, landmarks (`header`, `nav`, `main`, `footer`). No clickable `div` | Keyboard and screen-reader users get it for free; custom widgets need a lot of extra code |
+| **Accessibility checks while coding** | Accessibility lint rules in the editor and CI, plus a keyboard-only test of every changed screen | Automated tools find only part of the problems |
+| **TypeScript** | New front-end code is TypeScript | Catches many mistakes before the browser runs the code |
+| **One styling approach** | Plain CSS (custom properties, nesting), CSS Modules, utility CSS or Sass. Lint with Stylelint | A mix of systems is hard to maintain |
+| **Sass: `@use`, not `@import`** | `@import` is deprecated since Dart Sass 1.80.0 and will be removed in 3.0.0 | The old rule makes every name global and loads the same file many times |
+| **Mobile-first CSS** | Base styles for small screens, then `min-width` media or container queries. `<meta name="viewport" content="width=device-width">`; never block zoom | Phones are a large part of traffic; without the tag phones show a shrunk desktop page |
+| **API calls** | Check `res.ok` (`fetch` does not throw on 404 or 500), set a timeout, show loading, empty and error states | The most common front-end bug is using an error body as if it were data |
+| **The browser is untrusted** | No secrets in the bundle. The server validates and authorizes every request. Never insert untrusted data as HTML (`innerHTML`, `dangerouslySetInnerHTML`, `v-html`); use `textContent` or the framework's escaping | Users can read and change everything in the browser |
+| **Cookies and tokens** | Session cookies: `HttpOnly` (JavaScript cannot read it), `Secure` (HTTPS only) and `SameSite` (`Lax` by default; `None` needs `Secure`). Avoid long-lived tokens in `localStorage`. `SameSite` does not stop all CSRF: add a CSRF token or `Origin` check | An XSS bug can steal anything JavaScript can read |
+| **Third-party scripts** | Each one runs with your page's rights: approve it, load as few as possible, and add **SRI** to CDN files | A hacked third party becomes your breach |
+| **Bundle size** | Code splitting, lazy loading, a size budget in CI | JavaScript must be downloaded, parsed and run; too much of it slows the page |
+
+```html
+<!-- SRI: the browser refuses the file if its hash does not match -->
+<script src="https://cdn.example.com/lib.js"
+        integrity="sha384-<hash>" crossorigin="anonymous"></script>
+```
+
+```http
+Set-Cookie: sid=<value>; Secure; HttpOnly; SameSite=Lax; Path=/
+```
+
+- **Checklist for every UI change and release:** [frontend-checklist.md](templates/frontend-checklist.md).
+- Server-side counterparts (CORS, rate limiting, validation) are in [4.9](#49-secure-coding-checklist-code-level).
+
 ## 5. Development is "done" when... (a typical Definition of Done)
 
 - [ ] The code meets the story's **acceptance criteria** and follows the **design** (API contract, layers, ADRs).
@@ -454,6 +485,7 @@ on:
 - [ ] **Lint, format and type checks** pass.
 - [ ] **Security checks** pass: input validated, authorization checked, no secrets, parameterized queries, dependency scan clean.
 - [ ] Errors go through the **central error handler**; logs are structured with no sensitive data.
+- [ ] **User-facing changes** pass the front-end checks (§4.14): native elements, keyboard test, works at 320 px and on desktop, accessibility check passes.
 - [ ] The **PR is small**, has a clear description, and is **approved** by at least one reviewer.
 - [ ] **Docs** (README, OpenAPI, user help, runbooks, SOPs, CHANGELOG) are updated **in the same PR** (help-center content: in the same release) — or the PR says "no docs change".
 - [ ] Database **migrations** are backward compatible.
@@ -523,6 +555,12 @@ on:
 17. **should** — Code compares versions with a **SemVer library**, never with string comparison.
 18. **must** — A new instance starts from the **image plus environment variables only**: no local files, no manual steps, no state kept in the process (Twelve-Factor III, VI, IX; table in §4.5).
 19. **should** — When a bug is hard to place, check the **four boundaries** in order (client, edge and network, application, persistence) before changing code ([Maintenance 4.4.1](../06-Maintenance/Maintenance.md#441-where-is-it-broken-triage-by-boundary)).
+20. **must** — Interactive elements use **native HTML elements** (`button`, `a href`, `label` with `input`); a clickable `div` fails code review.
+21. **must** — The browser is **untrusted**: no secrets in front-end code or bundles; untrusted data is never inserted as HTML; the server validates and authorizes every request (§4.14).
+22. **must** — Session cookies are `HttpOnly`, `Secure` and `SameSite` (`Lax` unless an ADR says otherwise). `SameSite=Lax` is **not a full CSRF (Cross-Site Request Forgery) defence**: state-changing requests that use cookie sessions also need a CSRF token or an `Origin` header check.
+23. **should** — Every API call checks for HTTP errors, has a timeout, and the UI shows loading, empty and error states.
+24. **should** — New front-end code is **TypeScript** (or JavaScript with JSDoc types checked in CI); a project uses **one** styling approach; Sass code uses `@use`, not `@import`.
+25. **should** — Third-party scripts are approved by the Tech Lead or listed in the project's dependency list, and scripts and stylesheets loaded from a CDN use **SRI** (Subresource Integrity: `integrity` + `crossorigin`).
 
 ### 6.5 Templates
 
@@ -533,6 +571,7 @@ on:
 | [definition-of-done.md](templates/definition-of-done.md) | `docs/definition-of-done.md` |
 | [versioning-policy.md](templates/versioning-policy.md) | `docs/versioning-policy.md` (Sprint 0) |
 | [sop.md](templates/sop.md) | `docs/sop/<short-name>.md` (filled example: merging to `main`) |
+| [frontend-checklist.md](templates/frontend-checklist.md) | Web UIs: use at project start and before each release |
 
 ---
 

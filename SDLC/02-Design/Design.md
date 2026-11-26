@@ -431,6 +431,25 @@ Many companies write a short design doc, often called an **RFC (Request for Comm
 
 **5. Follow the Twelve-Factor rules for a cloud-ready service** (config in the environment, stateless processes, disposable processes, logs as streams). The full list and where each factor lives in this guide is in [Development 4.5](../03-Development/Development.md#45-configuration-fail-fast-at-startup).
 
+### 4.13 Front-end design decisions
+
+> From course note [module 2, 02 Learning Front-End Development](../../course-1-introduction-to-software-engineering/module-2-introduction-to-software-development/notes/02-learning-front-end-development.md). The lecture names HTML, CSS, JavaScript, Sass, Less and three frameworks. This section turns them into design decisions. For delivery style (static, server-rendered, single-page app) and the CDN, see [4.12](#412-web-delivery-and-cloud-baseline).
+
+| Decision | Default | Why |
+|----------|---------|-----|
+| **Approach** | Plain HTML, CSS and a little JavaScript for content sites. A **framework** (for example Angular, Vue, or React with Next.js or React Router) for apps with many screens and states | A framework gives structure, routing and rendering modes. A simple site does not need its weight |
+| **Library or framework?** | React is a **library**: its own documentation advises new apps to start with a framework. Angular is a full framework. Vue can be adopted step by step | Picking only a library means you assemble routing, data loading and build tools yourself |
+| **Layout** | **Responsive and mobile-first**, with the **same content and features on every device** | Search engines index the mobile page first; phone users need every feature. Separate "adaptive" versions cost more to maintain |
+| **Browser and device support** | A **written policy** (for example the current and previous major versions of Chrome, Edge, Firefox and Safari, plus iOS Safari) kept in `browserslist` | Without a policy, "works in every browser" cannot be tested or promised |
+| **Accessibility** | **WCAG (Web Content Accessibility Guidelines) 2.2 level AA** (see [Planning](../01-Planning/Planning.md)) | Often a legal duty (European Accessibility Act); also better for everyone |
+| **Performance targets** | **Core Web Vitals** at the **75th percentile of real users**: Largest Contentful Paint (LCP) ≤ 2.5 s, Interaction to Next Paint (INP) ≤ 200 ms, Cumulative Layout Shift (CLS) ≤ 0.1 | A measurable non-functional requirement for [4.1](#41-non-functional-requirements-drive-the-architecture) |
+| **Styling** | One approach per project: plain modern CSS, CSS Modules, utility CSS, or Sass | Mixed systems are hard to maintain. Browsers now support custom properties and nesting, so a preprocessor is optional for new projects |
+| **Shared UI** | Reusable components and **design tokens** when the product has many screens | Same look and one place to change a color |
+
+- **Write an ADR for the front-end approach** (rule 5 already requires one for a major dependency). It must list the **support window and end-of-life date** of the framework. Real examples: AngularJS support ended in January 2022 and Vue 2 reached end of life on 31 December 2023, so teams on them had to migrate.
+- **The browser is not part of the trusted system.** Everything the user's browser holds can be read or changed, so design validation, authorization and secrets on the **server** (rule 3; [Development 4.14](../03-Development/Development.md#414-front-end-code-standards)).
+- **Checklist for the team:** [frontend-checklist.md](../03-Development/templates/frontend-checklist.md).
+
 ## 5. Design is "done enough" when...
 
 - [ ] The **HLD** is agreed: components, technology choices and an **architecture style**, with a C4 context and container diagram.
@@ -441,6 +460,7 @@ Many companies write a short design doc, often called an **RFC (Request for Comm
 - [ ] **Operations** are planned: logs, metrics, traces, health checks, configuration and secrets.
 - [ ] **Integrations** have adapters; build-vs-buy is decided.
 - [ ] **Delivery and cloud baseline** (§4.12) is decided: delivery style per part, CDN and cache rules, service model, and the availability-zone setup.
+- [ ] **Front-end decisions** (§4.13) are decided for web UIs: approach (ADR with end-of-life date), responsive and mobile-first, browser support policy, WCAG and Core Web Vitals targets.
 - [ ] A **rollout, migration and rollback** plan exists.
 - [ ] The design links back to the **requirement IDs** it serves.
 - [ ] The design was **reviewed** by the team (and stakeholders for big changes), and **prototypes** were shown where useful.
@@ -485,6 +505,7 @@ Many companies write a short design doc, often called an **RFC (Request for Comm
 - [ ] **Reliability** planned: timeouts, retries, failure behavior, backups
 - [ ] **Operations** planned: logs, metrics, traces, health checks, configuration and secrets
 - [ ] **Delivery and cloud baseline** recorded (§4.12): delivery style, CDN and cache headers, service model, availability zones
+- [ ] **Front-end decisions** recorded (§4.13) for web UIs: approach ADR, support policy, accessibility and performance targets
 - [ ] **Rollout, migration and rollback** approach known
 - [ ] Reviewed as a **pull request** by the Tech Lead and at least one other developer
 
@@ -507,6 +528,11 @@ Many companies write a short design doc, often called an **RFC (Request for Comm
 15. **should** — Public static files are served through a **CDN**. Hashed files use `Cache-Control: public, max-age=31536000, immutable`; HTML uses `no-cache`; personal responses use `private` (§4.12).
 16. **should** — Multi-region is chosen only with an ADR that names the **RTO/RPO** target and the cost; single-region multi-AZ is the default.
 17. **must** — The design lists, per service, **what the cloud provider manages and what we manage** (service model, patching, access, data). Nothing is left as "the cloud handles it".
+18. **must** on public and client-facing UIs, **should** on internal tools — A web UI is **responsive and mobile-first** and shows the **same content and features on every device**. A separate adaptive (per-screen-size) version, or a desktop-only UI, needs an ADR.
+19. **must** — A **browser and device support policy** is written in the project brief or the versioning policy, and a feature outside it may fail, but the **core task must still work** (progressive enhancement, §4.13).
+20. **should** — The front-end ADR (rule 5) lists the framework's **support window and end-of-life date**, and the chosen **rendering mode** (§4.12).
+21. **should** — Web UIs have **WCAG 2.2 AA** and **Core Web Vitals** targets (LCP ≤ 2.5 s, INP ≤ 200 ms, CLS ≤ 0.1 at the 75th percentile) written as quality attributes (§4.1).
+22. **should** — Products with many screens use **shared components and design tokens** instead of copied styles.
 
 ### 6.5 Templates
 
@@ -515,6 +541,7 @@ Many companies write a short design doc, often called an **RFC (Request for Comm
 | [design-doc.md](templates/design-doc.md) | `docs/design/<name>.md` |
 | [adr.md](templates/adr.md) | `docs/adr/<NNNN>-<title>.md` |
 | [threat-model.md](templates/threat-model.md) | `docs/threat-model.md` |
+| [frontend-checklist.md](../03-Development/templates/frontend-checklist.md) | Web UIs: decisions at project start, checks before each release |
 
 ---
 

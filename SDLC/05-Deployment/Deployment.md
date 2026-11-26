@@ -343,6 +343,11 @@ The **DORA (DevOps Research and Assessment)** research program measures software
   - **HSTS** (`Strict-Transport-Security`) is sent on HTTPS responses: `max-age=31536000; includeSubDomains` (1 year) once every subdomain works over HTTPS. **Preloading** (the `preload` flag) is hard to undo, so it needs a Tech Lead decision.
 - **CDN and cache headers:** hashed static files use `Cache-Control: public, max-age=31536000, immutable`; HTML uses `no-cache`; personal responses use `private` ([Design 4.12](../02-Design/Design.md#412-web-delivery-and-cloud-baseline)). **Check on staging with `curl -I`** that no personal response is cached by the CDN.
 - **Health endpoints reachable by the load balancer:** liveness and readiness exist (see the manifest in §3) and do **not** go through the CDN cache.
+- **Browser security for web UIs** (not in the lecture; from [module 2, 02](../../course-1-introduction-to-software-engineering/module-2-introduction-to-software-development/notes/02-learning-front-end-development.md)):
+  - Send a **Content-Security-Policy (CSP)** header. A **strict** policy uses a **nonce or hash** for scripts (server-rendered pages use nonces; static sites use hashes), avoids `unsafe-inline`, and sets `object-src 'none'` and `base-uri 'none'`. **Start with `Content-Security-Policy-Report-Only`**, fix the reports, then enforce.
+  - Session cookies carry `Secure`, `HttpOnly` and `SameSite` ([Development 4.14](../03-Development/Development.md#414-front-end-code-standards)).
+  - Scripts and stylesheets from a CDN use **SRI** (Subresource Integrity: `integrity` with `crossorigin="anonymous"`).
+  - Upload **source maps** to the error-tracking tool instead of serving them to every visitor, so errors stay readable without publishing your source.
 - **Check from outside:** open the site from a network that is not the office or VPN, and run the checks above against the real domain. Many problems only appear at the edge.
 
 ## 5. Deployment is "done" when...
@@ -393,6 +398,7 @@ The **DORA (DevOps Research and Assessment)** research program measures software
 - [ ] Migrations backward compatible; **rollback plan** written and possible
 - [ ] Production config and secrets verified; no secrets in the image
 - [ ] First release or domain change: **web baseline** checked (HTTPS-only with redirect, HSTS, CDN cache headers, auto-renewing certificate; §4.10)
+- [ ] Web UIs: the [front-end checklist](../03-Development/templates/frontend-checklist.md) is done (CSP, cookies, performance budget, source maps)
 - [ ] Monitoring, alerts and runbooks cover the change; on-call informed
 - [ ] Users / client / support informed of visible changes
 - [ ] The [release checklist](templates/release-checklist.md) is complete (as required by the project type)
@@ -418,6 +424,8 @@ The **DORA (DevOps Research and Assessment)** research program measures software
 17. **should** — Send **HSTS** (`max-age` of at least one year) once all subdomains support HTTPS. Use **preload** only with a Tech Lead decision.
 18. **must** — Cache headers are **checked on staging before release** (`curl -I`): hashed files immutable, HTML `no-cache`, personal responses `private` or `no-store`. A response with personal data that a shared cache can store is a release blocker.
 19. **should** — Lower the DNS TTL (about 300 seconds) **before** a planned migration or domain change, and raise it again afterwards. DNS records are kept in Infrastructure as Code.
+20. **should** — Public web UIs send a **Content-Security-Policy** (strict, nonce or hash based), tested in **Report-Only** mode before it is enforced; `unsafe-inline` in `script-src` needs an ADR (for styles, prefer a nonce or hash).
+21. **should** — Source maps are uploaded to the error-tracking tool and are **not** served publicly, unless the project is open source.
 
 ### 6.5 Templates
 

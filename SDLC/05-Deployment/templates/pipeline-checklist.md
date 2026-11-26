@@ -12,6 +12,7 @@
 ## Pipeline stages
 - [ ] Install with lockfile → lint → type check → unit tests → integration tests
 - [ ] Security: dependency scan, secret scan, SAST; container image scan
+- [ ] Web UIs: accessibility check, bundle-size budget and lab performance check ([Testing rules 18–19](../../04-Testing/Testing.md#64-rules))
 - [ ] Docs checks: Markdown lint, broken links, OpenAPI lint ([README §7.2](../../README.md#72-documentation-rules), rule 5)
 - [ ] Build **once**; tag with commit SHA (and version); push to the registry
 - [ ] Deploy to staging automatically → smoke tests

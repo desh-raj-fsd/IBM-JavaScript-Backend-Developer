@@ -8,6 +8,7 @@
 - [ ] ★ Lint, format and type checks pass
 - [ ] ★ Reviewed and approved by at least one other developer
 - [ ] Small, focused PR with a clear description
+- [ ] User-facing UI: native elements, keyboard test, works at 320 px and on desktop, accessibility check passes ([frontend-checklist.md](frontend-checklist.md))
 
 ## Tests
 - [ ] ★ Unit and integration tests written and passing in CI

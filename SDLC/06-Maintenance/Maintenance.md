@@ -329,6 +329,17 @@ groups:
 - **Treat AI suggestions as hypotheses.** Verify with real data, and send every fix through the normal review and tests.
 - If the product **itself uses an AI model**, maintenance also includes: monitoring answer **quality** over time (quality can drift as user behavior changes), re-running **evals** before upgrading to a new model version, and watching **cost per request**.
 
+### 4.12 Front-end monitoring and upgrades
+
+> From course note [module 2, 02 Learning Front-End Development](../../course-1-introduction-to-software-engineering/module-2-introduction-to-software-development/notes/02-learning-front-end-development.md). The lecture says front-end technologies are upgraded constantly and that sites must keep working in many browsers, operating systems and devices.
+
+- **Real-user monitoring (RUM):** collect **Core Web Vitals** (Largest Contentful Paint, Interaction to Next Paint, Cumulative Layout Shift) from real visitors; INP replaced FID (First Input Delay) in 2024, for example with Google's `web-vitals` library, and look at the **75th percentile**. Lab tests do not show what slow phones and bad networks see.
+- **JavaScript error tracking:** send front-end errors to an error-tracking tool with **source maps** so stack traces are readable. Alert on a **spike after a release** and link the alert to the release version.
+- **Check by boundary** when users report a problem: start with the client (browser, device, cached files), then the edge (CDN, DNS, certificate), as in [4.4.1](#441-where-is-it-broken-triage-by-boundary).
+- **Track end-of-life dates** of the framework, build tools, Node.js and the browser support policy. Real examples: **AngularJS** support ended in January 2022, **Vue 2** reached end of life on 31 December 2023, and Sass `@import` is deprecated and will be removed in Dart Sass 3.0.0. Plan upgrades as backlog work **before** the date, not after.
+- **Automate small updates** (Dependabot or Renovate) and let CI tests prove they are safe; do **major** framework upgrades one version at a time.
+- **Review the support policy** every quarter: browsers, operating systems and devices change.
+
 ## 5. A service is "healthy and well maintained" when...
 
 - [ ] **SLOs** are defined, measured (SLIs), and **met**; the error budget is tracked.
@@ -338,6 +349,7 @@ groups:
 - [ ] **Hotfixes** use the normal pipeline and always add a **regression test** named with the bug ID.
 - [ ] **Backups** meet RPO/RTO and **restores are tested**.
 - [ ] **Dependencies, Node.js LTS, base images and certificates** are kept up to date; vulnerabilities are fixed on time.
+- [ ] **Web UIs:** real-user Core Web Vitals and JavaScript errors are visible, and framework end-of-life dates are tracked (§4.12).
 - [ ] **Data** retention, deletion requests and database health are managed.
 - [ ] **Technical debt** gets regular time; deprecated features and APIs follow a **sunset plan**.
 - [ ] **Feedback, analytics and incident learnings** flow into the **backlog**, starting the next loop.
@@ -412,6 +424,8 @@ groups:
 15. **should** — Maintenance and support work (bugs, tickets, upgrades, security fixes) runs in a **Kanban lane** with a **WIP limit** (default 2), in the **same backlog** as features, and the team tracks its **cycle time** ([README §6.3](../README.md#63-kanban-for-continuous-work)).
 16. **should** — Incident triage follows the **four boundaries** (client, edge and network, application, persistence) and each runbook says which boundary its alert belongs to (§4.4.1).
 17. **must** — On-call people can **check certificate expiry, DNS and the CDN** from a runbook, not only the application logs. Expired certificates and wrong DNS are among the most common avoidable outages.
+18. **should** — Web UIs collect **real-user Core Web Vitals** and **JavaScript errors** (with source maps); the 75th-percentile values and the error rate are reviewed in the monthly service review.
+19. **must** — The **end-of-life dates** of the framework, Node.js LTS line and build tools are tracked; the browser support policy is reviewed every quarter. Upgrade work is planned in the backlog **at least one quarter before** the date (rule 9 and the G5 check apply).
 
 ### 6.6 Templates
 

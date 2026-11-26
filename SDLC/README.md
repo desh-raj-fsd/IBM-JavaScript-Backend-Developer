@@ -369,6 +369,7 @@ flowchart TD
 | Development | [definition-of-done.md](03-Development/templates/definition-of-done.md) | Team DoD |
 | Development | [versioning-policy.md](03-Development/templates/versioning-policy.md) | Version scheme, bump rules, supported versions, deprecation periods |
 | Development | [sop.md](03-Development/templates/sop.md) | Standard Operating Procedure for a repeated, project-specific task (filled example: merging to `main`) |
+| Development | [frontend-checklist.md](03-Development/templates/frontend-checklist.md) | Web UIs: decisions at project start and checks before each release |
 | Testing | [test-strategy.md](04-Testing/templates/test-strategy.md) | How the project proves quality |
 | Testing | [bug-report.md](04-Testing/templates/bug-report.md) | Reporting a bug |
 | Testing | [uat-signoff.md](04-Testing/templates/uat-signoff.md) | Acceptance by PO / client |
@@ -461,13 +462,15 @@ The external standards, laws and specifications this guide relies on. **Review o
 | **Conventional Commits** | 1.0.0 | Development | next review |
 | **ISO/IEC 25010** (software quality model) | 2023 edition — usability renamed **interaction capability** (accessibility split into *inclusivity* and *user assistance*); **safety** added; portability renamed **flexibility** | Planning (NFRs), Testing | 2026-11-16 |
 | **ISTQB Foundation Level syllabus** (testing terms and principles) | CTFL (Certified Tester Foundation Level) **v4.0** (April 2023; errata release v4.0.1, Sept 2024) — seven testing principles ("tests wear out" was called the "pesticide paradox" in older editions); maintenance testing = checking the change + regression | Testing §4.13 | 2026-11-16 |
-| **WCAG** (accessibility) | 2.2, level AA as default target | Planning, Testing | next review |
+| **WCAG** (accessibility) | 2.2 (W3C Recommendation, republished 12 Dec 2024; success criterion 4.1.1 Parsing removed), level AA as default target. AA includes text contrast 4.5:1 and a minimum touch-target size of 24×24 CSS pixels | Planning, Design, Development, Testing | 2026-11-26 |
 | **European Accessibility Act** | Applies since 28 June 2025 | Planning | next review |
 | **GDPR** (EU data protection) | Regulation (EU) 2016/679 | Planning, Design, Maintenance | next review |
 | **EU Cyber Resilience Act** | Reporting duties since **11 Sep 2026**; full application **11 Dec 2027** | Deployment, Maintenance | 2026-11-13 |
 | **OpenAPI** | **3.2** (Sept 2025); 3.1 still widely supported | Design | 2026-11-13 |
 | **RFC 9457** Problem Details / **RFC 9745** Deprecation / **RFC 8594** Sunset / **RFC 9116** security.txt | Published RFCs | Design, Development, Maintenance | 2026-11-13 (9745); others next review |
 | **DORA metrics** | **Five** metrics: change lead time, deployment frequency, failed deployment recovery time, change fail rate, deployment rework rate | Deployment, Maintenance | 2026-11-13 |
+| **Core Web Vitals** (web.dev) | LCP ≤ 2.5 s, INP ≤ 200 ms, CLS ≤ 0.1, measured at the 75th percentile of real page loads; INP replaced FID in 2024 | Design, Testing, Maintenance | 2026-11-26 |
+| **Browser security features** (MDN) | Cookies `HttpOnly`, `Secure`, `SameSite`; strict CSP with nonce or hash (test in Report-Only first); SRI with `integrity` + `crossorigin`; viewport meta `width=device-width` | Development, Deployment | 2026-11-26 |
 | **The Twelve-Factor App** (12factor.net) | 12 factors (I Codebase … XII Admin processes); page last updated 2017; still the common cloud-service baseline | Design, Development, Deployment | 2026-11-26 |
 | **HTTPS and TLS** — HSTS (RFC 6797), TLS 1.3 (RFC 8446), TLS 1.0/1.1 deprecated (RFC 8996), NIST SP 800-52 Rev. 2 | TLS 1.2 minimum, 1.3 preferred; HSTS `max-age` at least 1 year for preload. NIST has announced a Rev. 3 (not yet published): re-check at next review | Design, Deployment | 2026-11-26 (HSTS, NIST via MDN and NIST pages); RFC numbers next review |
 | **HTTP caching** (`Cache-Control`, `immutable`, RFC 9111 / RFC 8246) | Hashed files: long `max-age` + `immutable`; HTML: `no-cache`; personal data: `private` | Design, Deployment | 2026-11-26 (MDN) |

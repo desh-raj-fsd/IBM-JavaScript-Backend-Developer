@@ -20,6 +20,7 @@
 ## 4. Security and platform
 - [ ] Open vulnerabilities by severity (within agreed fix times?)
 - [ ] Runtime / framework / base image end-of-life dates checked
+- [ ] Web UIs: real-user Core Web Vitals (75th percentile) and front-end error rate reviewed
 - [ ] Certificates and secrets rotation OK
 - [ ] Access review done (quarterly)
 - [ ] Documents past their **Next review due** date (SOPs, runbooks, README, user docs) listed, with an owner ([README §7.2](../../README.md#72-documentation-rules), rule 7)

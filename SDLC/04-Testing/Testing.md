@@ -2,7 +2,7 @@
 
 **SDLC series — Phase 4 of 6.** How professional backend teams do **Testing** today: the lecture's core tasks, the Waterfall way vs. the modern way, and the industry practices the lecture does not cover.
 
-> **Last reviewed:** 2026-11-16 · **Next review due:** 2027-05-16 · **Review owner:** QA Engineer · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
+> **Last reviewed:** 2026-11-26 · **Next review due:** 2027-05-26 · **Review owner:** QA Engineer · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
 
 [← Development](../03-Development/Development.md) · [Guide README](../README.md) · [Overview](../../6-Phases-of-SDLC-Modern-Best-Practices.md) · [Deployment →](../05-Deployment/Deployment.md)
 
@@ -474,6 +474,17 @@ on:
 
 **What happens if… a team only ever runs the affected tests?** A change in a shared test fixture or in configuration is not linked to the tests it breaks, so a regression reaches staging — or production on an internal product with Continuous Deployment. The full run on `main` catches it before deployment.
 
+### 4.16 Front-end testing
+
+> From course note [module 2, 02 Learning Front-End Development](../../course-1-introduction-to-software-engineering/module-2-introduction-to-software-development/notes/02-learning-front-end-development.md). Rules for the UI itself are in [Development 4.14](../03-Development/Development.md#414-front-end-code-standards).
+
+- **Layers:** many **unit** tests for logic, some **component** tests (for example Testing Library), and **few end-to-end tests** for key flows (login, checkout) run in **Chromium, Firefox and WebKit** with a tool such as Playwright. This is the cross-browser part of rule 16.
+- **Accessibility:** an automated check (for example axe) finds only **part** of the problems. Add a **keyboard-only test** of every changed screen, and a **screen-reader check** of key flows before a major release. The target is **WCAG (Web Content Accessibility Guidelines) 2.2 level AA**, for example text contrast of at least 4.5:1 (large text 3:1) and touch targets of at least 24×24 CSS pixels, or enough space around a smaller target.
+- **Responsive:** check at **320 px** width and at a desktop width, with text zoomed to 200%, and on at least one real phone. Phone and desktop must offer the **same content and features**.
+- **Performance:** a **lab** test (Lighthouse or similar) with a budget in CI for key pages, and **field** data (real users) after release ([Maintenance 4.12](../06-Maintenance/Maintenance.md#412-front-end-monitoring-and-upgrades)). Targets at the 75th percentile: Largest Contentful Paint (LCP) ≤ 2.5 s, Interaction to Next Paint (INP) ≤ 200 ms, Cumulative Layout Shift (CLS) ≤ 0.1.
+- **Security:** include XSS (Cross-Site Scripting) cases (script text in every input that is shown back) and check that no secret is in the build output.
+- **Visual regression** (see [4.2](#42-common-test-types-and-when-they-run)) catches unwanted style changes.
+
 ## 5. Testing is "done enough" when... (exit criteria)
 
 - [ ] Every **acceptance criterion** has a passing test (automated where possible).
@@ -482,6 +493,7 @@ on:
 - [ ] Test inputs are chosen with **test design techniques** (equivalence classes and boundary values for every validated input — rule 13, checked in code review).
 - [ ] The **full** regression suite runs on every merge to `main` and on the release commit (and nightly, as rule 14 requires).
 - [ ] **Non-functional** targets are proven: performance (load test vs. SLOs), security scans clean, accessibility checks pass.
+- [ ] **Web UIs:** keyboard, responsive (320 px and desktop) and cross-browser checks pass, and the lab performance budget is met (§4.16).
 - [ ] **Coverage** is above the team minimum, and important paths (auth, payments, data changes) are well covered.
 - [ ] No open **critical or high-severity** bugs (or each has an agreed plan).
 - [ ] **Smoke tests** pass on staging; **UAT / product owner acceptance** is done.
@@ -549,6 +561,8 @@ The release goes to [G4 in Deployment](../05-Deployment/Deployment.md#6-lumenven
 15. **must** — A bug fix is merged only with an automated test named with the bug ID (`BUG-<id>: …`) that is shown to **fail without the fix** (written first, red, then green with the fix). The same test is the confirmation test now and the regression test afterwards (§4.15). This extends rule 2.
 16. **should** — **Compatibility** is tested in a CI matrix for every **supported** platform the project lists (Node.js LTS lines, browsers, API client versions — see the [versioning policy](../03-Development/templates/versioning-policy.md)), and **API documentation** is generated from or checked against the OpenAPI contract in CI.
 17. **must** on regulated projects, **should** on client projects — Tests that cannot be automated (UAT scripts, OAT, manual accessibility checks) are written with the [test-case template](templates/test-case.md) **before** the test session, linked to requirement IDs, and the executed record is kept with the release (`docs/releases/`).
+18. **must** on client and regulated projects (and wherever a legal accessibility duty applies), **should** on internal products — UI changes pass an **automated accessibility check in CI** and a **manual keyboard test**; key flows get a **screen-reader check** before each major release (§4.16).
+19. **should** — Key pages have a **performance budget** in CI. The **bundle-size** budget is the reliable part; lab scores (Lighthouse) vary from run to run, so treat them as advice. The **field** Core Web Vitals (Largest Contentful Paint 2.5 s, Interaction to Next Paint 200 ms, Cumulative Layout Shift 0.1) are reviewed after release.
 
 ### 6.5 Templates
 
