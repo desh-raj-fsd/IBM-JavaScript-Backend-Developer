@@ -2,8 +2,6 @@
 
 **Learning goals of this lecture:** after this lecture you can **describe pair programming**, **compare different styles**, and **list the benefits and challenges** of pair programming.
 
-> **How to read these notes:** facts from the lecture are the base. Blocks marked **✅ Modern Best Practice** or **Not in the lecture — industry practice** add how teams work today. **⚠️ Correction** blocks fix a lecture statement. The lecture's own words appear only in quiz lines, "Lecture says" quotes and "Lecture" table columns.
-
 ---
 
 ## 1. Jargon Translation (Read This First)

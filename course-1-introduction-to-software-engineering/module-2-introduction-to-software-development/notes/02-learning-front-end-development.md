@@ -1,7 +1,5 @@
 # 02 — Learning Front-End Development
 
-> **How to read these notes:** facts from the lecture are the base. Blocks marked **✅ Modern Best Practice** or **Not in the lecture — industry practice** are added so you learn how teams work today. Blocks marked **⚠️ Correction** fix something the lecture says that is wrong or outdated. If you read only the corrected text, you learn only correct facts. The lecture's own words are kept only in the quiz lines under each correction, in the "Lecture says" quotes and in the "Lecture" table columns.
-
 ---
 
 ## 1. Jargon Translation (Read This First)

@@ -2,10 +2,6 @@
 
 **Learning goals of this lecture:** after this lecture you can **describe software stack terminology**, **identify some commonly used software stacks**, and **list the benefits and challenges of different software stacks**.
 
-> **For exams, use the lecture wording shown in the quiz lines; in real work, use the corrections.**
->
-> **How to read these notes:** facts from the lecture are the base. **✅ Modern Best Practice** and **Not in the lecture — industry practice** blocks add how teams work today. **⚠️ Correction** blocks fix a lecture statement. The lecture's own words appear only in quiz lines, "Lecture says" quotes and "Lecture" table columns.
-
 ---
 
 ## 1. Jargon Translation (Read This First)

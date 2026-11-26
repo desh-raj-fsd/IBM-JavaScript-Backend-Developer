@@ -1,7 +1,5 @@
 # 06 — Introducing Application Development Tools
 
-> **How to read these notes:** facts from the lecture are the base. **✅ Modern Best Practice** and **Not in the lecture — industry practice** blocks add how teams work today. **⚠️ Correction** blocks fix a lecture statement. The lecture's own words appear only in quiz lines, "Lecture says" quotes and "Lecture" table columns.
-
 ---
 
 ## 1. Jargon Translation (Read This First)

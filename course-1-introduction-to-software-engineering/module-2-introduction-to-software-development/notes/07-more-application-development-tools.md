@@ -1,7 +1,5 @@
 # 07 — More Application Development Tools
 
-> **How to read these notes:** facts from the lecture are the base. **✅ Modern Best Practice** and **Not in the lecture — industry practice** blocks add how teams work today. **⚠️ Correction** blocks fix a lecture statement. The lecture's own words appear only in quiz lines, "Lecture says" quotes and "Lecture" table columns.
-
 ---
 
 ## 1. Jargon Translation (Read This First)
@@ -138,6 +136,8 @@ flowchart TD
 - **Packages are archive files** containing the **app files**, **instructions for installation** and **any metadata** you choose.
 - A package also has **its own metadata**: the **package description**, the **package version**, and its **dependencies** (other packages that must be installed first).
 - After bundling the app into a package, you use a **package manager to distribute it**.
+
+![From source code to an installed app: build tool, package, registry and package manager](../images/07-more-application-development-tools-build-to-install.svg)
 
 #### 3.3.2 ✅ Modern Best Practice: what a package really is today
 
