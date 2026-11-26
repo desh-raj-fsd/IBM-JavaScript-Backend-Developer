@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" font-family="Helvetica, Arial, sans-serif">
+<rect width="900" height="470" fill="#ffffff"/>
+<text x="450" y="38" text-anchor="middle" font-size="22" font-weight="bold" fill="#1f2937">Secure Checkout and PCI DSS Tokenization Flow</text>
+<text x="450" y="62" text-anchor="middle" font-size="13" fill="#6b7280">Your app back-end stores a safe payment token instead of raw credit card numbers</text>
+
+<!-- Client Browser -->
+<rect x="40" y="110" width="230" height="260" rx="14" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<rect x="40" y="110" width="230" height="44" rx="14" fill="#dbeafe"/>
+<text x="155" y="138" text-anchor="middle" font-size="16" font-weight="bold" fill="#1e3a8a">1. Browser Checkout</text>
+<text x="155" y="182" text-anchor="middle" font-size="11" fill="#1e3a8a">User enters shipping address</text>
+<text x="155" y="200" text-anchor="middle" font-size="11" fill="#1e3a8a">and card details in hosted form</text>
+<rect x="60" y="220" width="190" height="58" rx="8" fill="#ffffff" stroke="#93c5fd"/>
+<text x="155" y="244" text-anchor="middle" font-size="12" font-weight="bold" fill="#1d4ed8">Card PAN + CVV</text>
+<text x="155" y="264" text-anchor="middle" font-size="11" fill="#475569">Sent to processor over TLS</text>
+<rect x="60" y="294" width="190" height="56" rx="8" fill="#ffffff" stroke="#93c5fd"/>
+<text x="155" y="317" text-anchor="middle" font-size="12" font-weight="bold" fill="#0f766e">Address + Token</text>
+<text x="155" y="336" text-anchor="middle" font-size="11" fill="#475569">Sent to your app back-end</text>
+
+<!-- Payment Processor -->
+<rect x="335" y="95" width="230" height="145" rx="14" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<rect x="335" y="95" width="230" height="42" rx="14" fill="#dcfce7"/>
+<text x="450" y="122" text-anchor="middle" font-size="15" font-weight="bold" fill="#166534">2. PCI Payment Processor</text>
+<text x="450" y="160" text-anchor="middle" font-size="11" fill="#166534">Validates card (Stripe / Adyen)</text>
+<text x="450" y="180" text-anchor="middle" font-size="11" fill="#166534">Stores card in PCI-safe vault</text>
+<text x="450" y="206" text-anchor="middle" font-size="12" font-weight="bold" fill="#15803d">Returns: tok_visa_4242</text>
+
+<!-- App Back-End -->
+<rect x="335" y="275" width="230" height="125" rx="14" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+<rect x="335" y="275" width="230" height="42" rx="14" fill="#ffedd5"/>
+<text x="450" y="302" text-anchor="middle" font-size="15" font-weight="bold" fill="#9a3412">3. App Back-End Server</text>
+<text x="450" y="340" text-anchor="middle" font-size="12" fill="#7c2d12">Charges via processor API</text>
+<text x="450" y="359" text-anchor="middle" font-size="12" fill="#7c2d12">Uses idempotency key + TLS</text>
+<text x="450" y="378" text-anchor="middle" font-size="12" font-weight="bold" fill="#9a3412">Never sees raw PAN / CVV</text>
+
+<!-- App Database -->
+<rect x="630" y="275" width="230" height="125" rx="14" fill="#faf5ff" stroke="#7c3aed" stroke-width="2"/>
+<rect x="630" y="275" width="230" height="42" rx="14" fill="#ede9fe"/>
+<text x="745" y="302" text-anchor="middle" font-size="15" font-weight="bold" fill="#5b21b6">4. App Database</text>
+<text x="745" y="340" text-anchor="middle" font-size="12" fill="#4c1d95">Saves order ID + shipping</text>
+<text x="745" y="359" text-anchor="middle" font-size="12" fill="#4c1d95">Saves token: tok_visa_4242</text>
+<text x="745" y="378" text-anchor="middle" font-size="12" font-weight="bold" fill="#b91c1c">NO raw card numbers stored</text>
+
+<!-- Arrows -->
+<line x1="270" y1="242" x2="328" y2="178" stroke="#16a34a" stroke-width="2.5"/>
+<polygon points="333,173 321,176 329,185" fill="#16a34a"/>
+<text x="292" y="190" text-anchor="middle" font-size="11" fill="#166534">TLS</text>
+
+<line x1="335" y1="210" x2="275" y2="278" stroke="#15803d" stroke-width="2" stroke-dasharray="5,4"/>
+<polygon points="271,283 282,279 274,271" fill="#15803d"/>
+
+<line x1="270" y1="330" x2="328" y2="330" stroke="#ea580c" stroke-width="2.5"/>
+<polygon points="334,330 323,324 323,336" fill="#ea580c"/>
+
+<line x1="450" y1="275" x2="450" y2="246" stroke="#ea580c" stroke-width="2"/>
+<polygon points="450,241 444,251 456,251" fill="#ea580c"/>
+<text x="515" y="262" text-anchor="middle" font-size="11" fill="#9a3412">Charge token API</text>
+
+<line x1="565" y1="337" x2="623" y2="337" stroke="#7c3aed" stroke-width="2.5"/>
+<polygon points="629,337 618,331 618,343" fill="#7c3aed"/>
+
+<text x="450" y="442" text-anchor="middle" font-size="13" fill="#374151">PCI DSS v4.0.1 best practice: tokenization keeps raw cardholder data out of your servers and database.</text>
+</svg>
