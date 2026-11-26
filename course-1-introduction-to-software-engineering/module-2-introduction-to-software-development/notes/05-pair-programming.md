@@ -48,7 +48,7 @@
 - The lecture says the **physical way is preferred**, but **virtual pair programming can also be productive**.
 - **Why it helps (lecture):** the two developers **plan and discuss ideas continually** while they build the solution, which **generally results in a better end product**.
 
-⚠️ **Correction:** pair programming is a **technique (a practice) used in Agile teams**, not a kind of Agile itself. Agile is the way of working; pairing is one practice inside it. It was made popular by **Extreme Programming (XP)**, an Agile method.
+⚠️ **Correction:** pair programming is a **technique (a practice) used in Agile teams**, not a kind of Agile itself. Agile is the way of working; pairing is one practice inside it, and Agile does not require it. It was made popular by **Extreme Programming (XP)**, an Agile method.
 > **Lecture wording (for the quiz):** "Pair programming is a type of Agile development where two developers can plan and discuss their ideas continually as they create a solution, generally resulting in a better end product."
 
 ```mermaid
@@ -92,7 +92,7 @@ flowchart TD
 
 - Ping-pong **uses test-driven development (TDD)**.
 - **For each task:** one developer **writes a failing test**; the second developer **writes code to pass that test**.
-- **For each new task they swap roles**, so the person who writes the test and the person who writes the code change regularly.
+- **For each new task they swap roles** (the lecture's version; see the common variant below), so the person who writes the test and the person who writes the code change regularly.
 - At the **end of each task** both **refactor** the working code together to refine and improve it.
 
 ```mermaid
@@ -111,7 +111,7 @@ flowchart TD
 - **Defining rule:** for an idea to go **from your head to the computer, it must go through someone else’s hands**.
 - **Roles:** the **more experienced person is the navigator**; the **driver learns** by watching their implementation and **thought processes**.
 - **Lecture detail:** the driver shouldn’t challenge ideas until the full implementation is complete, so the navigator's flow is not interrupted.
-- **Where it comes from (not in the lecture):** the rule is Llewellyn Falco's "strong-style pairing" (blog post, 30 June 2014). Falco says the expert almost always navigates and everything goes through the novice's hands.
+- **Where it comes from (not in the lecture):** the rule is Llewellyn Falco's "strong-style pairing" (blog post of 30 June 2014; source: Falco's blog, read through a search result). Falco says the expert almost always navigates and everything goes through the novice's hands.
 
 #### ✅ Modern Best Practice: use the style that fits the task
 
@@ -120,14 +120,14 @@ flowchart TD
 
 | Situation | Good style |
 |---|---|
-| Normal feature work, both people know the code | Driver/navigator, swap about every 10–30 minutes |
+| Normal feature work, both people know the code | Driver/navigator, swap about every 15–30 minutes (a team choice, not a standard) |
 | New logic that can be tested | Ping-pong (TDD) |
 | Junior or new joiner learning | Strong-style, then move to driver/navigator as they grow |
 | Large unknown (new tool) | Do a short **spike** (research task) first, maybe alone, then pair on the real work |
 | Hard problem for the whole team | **Mob programming** |
 
 - **After a strong-style task,** do a short **recap** and let the driver ask questions and give opinions. Learning needs two-way talk.
-- **Swap often.** A **timer** (for example every 15–25 minutes) makes it easy and fair.
+- **Swap often.** A **timer** (for example every 15–30 minutes, a common team choice) makes it easy and fair.
 - **Avoid long solo tasks inside a pair.** If you split up, set a time to meet again.
 
 ---
@@ -166,8 +166,8 @@ flowchart TD
 - **Good for:** onboarding, spreading domain knowledge, complex or unclear problems, catching errors early, building shared code ownership, and reducing the **bus factor** (how many people must leave before nobody knows a part of the system).
 - **Less useful for:** very routine, well-understood tasks, and big unknowns that need quiet research first.
 - **Cost:** two people on one task is a real cost, so choose the work where the benefit is highest. The claim "less rework later" depends on the team and the task; measure it with your own data (defects, review time, cycle time) instead of assuming it.
-- **Pairing does not replace the rest:** keep **pull request reviews**, CI (Continuous Integration) and tests. Pairing is an extra layer (as the lecture says). A paired change still gets a review from someone who did not write it when the risk is high.
-- **Credit both people in Git:** add a `Co-authored-by:` line to the commit message (GitHub shows both as authors; use a blank line before the trailers):
+- **Pairing does not replace the rest:** keep **pull request reviews**, CI (Continuous Integration) and tests. Pairing is an extra layer (as the lecture says). A paired change **always** gets a review from someone outside the pair (the rule in the LumenVenture guide).
+- **Credit both people in Git:** add a `Co-authored-by:` line to the commit message (GitHub shows both as authors when the email is linked to their GitHub account, or their GitHub no-reply address; use a blank line before the trailers):
 
 ```text
 Add review rating validation
@@ -185,7 +185,7 @@ Co-authored-by: Sam Okoye <sam@example.com>
 
 | Challenge | Meaning | What helps (industry practice) |
 |---|---|---|
-| **Exhausting focus** | Pairing needs **long periods of focus**, which tires both people | **Breaks**, timers, no all-day pairing: aim for at most about **6 hours** a day, with solo time for email, thinking and admin |
+| **Exhausting focus** | Pairing needs **long periods of focus**, which tires both people | **Breaks**, timers, no all-day pairing: aim for at most about **6 hours** a day (suggested in Fowler's article), with solo time for email, thinking and admin |
 | **Schedules and commitments** | **Personal or other work commitments** disturb the pair schedule | Agree pairing hours (for example 10:00–15:00), plan pairs in the sprint, keep a **backup** pair partner |
 | **One person controls everything** | The pairing becomes **typist/programmer**: one types, the other only watches, and **none of the benefits** appear | **Swap roles on a timer**, use ping-pong, ask the quiet person to drive, the navigator must talk and think |
 | **Personalities that clash** | Two people may **not work well together** | Rotate pairs, set working agreements, ask a mentor or the Delivery Lead for help, respect different styles |
@@ -239,15 +239,15 @@ flowchart TD
 
 ## 4. Concrete Real-World Example: Pairing on the Book Review API
 
-**Situation:** Priya is new. She and Marco, a senior developer, must add a "rating must be 1 to 5" rule to the Book Review API (Application Programming Interface).
+**Situation:** the pair mixes styles on purpose: strong-style for learning, ping-pong for testable logic, driver/navigator for the rest. Priya is new. She and Marco, a senior developer, must add a "rating must be 1 to 5" rule to the Book Review API (Application Programming Interface).
 
 | Step | What happens | Style |
 |---|---|---|
 | 1 | Marco navigates and tells Priya what to type; Priya drives and learns how the team structures validation | Strong-style |
-| 2 | They write a failing test: `POST /reviews` with rating 7 must return 400 | Ping-pong |
-| 3 | Priya writes the validation code to pass it; then she writes the next failing test (rating 0) and Marco passes it | Ping-pong |
+| 2 | Marco writes a failing test: `POST /reviews` with rating 7 must return 400 | Ping-pong |
+| 3 | Priya writes the validation code to pass it; then she writes the next failing test (rating 0) and Marco passes it (the common variant: the ball goes back and forth inside one task) | Ping-pong |
 | 4 | Both refactor the validation into a shared function | Ping-pong refactor |
-| 5 | After 25 minutes the timer rings; they swap and recap | Driver/navigator |
+| 5 | After about 25 minutes (example) the timer rings; they swap and recap | Driver/navigator |
 | 6 | They open a pull request with a `Co-authored-by:` line; a third teammate reviews it | Formal review still happens |
 
 ---
@@ -303,9 +303,9 @@ node --test            # run all tests
 | Topic | Lecture | ✅ Modern best practice |
 |---|---|---|
 | **What it is** | Two developers side by side at one computer, in person or virtual | A technique used in Agile teams (not a "type of Agile"), popularized by XP; remote pairing is normal |
-| **Driver/navigator** | Most common; driver types, navigator reviews and keeps the bigger picture; swap regularly | Swap on a timer (about 15–30 minutes); driver talks aloud; navigator keeps notes |
+| **Driver/navigator** | Most common; driver types, navigator reviews and keeps the bigger picture; swap regularly | Swap on a timer (about 15–30 minutes, a common team choice); driver talks aloud; navigator keeps notes |
 | **Ping-pong** | TDD; one writes a failing test, the other makes it pass; swap each task; refactor together | Red, green, refactor in very small steps; B writes the next failing test |
 | **Strong-style** | Idea goes through someone else's hands; expert navigates; driver does not challenge until the end | A learning phase: do a recap with questions; move on to normal pairing as the learner grows |
 | **Benefits** | Shared knowledge, onboarding, soft skills, fewer bugs, review on the fly, better approach, less rework | Strong for risky or learning work; measure results; pairing adds a review layer but does not replace pull requests |
-| **Challenges** | Tiring, schedules, one person dominates, personalities, noise | Timers and breaks (about 6 hours a day at most), agreed hours, rotate pairs, quiet spaces |
+| **Challenges** | Tiring, schedules, one person dominates, personalities, noise | Timers and breaks (about 6 hours a day at most, per Fowler's article), agreed hours, rotate pairs, quiet spaces |
 | **AI assistants** | Not mentioned | A tool inside the pair, never a replacement; the human stays responsible |

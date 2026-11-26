@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" font-family="Helvetica, Arial, sans-serif">
+<rect width="900" height="460" fill="#ffffff"/>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#475569"/></marker></defs>
+<text x="450" y="40" text-anchor="middle" font-size="24" font-weight="bold" fill="#1f2937">CI, Continuous Delivery and Continuous Deployment</text>
+<text x="450" y="66" text-anchor="middle" font-size="14" fill="#6b7280">The same pipeline. The difference is who presses "release".</text>
+<rect x="30" y="100" width="130" height="60" rx="8" fill="#f0fdfa" stroke="#0d9488" stroke-width="2"/>
+<text x="95" y="126" text-anchor="middle" font-size="13" font-weight="bold" fill="#115e59">Commit</text>
+<text x="95" y="145" text-anchor="middle" font-size="11" fill="#115e59">small change to main</text>
+<rect x="200" y="100" width="150" height="60" rx="8" fill="#f0fdfa" stroke="#0d9488" stroke-width="2"/>
+<text x="275" y="126" text-anchor="middle" font-size="13" font-weight="bold" fill="#115e59">Build and test</text>
+<text x="275" y="145" text-anchor="middle" font-size="11" fill="#115e59">automatic, on every push</text>
+<rect x="390" y="100" width="150" height="60" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="465" y="126" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e3a8a">Deploy to staging</text>
+<text x="465" y="145" text-anchor="middle" font-size="11" fill="#1e3a8a">same build, more tests</text>
+<rect x="580" y="100" width="150" height="60" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="655" y="126" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e3a8a">Ready to release</text>
+<text x="655" y="145" text-anchor="middle" font-size="11" fill="#1e3a8a">always releasable</text>
+<rect x="770" y="100" width="100" height="60" rx="8" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+<text x="820" y="126" text-anchor="middle" font-size="13" font-weight="bold" fill="#9a3412">Production</text>
+<line x1="162" y1="130" x2="198" y2="130" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<line x1="352" y1="130" x2="388" y2="130" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<line x1="542" y1="130" x2="578" y2="130" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<line x1="732" y1="130" x2="768" y2="130" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<rect x="30" y="200" width="290" height="230" rx="12" fill="#f0fdfa" stroke="#0d9488" stroke-width="2"/>
+<text x="175" y="228" text-anchor="middle" font-size="16" font-weight="bold" fill="#115e59">Continuous integration</text>
+<text x="175" y="256" text-anchor="middle" font-size="12" fill="#134e4a">Merge to main at least daily.</text>
+<text x="175" y="276" text-anchor="middle" font-size="12" fill="#134e4a">Every merge is built and tested</text>
+<text x="175" y="296" text-anchor="middle" font-size="12" fill="#134e4a">automatically.</text>
+<text x="175" y="336" text-anchor="middle" font-size="12" fill="#115e59">A practice, run by a CI server.</text>
+<text x="175" y="356" text-anchor="middle" font-size="12" fill="#115e59">A red build blocks the merge.</text>
+<rect x="335" y="200" width="270" height="230" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="470" y="228" text-anchor="middle" font-size="16" font-weight="bold" fill="#1e3a8a">Continuous delivery</text>
+<text x="470" y="256" text-anchor="middle" font-size="12" fill="#1e3a8a">Every change can be released</text>
+<text x="470" y="276" text-anchor="middle" font-size="12" fill="#1e3a8a">to production at any time.</text>
+<text x="470" y="316" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e3a8a">A person or a schedule</text>
+<text x="470" y="336" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e3a8a">decides when to release.</text>
+<text x="470" y="376" text-anchor="middle" font-size="12" fill="#1e3a8a">Typical for client projects.</text>
+<rect x="620" y="200" width="250" height="230" rx="12" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+<text x="745" y="228" text-anchor="middle" font-size="16" font-weight="bold" fill="#9a3412">Continuous deployment</text>
+<text x="745" y="256" text-anchor="middle" font-size="12" fill="#7c2d12">Every change that passes</text>
+<text x="745" y="276" text-anchor="middle" font-size="12" fill="#7c2d12">the pipeline goes to</text>
+<text x="745" y="296" text-anchor="middle" font-size="12" fill="#7c2d12">production automatically.</text>
+<text x="745" y="336" text-anchor="middle" font-size="12" font-weight="bold" fill="#9a3412">No manual release step.</text>
+<text x="745" y="376" text-anchor="middle" font-size="12" fill="#7c2d12">Needs strong tests and rollback.</text>
+</svg>

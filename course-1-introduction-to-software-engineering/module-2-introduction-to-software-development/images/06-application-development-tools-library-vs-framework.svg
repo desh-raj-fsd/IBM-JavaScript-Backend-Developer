@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="Helvetica, Arial, sans-serif">
+<rect width="900" height="480" fill="#ffffff"/>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#475569"/></marker></defs>
+<text x="450" y="40" text-anchor="middle" font-size="24" font-weight="bold" fill="#1f2937">Library vs. Framework: Who Calls Whom?</text>
+<text x="450" y="66" text-anchor="middle" font-size="14" fill="#6b7280">Inversion of control: "Don't call us, we'll call you."</text>
+<rect x="30" y="90" width="400" height="370" rx="14" fill="#f0fdfa" stroke="#0d9488" stroke-width="2"/>
+<text x="230" y="122" text-anchor="middle" font-size="18" font-weight="bold" fill="#115e59">Library: you are in control</text>
+<rect x="60" y="150" width="340" height="60" rx="8" fill="#ffffff" stroke="#99f6e4"/>
+<text x="230" y="175" text-anchor="middle" font-size="13" font-weight="bold" fill="#134e4a">Your program</text>
+<text x="230" y="195" text-anchor="middle" font-size="11" fill="#0f766e">decides the flow and structure</text>
+<line x1="150" y1="212" x2="150" y2="290" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<text x="162" y="255" font-size="11" fill="#134e4a">1. you call</text>
+<line x1="310" y1="290" x2="310" y2="214" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<text x="206" y="255" font-size="11" fill="#134e4a">     2. returns</text>
+<rect x="60" y="292" width="340" height="56" rx="8" fill="#ffffff" stroke="#99f6e4"/>
+<text x="230" y="316" text-anchor="middle" font-size="13" font-weight="bold" fill="#134e4a">Library (jQuery, EmailValidator)</text>
+<text x="230" y="334" text-anchor="middle" font-size="11" fill="#0f766e">one problem or feature set</text>
+<text x="230" y="390" text-anchor="middle" font-size="12" fill="#134e4a">More flexible, less standard structure</text>
+<text x="230" y="410" text-anchor="middle" font-size="12" fill="#134e4a">Like picking tools from a toolbox</text>
+<rect x="470" y="90" width="400" height="370" rx="14" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+<text x="670" y="122" text-anchor="middle" font-size="18" font-weight="bold" fill="#9a3412">Framework: it is in control</text>
+<rect x="500" y="150" width="340" height="60" rx="8" fill="#ffffff" stroke="#fdba74"/>
+<text x="670" y="175" text-anchor="middle" font-size="13" font-weight="bold" fill="#7c2d12">Framework (Angular, Django, Express)</text>
+<text x="670" y="195" text-anchor="middle" font-size="11" fill="#7c2d12">owns the flow and the structure</text>
+<line x1="590" y1="212" x2="590" y2="290" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<text x="602" y="255" font-size="11" fill="#7c2d12">1. it calls</text>
+<line x1="750" y1="290" x2="750" y2="214" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<text x="646" y="255" font-size="11" fill="#7c2d12">     2. returns</text>
+<rect x="500" y="292" width="340" height="56" rx="8" fill="#ffffff" stroke="#fdba74"/>
+<text x="670" y="316" text-anchor="middle" font-size="13" font-weight="bold" fill="#7c2d12">Your code (handlers, components)</text>
+<text x="670" y="334" text-anchor="middle" font-size="11" fill="#7c2d12">plugged into the framework's slots</text>
+<text x="670" y="390" text-anchor="middle" font-size="12" fill="#7c2d12">Less flexible, more standard structure</text>
+<text x="670" y="410" text-anchor="middle" font-size="12" fill="#7c2d12">Like adding rooms to a house frame</text>
+</svg>

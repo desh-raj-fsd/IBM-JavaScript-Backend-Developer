@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400" font-family="Helvetica, Arial, sans-serif">
+<rect width="900" height="400" fill="#ffffff"/>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#475569"/></marker></defs>
+<text x="450" y="40" text-anchor="middle" font-size="24" font-weight="bold" fill="#1f2937">From Source Code to an Installed App</text>
+<text x="450" y="66" text-anchor="middle" font-size="14" fill="#6b7280">Build tool, package, registry and package manager</text>
+<rect x="30" y="100" width="150" height="110" rx="10" fill="#f0fdfa" stroke="#0d9488" stroke-width="2"/>
+<text x="105" y="128" text-anchor="middle" font-size="14" font-weight="bold" fill="#115e59">Source code</text>
+<text x="105" y="152" text-anchor="middle" font-size="11" fill="#134e4a">your files plus</text>
+<text x="105" y="168" text-anchor="middle" font-size="11" fill="#134e4a">package.json and</text>
+<text x="105" y="184" text-anchor="middle" font-size="11" fill="#134e4a">the lockfile</text>
+<rect x="225" y="100" width="150" height="110" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="300" y="128" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e3a8a">Build tool</text>
+<text x="300" y="152" text-anchor="middle" font-size="11" fill="#1e3a8a">install dependencies,</text>
+<text x="300" y="168" text-anchor="middle" font-size="11" fill="#1e3a8a">compile, bundle, test</text>
+<text x="300" y="184" text-anchor="middle" font-size="11" fill="#1e3a8a">(Webpack, esbuild, Maven)</text>
+<rect x="420" y="100" width="150" height="110" rx="10" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+<text x="495" y="128" text-anchor="middle" font-size="14" font-weight="bold" fill="#9a3412">Package</text>
+<text x="495" y="152" text-anchor="middle" font-size="11" fill="#7c2d12">archive with files,</text>
+<text x="495" y="168" text-anchor="middle" font-size="11" fill="#7c2d12">install instructions,</text>
+<text x="495" y="184" text-anchor="middle" font-size="11" fill="#7c2d12">name, version, deps</text>
+<rect x="615" y="100" width="120" height="110" rx="10" fill="#fdf2f8" stroke="#db2777" stroke-width="2"/>
+<text x="675" y="128" text-anchor="middle" font-size="14" font-weight="bold" fill="#9d174d">Registry</text>
+<text x="675" y="152" text-anchor="middle" font-size="11" fill="#831843">stores packages</text>
+<text x="675" y="168" text-anchor="middle" font-size="11" fill="#831843">(npm registry,</text>
+<text x="675" y="184" text-anchor="middle" font-size="11" fill="#831843">image registry)</text>
+<rect x="770" y="100" width="105" height="110" rx="10" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+<text x="822" y="128" text-anchor="middle" font-size="14" font-weight="bold" fill="#5b21b6">Installed</text>
+<text x="822" y="152" text-anchor="middle" font-size="11" fill="#4c1d95">on a server</text>
+<text x="822" y="168" text-anchor="middle" font-size="11" fill="#4c1d95">or a computer</text>
+<line x1="182" y1="155" x2="223" y2="155" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<line x1="377" y1="155" x2="418" y2="155" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<line x1="572" y1="155" x2="613" y2="155" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<line x1="737" y1="155" x2="768" y2="155" stroke="#475569" stroke-width="2" marker-end="url(#a)"/>
+<text x="675" y="235" text-anchor="middle" font-size="12" fill="#9d174d">publish</text>
+<text x="822" y="235" text-anchor="middle" font-size="12" fill="#5b21b6">package manager installs</text>
+<rect x="30" y="270" width="845" height="100" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+<text x="452" y="298" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">What a package manager does on install</text>
+<text x="452" y="322" text-anchor="middle" font-size="12" fill="#334155">1. find the package and its dependencies   2. download from the registry   3. verify checksums and signatures</text>
+<text x="452" y="344" text-anchor="middle" font-size="12" fill="#334155">4. install dependencies first, then the package   5. record exact versions and hashes in the lockfile</text>
+</svg>
