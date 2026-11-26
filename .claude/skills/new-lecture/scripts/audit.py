@@ -131,6 +131,15 @@ def main() -> int:
             for label in re.findall(r"\|([^|\n]*)\|", block):
                 if re.search(r'[()<>"]', label):
                     problems.append(f"MERMAID {f}: edge label has ( ) < > or quotes: |{label}|")
+            # master prompt section 8: margin node in "direction TB" subgraphs; quote node labels with special characters
+            if "direction TB" in block and "margin_" not in block:
+                problems.append(f"MERMAID {f}: 'direction TB' subgraph without the invisible margin node (master prompt section 8)")
+            if "sequenceDiagram" not in block:
+                for lab in re.findall(r"[A-Za-z0-9_]+\[([^\]\n]*)\]", block):
+                    if lab.startswith(("(", "/", "\\", "[")):
+                        continue  # database cylinder [(...)] and other shape syntax
+                    if re.search(r"[()<>]", lab) and not (lab.startswith('"') and lab.endswith('"')):
+                        problems.append(f"MERMAID {f}: node label with ( ) < > must be in double quotes: [{lab[:50]}]")
 
         if "/notes/" in f.replace("\\", "/"):
             badges = text.count("⚠️ **Correction")

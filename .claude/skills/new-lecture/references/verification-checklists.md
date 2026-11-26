@@ -1,6 +1,6 @@
 # Verification Checklists (shared by /new-lecture, /sdlc-sync, /repo-audit)
 
-**How checking works in `/new-lecture` (fast path):** `scripts/audit.py` (coverage via `--keys`, `--leak-file`, `--acronyms`, links, anchors, Mermaid, SVG, names, badge/quiz-line count) is the check. A model review is opt-in (`--review`, light, no web). `/sdlc-sync` and `/repo-audit` still use the stricter per-chunk passes below when the user asks for a deep review.
+**How checking works in `/new-lecture`:** `scripts/audit.py` (coverage via `--keys`, `--leak-file`, `--acronyms`, `--rules`, links, anchors, Mermaid, SVG, names, badge/quiz-line count) and `riskcheck.py` are the checks. The SDLC sync runs automatically, followed by one light model review (no web) that covers the note and the SDLC change together. `/sdlc-sync` and `/repo-audit` still use the stricter per-chunk passes below when the user asks for a deep review.
 
 ---
 
