@@ -10,6 +10,7 @@
 - [ ] **Production** (access only through the pipeline; human access is break-glass and logged)
 
 ## Pipeline stages
+- [ ] Pull-request pipeline feedback in about 10 minutes (ceiling 15); a red `main` is fixed or reverted within 1 hour ([Deployment rule 22](../Deployment.md#64-rules))
 - [ ] Install with lockfile → lint → type check → unit tests → integration tests
 - [ ] Security: dependency scan, secret scan, SAST; container image scan
 - [ ] Web UIs: accessibility check, bundle-size budget and lab performance check ([Testing rules 18–19](../../04-Testing/Testing.md#64-rules))

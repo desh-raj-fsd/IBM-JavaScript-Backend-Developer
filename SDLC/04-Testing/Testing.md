@@ -80,7 +80,7 @@
   1. **Red** — write a test; it fails.
   2. **Green** — write the smallest code that passes.
   3. **Refactor** — clean up; the test proves nothing broke.
-- **CI runs every test on every push and PR.** A red build blocks the merge.
+- **CI runs the pull-request test set on every push and PR** (unit, integration and the affected tests; the full suite runs on `main`, rule 14). A red build blocks the merge.
 - **The test pyramid:** many fast unit tests, fewer integration tests, few end-to-end tests. The lecture's four levels map onto it like this:
 
   | Level (lecture) | What it tests | Speed | How many | Node.js tools |

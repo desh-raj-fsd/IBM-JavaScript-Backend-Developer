@@ -327,7 +327,7 @@ module.exports = errorHandler;
 
 ### 4.8 Dependencies and supply-chain security
 
-- **Choose packages carefully:** active maintenance, many users, small size, a clear license that your company allows (MIT, Apache-2.0, BSD are usually fine; check **copyleft** licenses like GPL with your legal team).
+- **Choose packages carefully:** first ask whether the platform or a few lines of code can do the job; then check active maintenance, many users, small size, known vulnerabilities, a clear license that your company allows (MIT, Apache-2.0, BSD are usually fine; check **copyleft** licenses like GPL with your legal team), and **how hard it is to replace later** (exit plan, see [Design rule 5](../02-Design/Design.md#64-rules)).
 - **Fewer dependencies = smaller attack surface.** Do not add a package for a 3-line function.
 - **Lockfile + `npm ci`** so every machine installs the **exact** same versions.
 - **Version ranges in `package.json`:**
@@ -345,6 +345,7 @@ module.exports = errorHandler;
 - **Supply-chain attacks are real:** typosquatting (a fake package with a similar name) and hijacked maintainer accounts. Check names carefully; prefer packages with **npm provenance**; be careful with packages that run **install scripts**.
 - **SBOM (Software Bill of Materials):** a list of every component in your software (formats **CycloneDX** or **SPDX**; `npm sbom` creates one); required by many enterprise and government customers.
 - **Recent attacks show why this matters:** in **2025**, attackers phished npm maintainers and published malware inside very popular packages (for example `chalk` and `debug` in September 2025), and a self-spreading worm ("Shai-Hulud") stole tokens from developer machines and CI. **OWASP Top 10:2025** now lists **Software Supply Chain Failures** as risk **A03**.
+- **Publishing a package?** List what ships with the `files` field in `package.json` (an allowlist) and run `npm pack --dry-run` to see the contents before `npm publish`: no `.env`, test data or secrets (see rule 30).
 - **Practical defenses:**
   - Install with **`npm ci`**; consider **`--ignore-scripts`** in CI when your dependencies do not need install scripts.
   - **Wait a few days before adopting brand-new versions** (a "cooldown"), **except** for security fixes — many malicious versions are found and removed within days:
@@ -416,7 +417,10 @@ services:
 
 ### 4.12 Collaboration and documentation
 
-- **Pair programming** (two developers, one task) and **mob/ensemble programming** (the whole team, one task) spread knowledge and catch mistakes early. In a pair, the **driver** types and thinks about the small goal; the **navigator** reviews and keeps the bigger picture; **swap roles often** and do not pair all day (about 6 hours at most, with breaks). Good for onboarding and hard problems; for large unknowns do a short **spike** first. Details: [course note 04](../../course-1-introduction-to-software-engineering/module-2-introduction-to-software-development/notes/04-teamwork-and-squads.md).
+- **Pair programming** (two developers, one task) and **mob/ensemble programming** (the whole team, one task) spread knowledge and catch mistakes early. In a pair, the **driver** types and thinks about the small goal; the **navigator** reviews and keeps the bigger picture; **swap roles often** and do not pair all day (Fowler suggests about 6 hours a day as a ceiling, with breaks). Good for onboarding and hard problems; for large unknowns do a short **spike** first. Details: [course note 04](../../course-1-introduction-to-software-engineering/module-2-introduction-to-software-development/notes/04-teamwork-and-squads.md).
+  - **Three common styles:** **driver/navigator** (the default; swap on a timer, about every 15–30 minutes), **ping-pong** (one person writes a failing test, the other makes it pass; good for TDD (test-driven development)), **strong-style** (an idea must go through the other person's hands; the expert navigates, the learner types; teams often add a short recap with questions afterwards). Use a **spike** first for big unknowns.
+  - **Remote pairing** works well with a shared editor or screen, a headset and a timer; agree who drives first, the swap time and the breaks.
+  - **Credit both people:** add a `Co-authored-by: Name <email>` trailer (after a blank line) to the commit message. **Pairing is an extra review layer, not a replacement for the pull request** (rule 28; the second author's trailer is rule 27). More: [course note 05](../../course-1-introduction-to-software-engineering/module-2-introduction-to-software-development/notes/05-pair-programming.md).
 - **Docs as code:** a **README** (what it is, how to run it, how to test it), API docs generated from OpenAPI, JSDoc on public functions, ADRs, and a **CHANGELOG** — all in Git and reviewed in PRs.
 - **Comments explain *why*, not *what*.** The code shows *what*.
 - **Docs change in the same PR as the code.** Documentation is updated **with** each change, in every phase — not "later" or "in the maintenance phase". If users read the old docs for weeks, the docs are wrong ([README §7.2](../README.md#72-documentation-rules), rule 2).
@@ -464,6 +468,7 @@ on:
 | **The browser is untrusted** | No secrets in the bundle. The server validates and authorizes every request. Never insert untrusted data as HTML (`innerHTML`, `dangerouslySetInnerHTML`, `v-html`); use `textContent` or the framework's escaping | Users can read and change everything in the browser |
 | **Cookies and tokens** | Session cookies: `HttpOnly` (JavaScript cannot read it), `Secure` (HTTPS only) and `SameSite` (`Lax` by default; `None` needs `Secure`). Avoid long-lived tokens in `localStorage`. `SameSite` does not stop all CSRF: add a CSRF token or `Origin` check | An XSS bug can steal anything JavaScript can read |
 | **Third-party scripts** | Each one runs with your page's rights: approve it, load as few as possible, and add **SRI** to CDN files | A hacked third party becomes your breach |
+| **Build tool (front end)** | Use a maintained build tool run through `npm run build` in CI, for example Vite, esbuild or Rollup (Webpack in older projects); the choice is recorded in an ADR ([Design rule 5](../02-Design/Design.md#64-rules)). **Inject environment settings at runtime** (or per environment), never bake secrets into the bundle (rule 21) | Reproducible builds; the same artifact moves to every environment ([Deployment rule 2](../05-Deployment/Deployment.md#64-rules)) |
 | **Bundle size** | Code splitting, lazy loading, a size budget in CI | JavaScript must be downloaded, parsed and run; too much of it slows the page |
 
 ```html
@@ -573,6 +578,10 @@ Set-Cookie: sid=<value>; Secure; HttpOnly; SameSite=Lax; Path=/
 24. **should** — New front-end code is **TypeScript** (or JavaScript with JSDoc types checked in CI); a project uses **one** styling approach; Sass code uses `@use`, not `@import`.
 25. **should** — Third-party scripts are approved by the Tech Lead or listed in the project's dependency list, and scripts and stylesheets loaded from a CDN use **SRI** (Subresource Integrity: `integrity` + `crossorigin`).
 26. **should** — Database access uses **connection pooling** and **versioned schema migrations**; developers inspect generated ORM queries in development to prevent `N+1` query loops (§4.15).
+27. **should** — A commit made by a pair carries a `Co-authored-by: Name <email>` trailer for the second person (the first is the commit author), so both are credited in Git history. Use the email linked to the person's GitHub account, or their GitHub no-reply address.
+28. **must** (restates rule 1 for pairs) — **Pairing never replaces review:** every pull request is approved by someone **outside the pair**, as rule 1 and gate G3 already require. Pairing is an extra layer and a good way to onboard. On a team too small to have an outsider (a prototype), the Tech Lead or another LumenVenture developer reviews; write that arrangement in the project brief §10.
+29. **should** (**must** on client and regulated projects) — CI runs `git diff --check origin/main...HEAD` (with full-depth checkout) so that leftover **conflict markers** (`<<<<<<<`) fail the build; whitespace warnings follow the repository's `core.whitespace` / `.gitattributes` settings (Markdown line breaks, lockfiles and generated files are excluded). A pre-commit hook may run `git diff --cached --check` as an early warning, but CI is the enforcement. Conflicts are resolved by a developer who has **read both sides**.
+30. **should** (**must** for packages published outside the company) — A published package (npm or an internal registry) has a `files` allowlist (never `files: ["."]` or a broad glob; `.npmignore` only as a fallback). The release job runs `npm pack --dry-run --json` and **fails** if forbidden paths appear (`.env`, `*.pem`, `test/`, `.git*`). Owner: Tech Lead. This applies to packages that are **published**, not to services that are only deployed. Publishing itself follows [Deployment rule 12](../05-Deployment/Deployment.md#64-rules).
 
 ### 6.5 Templates
 

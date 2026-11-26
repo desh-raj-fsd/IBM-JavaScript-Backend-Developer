@@ -215,6 +215,7 @@ kubectl rollout status deployment/book-review-api   # watch it recover
 - **`.dockerignore`** so `node_modules`, `.git`, `.env` and test files never enter the image.
 - **Never bake secrets into the image** — they stay readable in the image layers forever. Inject them at runtime.
 - **Start `node` directly**, not through `npm start`, so the process receives shutdown signals (`SIGTERM`) correctly.
+- **OS packages in a Dockerfile:** install with `apt-get`, not `dpkg -i` (dpkg does not resolve dependencies automatically), in **one** `RUN` layer, and clean the package lists: `RUN apt-get update && apt-get install -y --no-install-recommends <packages> && rm -rf /var/lib/apt/lists/*` (Docker's build best practices). **Pin base images:** a digest for production images (tags are mutable), a version tag at minimum; Renovate or Dependabot update the pins (Docker build best practices). More: [course note 07](../../course-1-introduction-to-software-engineering/module-2-introduction-to-software-development/notes/07-more-application-development-tools.md).
 
 ```dockerfile
 # Dockerfile — multi-stage, small, non-root
@@ -426,6 +427,7 @@ The **DORA (DevOps Research and Assessment)** research program measures software
 19. **should** — Lower the DNS TTL (about 300 seconds) **before** a planned migration or domain change, and raise it again afterwards. DNS records are kept in Infrastructure as Code.
 20. **should** — Public web UIs send a **Content-Security-Policy** (strict, nonce or hash based), tested in **Report-Only** mode before it is enforced; `unsafe-inline` in `script-src` needs an ADR (for styles, prefer a nonce or hash).
 21. **should** — Source maps are uploaded to the error-tracking tool and are **not** served publicly, unless the project is open source.
+22. **should** — The **pull-request pipeline** (lint, type check, unit and affected tests, build) targets about **10 minutes**, with a ceiling of **15** (the XP guideline in Martin Fowler's article on Continuous Integration; he notes that most modern projects reach it). The **full suite** on `main` and the nightly runs ([Testing rule 14](../04-Testing/Testing.md#64-rules)) may take longer and run asynchronously. If the pull-request pipeline stays over 15 minutes for two weeks, the Tech Lead schedules a speed-up. A red build on `main` is **fixed or reverted within 1 hour** by the author of the breaking change (the Tech Lead is the backstop).
 
 ### 6.5 Templates
 

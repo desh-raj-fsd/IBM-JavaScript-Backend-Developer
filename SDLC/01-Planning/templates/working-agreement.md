@@ -20,7 +20,9 @@
 - Definition of Done: [definition-of-done.md](../../03-Development/templates/definition-of-done.md)
 - Who decides what: PO = what and order; TL and Developers = how; the team = who picks which task
 - Disagreement: we write the options and reasons, the person responsible decides, we support the decision ("disagree and commit"), and record it as an ADR if it is hard to undo
-- Pairing or mobbing: <when we use it: hard problems, onboarding>; breaks and solo time are fine
+- If we pair or mob (optional, Development rule 11): when we use it (hard problems, onboarding); style (driver/navigator by default, ping-pong for testable logic, strong-style for onboarding); swap about every **20 minutes**; breaks and solo time are fine
+  - Both people are credited with `Co-authored-by:` (Development rule 27)
+  - The pull request still needs an approval from outside the pair (Development rule 28)
 
 ## 4. How we treat each other
 - Asking for help or admitting a mistake is normal; we do **blameless** reviews of problems (what allowed it, not who)
