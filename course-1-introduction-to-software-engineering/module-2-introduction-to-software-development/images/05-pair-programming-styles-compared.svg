@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" font-family="Helvetica, Arial, sans-serif">
+<rect width="900" height="520" fill="#ffffff"/>
+<text x="450" y="40" text-anchor="middle" font-size="24" font-weight="bold" fill="#1f2937">Three Styles of Pair Programming</text>
+<text x="450" y="66" text-anchor="middle" font-size="14" fill="#6b7280">One task, two people. Choose the style that fits the work.</text>
+<rect x="30" y="90" width="270" height="400" rx="14" fill="#f0fdfa" stroke="#0d9488" stroke-width="2"/>
+<rect x="30" y="90" width="270" height="50" rx="14" fill="#ccfbf1"/>
+<text x="165" y="122" text-anchor="middle" font-size="17" font-weight="bold" fill="#115e59">Driver / navigator</text>
+<text x="165" y="165" text-anchor="middle" font-size="12" font-style="italic" fill="#115e59">The most common style</text>
+<rect x="50" y="185" width="105" height="70" rx="8" fill="#ffffff" stroke="#99f6e4"/>
+<text x="102" y="210" text-anchor="middle" font-size="13" font-weight="bold" fill="#134e4a">Driver</text>
+<text x="102" y="230" text-anchor="middle" font-size="11" fill="#0f766e">types the code</text>
+<rect x="175" y="185" width="105" height="70" rx="8" fill="#ffffff" stroke="#99f6e4"/>
+<text x="227" y="210" text-anchor="middle" font-size="13" font-weight="bold" fill="#134e4a">Navigator</text>
+<text x="227" y="230" text-anchor="middle" font-size="11" fill="#0f766e">reviews, directs,</text>
+<text x="227" y="244" text-anchor="middle" font-size="11" fill="#0f766e">sees the big picture</text>
+<text x="165" y="290" text-anchor="middle" font-size="12" fill="#134e4a">Swap roles regularly</text>
+<text x="165" y="308" text-anchor="middle" font-size="12" fill="#134e4a">(use a timer)</text>
+<text x="165" y="350" text-anchor="middle" font-size="12" font-weight="bold" fill="#115e59">Best for</text>
+<text x="165" y="368" text-anchor="middle" font-size="12" fill="#134e4a">everyday feature work</text>
+<rect x="315" y="90" width="270" height="400" rx="14" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<rect x="315" y="90" width="270" height="50" rx="14" fill="#dbeafe"/>
+<text x="450" y="122" text-anchor="middle" font-size="17" font-weight="bold" fill="#1e3a8a">Ping-pong</text>
+<text x="450" y="165" text-anchor="middle" font-size="12" font-style="italic" fill="#1e3a8a">Uses test-driven development</text>
+<rect x="335" y="185" width="230" height="38" rx="8" fill="#ffffff" stroke="#93c5fd"/>
+<text x="450" y="209" text-anchor="middle" font-size="12" fill="#1e3a8a">A writes a failing test (red)</text>
+<rect x="335" y="233" width="230" height="38" rx="8" fill="#ffffff" stroke="#93c5fd"/>
+<text x="450" y="257" text-anchor="middle" font-size="12" fill="#1e3a8a">B writes code to pass it (green)</text>
+<rect x="335" y="281" width="230" height="38" rx="8" fill="#ffffff" stroke="#93c5fd"/>
+<text x="450" y="305" text-anchor="middle" font-size="12" fill="#1e3a8a">Both refactor together</text>
+<text x="450" y="345" text-anchor="middle" font-size="12" fill="#1e3a8a">Swap roles for the next task</text>
+<text x="450" y="385" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e3a8a">Best for</text>
+<text x="450" y="403" text-anchor="middle" font-size="12" fill="#1e3a8a">logic that can be tested</text>
+<rect x="600" y="90" width="270" height="400" rx="14" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+<rect x="600" y="90" width="270" height="50" rx="14" fill="#ffedd5"/>
+<text x="735" y="122" text-anchor="middle" font-size="17" font-weight="bold" fill="#9a3412">Strong-style</text>
+<text x="735" y="165" text-anchor="middle" font-size="12" font-style="italic" fill="#9a3412">Juniors learn from experts</text>
+<rect x="620" y="185" width="105" height="70" rx="8" fill="#ffffff" stroke="#fdba74"/>
+<text x="672" y="210" text-anchor="middle" font-size="13" font-weight="bold" fill="#7c2d12">Expert</text>
+<text x="672" y="230" text-anchor="middle" font-size="11" fill="#7c2d12">navigates:</text>
+<text x="672" y="244" text-anchor="middle" font-size="11" fill="#7c2d12">says the idea</text>
+<rect x="745" y="185" width="105" height="70" rx="8" fill="#ffffff" stroke="#fdba74"/>
+<text x="797" y="210" text-anchor="middle" font-size="13" font-weight="bold" fill="#7c2d12">Learner</text>
+<text x="797" y="230" text-anchor="middle" font-size="11" fill="#7c2d12">drives: types</text>
+<text x="797" y="244" text-anchor="middle" font-size="11" fill="#7c2d12">and learns</text>
+<text x="735" y="285" text-anchor="middle" font-size="12" fill="#7c2d12">An idea must go through</text>
+<text x="735" y="303" text-anchor="middle" font-size="12" fill="#7c2d12">someone else's hands</text>
+<text x="735" y="335" text-anchor="middle" font-size="12" fill="#7c2d12">Add a recap with questions</text>
+<text x="735" y="353" text-anchor="middle" font-size="12" fill="#7c2d12">after the task</text>
+<text x="735" y="385" text-anchor="middle" font-size="12" font-weight="bold" fill="#9a3412">Best for</text>
+<text x="735" y="403" text-anchor="middle" font-size="12" fill="#7c2d12">onboarding and learning</text>
+</svg>
