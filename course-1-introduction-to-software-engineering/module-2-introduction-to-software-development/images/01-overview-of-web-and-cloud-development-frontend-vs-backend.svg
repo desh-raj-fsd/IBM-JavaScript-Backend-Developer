@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" font-family="Helvetica, Arial, sans-serif">
+  <!-- White Background -->
+  <rect width="900" height="600" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="450" y="42" text-anchor="middle" font-size="24" font-weight="bold" fill="#1f2937">Front-End vs. Back-End vs. Full-Stack Development</text>
+  <text x="450" y="68" text-anchor="middle" font-size="14" fill="#6b7280">Comparing runtime boundaries, technology stacks, and engineering responsibilities</text>
+
+  <!-- Left Card: Front-End (Client-Side) -->
+  <rect x="40" y="95" width="260" height="475" rx="14" fill="#f0fdfa" stroke="#0d9488" stroke-width="2"/>
+  <rect x="40" y="95" width="260" height="50" rx="14" fill="#ccfbf1"/>
+  <text x="170" y="126" text-anchor="middle" font-size="17" font-weight="bold" fill="#115e59">Front-End (Client-Side)</text>
+  <text x="170" y="165" text-anchor="middle" font-size="12" font-style="italic" fill="#0f766e">Runs in User's Browser / Device</text>
+
+  <!-- Section 1: Core Technologies -->
+  <rect x="55" y="185" width="230" height="90" rx="8" fill="#ffffff" stroke="#99f6e4" stroke-width="1.5"/>
+  <text x="65" y="206" font-size="12" font-weight="bold" fill="#134e4a">Core Technologies</text>
+  <text x="65" y="226" font-size="11" fill="#0f766e">• HTML5 (Structure &amp; Semantics)</text>
+  <text x="65" y="244" font-size="11" fill="#0f766e">• CSS3 (Styling, Flexbox, Grid)</text>
+  <text x="65" y="262" font-size="11" fill="#0f766e">• JavaScript (ES6+) &amp; TypeScript</text>
+
+  <!-- Section 2: Frameworks & Libraries -->
+  <rect x="55" y="285" width="230" height="85" rx="8" fill="#ffffff" stroke="#99f6e4" stroke-width="1.5"/>
+  <text x="65" y="306" font-size="12" font-weight="bold" fill="#134e4a">Frameworks &amp; Tools</text>
+  <text x="65" y="326" font-size="11" fill="#0f766e">• React, Vue.js, Angular, Svelte</text>
+  <text x="65" y="344" font-size="11" fill="#0f766e">• Tailwind CSS, Bootstrap, Sass</text>
+  <text x="65" y="362" font-size="11" fill="#0f766e">• Vite, Webpack, npm bundles</text>
+
+  <!-- Section 3: Responsibilities -->
+  <rect x="55" y="380" width="230" height="175" rx="8" fill="#ffffff" stroke="#99f6e4" stroke-width="1.5"/>
+  <text x="65" y="401" font-size="12" font-weight="bold" fill="#134e4a">Key Responsibilities</text>
+  <text x="65" y="421" font-size="11" fill="#0f766e">• User Interface (UI) design</text>
+  <text x="65" y="439" font-size="11" fill="#0f766e">• User Experience (UX) workflows</text>
+  <text x="65" y="457" font-size="11" fill="#0f766e">• Accessibility (WCAG / a11y)</text>
+  <text x="65" y="475" font-size="11" fill="#0f766e">• Responsive layout (Mobile/Desktop)</text>
+  <text x="65" y="493" font-size="11" fill="#0f766e">• Client state management</text>
+  <text x="65" y="511" font-size="11" fill="#0f766e">• Core Web Vitals performance</text>
+  <text x="65" y="529" font-size="11" fill="#0f766e">• Consuming REST/GraphQL APIs</text>
+
+  <!-- Center Card: Full-Stack Developer -->
+  <rect x="320" y="95" width="260" height="475" rx="14" fill="#faf5ff" stroke="#7e22ce" stroke-width="2"/>
+  <rect x="320" y="95" width="260" height="50" rx="14" fill="#f3e8ff"/>
+  <text x="450" y="126" text-anchor="middle" font-size="17" font-weight="bold" fill="#581c87">Full-Stack Developer</text>
+  <text x="450" y="165" text-anchor="middle" font-size="12" font-style="italic" fill="#6b21a8">Bridges Both Client &amp; Server Tiers</text>
+
+  <!-- Middle Box: T-Shaped Profile -->
+  <rect x="335" y="185" width="230" height="105" rx="8" fill="#ffffff" stroke="#d8b4fe" stroke-width="1.5"/>
+  <text x="345" y="206" font-size="12" font-weight="bold" fill="#581c87">The "T-Shaped" Engineer</text>
+  <text x="345" y="226" font-size="11" fill="#6b21a8">• Broad general skills across stack</text>
+  <text x="345" y="244" font-size="11" fill="#6b21a8">• Deep specialization in 1 tier</text>
+  <text x="345" y="262" font-size="11" fill="#6b21a8">• Understands end-to-end data flow</text>
+  <text x="345" y="280" font-size="11" fill="#6b21a8">• Can build features independently</text>
+
+  <!-- Middle Box: The API Contract -->
+  <rect x="335" y="300" width="230" height="110" rx="8" fill="#ffffff" stroke="#d8b4fe" stroke-width="1.5"/>
+  <text x="345" y="321" font-size="12" font-weight="bold" fill="#581c87">The Connecting Contract</text>
+  <text x="345" y="341" font-size="11" fill="#6b21a8">• RESTful APIs &amp; HTTP Methods</text>
+  <text x="345" y="359" font-size="11" fill="#6b21a8">• JSON Data Serialization</text>
+  <text x="345" y="377" font-size="11" fill="#6b21a8">• OpenAPI / Swagger Specs</text>
+  <text x="345" y="395" font-size="11" fill="#6b21a8">• Cross-Origin Resource Sharing</text>
+
+  <!-- Middle Box: Unified Tooling -->
+  <rect x="335" y="420" width="230" height="135" rx="8" fill="#ffffff" stroke="#d8b4fe" stroke-width="1.5"/>
+  <text x="345" y="441" font-size="12" font-weight="bold" fill="#581c87">Unified Workflows</text>
+  <text x="345" y="461" font-size="11" fill="#6b21a8">• Git branch &amp; GitHub PR reviews</text>
+  <text x="345" y="479" font-size="11" fill="#6b21a8">• Containerization with Docker</text>
+  <text x="345" y="497" font-size="11" fill="#6b21a8">• Automated CI/CD deployment</text>
+  <text x="345" y="515" font-size="11" fill="#6b21a8">• End-to-end integration testing</text>
+  <text x="345" y="533" font-size="11" fill="#6b21a8">• Rapid prototyping of MVPs</text>
+
+  <!-- Right Card: Back-End (Server-Side) -->
+  <rect x="600" y="95" width="260" height="475" rx="14" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <rect x="600" y="95" width="260" height="50" rx="14" fill="#fef3c7"/>
+  <text x="730" y="126" text-anchor="middle" font-size="17" font-weight="bold" fill="#92400e">Back-End (Server-Side)</text>
+  <text x="730" y="165" text-anchor="middle" font-size="12" font-style="italic" fill="#b45309">Runs on Remote Server / Cloud</text>
+
+  <!-- Section 1: Runtimes & Frameworks -->
+  <rect x="615" y="185" width="230" height="90" rx="8" fill="#ffffff" stroke="#fde68a" stroke-width="1.5"/>
+  <text x="625" y="206" font-size="12" font-weight="bold" fill="#78350f">Runtimes &amp; Frameworks</text>
+  <text x="625" y="226" font-size="11" fill="#b45309">• Node.js (Express, Fastify, NestJS)</text>
+  <text x="625" y="244" font-size="11" fill="#b45309">• Python (FastAPI, Django), Go</text>
+  <text x="625" y="262" font-size="11" fill="#b45309">• Java (Spring Boot), C# (.NET)</text>
+
+  <!-- Section 2: Data Persistence -->
+  <rect x="615" y="285" width="230" height="85" rx="8" fill="#ffffff" stroke="#fde68a" stroke-width="1.5"/>
+  <text x="625" y="306" font-size="12" font-weight="bold" fill="#78350f">Data &amp; Persistence</text>
+  <text x="625" y="326" font-size="11" fill="#b45309">• Relational: PostgreSQL, MySQL, Db2</text>
+  <text x="625" y="344" font-size="11" fill="#b45309">• NoSQL: MongoDB, Redis, Cassandra</text>
+  <text x="625" y="362" font-size="11" fill="#b45309">• DBA Collaboration &amp; Migrations</text>
+
+  <!-- Section 3: Responsibilities -->
+  <rect x="615" y="380" width="230" height="175" rx="8" fill="#ffffff" stroke="#fde68a" stroke-width="1.5"/>
+  <text x="625" y="401" font-size="12" font-weight="bold" fill="#78350f">Key Responsibilities</text>
+  <text x="625" y="421" font-size="11" fill="#b45309">• Business logic implementation</text>
+  <text x="625" y="439" font-size="11" fill="#b45309">• Authentication (JWT, OAuth, Cookies)</text>
+  <text x="625" y="457" font-size="11" fill="#b45309">• Authorization (RBAC permissions)</text>
+  <text x="625" y="475" font-size="11" fill="#b45309">• Database queries &amp; indexing</text>
+  <text x="625" y="493" font-size="11" fill="#b45309">• API rate limiting &amp; validation</text>
+  <text x="625" y="511" font-size="11" fill="#b45309">• Security (OWASP Top 10 defenses)</text>
+  <text x="625" y="529" font-size="11" fill="#b45309">• Cloud deployment &amp; observability</text>
+</svg>

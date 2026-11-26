@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" font-family="Helvetica, Arial, sans-serif">
+  <!-- White Background -->
+  <rect width="900" height="600" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="450" y="42" text-anchor="middle" font-size="24" font-weight="bold" fill="#1f2937">Traditional Hosting vs. Cloud-Native Scalability &amp; Resilience</text>
+  <text x="450" y="68" text-anchor="middle" font-size="14" fill="#6b7280">How cloud architectures replace fragile single servers with self-healing, multi-zone clusters</text>
+
+  <!-- Left Side: Traditional Single-Server Hosting -->
+  <rect x="40" y="95" width="380" height="475" rx="14" fill="#fef2f2" stroke="#ef4444" stroke-width="2"/>
+  <rect x="40" y="95" width="380" height="50" rx="14" fill="#fee2e2"/>
+  <text x="230" y="126" text-anchor="middle" font-size="17" font-weight="bold" fill="#991b1b">Traditional Hosting (Single Server)</text>
+  <text x="230" y="165" text-anchor="middle" font-size="12" font-style="italic" fill="#b91c1c">Single Point of Failure (SPOF) • Inelastic</text>
+
+  <!-- Traditional Diagram Elements -->
+  <!-- Traffic -->
+  <rect x="140" y="185" width="180" height="35" rx="6" fill="#ffffff" stroke="#fca5a5" stroke-width="1.5"/>
+  <text x="230" y="207" text-anchor="middle" font-size="12" font-weight="bold" fill="#7f1d1d">All User Traffic</text>
+
+  <line x1="230" y1="220" x2="230" y2="245" stroke="#ef4444" stroke-width="2" stroke-dasharray="3 3"/>
+
+  <!-- Single Server Box -->
+  <rect x="70" y="245" width="320" height="150" rx="10" fill="#ffffff" stroke="#ef4444" stroke-width="2"/>
+  <text x="230" y="270" text-anchor="middle" font-size="14" font-weight="bold" fill="#b91c1c">Single Physical Server (On-Premise)</text>
+
+  <rect x="90" y="285" width="280" height="30" rx="4" fill="#fee2e2"/>
+  <text x="230" y="305" text-anchor="middle" font-size="11" fill="#991b1b">Web Server + Node.js App + Database together</text>
+
+  <!-- Explosion / Crash Symbol -->
+  <circle cx="230" cy="355" r="22" fill="#ef4444"/>
+  <text x="230" y="361" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">✖</text>
+  <text x="230" y="388" text-anchor="middle" font-size="11" font-weight="bold" fill="#b91c1c">Hardware Crash = Complete Outage!</text>
+
+  <!-- Traditional Weaknesses List -->
+  <rect x="70" y="415" width="320" height="135" rx="8" fill="#ffffff" stroke="#fca5a5" stroke-width="1.5"/>
+  <text x="85" y="438" font-size="12" font-weight="bold" fill="#991b1b">Why Traditional Systems Fail Under Load:</text>
+  <text x="85" y="460" font-size="11" fill="#7f1d1d">• Vertical scaling requires expensive hardware swaps</text>
+  <text x="85" y="480" font-size="11" fill="#7f1d1d">• Sudden traffic spikes trigger 502/504 timeout errors</text>
+  <text x="85" y="500" font-size="11" fill="#7f1d1d">• Power cut or drive crash causes total data downtime</text>
+  <text x="85" y="520" font-size="11" fill="#7f1d1d">• Manual recovery takes hours or days</text>
+  <text x="85" y="540" font-size="11" fill="#7f1d1d">• Paying for idle peak capacity 24/7 wastes budget</text>
+
+  <!-- Right Side: Cloud-Native Scalability & Resilience -->
+  <rect x="480" y="95" width="380" height="475" rx="14" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <rect x="480" y="95" width="380" height="50" rx="14" fill="#dcfce7"/>
+  <text x="670" y="126" text-anchor="middle" font-size="17" font-weight="bold" fill="#14532d">Cloud-Native (Multi-Zone &amp; Scalable)</text>
+  <text x="670" y="165" text-anchor="middle" font-size="12" font-style="italic" fill="#15803d">High Availability (HA) • Autoscaling • Self-Healing</text>
+
+  <!-- Cloud Diagram Elements -->
+  <!-- Load Balancer -->
+  <rect x="560" y="185" width="220" height="35" rx="6" fill="#ffffff" stroke="#86efac" stroke-width="1.5"/>
+  <text x="670" y="207" text-anchor="middle" font-size="12" font-weight="bold" fill="#166534">Elastic Cloud Load Balancer</text>
+
+  <line x1="610" y1="220" x2="560" y2="250" stroke="#16a34a" stroke-width="2"/>
+  <line x1="730" y1="220" x2="780" y2="250" stroke="#16a34a" stroke-width="2"/>
+
+  <!-- Zone A Box -->
+  <rect x="500" y="250" width="160" height="90" rx="8" fill="#ffffff" stroke="#86efac" stroke-width="1.5"/>
+  <text x="580" y="270" text-anchor="middle" font-size="11" font-weight="bold" fill="#14532d">Availability Zone A</text>
+  <rect x="515" y="280" width="130" height="24" rx="4" fill="#dcfce7"/>
+  <text x="580" y="296" text-anchor="middle" font-size="10" fill="#166534">App Container 1</text>
+  <rect x="515" y="310" width="130" height="20" rx="4" fill="#dcfce7"/>
+  <text x="580" y="324" text-anchor="middle" font-size="9" fill="#166534">Primary DB (Read/Write)</text>
+
+  <!-- Zone B Box -->
+  <rect x="680" y="250" width="160" height="90" rx="8" fill="#ffffff" stroke="#86efac" stroke-width="1.5"/>
+  <text x="760" y="270" text-anchor="middle" font-size="11" font-weight="bold" fill="#14532d">Availability Zone B</text>
+  <rect x="695" y="280" width="130" height="24" rx="4" fill="#dcfce7"/>
+  <text x="760" y="296" text-anchor="middle" font-size="10" fill="#166534">App Container 2</text>
+  <rect x="695" y="310" width="130" height="20" rx="4" fill="#dcfce7"/>
+  <text x="760" y="324" text-anchor="middle" font-size="9" fill="#166534">Replica DB (Sync)</text>
+
+  <!-- Autoscaling Event Box -->
+  <rect x="500" y="350" width="340" height="45" rx="6" fill="#ecfdf5" stroke="#34d399" stroke-width="1.5"/>
+  <text x="670" y="370" text-anchor="middle" font-size="11" font-weight="bold" fill="#065f46">⚡ Horizontal Pod Autoscaler (HPA)</text>
+  <text x="670" y="386" text-anchor="middle" font-size="10" fill="#047857">Automatically adds App Container 3 &amp; 4 during traffic surges</text>
+
+  <!-- Cloud Strengths List -->
+  <rect x="500" y="415" width="340" height="135" rx="8" fill="#ffffff" stroke="#86efac" stroke-width="1.5"/>
+  <text x="515" y="438" font-size="12" font-weight="bold" fill="#14532d">Why Cloud Systems Excel in Production:</text>
+  <text x="515" y="460" font-size="11" fill="#166534">• Zero-Downtime: If Zone A fails, Zone B handles traffic</text>
+  <text x="515" y="480" font-size="11" fill="#166534">• Self-Healing: Crashed containers restart in &lt; 2 seconds</text>
+  <text x="515" y="500" font-size="11" fill="#166534">• Elastic: Scales from 2 to 200 instances automatically</text>
+  <text x="515" y="520" font-size="11" fill="#166534">• Managed Services: Cloud automates backups &amp; security</text>
+  <text x="515" y="540" font-size="11" fill="#166534">• Pay-as-you-go: Pay only for real resource consumption</text>
+</svg>
