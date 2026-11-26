@@ -2,7 +2,7 @@
 
 **SDLC series — Phase 6 of 6.** How professional backend teams do **Maintenance** today: the lecture's core tasks, the Waterfall way vs. the modern way, and the industry practices the lecture does not cover.
 
-> **Last reviewed:** 2026-11-16 · **Next review due:** 2027-05-16 · **Review owner:** Tech Lead · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
+> **Last reviewed:** 2026-11-26 · **Next review due:** 2027-05-26 · **Review owner:** Tech Lead · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
 
 [← Deployment](../05-Deployment/Deployment.md) · [Guide README](../README.md) · [Overview](../../6-Phases-of-SDLC-Modern-Best-Practices.md) · [Overview →](../../6-Phases-of-SDLC-Modern-Best-Practices.md)
 
@@ -259,6 +259,20 @@ groups:
 *Blameless: we fix systems and processes, not people.*
 ```
 
+#### 4.4.1 Where is it broken? Triage by boundary
+
+> From course note [module 2, 01 Overview of Web and Cloud Development](../../course-1-introduction-to-software-engineering/module-2-introduction-to-software-development/notes/01-overview-of-web-and-cloud-development.md). A web request crosses four boundaries. Check them **in order**, outside to inside. This keeps the first minutes of an incident calm and fast.
+
+| # | Boundary | Typical problems | First checks |
+|---|----------|------------------|--------------|
+| 1 | **Client** (browser, app, device) | JavaScript errors, old cached files, slow device or network | Browser console and network tab; does it fail for **everyone** or one device or version? |
+| 2 | **Edge and network** (DNS, CDN, load balancer, TLS) | Wrong DNS, expired certificate, bad cache rule, blocked traffic, load balancer sees no healthy instance | `dig`, `curl -I`, certificate expiry, CDN and load balancer dashboards |
+| 3 | **Application** (Node.js, Express) | Exceptions after a deploy, blocked event loop, memory leak, a failing dependency | Error rate and latency by version, recent deploy marker, logs by request ID |
+| 4 | **Persistence** (database, cache, object storage) | Exhausted connection pool, slow query, lock, full disk | Connection count, slow-query log, CPU and disk, replication lag |
+
+- **Rule of thumb:** if only **one user or device** fails, start at 1. If **everything** fails right after a deploy, start at 3 and consider rollback first. If **errors are slow, then fail**, suspect 4.
+- Write the boundary where the fault was found into the **postmortem**; repeated faults at one boundary show where to invest.
+
 ### 4.5 The hotfix process
 
 - A hotfix is a **small, urgent fix** to production — but it still goes through the **same pipeline**: a PR, a review (it can be quick), **tests**, and staging.
@@ -396,6 +410,8 @@ groups:
 13. **should** — Every public service publishes a **`security.txt`** and a vulnerability disclosure policy.
 14. **must** — Where the **EU Cyber Resilience Act** applies, the on-call and incident process includes the **24-hour / 72-hour** reporting steps, with a named owner.
 15. **should** — Maintenance and support work (bugs, tickets, upgrades, security fixes) runs in a **Kanban lane** with a **WIP limit** (default 2), in the **same backlog** as features, and the team tracks its **cycle time** ([README §6.3](../README.md#63-kanban-for-continuous-work)).
+16. **should** — Incident triage follows the **four boundaries** (client, edge and network, application, persistence) and each runbook says which boundary its alert belongs to (§4.4.1).
+17. **must** — On-call people can **check certificate expiry, DNS and the CDN** from a runbook, not only the application logs. Expired certificates and wrong DNS are among the most common avoidable outages.
 
 ### 6.6 Templates
 

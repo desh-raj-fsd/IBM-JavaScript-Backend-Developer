@@ -8,6 +8,8 @@
 - [ ] `CODEOWNERS` file
 - [ ] `README.md`: what it is, how to run, test, deploy
 - [ ] `.gitignore` (includes `.env`), `.env.example` with fake values
+- [ ] `.editorconfig` committed (UTF-8, LF line endings, 2 spaces, trailing whitespace trimmed)
+- [ ] Development environment documented (or optional `.devcontainer/` provided)
 - [ ] Runtime version pinned (for example `.nvmrc`, `.tool-versions`)
 - [ ] Lockfile committed; CI uses a clean, locked install (for example `npm ci`)
 - [ ] `.github/pull_request_template.md` copied from this guide

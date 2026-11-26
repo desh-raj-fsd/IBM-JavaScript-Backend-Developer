@@ -2,7 +2,7 @@
 
 **SDLC series — Phase 5 of 6.** How professional backend teams do **Deployment** today: the lecture's core tasks, the Waterfall way vs. the modern way, and the industry practices the lecture does not cover.
 
-> **Last reviewed:** 2026-11-16 · **Next review due:** 2027-05-16 · **Review owner:** Tech Lead · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
+> **Last reviewed:** 2026-11-26 · **Next review due:** 2027-05-26 · **Review owner:** Tech Lead · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
 
 [← Testing](../04-Testing/Testing.md) · [Guide README](../README.md) · [Overview](../../6-Phases-of-SDLC-Modern-Best-Practices.md) · [Maintenance →](../06-Maintenance/Maintenance.md)
 
@@ -331,10 +331,25 @@ The **DORA (DevOps Research and Assessment)** research program measures software
 - **Review every generated config** — small mistakes (wrong permissions, missing limits, `latest` tags) cause outages and security holes.
 - **Do not give AI agents unrestricted production access.** Changes to production should still go through the reviewed pipeline.
 
+### 4.10 Go-live web baseline: DNS, HTTPS and CDN
+
+> From course note [module 2, 01 Overview of Web and Cloud Development](../../course-1-introduction-to-software-engineering/module-2-introduction-to-software-development/notes/01-overview-of-web-and-cloud-development.md). Do these checks **before the first public release** and after any domain or edge change. The design side is in [Design 4.12](../02-Design/Design.md#412-web-delivery-and-cloud-baseline).
+
+- **DNS (Domain Name System):** the domain points to the load balancer or CDN. Keep the **TTL** (how long DNS answers are cached) **low (for example 300 seconds) before a migration**, so you can switch fast, and raise it afterwards. Keep DNS records in **Infrastructure as Code**, and turn on registrar lock and 2FA for the domain account.
+- **HTTPS only:**
+  - A valid certificate that **renews automatically** (see [Maintenance 4.7](../06-Maintenance/Maintenance.md#47-keeping-the-platform-up-to-date-adaptive-maintenance)).
+  - **TLS 1.3 preferred, TLS 1.2 as the minimum.** TLS 1.0 and 1.1 are switched off (RFC 8996). NIST SP 800-52 Rev. 2 also sets TLS 1.2 as the baseline.
+  - Plain `http://` answers with a **permanent redirect (301/308) to `https://`**. This redirect must **not** carry the HSTS header (browsers ignore it over HTTP).
+  - **HSTS** (`Strict-Transport-Security`) is sent on HTTPS responses: `max-age=31536000; includeSubDomains` (1 year) once every subdomain works over HTTPS. **Preloading** (the `preload` flag) is hard to undo, so it needs a Tech Lead decision.
+- **CDN and cache headers:** hashed static files use `Cache-Control: public, max-age=31536000, immutable`; HTML uses `no-cache`; personal responses use `private` ([Design 4.12](../02-Design/Design.md#412-web-delivery-and-cloud-baseline)). **Check on staging with `curl -I`** that no personal response is cached by the CDN.
+- **Health endpoints reachable by the load balancer:** liveness and readiness exist (see the manifest in §3) and do **not** go through the CDN cache.
+- **Check from outside:** open the site from a network that is not the office or VPN, and run the checks above against the real domain. Many problems only appear at the edge.
+
 ## 5. Deployment is "done" when...
 
 - [ ] The change reached production through the **pipeline** (no manual steps), using the **same image** that passed staging.
 - [ ] **Smoke tests** passed in staging and production; **sign-off / approval gate** completed where required.
+- [ ] For a **first release or a domain change**: the **web baseline** (§4.10: HTTPS, redirect, HSTS, cache headers) was checked on the real domain.
 - [ ] The rollout used a **safe strategy** (rolling, canary or blue-green), with **no downtime**.
 - [ ] **Metrics are healthy** after release (error rate, latency vs. SLOs); no automatic rollback was triggered.
 - [ ] A **rollback (or roll-forward) plan** is known and tested; migrations are backward compatible.
@@ -377,6 +392,7 @@ The **DORA (DevOps Research and Assessment)** research program measures software
 - [ ] Safe rollout chosen (rolling / canary / blue-green); flags set
 - [ ] Migrations backward compatible; **rollback plan** written and possible
 - [ ] Production config and secrets verified; no secrets in the image
+- [ ] First release or domain change: **web baseline** checked (HTTPS-only with redirect, HSTS, CDN cache headers, auto-renewing certificate; §4.10)
 - [ ] Monitoring, alerts and runbooks cover the change; on-call informed
 - [ ] Users / client / support informed of visible changes
 - [ ] The [release checklist](templates/release-checklist.md) is complete (as required by the project type)
@@ -398,6 +414,10 @@ The **DORA (DevOps Research and Assessment)** research program measures software
 13. **must** — For client products sold in the EU, the **CRA** scope is checked in the project brief; if in scope, the vulnerability-reporting and security-update process is agreed with the client before go-live.
 14. **must** — Releases are **not tied to the sprint end**. A change that passes the pipeline is deployed when it is ready (internal: automatically; client: after the approval gate). The Sprint Review inspects the work; it is never a release gate ([README §6.4](../README.md#64-releases-are-not-tied-to-sprints)).
 15. **must** — Images are tagged with the **version and the commit SHA**; production manifests use the version tag or the **digest** — **never `latest`**. Only final (non-pre-release) versions reach production, and the post-deploy smoke test checks `/version`.
+16. **must** — Every public site and API is **HTTPS-only**: plain HTTP redirects to HTTPS, TLS 1.2 is the minimum (TLS 1.3 preferred), and certificates renew automatically.
+17. **should** — Send **HSTS** (`max-age` of at least one year) once all subdomains support HTTPS. Use **preload** only with a Tech Lead decision.
+18. **must** — Cache headers are **checked on staging before release** (`curl -I`): hashed files immutable, HTML `no-cache`, personal responses `private` or `no-store`. A response with personal data that a shared cache can store is a release blocker.
+19. **should** — Lower the DNS TTL (about 300 seconds) **before** a planned migration or domain change, and raise it again afterwards. DNS records are kept in Infrastructure as Code.
 
 ### 6.5 Templates
 

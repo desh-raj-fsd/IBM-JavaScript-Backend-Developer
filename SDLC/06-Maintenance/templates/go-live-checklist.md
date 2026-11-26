@@ -19,6 +19,8 @@
 - [ ] Rollback tested on staging
 - [ ] Capacity checked (load test vs. expected traffic); autoscaling set
 - [ ] TLS certificates auto-renew
+- [ ] HTTPS-only with redirect and HSTS; cache headers checked (no personal data in shared caches) ([Deployment 4.10](../../05-Deployment/Deployment.md#410-go-live-web-baseline-dns-https-and-cdn))
+- [ ] At least 2 instances in at least 2 availability zones; one zone failure was tested or reasoned through
 
 ## Security and data
 - [ ] Threat model mitigations done; scans clean; pen test done if required

@@ -3,6 +3,35 @@
 > One entry per review or significant change, **newest first**. Rules: [README §9.1 Review schedule](README.md#91-review-schedule).
 > Each entry lists the date, the files, the reviewers, what changed (or "no changes needed") and the sources checked.
 
+## 2026-11-26 — Web and cloud baseline: note-01 module-2 "Overview of Web and Cloud Development" (second pass)
+
+- **Files:** `README.md` (§10 standards table), `02-Design/Design.md` (new §4.12, done-when and G2 items, rules 14–17), `03-Development/Development.md` (Twelve-Factor map in §4.5, rules 18–19, duplicate §4.11 renumbered), `05-Deployment/Deployment.md` (new §4.10, done-when and G4 items, rules 16–19), `06-Maintenance/Maintenance.md` (new §4.4.1, rules 16–17), templates `05-Deployment/templates/pipeline-checklist.md` and `06-Maintenance/templates/go-live-checklist.md`
+- **Scope:** **targeted** change: the web and cloud practices from the module-2 note that the guide was missing. Not a full review; README "Last reviewed" stays at the last full-guide review (2026-11-13). Review dates of the four edited phase files moved to 2026-11-26.
+- **Reviewers:** <Tech Lead>, <Developers> — *to be filled in when the pull request is approved*
+- **What changed:**
+  - **Design §4.12:** delivery style per part (static, SSR, SPA, API), CDN and cache-header defaults, cloud service models with shared responsibility, availability zones (multi-AZ default; multi-region only with an ADR and RTO/RPO), link to Twelve-Factor. Rules 14–17: stateless and 2+ instances in 2+ zones, CDN and cache headers, multi-region needs an ADR, provider vs our responsibilities listed.
+  - **Development §4.5:** the 12 factors mapped to where each lives in the guide. Rules 18–19. The second "4.11" (environments and editor standards) is now **§4.13** (it clashed with "Using AI coding assistants well").
+  - **Deployment §4.10:** go-live web baseline: DNS TTL and IaC, HTTPS-only with redirect, TLS 1.2 minimum / 1.3 preferred, HSTS, cache-header checks with `curl -I`, check from outside the network. Rules 16–19, gate G4 and done-when items.
+  - **Maintenance §4.4.1:** triage by four boundaries (client, edge and network, application, persistence). Rules 16–17.
+  - **Templates:** pipeline checklist and go-live checklist got DNS, HTTPS, HSTS, CDN and multi-AZ checks.
+  - **Course note fixes (own additions):** "valid TLS 1.3 certificate" corrected (a certificate has no TLS version) and `.eslintrc` replaced by the ESLint flat config.
+- **Gap-analysis note:** the first keyword search had a wrong pattern and listed graceful shutdown, readiness/liveness probes and environment-variable config as missing. They are already in Deployment §4.2, §3 and Development §4.5, so they were **not** added again.
+- **Sources checked:** 12factor.net (12 factors, last updated 2017); MDN Strict-Transport-Security and Cache-Control; NIST SP 800-52 Rev. 2 page (TLS 1.2 baseline, TLS 1.3 support by 1 Jan 2024; a Rev. 3 is planned); AWS Shared Responsibility Model and AWS Availability Zones whitepaper; eslint.org flat config page.
+- **Not re-checked:** RFC numbers (6797, 8446, 8996, 9111, 8246) were taken from memory, not re-read; the AWS pages are one provider's wording (Azure and GCP use the same idea); no second independent verification round was run.
+- **Next review due:** Design, Development, Deployment, Maintenance 2027-05-26.
+
+## 2026-11-16 — Development environment: note-01 module-2 "Overview of Web and Cloud Development" findings
+
+- **Files:** `03-Development/Development.md` (new §4.11 Development environments and editor standards), `03-Development/templates/repo-setup-checklist.md` (Repository section: `.editorconfig` and DevContainers)
+- **Scope:** **targeted** change: add editor configuration and containerized development environment standards from course note "01 Overview of Web and Cloud Development". Correction sweep: confirmed Atom is not referenced in the SDLC guide, and legacy unmaintained editors are formally retired in §4.11.
+- **Reviewers:** <Tech Lead>, <Developers> — *to be filled in when the pull request is approved*
+- **What changed:**
+  - **Development §4.11:** Development environments and editor standards: required `.editorconfig` in repository root (UTF-8, LF, 2 spaces, trim whitespace, final newline); containerized reproducible setups via DevContainers (`.devcontainer/devcontainer.json`); retirement of unmaintained editors (e.g. Atom, sunset Dec 2022) in favor of modern LSP-driven tools.
+  - **Templates:** `repo-setup-checklist.md` updated under `## Repository` with explicit checks for `.editorconfig` and documented development environments / DevContainers.
+- **Sources checked:** EditorConfig specification (editorconfig.org); Development Containers Specification (containers.dev); GitHub announcement of Atom sunset (December 15, 2022).
+- **Not re-checked:** None.
+- **Next review due:** Development 2027-05-16.
+
 ## 2026-11-16 — Roles: note-10 "Roles in Software Engineering Projects" findings
 - **Files:** `README.md` (§2 kickoff step 1, §3 DL row and hats note, §3.1 two RACI rows, new §3.2 optional and shared roles, new §3.3 role rules 1–7, §7 docs tree, §8 templates, §10 Scrum Guide row), `01-Planning/Planning.md` (§8.2 required outputs, §8.3 Gate G1, §8.5 templates), new template `01-Planning/templates/team-roles.md`
 - **Scope:** **targeted** change: add the role practices from course note "10 Roles in Software Engineering Projects" that the guide was missing. Not a full review of the phase files; README "Last reviewed" stays the last **full-guide** review (2026-11-13). Correction sweep: none of the note's corrected lecture claims ("in Agile the equivalent role [of a project manager] is called a Scrum master", stakeholders are only "the people for whom the product is being designed", "SRE, sometimes called … ops engineer", the PO/PM "leading development efforts") was found in the guide (Development §1 "a project manager assigns all tasks" is in the Waterfall column, which is correct).

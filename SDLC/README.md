@@ -468,5 +468,9 @@ The external standards, laws and specifications this guide relies on. **Review o
 | **OpenAPI** | **3.2** (Sept 2025); 3.1 still widely supported | Design | 2026-11-13 |
 | **RFC 9457** Problem Details / **RFC 9745** Deprecation / **RFC 8594** Sunset / **RFC 9116** security.txt | Published RFCs | Design, Development, Maintenance | 2026-11-13 (9745); others next review |
 | **DORA metrics** | **Five** metrics: change lead time, deployment frequency, failed deployment recovery time, change fail rate, deployment rework rate | Deployment, Maintenance | 2026-11-13 |
+| **The Twelve-Factor App** (12factor.net) | 12 factors (I Codebase … XII Admin processes); page last updated 2017; still the common cloud-service baseline | Design, Development, Deployment | 2026-11-26 |
+| **HTTPS and TLS** — HSTS (RFC 6797), TLS 1.3 (RFC 8446), TLS 1.0/1.1 deprecated (RFC 8996), NIST SP 800-52 Rev. 2 | TLS 1.2 minimum, 1.3 preferred; HSTS `max-age` at least 1 year for preload. NIST has announced a Rev. 3 (not yet published): re-check at next review | Design, Deployment | 2026-11-26 (HSTS, NIST via MDN and NIST pages); RFC numbers next review |
+| **HTTP caching** (`Cache-Control`, `immutable`, RFC 9111 / RFC 8246) | Hashed files: long `max-age` + `immutable`; HTML: `no-cache`; personal data: `private` | Design, Deployment | 2026-11-26 (MDN) |
+| **Cloud shared responsibility** (provider "of the cloud", customer "in the cloud") and availability zones | AWS model used as the reference; other providers use the same idea | Design | 2026-11-26 (AWS docs) |
 | **Node.js release schedule** | Use an Active or Maintenance LTS line; from Node.js 27, one major per year and every major becomes LTS | Development, Maintenance | 2026-11-13 |
 | **npm registry security** | Classic tokens revoked 9 Dec 2025; granular write tokens ≤ 90 days; trusted publishing (OIDC) recommended; `min-release-age` cooldown since npm 11.10.0 | Development, Deployment | 2026-11-13 |

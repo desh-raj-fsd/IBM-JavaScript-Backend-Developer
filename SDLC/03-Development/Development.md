@@ -2,7 +2,7 @@
 
 **SDLC series — Phase 3 of 6.** How professional backend teams do **Development** today: the lecture's core tasks, the Waterfall way vs. the modern way, and the industry practices the lecture does not cover.
 
-> **Last reviewed:** 2026-11-16 · **Next review due:** 2027-05-16 · **Review owner:** Tech Lead · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
+> **Last reviewed:** 2026-11-26 · **Next review due:** 2027-05-26 · **Review owner:** Tech Lead · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
 
 [← Design](../02-Design/Design.md) · [Guide README](../README.md) · [Overview](../../6-Phases-of-SDLC-Modern-Best-Practices.md) · [Testing →](../04-Testing/Testing.md)
 
@@ -271,6 +271,26 @@ if (!result.success) {
 module.exports = result.data;
 ```
 
+**The Twelve-Factor App** (12factor.net) is the standard checklist for a cloud-ready service. Where each factor lives in this guide:
+
+| # | Factor (rule) | In this guide |
+|---|---------------|---------------|
+| I | **Codebase:** one codebase in Git, many deploys | [4.1 Branching](#41-branching-strategies) |
+| II | **Dependencies:** declare and isolate them | Lockfile, rule 5 and [4.8](#48-dependencies-and-supply-chain-security) |
+| III | **Config:** store it in the environment | This section |
+| IV | **Backing services:** databases and queues are attached resources, swapped by changing config | [Design 4.7](../02-Design/Design.md#47-integrations-and-build-vs-buy) (adapters) |
+| V | **Build, release, run:** strictly separate stages | [Deployment](../05-Deployment/Deployment.md) rule 2 (build once, promote) |
+| VI | **Processes:** stateless, share nothing | [Design rule 14](../02-Design/Design.md#64-rules) |
+| VII | **Port binding:** the app serves HTTP itself on `PORT` | `config.js` above |
+| VIII | **Concurrency:** scale out with more processes | [Deployment 4.4](../05-Deployment/Deployment.md#44-autoscaling-and-capacity) |
+| IX | **Disposability:** fast start, graceful shutdown | [Deployment 4.2](../05-Deployment/Deployment.md#42-zero-downtime-deploys-graceful-shutdown) |
+| X | **Dev/prod parity:** keep environments alike | [4.10](#410-local-development-environment), [4.13](#413-development-environments-and-editor-standards) |
+| XI | **Logs:** write events to stdout as a stream; the platform collects them | [4.6](#46-error-handling-and-logging-in-code) |
+| XII | **Admin processes:** migrations and one-off tasks run as separate, versioned jobs | [Deployment 4.6](../05-Deployment/Deployment.md#46-rollback-vs-roll-forward) (migrations) |
+
+- The Twelve-Factor text is from 2017 and is still the common baseline. Treat it as a **minimum**, not the full list (it says nothing about security, tracing or containers).
+- **Check:** can a new instance start from the image plus environment variables alone, and can any instance be killed at any time without losing data? If not, a factor is broken.
+
 ### 4.6 Error handling and logging in code
 
 - **One central error middleware** turns every error into the standard error format. Routes do not build error responses by hand for unexpected errors.
@@ -416,6 +436,17 @@ on:
 # Not a required status check: with a paths filter, PRs without docs changes never run it.
 ```
 
+### 4.13 Development environments and editor standards
+
+- **Consistent editor configuration (`.editorconfig`):** every project must include an `.editorconfig` file in the repository root. This ensures that regardless of whether a developer uses VS Code, Neovim, WebStorm, or Sublime Text, basic formatting rules remain consistent across macOS, Linux, and Windows:
+  - UTF-8 character encoding without byte-order marks (`charset = utf-8`);
+  - Consistent indentation style and size (e.g. 2 spaces, no tabs);
+  - Unix-style line endings (`end_of_line = lf`);
+  - Trailing whitespace trimmed automatically on save (`trim_trailing_whitespace = true`);
+  - Newline inserted at the end of every file (`insert_final_newline = true`).
+- **Reproducible containerized environments (DevContainers):** teams should consider providing a `.devcontainer/devcontainer.json` configuration for complex services. DevContainers package the required Node.js LTS version, system libraries, database clients, and recommended editor extensions into a Docker container, eliminating machine-specific configuration drift.
+- **Retire unmaintained legacy editors:** developers must use actively maintained editors supporting the Language Server Protocol (LSP) and modern security tooling. Legacy tools like Atom (officially sunset on December 15, 2022) must not be used on company projects due to unpatched security vulnerabilities.
+
 ## 5. Development is "done" when... (a typical Definition of Done)
 
 - [ ] The code meets the story's **acceptance criteria** and follows the **design** (API contract, layers, ADRs).
@@ -490,6 +521,8 @@ on:
 15. **must** — A released version is **never changed or re-published**; tags and published packages are immutable, and a fix is always a new version.
 16. **should** — `package.json` declares `"engines"`; `.nvmrc`, the Docker base image and the CI matrix use the same supported **LTS** Node.js line(s).
 17. **should** — Code compares versions with a **SemVer library**, never with string comparison.
+18. **must** — A new instance starts from the **image plus environment variables only**: no local files, no manual steps, no state kept in the process (Twelve-Factor III, VI, IX; table in §4.5).
+19. **should** — When a bug is hard to place, check the **four boundaries** in order (client, edge and network, application, persistence) before changing code ([Maintenance 4.4.1](../06-Maintenance/Maintenance.md#441-where-is-it-broken-triage-by-boundary)).
 
 ### 6.5 Templates
 

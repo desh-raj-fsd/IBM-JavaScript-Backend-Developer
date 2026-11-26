@@ -2,7 +2,7 @@
 
 **SDLC series — Phase 2 of 6.** How professional backend teams do **Design** today: the lecture's core tasks, the Waterfall way vs. the modern way, and the industry practices the lecture does not cover.
 
-> **Last reviewed:** 2026-11-16 · **Next review due:** 2027-05-16 · **Review owner:** Tech Lead · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
+> **Last reviewed:** 2026-11-26 · **Next review due:** 2027-05-26 · **Review owner:** Tech Lead · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
 
 [← Planning](../01-Planning/Planning.md) · [Guide README](../README.md) · [Overview](../../6-Phases-of-SDLC-Modern-Best-Practices.md) · [Development →](../03-Development/Development.md)
 
@@ -389,6 +389,48 @@ Many companies write a short design doc, often called an **RFC (Request for Comm
 - **A human owns every decision.** AI may suggest patterns the system does not need, or tools that do not fit your constraints. Record the final decision and the reasons in an ADR.
 - If the product **itself uses an AI model**, design for it explicitly: answers can differ each time (plan **evaluation tests**), model calls are slow and cost money (plan **timeouts, caching and budgets**), and user text can try to trick the model (**prompt injection**) — so **authorization must always be checked by your server, never by the model**.
 
+### 4.12 Web delivery and cloud baseline
+
+> From course note [module 2, 01 Overview of Web and Cloud Development](../../course-1-introduction-to-software-engineering/module-2-introduction-to-software-development/notes/01-overview-of-web-and-cloud-development.md). The lecture explains the client-server model and what "cloud" means. This section turns it into design decisions.
+
+**1. Choose how each page or screen is delivered.** Decide this per part of the product, not once for everything.
+
+| Delivery style | What it is | Good for | Watch out for |
+|----------------|-----------|----------|---------------|
+| **Static** (pre-built files on a CDN) | Files are built once and served as they are | Marketing pages, docs, blogs | Content changes need a new build |
+| **Server-rendered (SSR)** | The server builds HTML for each request | Pages that need SEO and fresh data | Server cost; cache carefully |
+| **Single-page app (SPA)** | The browser loads JavaScript and calls your API | Logged-in apps and dashboards | Slower first load; SEO needs extra work |
+| **API only** | JSON for other clients (mobile app, partners) | Backend products like the Book Review API | You need an API contract (§4.4) |
+
+- A common default: a **static or SPA front end on a CDN** that calls a **stateless API**. Record the choice in an ADR when it is hard to change.
+
+**2. Put a CDN (Content Delivery Network) in front of anything public.** A CDN keeps copies of your files in many places near the user and also absorbs traffic spikes and some attacks.
+
+| Content | Cache header (default) | Why |
+|---------|------------------------|-----|
+| Files with a **hash in the name** (`app.3f9a1c.js`) | `Cache-Control: public, max-age=31536000, immutable` | The name changes when the content changes, so the file can be cached for a year |
+| The **HTML entry page** | `Cache-Control: no-cache` | The browser checks for a new version each time (`no-cache` means "revalidate", not "do not store") |
+| **Personal or logged-in responses** | `Cache-Control: private, no-cache` (or `no-store` for very sensitive data) | A shared cache must never serve one user's data to another user |
+
+**3. Know who is responsible for what in the cloud.** The cloud provider secures and runs the **infrastructure** ("security **of** the cloud"). You are always responsible for your **data, access rules, configuration and application code** ("security **in** the cloud"). The more the provider manages, the less you manage, but **you never hand over responsibility for your data and permissions**.
+
+| Service model | You manage | Example |
+|---------------|-----------|---------|
+| **IaaS** (Infrastructure as a Service) | OS, patches, runtime, app, data | A virtual machine (AWS EC2) |
+| **PaaS** (Platform as a Service) / containers | App, config, data | A managed container or app platform |
+| **FaaS** (Function as a Service, serverless) | Function code, permissions, data | AWS Lambda, Azure Functions |
+| **SaaS** (Software as a Service) | Your users, permissions and data in it | A hosted email or CRM tool |
+
+- **Default:** prefer the **most managed** option that meets the requirements ("buy" side of §4.7). Use IaaS only when there is a written reason. Every extra layer you run is a layer you must patch (see [Maintenance 4.7](../06-Maintenance/Maintenance.md#47-keeping-the-platform-up-to-date-adaptive-maintenance)).
+
+**4. Design for failure of a data center, not only of a server.** In the cloud, a **region** is a geographic area, and an **availability zone (AZ)** is one or more separate data centers inside it with their own power and network.
+
+- **Default for production:** run **at least 2 instances in at least 2 availability zones** behind a load balancer, with the database set up for **multi-AZ failover** (a standby copy in another zone).
+- **Multi-region** (a second region that can take over) is **not** the default. It is a costly choice for strict availability or legal needs. Add it only with an ADR that states the **RTO/RPO** target and the cost (see [Maintenance 4.6](../06-Maintenance/Maintenance.md#46-backups-and-disaster-recovery)).
+- High availability needs a **stateless** API: no session or file kept on one server. Sessions go to a shared store or into signed tokens; uploaded files go to object storage.
+
+**5. Follow the Twelve-Factor rules for a cloud-ready service** (config in the environment, stateless processes, disposable processes, logs as streams). The full list and where each factor lives in this guide is in [Development 4.5](../03-Development/Development.md#45-configuration-fail-fast-at-startup).
+
 ## 5. Design is "done enough" when...
 
 - [ ] The **HLD** is agreed: components, technology choices and an **architecture style**, with a C4 context and container diagram.
@@ -398,6 +440,7 @@ Many companies write a short design doc, often called an **RFC (Request for Comm
 - [ ] **Reliability** is planned: timeouts, retries, failure behavior, backups.
 - [ ] **Operations** are planned: logs, metrics, traces, health checks, configuration and secrets.
 - [ ] **Integrations** have adapters; build-vs-buy is decided.
+- [ ] **Delivery and cloud baseline** (§4.12) is decided: delivery style per part, CDN and cache rules, service model, and the availability-zone setup.
 - [ ] A **rollout, migration and rollback** plan exists.
 - [ ] The design links back to the **requirement IDs** it serves.
 - [ ] The design was **reviewed** by the team (and stakeholders for big changes), and **prototypes** were shown where useful.
@@ -441,6 +484,7 @@ Many companies write a short design doc, often called an **RFC (Request for Comm
 - [ ] **Threat model** done; high threats have mitigations planned as stories
 - [ ] **Reliability** planned: timeouts, retries, failure behavior, backups
 - [ ] **Operations** planned: logs, metrics, traces, health checks, configuration and secrets
+- [ ] **Delivery and cloud baseline** recorded (§4.12): delivery style, CDN and cache headers, service model, availability zones
 - [ ] **Rollout, migration and rollback** approach known
 - [ ] Reviewed as a **pull request** by the Tech Lead and at least one other developer
 
@@ -459,6 +503,10 @@ Many companies write a short design doc, often called an **RFC (Request for Comm
 11. **should** — Event and message APIs are documented in **AsyncAPI**, like REST APIs in OpenAPI.
 12. **must** — Inside one API version, changes are **additive only** (§4.4.1). A breaking change gets a **new API version** that runs in parallel with the old one, which gets `Deprecation`/`Sunset` headers and the notice period from the versioning policy.
 13. **should** — CI runs an **OpenAPI diff** against `main` and fails on breaking changes inside the same API version.
+14. **must** — Production services are **stateless** (no session, upload or cache that only one instance holds) and run **at least 2 instances across at least 2 availability zones** with a health-checked load balancer. A single instance needs an ADR (internal tools and prototypes only).
+15. **should** — Public static files are served through a **CDN**. Hashed files use `Cache-Control: public, max-age=31536000, immutable`; HTML uses `no-cache`; personal responses use `private` (§4.12).
+16. **should** — Multi-region is chosen only with an ADR that names the **RTO/RPO** target and the cost; single-region multi-AZ is the default.
+17. **must** — The design lists, per service, **what the cloud provider manages and what we manage** (service model, patching, access, data). Nothing is left as "the cloud handles it".
 
 ### 6.5 Templates
 

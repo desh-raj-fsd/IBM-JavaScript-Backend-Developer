@@ -31,6 +31,10 @@
 - [ ] Resource requests/limits and autoscaling rules set
 - [ ] Backups configured (see Maintenance)
 - [ ] TLS certificates renewed automatically
+- [ ] DNS records in Infrastructure as Code; registrar lock and 2FA on the domain account
+- [ ] HTTPS-only: HTTP redirects to HTTPS, TLS 1.2 minimum (1.3 preferred), HSTS sent on HTTPS responses
+- [ ] CDN in front of public files; cache headers set (hashed files immutable, HTML `no-cache`, personal responses `private`)
+- [ ] Production runs at least 2 instances in at least 2 availability zones behind a health-checked load balancer
 
 ## Measurement
 - [ ] DORA metrics visible: change lead time, deployment frequency, failed deployment recovery time, change fail rate, deployment rework rate
