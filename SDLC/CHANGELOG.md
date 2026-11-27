@@ -3,6 +3,60 @@
 > One entry per review or significant change, **newest first**. Rules: [README §9.1 Review schedule](README.md#91-review-schedule).
 > Each entry lists the date, the files, the reviewers, what changed (or "no changes needed") and the sources checked.
 
+## 2026-11-27 — Deep review of module 4 notes 01–07 and their SDLC changes (corrections)
+
+- **Files:** module-4 notes 02–07 and `images/07-production-deployment-components-proxy-and-lb.svg`; `02-Design/Design.md` (§4.12 item 6 wording)
+- **Scope:** **targeted fact check** of the module-4 sync (not a full review). All 7 code blocks re-run on Node.js v24.18.0: output matches the notes.
+- **What changed:** note 02 no longer credits `c4model.com` with a claim it does not make (it says ad hoc diagrams have inconsistent notation; C4 is inspired by UML); concurrency overclaim removed. Note 05 `/toString` example was wrong (keys start with `/`): fixed and checked locally. Note 07: nginx active `/healthz` probes need NGINX Plus or a cloud load balancer (open-source nginx has passive checks); WAF does not replace authorization for BOLA. Note 06: a VPC is not a private cloud. Note 03: full `ReferenceError` text. Note 04: timeout wording. Design §4.12 item 6: VPC (AWS, Google) / VNet (Azure).
+- **Sources checked (2026-11-27):** `nginx.org` load-balancing and upstream docs (`least_time` open source since 1.31.0; `health_check` commercial); `c4model.com` introduction and FAQ; `omg.org/spec/UML/` (still 2.5.1); `expressjs.com/en/guide/behind-proxies.html`; `martinfowler.com` microservices and event-driven articles (choreography preference, Event Notification); `12factor.net` processes and dev-prod parity; `kubernetes.io` Service page; `mermaid.js.org`; `rfc-editor.org/info/rfc9457`.
+- **Not re-checked:** exact "Lecture wording (for the quiz)" lines (transcripts were not kept); AWS/Azure/GCP naming of the private-network term beyond common usage.
+- **Next review due:** Design 2027-05-27.
+
+## 2026-11-27 — Reverse proxy `trust proxy` pitfall: module-4 note-07 "Production Deployment Components" findings
+
+- **Files:** `03-Development/Development.md` (§4.7 Node.js pitfalls table extended with **Missing `trust proxy` behind a reverse proxy**)
+- **Scope:** **targeted** 1-row extension to `Development §4.7` (load balancers, health checks, multi-AZ HA replicas, CDN, TLS, and backups were already present in `Design §4.12`, `Deployment §4.2`, and `Maintenance §4.6`).
+- **Reviewers:** <Tech Lead>, <Developers> — *to be filled in when the pull request is approved*
+- **What changed:** Added a row to `Development §4.7` instructing Express services behind reverse proxies/load balancers to configure `app.set('trust proxy', N)` to the exact proxy hop count rather than leaving it unset or blindly setting `true`.
+- **Sources checked (2026-11-27):** `expressjs.com/en/guide/behind-proxies.html` (`trust proxy` and internal IP behavior); `nginx.org/en/docs/http/load_balancing.html` (load-balancing algorithms and health checks).
+- **Next review due:** Development 2027-05-27.
+
+## 2026-11-27 — Cloud hosting models & VPC defense: module-4 note-06 "Application Deployment Environments" findings
+
+- **Files:** `02-Design/Design.md` (§4.12 item 6 added on public vs. private/hybrid/on-premises selection and defense-in-depth beyond perimeter firewalls)
+- **Scope:** **targeted** extension to existing `Design §4.12` (staging/production pipelines, immutable Docker promotion, IaC, Twelve-Factor dev/prod parity, and shared cloud responsibility were already covered in `Design §4.12` and `Deployment.md §3`).
+- **Reviewers:** <Tech Lead>, <Developers> — *to be filled in when the pull request is approved*
+- **What changed:** Added `Design §4.12` point 6 establishing managed **public cloud** in private **VPC** subnets with TLS/auth everywhere as default, requiring an ADR + ownership assignment for **private/hybrid/on-premises** deployments.
+- **Sources checked (2026-11-27):** `12factor.net/dev-prod-parity` (keeping development, staging, and production similar).
+- **Next review due:** Design 2027-05-27.
+
+## 2026-11-27 — API Gateway & choreography vs. orchestration: module-4 note-05 "Architectural Patterns in Software" findings
+
+- **Files:** `02-Design/Design.md` (§4.2 extended with thin **API gateway** boundaries and **choreography vs. orchestration** guidance)
+- **Scope:** **targeted** extension to existing `Design §4.2` (modular monolith, microservices, serverless, event-driven patterns, combination guidance, and `AsyncAPI` were already present).
+- **Reviewers:** <Tech Lead>, <Developers> — *to be filled in when the pull request is approved*
+- **What changed:** Added guidance in `Design §4.2` keeping API gateways thin (routing/auth/TLS/rate limits only) and choosing between event-driven **choreography** vs. central **orchestration**.
+- **Sources checked (2026-11-27):** `martinfowler.com/articles/microservices.html` ("smart endpoints and dumb pipes"); `martinfowler.com/articles/201701-event-driven.html` ("Event Notification").
+- **Next review due:** Design 2027-05-27.
+
+## 2026-11-27 — High cohesion & loose coupling: module-4 note-02 "Software Design and Modeling" findings
+
+- **Files:** `02-Design/Design.md` (§4.2 module boundaries bullet extended with explicit **high cohesion** and **loose coupling**)
+- **Scope:** **targeted** extension to existing `Design §4.2` (Mermaid/PlantUML diagrams as code, C4 levels, ports & adapters, fitness functions, and state-transition testing in `Testing.md` were already present).
+- **Reviewers:** <Tech Lead>, <Developers> — *to be filled in when the pull request is approved*
+- **What changed:** Named **high cohesion** inside each bounded module and **loose coupling** across module boundaries in `Design §4.2`.
+- **Sources checked (2026-11-27):** `c4model.com/introduction`, `mermaid.js.org/syntax/sequenceDiagram.html`, `mermaid.js.org/syntax/stateDiagram.html`, `omg.org/spec/UML/` (UML 2.5.1).
+- **Next review due:** Design 2027-05-27.
+
+## 2026-11-27 — Quality attributes interoperability & manageability: module-4 note-01 "Introduction to Software Architecture" findings
+
+- **Files:** `02-Design/Design.md` (§4.1 quality-attributes table extended with **Interoperability** and **Manageability**; `Last reviewed` updated to `2026-11-27`)
+- **Scope:** **targeted** extension to existing `Design §4.1` (architecture styles, C4 diagrams, ADRs, OpenAPI contracts, tech stack ADRs, fitness functions, and production load-balanced stateless rules were already present in `§4.2`, `§4.8`, `§4.14`, and rules 1–25).
+- **Reviewers:** <Tech Lead>, <Developers> — *to be filled in when the pull request is approved*
+- **What changed:** Added an explicit **Interoperability** row (OpenAPI/AsyncAPI contracts, RFC 9457, versioning, vendor adapters) and paired **Manageability** with **Observability** (health checks and externalized validated config) in `Design §4.1`.
+- **Sources checked (2026-11-27):** `c4model.com`, `adr.github.io`, `martinfowler.com/architecture/`, `omg.org/spec/UML/` (UML 2.5.1).
+- **Next review due:** Design 2027-05-27.
+
 ## 2026-11-27 — Full-folder fact check after module 3 (corrections)
 
 - **Files:** `README.md` (§10 standards table), `02-Design/Design.md`, `03-Development/Development.md`, `04-Testing/Testing.md` (+ `images/sdlc-modern-v-model-in-ci.svg`), `05-Deployment/Deployment.md`, root `6-Phases-of-SDLC-Modern-Best-Practices.md`

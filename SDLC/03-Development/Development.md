@@ -327,6 +327,7 @@ module.exports = errorHandler;
 | **Forgotten `await`** | Code continues before the database write finishes; errors are lost | ESLint rules such as `no-floating-promises` (typescript-eslint) |
 | **Memory leaks** | Caches or listeners that grow forever | Limit cache size (LRU — Least Recently Used), remove listeners, watch memory metrics |
 | **No graceful shutdown** | Deploys cut off requests in the middle | On `SIGTERM`, stop accepting new requests, finish current ones, close the database pool, then exit |
+| **Missing `trust proxy` behind a reverse proxy** | Express sees the load balancer's internal IP (`req.ip`) and `http` instead of the real client, breaking rate limits and cookies | Set `app.set('trust proxy', N)` to the exact trusted proxy hop count (per `expressjs.com/en/guide/behind-proxies.html`), never `true` blindly |
 
 ### 4.8 Dependencies and supply-chain security
 

@@ -2,7 +2,7 @@
 
 **SDLC series — Phase 2 of 6.** How professional backend teams do **Design** today: the lecture's core tasks, the Waterfall way vs. the modern way, and the industry practices the lecture does not cover.
 
-> **Last reviewed:** 2026-11-26 · **Next review due:** 2027-05-26 · **Review owner:** Tech Lead · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
+> **Last reviewed:** 2026-11-27 · **Next review due:** 2027-05-27 · **Review owner:** Tech Lead · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
 
 [← Planning](../01-Planning/Planning.md) · [Guide README](../README.md) · [Overview](../../6-Phases-of-SDLC-Modern-Best-Practices.md) · [Development →](../03-Development/Development.md)
 
@@ -176,7 +176,8 @@ The lecture says "develop the software architecture". In practice, a complete ba
 | **Scalability** | Handle 10x traffic | **Stateless** API servers (no session in memory), horizontal scaling, queues for slow work |
 | **Security** | Protect personal data | Authentication + authorization design, encryption, least privilege, input validation, rate limiting |
 | **Maintainability** | Easy to change | Clear module boundaries, layers (routes → services → repositories), tests, ADRs |
-| **Observability** | Find problems in minutes | Structured logs, metrics, tracing (OpenTelemetry), request IDs |
+| **Interoperability** | Smooth data exchange with external clients and systems | Standard OpenAPI / AsyncAPI contracts, RFC 9457 error format, explicit API versioning, vendor adapters |
+| **Observability & Manageability** | Find problems in minutes and operate upgrades safely | Structured logs, metrics, tracing (OpenTelemetry), request IDs, health checks, externalized validated config |
 | **Cost** | Fit the cloud budget | Right-sized resources, autoscaling, managed services vs. self-hosted trade-off |
 
 - **Trade-offs are normal.** For example, a cache improves performance but can show **slightly old data**. Write the trade-off down in an ADR.
@@ -192,7 +193,8 @@ The lecture says "develop the software architecture". In practice, a complete ba
 | **Event-driven** | Services communicate through events on a broker (Kafka, RabbitMQ) | Work that can happen later (emails, notifications, analytics) | Eventual consistency, harder debugging |
 
 - These styles can be **combined** — for example a modular monolith that sends events to a serverless function for emails.
-- **Finding the module boundaries:** use **DDD (Domain-Driven Design)** ideas — split along **business** areas ("bounded contexts" such as Reviews, Catalog, Accounts), each with its own model and words. An **EventStorming** workshop ([Planning 4.9](../01-Planning/Planning.md#49-workshops-that-turn-vague-ideas-into-clear-requirements)) is a fast way to find them.
+- **API gateways & service coordination:** When exposing multiple services, keep an **API gateway** thin (TLS termination, auth check, rate limiting, routing — never business logic). Coordinate workflows with **event-driven choreography** ("smart endpoints and dumb pipes", per `martinfowler.com/articles/microservices.html`) by default so services stay loosely coupled, or explicit **orchestration** (such as a Saga coordinator) when strict multi-step rollbacks are required.
+- **Finding the module boundaries:** use **DDD (Domain-Driven Design)** ideas — split along **business** areas ("bounded contexts" such as Reviews, Catalog, Accounts) with **high cohesion** inside each module and **loose coupling** across boundaries so changing one module minimally affects others. An **EventStorming** workshop ([Planning 4.9](../01-Planning/Planning.md#49-workshops-that-turn-vague-ideas-into-clear-requirements)) is a fast way to find them.
 - **Inside each module — ports and adapters (hexagonal architecture):** business rules in the center do not depend on Express, the database or any vendor. **Adapters** connect them to the outside (HTTP route, database repository, email provider). Business logic becomes easy to unit-test, and a vendor can be replaced without touching it.
 - **Keep the boundaries automatically — architecture fitness functions:** a test in CI that fails when a rule is broken, for example "the `reviews` module must not import from `accounts/internal`" (tools: **dependency-cruiser**, ESLint import rules).
 
@@ -431,6 +433,8 @@ Many companies write a short design doc, often called an **RFC (Request for Comm
 - High availability needs a **stateless** API: no session or file kept on one server. Sessions go to a shared store or into signed tokens; uploaded files go to object storage.
 
 **5. Follow the Twelve-Factor rules for a cloud-ready service** (config in the environment, stateless processes, disposable processes, logs as streams). The full list and where each factor lives in this guide is in [Development 4.5](../03-Development/Development.md#45-configuration-fail-fast-at-startup).
+
+**6. Pick the hosting model explicitly and defend inside the perimeter.** Default to managed **public cloud** inside isolated private-network subnets (**VPC** on AWS and Google Cloud, **VNet** on Azure) with **TLS** and server-side authentication on every hop (never rely on a perimeter firewall alone). Choose **private cloud**, **hybrid cloud**, or **on-premises** hosting only with an ADR documenting data-residency or compliance constraints and who owns hardware, network, and OS maintenance (owner: Tech Lead).
 
 ### 4.13 Front-end design decisions
 
