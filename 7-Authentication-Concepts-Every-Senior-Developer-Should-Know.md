@@ -145,7 +145,7 @@ flowchart TD
     D -->|yes| F["200 OK with the photo"]
 ```
 
-**Security note:** Rahul's URL trick is a real attack called **IDOR (Insecure Direct Object Reference)**. It is part of **Broken Access Control**, the top risk in the OWASP (Open Web Application Security Project) Top 10. Every request must check who owns the data. Being logged in is not enough.
+**Security note:** Rahul's URL trick is a real attack called **IDOR (Insecure Direct Object Reference)**. It is part of **Broken Access Control**, the top risk in the OWASP (Open Worldwide Application Security Project) Top 10. Every request must check who owns the data. Being logged in is not enough.
 
 **Naming note:** `401 Unauthorized` has a confusing name. It really means "not authenticated".
 
@@ -720,15 +720,19 @@ All JavaScript examples use only Node.js built-in modules. To run one, paste all
 ```js
 const crypto = require('node:crypto');
 
+// scrypt settings: N=2^17, r=8, p=1 is the minimum OWASP lists for scrypt. Node's default N (2^14) is lower,
+// and N=2^17 needs about 128 MiB, so maxmem must be raised. Argon2id is still OWASP's first choice.
+const SCRYPT = { N: 2 ** 17, r: 8, p: 1, maxmem: 256 * 1024 * 1024 };
+
 // Store a salted hash, never the password.
 function hashPassword(password) {
   const salt = crypto.randomBytes(16); // A different salt for each user.
-  const hash = crypto.scryptSync(password, salt, 64); // scrypt is slow on purpose.
+  const hash = crypto.scryptSync(password, salt, 64, SCRYPT); // scrypt is slow on purpose.
   return { salt: salt.toString('hex'), hash: hash.toString('hex') };
 }
 
 function checkPassword(password, stored) {
-  const attempt = crypto.scryptSync(password, Buffer.from(stored.salt, 'hex'), 64);
+  const attempt = crypto.scryptSync(password, Buffer.from(stored.salt, 'hex'), 64, SCRYPT);
   // timingSafeEqual takes the same time wherever the values differ.
   return crypto.timingSafeEqual(attempt, Buffer.from(stored.hash, 'hex'));
 }

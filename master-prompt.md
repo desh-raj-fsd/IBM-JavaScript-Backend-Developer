@@ -14,7 +14,7 @@ This is based on the _IBM JavaScript Backend Developer Professional Certificate_
 - **Databases:** Integrating SQL and NoSQL databases (like MongoDB) for data storage, retrieval, and management.
 - **DevOps & Deployment:** Application deployment, Agile methodologies, CI/CD, and DevOps practices using tools like Azure DevOps and Grafana.
 - **Cloud-Native Computing & Microservices:** Containerization with Docker, deploying and scaling with Kubernetes, OpenShift, Istio, and Serverless computing.
-- **Security:** Secure software development practices referencing the Open Web Application Security Project (OWASP).
+- **Security:** Secure software development practices referencing the Open Worldwide Application Security Project (OWASP).
 - **Projects:** Creating a travel recommendation website, a book review API, a multitier guestbook, and a MongoDB backend application.
 
 ## 3. Learner Profile

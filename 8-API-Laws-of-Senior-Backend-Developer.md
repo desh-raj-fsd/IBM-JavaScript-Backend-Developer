@@ -917,11 +917,11 @@ flowchart TD
 - **The specific mechanism matters less than consistency:** picking *one* strategy and applying it to every versioned change is more valuable than picking the theoretically "best" strategy — mixing URL versioning for some endpoints and header versioning for others reintroduces exactly the unpredictability the whole exercise is meant to eliminate.
 - **Always provide a migration path:** versioning without a deprecation plan just delays the pain — communicate a timeline, keep both versions running long enough for clients to migrate, and monitor real traffic on the old version before retiring it.
 - **Avoid unnecessary version bumps:** over-versioning (bumping the version for every additive change) creates maintenance overhead and forces clients to track version churn that never actually affected them — reserve version bumps strictly for genuinely breaking changes.
-- **Internal communication matters as much as the technical mechanism:** a changelog, deprecation headers (e.g., `Deprecation: true` / `Sunset: <date>`), and advance notice are part of "treating changes carefully," not just the versioning scheme itself.
+- **Internal communication matters as much as the technical mechanism:** a changelog, deprecation headers (`Deprecation: @<unix-timestamp>` per RFC 9745 and `Sunset: <HTTP-date>` per RFC 8594), and advance notice are part of "treating changes carefully," not just the versioning scheme itself.
 - **Semantic-style major/minor thinking still applies even without a formal semver string:** a "major" version bump maps to breaking changes (new URL/header version required), while a "minor," backward-compatible addition can ship silently under the existing version — teams benefit from applying this same mental model to APIs even when the version identifier itself is just a single integer or a date.
 - **Backward-compatible transformation layers reduce the cost of supporting old versions:** rather than maintaining fully separate code paths per version indefinitely, a common pattern is to build the *latest* internal representation once, then transform it down to each supported public version at the response-formatting boundary, keeping the core business logic version-agnostic.
 
-**Real-World Example:** Stripe uses date-based header versioning — every account is pinned to an API version like `2023-10-16` via the `Stripe-Version` header, and Stripe maintains backward-compatible transformation logic internally so that older-pinned accounts keep receiving the old response shape indefinitely, even as the "latest" version evolves. This lets Stripe ship breaking changes to new integrators without forcing existing production integrations to update on Stripe's timeline.
+**Real-World Example:** Stripe uses date-based header versioning — every account is pinned to an API version like `2024-09-30.acacia` (a date plus a release name; per docs.stripe.com/api/versioning) via the `Stripe-Version` header, and Stripe maintains backward-compatible transformation logic internally so that older-pinned accounts keep receiving the old response shape indefinitely, even as the "latest" version evolves. This lets Stripe ship breaking changes to new integrators without forcing existing production integrations to update on Stripe's timeline.
 
 **Best Coding/Development Practices:**
 1. **Ask "is this additive or breaking?" before touching a shared response shape**, and only reach for versioning when the answer is "breaking."
@@ -937,8 +937,8 @@ flowchart TD
 3. **Signal deprecation explicitly instead of silently removing an old version.**
    ```javascript
    app.get('/v1/products/:id', (req, res) => {
-     res.set('Deprecation', 'true');
-     res.set('Sunset', '2026-12-31');
+     res.set('Deprecation', '@1782863999');                                  // RFC 9745: a Date (Unix seconds), here 30 Jun 2026
+     res.set('Sunset', new Date('2026-12-31T23:59:59Z').toUTCString());      // RFC 8594: an HTTP-date
      res.status(200).json({ id: p.id, price: p.amount });
    });
    ```

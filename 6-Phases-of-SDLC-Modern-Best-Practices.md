@@ -86,7 +86,7 @@ How professional backend teams run **Planning, Design, Development, Testing, Dep
 | **GitOps** | Running deployments by changing a Git repository; a tool makes the cluster match Git automatically. | Git is the single source of truth for production. | A thermostat that keeps the room at the temperature written on the dial. |
 | **OIDC federation (in CI)** | Letting a CI job exchange its identity for a short-lived cloud token, instead of storing long-lived keys. | No permanent passwords in the pipeline. | A visitor badge that expires tonight instead of a permanent office key. |
 | **Roll-forward** | Fixing a bad release by quickly deploying a new, fixed version instead of going back. | Fix forward instead of undoing. | Patching a flat tire on the road instead of driving back home. |
-| **DORA metrics** | Four key measures of software delivery: deployment frequency, lead time, change failure rate, time to restore. | Four numbers that show how well a team delivers. | A car's speed, fuel use, breakdown rate and repair time. |
+| **DORA metrics** | Five key measures of software delivery: change lead time, deployment frequency, failed deployment recovery time, change fail rate, deployment rework rate. | Five numbers that show how well a team delivers. | A car's speed, fuel use, breakdown rate and repair time. |
 | **Observability** | The ability to understand what a system is doing from its logs, metrics and traces. | Being able to "see inside" the running app. | A car dashboard plus a black-box recorder. |
 | **SLO (Service Level Objective)** | A measurable reliability target, for example "99.9% of requests succeed". | A number that says "good enough" for users. | "The bus arrives on time 99 days out of 100". |
 | **Postmortem (blameless)** | A written review after an incident about what happened and how to prevent it, without blaming people. | Learn from the failure, don't punish. | An airline investigating a near-miss to fix the process. |
@@ -354,7 +354,7 @@ Scenario: Reviews work well
 - **Prioritize by value:** methods like **MoSCoW** (Must have, Should have, Could have, Won't have this time).
 - **Secure by design:** write security and privacy as real requirements from day one.
   - Example: *"Passwords are hashed with bcrypt or argon2."* *"Personal data follows GDPR (General Data Protection Regulation)."*
-  - Use the **OWASP (Open Web Application Security Project) Top 10** to learn the most common web risks, and the **OWASP ASVS (Application Security Verification Standard)** as the detailed checklist to write testable security requirements from.
+  - Use the **OWASP (Open Worldwide Application Security Project) Top 10** to learn the most common web risks, and the **OWASP ASVS (Application Security Verification Standard)** as the detailed checklist to write testable security requirements from.
 - **Measurable quality targets (SLOs):** *"99.9% of requests succeed; 95% answer in under 200 ms."* Not *"the API must be fast"*. An **SLA (Service Level Agreement)** is the **contract** version promised to a customer, usually looser than the internal SLO.
 - **Cheap prototypes:** clickable mock-ups (for example in Figma) or a quick throwaway demo, to get feedback within days.
 - **Estimate in ranges, re-plan often:** use story points or T-shirt sizes (S, M, L), and update the plan every sprint.
@@ -1391,9 +1391,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: { node-version: 24, cache: npm }  # a pinned Node.js LTS line (check nodejs.org); cache npm downloads
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with: { node-version: 26, cache: npm }  # a pinned Node.js LTS line (check nodejs.org); cache npm downloads
       - run: npm ci                             # exact versions from package-lock.json
       - run: npm run lint                       # coding standards
       - run: npm test                           # unit + integration tests
@@ -1407,13 +1407,13 @@ jobs:
       contents: read
       packages: write                           # needed to push to GitHub Container Registry
     steps:
-      - uses: actions/checkout@v4
-      - uses: docker/login-action@v3            # log in BEFORE pushing
+      - uses: actions/checkout@v7
+      - uses: docker/login-action@v4            # log in BEFORE pushing
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }} # short-lived token, no stored password
-      - uses: docker/build-push-action@v6
+      - uses: docker/build-push-action@v7
         with: { push: true, tags: "${{ env.IMAGE }}" }
 
   deploy-staging:
@@ -1421,7 +1421,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: staging                        # staging secrets and URL
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: ./scripts/deploy.sh staging "$IMAGE"   # e.g. update the GitOps repo or run kubectl
       - run: ./scripts/smoke-test.sh https://staging.example.com
 
@@ -1430,7 +1430,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: production                     # set "required reviewers" here = the sign-off gate
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: ./scripts/deploy.sh production "$IMAGE"  # the SAME image that passed staging
       - run: ./scripts/smoke-test.sh https://api.example.com
 ```
@@ -1488,7 +1488,7 @@ kubectl rollout status deployment/book-review-api   # watch it recover
 #### 6.4.1 Building a good container image
 
 - **Multi-stage build:** install and build in one stage, copy only what is needed into a small final image.
-- **Small, pinned base image** (for example `node:24-alpine` — an LTS line, pinned — or a "distroless" image) — fewer packages, fewer vulnerabilities.
+- **Small, pinned base image** (for example `node:26-alpine` — an LTS line, pinned — or a "distroless" image) — fewer packages, fewer vulnerabilities.
 - **Production dependencies only:** `npm ci --omit=dev`.
 - **Run as a non-root user** — set it by **numeric UID** (`USER 1000`); Kubernetes `runAsNonRoot` cannot verify a user given only by name and refuses to start the pod.
 - **`.dockerignore`** so `node_modules`, `.git`, `.env` and test files never enter the image.
@@ -1497,12 +1497,12 @@ kubectl rollout status deployment/book-review-api   # watch it recover
 
 ```dockerfile
 # Dockerfile — multi-stage, small, non-root
-FROM node:24-alpine AS deps
+FROM node:26-alpine AS deps
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci --omit=dev                 # exact production dependencies only
 
-FROM node:24-alpine
+FROM node:26-alpine
 ENV NODE_ENV=production
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
@@ -1516,7 +1516,7 @@ CMD ["node", "src/server.js"]         # node is PID 1 and receives SIGTERM direc
 
 ```dockerfile
 # ❌
-FROM node:24
+FROM node:26
 COPY . .                  # copies .env (secrets!), .git and local node_modules into the image
 RUN npm install           # dev dependencies too; versions may differ from the lockfile
 CMD npm start             # shell + npm wrap node; SIGTERM may not reach the app,
@@ -1589,9 +1589,10 @@ The **DORA (DevOps Research and Assessment)** research program measures software
 | Metric | Question |
 |--------|----------|
 | **Deployment frequency** | How often do we deploy to production? |
-| **Lead time for changes** | How long from commit to running in production? |
-| **Change failure rate** | What share of deployments cause a failure in production? |
-| **Time to restore service** | How fast do we recover from a failure? |
+| **Change lead time** | How long from commit to running in production? |
+| **Change fail rate** | What share of deployments need an immediate fix or rollback? |
+| **Failed deployment recovery time** | How fast do we recover from a failed deployment? (This replaced the older "time to restore service" / MTTR.) |
+| **Deployment rework rate** | What share of deployments are unplanned fixes for a problem in production? |
 
 - DORA's research found that teams that deploy **more often** usually also have **fewer failures** and **faster recovery** — speed and stability go together when releases are small and automated.
 - DORA reports also look at **reliability** (meeting your SLOs) next to these delivery metrics.
@@ -1947,7 +1948,7 @@ flowchart TD
 ## 10. Related Concepts
 
 1. **Agile and Scrum** — Scrum gives the six phases a fixed rhythm: sprint planning (plan), daily work (design, develop, test), sprint review (acceptance), retrospective (improve the process).
-2. **DevOps and the DORA metrics** — DORA (DevOps Research and Assessment) measures team performance with four numbers: deployment frequency, lead time for changes, change failure rate, and time to restore service.
+2. **DevOps and the DORA metrics** — DORA (DevOps Research and Assessment) measures team performance with five numbers: change lead time, deployment frequency, failed deployment recovery time, change fail rate, and deployment rework rate.
 3. **Twelve-Factor App** — a set of rules for cloud-ready apps (config in the environment, stateless processes, logs as event streams) that makes the deployment and maintenance phases easier.
 4. **OWASP Top 10 and DevSecOps** — the list of the most common web security risks, and the practice of checking for them automatically in every phase.
 5. **SRE (Site Reliability Engineering)** — Google's approach to running production with SLOs, error budgets and blameless postmortems; it gives the maintenance phase its modern shape.
