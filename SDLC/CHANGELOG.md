@@ -3,6 +3,16 @@
 > One entry per review or significant change, **newest first**. Rules: [README §9.1 Review schedule](README.md#91-review-schedule).
 > Each entry lists the date, the files, the reviewers, what changed (or "no changes needed") and the sources checked.
 
+## 2026-11-27 — Review: guides and module 1 (repo-audit)
+
+- **Files:** `README.md` (§10 ISO 29148 row), top-level guides (`6-Phases…`, `7-Authentication…`, `8-API-Laws…`, `7-Database-Laws…`, `7-Coding-Laws…`), `master-prompt.md` (OWASP name only), module 1 notes 03 and 05
+- **Scope:** **targeted** re-check of time-sensitive facts in the guides and module 1 notes; guide code blocks syntax-checked (fragments need imports, no real bugs found).
+- **Reviewers:** <Tech Lead>, <Developers> — *to be filled in when the pull request is approved*
+- **What changed:** OWASP name now "Open Worldwide Application Security Project" everywhere. Auth guide: scrypt example uses OWASP's minimum (N=2^17, r=8, p=1, `maxmem` raised). API guide: `Deprecation` header is a Date (`@<unix-seconds>`, RFC 9745), `Sunset` is an HTTP-date (RFC 8594), Stripe version example is `2024-09-30.acacia`. Overview guide: DORA now five metrics, CI example and Node.js 26 match the SDLC. ISO/IEC/IEEE 29148: confirmed 2024, revision under way.
+- **Sources checked (2026-11-27):** owasp.org Password Storage cheat sheet; rfc-editor.org RFC 9700, 9745, 8594; docs.stripe.com versioning (current version `2026-11-18.endive`); iso.org 29148:2018, 26514:2022, 25010:2023; ISO/IEC/IEEE 29119-3:2021 (web search).
+- **Not re-checked:** Standish CHAOS figures and other historical facts in module 1 note 01; guides' prose outside the facts above.
+- **Next review due:** 2027-05-27.
+
 ## 2026-11-27 — Full SDLC folder review: broken-item check, fact check, missing practices
 
 - **Files:** `README.md` (§10 rows, dates), `01-Planning/Planning.md`, `02-Design/Design.md`, `05-Deployment/Deployment.md`, `06-Maintenance/Maintenance.md`

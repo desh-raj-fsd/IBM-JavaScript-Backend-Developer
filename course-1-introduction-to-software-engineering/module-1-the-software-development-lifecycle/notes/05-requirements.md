@@ -401,7 +401,7 @@ flowchart TD
 > **Lecture says:** there are three documents — SRS, URS and SysRS.
 > **Industry today:** the international standard uses slightly different names, the URS is mainly a term from **regulated industries**, and Agile teams usually replace these documents with lighter, living artifacts.
 
-- **Names in ISO/IEC/IEEE 29148:2018** (the requirements engineering standard; it replaced IEEE 830 and was re-confirmed by ISO in 2024). It describes **four** requirement documents ("information items"), from the business view down to the software:
+- **Names in ISO/IEC/IEEE 29148:2018** (the requirements engineering standard; it replaced IEEE 830 and was re-confirmed by ISO in 2024; a revision is under way, per iso.org). It describes **four** requirement documents ("information items"), from the business view down to the software:
 
   | ISO 29148 name | Closest lecture term | Content |
   |----------------|----------------------|---------|

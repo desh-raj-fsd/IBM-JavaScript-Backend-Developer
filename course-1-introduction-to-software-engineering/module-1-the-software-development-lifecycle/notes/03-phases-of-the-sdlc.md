@@ -227,7 +227,7 @@ flowchart TD
   - Example: *"As a reader, I want to rate a book from 1 to 5, so that other readers can see if it is good."*
 - **Acceptance criteria** on every story: clear yes/no checks, so testers and developers agree on what "done" means (see the JSON in [5.1](#51-from-an-srs-requirement-to-code)).
 - **A prioritized backlog:** an ordered list of stories, "most valuable first". The team reorders it whenever priorities change.
-- **Security and privacy from day one** ("**secure by design**"): the risk and compliance factors from 3.2.1 are written as real requirements (for example *"passwords are hashed with bcrypt or argon2"*) and checked against threat lists such as the **OWASP (Open Web Application Security Project) Top 10**.
+- **Security and privacy from day one** ("**secure by design**"): the risk and compliance factors from 3.2.1 are written as real requirements (for example *"passwords are hashed with bcrypt or argon2"*) and checked against threat lists such as the **OWASP (Open Worldwide Application Security Project) Top 10**.
 - **Measurable quality targets:** write QA requirements as numbers, not wishes. An **SLO (Service Level Objective)** looks like *"99.9% of requests succeed; 95% answer in under 200 ms"*.
 - **Cheap prototypes:** clickable mock-ups in tools like Figma, or a quick AI-generated sketch app, used to get feedback within days and then thrown away.
 
