@@ -3,6 +3,61 @@
 > One entry per review or significant change, **newest first**. Rules: [README §9.1 Review schedule](README.md#91-review-schedule).
 > Each entry lists the date, the files, the reviewers, what changed (or "no changes needed") and the sources checked.
 
+## 2026-11-27 — Full-folder fact check after module 3 (corrections)
+
+- **Files:** `README.md` (§10 standards table), `02-Design/Design.md`, `03-Development/Development.md`, `04-Testing/Testing.md` (+ `images/sdlc-modern-v-model-in-ci.svg`), `05-Deployment/Deployment.md`, root `6-Phases-of-SDLC-Modern-Best-Practices.md`
+- **Scope:** a **review**, not new content: module-3 changes and the time-sensitive facts of the whole guide were re-checked against primary sources.
+- **Reviewers:** <Tech Lead> — *to be filled in when the pull request is approved*
+- **What changed:** OWASP Top 10 for LLM Applications is now the **2026** edition (was "2025"; README row and Development §4.8); SLSA row now **v1.2**; NIST SSDF row notes the **Rev. 1 / v1.2 initial public draft**; OpenAPI row adds patch **3.2.1** (10 Sept 2026); **ZAP** is now "ZAP by Checkmarx" (was "OWASP ZAP"; Testing, one diagram, root overview); MySQL `max_execution_time` limits only read-only `SELECT` statements (Development §4.15); the "lookup object" advice now says to read keys with `Object.hasOwn` or use a `Map` (a plain object returns inherited keys such as `constructor`); Docker QEMU wording hedged (Deployment §4.1); the Design execution-model bullet points to the stack ADR (rule 24); "Last checked" dates updated for every row verified today.
+- **Verified today (primary sources):** owasp.org (Top 10:2025 list incl. A10 and SSRF inside A01, ASVS 5.0.0 published 30 May 2025, SAMM, API Security 2023, LLM Top 10 2026); pcisecuritystandards.org (v4.0.1); iso.org (29148:2018, 25010:2023, 14764:2022); semver.org 2.0.0; conventionalcommits.org 1.0.0; spec.openapis.org (3.2.0 of 19 Sept 2025, 3.2.1 of 10 Sept 2026); rfc-editor.org (9457, 9745, 8594, 9116); dora.dev (five metrics); European Commission CRA page (reporting from 11 Sep 2026, main obligations from 11 Dec 2027); GitHub changelog (npm classic tokens revoked 9 Dec 2025); docs.github.com (Dependabot default 3-day cooldown, not for security updates); docs.npmjs.com (`min-release-age`, trusted publishing); expressjs.com (Express 5 rejected promises call `next`); OWASP Password Storage cheat sheet (Argon2id 19 MiB, 2 iterations, 1 degree of parallelism); zaproxy.org; nodejs.org release rules; Docker multi-platform docs; PostgreSQL `statement_timeout`; MySQL optimizer-hints/blog (via search).
+- **Not re-checked:** European Accessibility Act date and GDPR (stable law, general knowledge); ISTQB CTFL v4.0.1 errata date; npm "granular tokens at most 90 days"; Node.js LTS line numbers (read 2026-11-26).
+- **Next review due:** README at the next full-guide review (2027-05-13); changed phase files 2027-05-27.
+
+## 2026-11-27 — Composition & encapsulation: module-3 note-06 "Introduction to Programming Concepts Part 2" findings
+
+- **Files:** `03-Development/Development.md` (§4.4 extended with composition-over-inheritance and `#private`/closure state encapsulation)
+- **Scope:** **targeted** 1-bullet extension to existing §4.4 (modular layered architecture, SOLID, and stateless processes were already present). Correction sweep: 0 wrong lecture claims found in `SDLC/`.
+- **Reviewers:** <Tech Lead>, <Developers> — *to be filled in when the pull request is approved*
+- **What changed:** `Development §4.4` recommends favoring small pure functions and composition over deep class inheritance trees, and using `#private` fields or closures when classes guard internal invariants.
+- **Sources checked (2026-11-27):** MDN (`developer.mozilla.org` — Functions guide, Arrow functions, Parameter glossary, Private `#` class properties).
+- **Next review due:** Development 2027-05-27.
+
+## 2026-11-27 — Constants, immutability & container choice: module-3 note-05 "Introduction to Programming Concepts Part 1" findings
+
+- **Files:** `03-Development/Development.md` (§4.4 extended with `const`/magic-number discipline, shared-object immutability, and `Map`/`Set`/`TypedArray` selection)
+- **Scope:** **targeted** 1-bullet extension to existing §4.4 (runtime config validation and `N+1`/DB bounds were already present). Correction sweep: 0 wrong lecture claims found in `SDLC/`.
+- **Reviewers:** <Tech Lead>, <Developers> — *to be filled in when the pull request is approved*
+- **What changed:** `Development §4.4` recommends defaulting to `const` (ESLint `prefer-const`), avoiding magic numbers, freezing/cloning shared config objects, picking `Map`/`Set` over repeated scans on large sets, and bounding dynamic arrays (`TypedArray`/streaming for large binary payloads).
+- **Sources checked (2026-11-27):** MDN (`developer.mozilla.org` — `const` reassignment vs object mutation, JS `Array` resizable behavior, `TypedArray`); `cppreference.com` (`std::vector` contiguous memory and capacity reallocation).
+- **Next review due:** Development 2027-05-27.
+
+## 2026-11-27 — Branching hygiene & guard clauses: module-3 note-04 "Branching and Looping Programming Logic" findings
+
+- **Files:** `03-Development/Development.md` (§4.4 extended with flat branching / guard clauses, strict `===`, and `switch` fall-through prevention)
+- **Scope:** **targeted** 1-bullet extension to existing §4.4 (ESLint `complexity`/`max-depth`, `===`, and event-loop safety were already present). Correction sweep: 0 wrong lecture claims found in `SDLC/`.
+- **Reviewers:** <Tech Lead>, <Developers> — *to be filled in when the pull request is approved*
+- **What changed:** `Development §4.4` recommends guard clauses (early returns), strict equality (`===`/`!==`), and preventing `switch` fall-through via `break`/`return` + `default`, a `Map` (or a lookup object read with `Object.hasOwn`), or ESLint `eqeqeq` and `no-fallthrough`.
+- **Sources checked (2026-11-27):** MDN (`developer.mozilla.org` — JavaScript `switch` fall-through & `for` pre-check); Python docs (`docs.python.org` — compound statements); Oracle Java SE docs (`docs.oracle.com` — unused `goto` keyword).
+- **Next review due:** Development 2027-05-27.
+
+## 2026-11-27 — Query plans & DB least privilege: module-3 note-02 "Query and Assembly Programming Languages" findings
+
+- **Files:** `03-Development/Development.md` (§4.15 extended with `EXPLAIN` / timeouts, `jsonb` GIN indexes, and least-privilege runtime DB role; rule 26 updated)
+- **Scope:** **targeted** change extending existing §4.15 (least privilege, JSONB, parameterized queries, and migrations were already present). Correction sweep: 0 wrong lecture claims found in `SDLC/`.
+- **Reviewers:** <Tech Lead>, <Developers> — *to be filled in when the pull request is approved*
+- **What changed:** `Development §4.15` and rule 26 add `EXPLAIN` query-plan checks, query timeouts (`statement_timeout` / `max_execution_time`), `jsonb` GIN index note, and separating the runtime CRUD DB role (including sequence `USAGE`) from shared/production DDL migrations.
+- **Sources checked (2026-11-26/27):** PostgreSQL docs (`postgresql.org/docs/current/datatype-json.html`, `runtime-config-client.html`, `ddl-priv.html`, `sql-explain.html` — `jsonb` + GIN indexing, `statement_timeout`, sequence `USAGE`, `EXPLAIN`); Apache Cassandra docs (`cassandra.apache.org` — CQL typed table schemas); MongoDB docs (`mongodb.com` — JSON Schema validation).
+- **Next review due:** Development 2027-05-27.
+
+## 2026-11-26 — Execution model & target CPU builds: module-3 note-01 "Interpreted and Compiled Programming Languages" findings
+
+- **Files:** `02-Design/Design.md` (§4.14 execution model and memory-safety bullet), `05-Deployment/Deployment.md` (§4.1 target CPU architecture `--platform` bullet, rule 23), `05-Deployment/templates/pipeline-checklist.md` (target architecture build item)
+- **Scope:** **targeted** change adding execution-model selection guidance and explicit target CPU architecture container builds from module 3 note 01. Correction sweep: 0 wrong lecture claims found in `SDLC/`.
+- **Reviewers:** <Tech Lead>, <Developers> — *to be filled in when the pull request is approved*
+- **What changed:** `Design §4.14` adds AOT vs. JIT/bytecode cold-start and memory-safety trade-offs plus optional WebAssembly; `Deployment §4.1`, `pipeline-checklist.md`, and **should** rule 23 recommend pinning the explicit target CPU architecture in CI (default `linux/amd64`).
+- **Sources checked (2026-11-26):** Docker Docs Multi-platform builds (`docs.docker.com/build/building/multi-platform/` — `--platform linux/amd64,linux/arm64`); WebAssembly (`webassembly.org`); V8 (`v8.dev`), Python glossary (`docs.python.org/3/glossary.html`), .NET managed execution (`learn.microsoft.com`), Android (`developer.android.com/kotlin/first`), Lua (`lua.org/about.html`).
+- **Next review due:** Design, Deployment 2027-05-26.
+
 ## 2026-11-26 — Stacks: note 08 "Introduction to Software Stacks"
 
 - **Files:** `02-Design/Design.md` (new §4.14, rules 24–25), `03-Development/Development.md` (§4.8 license bullet, §4.10 Compose bullet)

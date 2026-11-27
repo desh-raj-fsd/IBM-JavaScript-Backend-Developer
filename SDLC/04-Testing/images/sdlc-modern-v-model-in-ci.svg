@@ -30,7 +30,7 @@
     <text x="760" y="155" font-size="11" fill="#14532d">validation + PO / client UAT</text>
     <rect x="605" y="202" width="200" height="56" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
     <text x="705" y="226" font-weight="bold" fill="#166534">System: E2E, load, DAST</text>
-    <text x="705" y="245" font-size="11" fill="#14532d">Playwright, k6, OWASP ZAP</text>
+    <text x="705" y="245" font-size="11" fill="#14532d">Playwright, k6, ZAP</text>
     <rect x="550" y="292" width="200" height="56" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
     <text x="650" y="316" font-weight="bold" fill="#166534">Integration + contract</text>
     <text x="650" y="335" font-size="11" fill="#14532d">Supertest, Testcontainers, Pact</text>

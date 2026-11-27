@@ -1076,7 +1076,7 @@ services:
   |-----------------|---------------|-------|----------|---------------|
   | **Unit** | One function or module alone | Milliseconds | Many | `node:test`, Jest, Vitest |
   | **Integration** | Parts together (route + service + real database) | Seconds | Some | Supertest, Testcontainers (real database in Docker) |
-  | **System** | The **whole** system, end to end — **functional** (E2E user flows) **and non-functional** (performance, security, reliability) | Minutes | Few | Playwright (E2E), k6 (load), OWASP ZAP (security) |
+  | **System** | The **whole** system, end to end — **functional** (E2E user flows) **and non-functional** (performance, security, reliability) | Minutes | Few | Playwright (E2E), k6 (load), ZAP (Zed Attack Proxy; formerly ZAP, now ZAP by Checkmarx, per zaproxy.org) (security) |
   | **Acceptance** | Does it meet the user's needs? | — | Per story | Automated acceptance criteria (for example Gherkin/Cucumber) + customer/product owner review on staging (UAT) |
 
 - **Pyramid vs. "testing trophy":** some teams (especially in JavaScript) prefer the **testing trophy**, which puts **more weight on integration tests**, because they give high confidence for their cost. Both agree on the main rule: **many fast tests, few slow ones, and no ice-cream cone** (mostly manual and E2E tests — slow and fragile).
@@ -1090,7 +1090,7 @@ services:
   | **SAST (Static Application Security Testing)** | Scans source code for unsafe patterns | CodeQL, Semgrep |
   | **Dependency / SCA (Software Composition Analysis)** | Finds npm packages with known vulnerabilities | `npm audit`, Dependabot, Snyk |
   | **Secret scanning** | Finds passwords and keys in commits | GitHub secret scanning, gitleaks |
-  | **DAST (Dynamic Application Security Testing)** | Attacks the running app in a test environment | OWASP ZAP |
+  | **DAST (Dynamic Application Security Testing)** | Attacks the running app in a test environment | ZAP |
   | **Container image scanning** | Finds vulnerable OS packages in Docker images | Trivy, Grype |
 
 - **Shift-right testing:** some checks continue **in production** — canary releases, synthetic monitoring, feature flags and chaos experiments (see [5.4.10](#5410-shift-right-testing-in-production)).

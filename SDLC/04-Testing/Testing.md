@@ -87,7 +87,7 @@
   |-----------------|---------------|-------|----------|---------------|
   | **Unit** | One function or module alone | Milliseconds | Many | `node:test`, Jest, Vitest |
   | **Integration** | Parts together (route + service + real database) | Seconds | Some | Supertest, Testcontainers (real database in Docker) |
-  | **System** | The **whole** system, end to end — **functional** (E2E user flows) **and non-functional** (performance, security, reliability) | Minutes | Few | Playwright (E2E), k6 (load), OWASP ZAP (security) |
+  | **System** | The **whole** system, end to end — **functional** (E2E user flows) **and non-functional** (performance, security, reliability) | Minutes | Few | Playwright (E2E), k6 (load), ZAP (Zed Attack Proxy; formerly ZAP, now ZAP by Checkmarx, per zaproxy.org) (security) |
   | **Acceptance** | Does it meet the user's needs? | — | Per story | Automated acceptance criteria (for example Gherkin/Cucumber) + customer/product owner review on staging (UAT) |
 
 - **What each level is for** (each level finds the defects it is **best and cheapest** at finding — avoiding duplicate tests is only a side benefit):
@@ -106,7 +106,7 @@
   | **SAST (Static Application Security Testing)** | Scans source code for unsafe patterns | CodeQL, Semgrep |
   | **Dependency / SCA (Software Composition Analysis)** | Finds npm packages with known vulnerabilities | `npm audit`, Dependabot, Snyk |
   | **Secret scanning** | Finds passwords and keys in commits | GitHub secret scanning, gitleaks |
-  | **DAST (Dynamic Application Security Testing)** | Attacks the running app in a test environment | OWASP ZAP |
+  | **DAST (Dynamic Application Security Testing)** | Attacks the running app in a test environment | ZAP |
   | **Container image scanning** | Finds vulnerable OS packages in Docker images | Trivy, Grype |
 
 - **Shift-right testing:** some checks continue **in production** — canary releases, synthetic monitoring, feature flags and chaos experiments (see [4.10](#410-shift-right-testing-in-production)).
@@ -358,7 +358,7 @@ test('review date uses the current time', (t) => {
 | What we specify | Its test is written… | It runs in CI as… | Tools (examples) |
 |-----------------|----------------------|-------------------|------------------|
 | **Story + acceptance criteria** (requirements) | With the story, before or with the code | **Acceptance** tests on staging + PO / client UAT | Gherkin/Cucumber, Playwright |
-| **NFRs + system design** (SLOs, ASVS level) | When the NFR is written | **System** tests: E2E, load, DAST | Playwright, k6, OWASP ZAP |
+| **NFRs + system design** (SLOs, ASVS level) | When the NFR is written | **System** tests: E2E, load, DAST | Playwright, k6, ZAP |
 | **Architecture + API contract** (OpenAPI, ADRs) | In the same PR as the contract change | **Integration** and **contract** tests | Supertest, Testcontainers, Pact |
 | **Module design** (function behavior) | First (TDD: red → green → refactor) | **Unit** tests | `node:test`, Vitest |
 

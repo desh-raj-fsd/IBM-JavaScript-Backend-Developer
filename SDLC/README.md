@@ -453,30 +453,30 @@ The external standards, laws and specifications this guide relies on. **Review o
 
 | Standard / law | Current edition or status | Used in | Last checked |
 |----------------|---------------------------|---------|--------------|
-| **OWASP Top 10** (web risks) | **2025** edition — new: A03 Software Supply Chain Failures, A10 Mishandling of Exceptional Conditions; SSRF merged into A01 | Planning, Design, Development, Testing | 2026-11-13 |
-| **OWASP ASVS** (security requirements) | **5.0** (May 2025), levels 1–3 | Planning, Design, Testing | 2026-11-13 |
+| **OWASP Top 10** (web risks) | **2025** edition — new: A03 Software Supply Chain Failures, A10 Mishandling of Exceptional Conditions; SSRF merged into A01 | Planning, Design, Development, Testing | 2026-11-27 (list A01–A10 read on owasp.org; SSRF is CWE-918 inside A01) |
+| **OWASP ASVS** (security requirements) | **5.0** (May 2025), levels 1–3 | Planning, Design, Testing | 2026-11-27 (5.0.0 published 30 May 2025) |
 | **OWASP API Security Top 10** | 2023 edition (`API1:2023` Broken Object Level Authorization / BOLA, `API4:2023` Unrestricted Resource Consumption) | Design, Development | 2026-11-26 |
 | **PCI DSS** (Payment Card Industry Data Security Standard) | **v4.0.1** — tokenization keeps raw credit card numbers and security codes out of app databases | Design, Development | 2026-11-26 |
-| **OWASP Top 10 for LLM Applications** | 2025 edition | Development (AI features) | next review |
+| **OWASP Top 10 for LLM Applications** | **2026** edition (announced September 2026; replaces the 2025 edition; LLM01:2026 Prompt Injection, LLM02:2026 Sensitive Information Disclosure, LLM10:2026 Improper Output Handling) | Development (AI features) | 2026-11-27 |
 | **OWASP Password Storage Cheat Sheet** | Living document — Argon2id first choice; bcrypt for legacy | Design, Development | 2026-11-13 |
-| **OWASP SAMM** (security maturity model) | v2 | Optional reference for measuring how mature our security practices are | next review |
-| **NIST SSDF** (Secure Software Development Framework) | SP 800-218 | Whole guide | next review |
-| **SLSA** (supply-chain levels) | v1.x — check slsa.dev | Deployment | next review |
-| **ISO/IEC/IEEE 29148** (requirements / SRS) | 2018 edition (replaced IEEE 830); document levels BRS, StRS, SyRS, SRS | Planning — requirement quality characteristics (all projects); full SRS (regulated projects) | 2026-11-13 |
-| **GAMP 5** (validation of computerized systems, GxP) | 2nd edition (2022) | Planning — URS for pharmaceutical / medical clients only | next review |
+| **OWASP SAMM** (security maturity model) | v2 | Optional reference for measuring how mature our security practices are | 2026-11-27 (v2; latest 2.2.0) |
+| **NIST SSDF** (Secure Software Development Framework) | SP 800-218 **v1.1** (final). **Rev. 1 (v1.2) is an initial public draft**: re-check when it is final | Whole guide | 2026-11-27 |
+| **SLSA** (supply-chain levels) | **v1.2** is the current specification (v1.1 is the previous one) | Deployment | 2026-11-27 |
+| **ISO/IEC/IEEE 29148** (requirements / SRS) | 2018 edition (replaced IEEE 830); document levels BRS, StRS, SyRS, SRS | Planning — requirement quality characteristics (all projects); full SRS (regulated projects) | 2026-11-27 |
+| **GAMP 5** (validation of computerized systems, GxP) | 2nd edition (2022) | Planning — URS for pharmaceutical / medical clients only | 2026-11-27 (ISPE page lists the 2nd edition; year 2022 from general knowledge) |
 | **Scrum Guide** | 2020 edition (still the official current version) — 3 accountabilities, 5 events, 3 artifacts with commitments (Product Goal, Sprint Goal, Definition of Done). The 2025 *Scrum Guide Expansion Pack* is an optional companion, **not** a new edition | README §3.2–§3.3 roles, §6 working rhythm | 2026-11-16; re-read 2026-11-26 for "self-managing", "no sub-teams or hierarchies", "10 or fewer people" and the Sprint Retrospective concluding the Sprint |
 | **Agile Manifesto** | 2001 — 4 values, 12 principles | README §6 | — (fixed text) |
-| **Semantic Versioning** | 2.0.0 (semver.org) — `MAJOR.MINOR.PATCH`, pre-release `-…`, build metadata `+…` | Development, Design, Deployment | next review |
-| **Conventional Commits** | 1.0.0 | Development | next review |
-| **ISO/IEC 25010** (software quality model) | 2023 edition — usability renamed **interaction capability** (accessibility split into *inclusivity* and *user assistance*); **safety** added; portability renamed **flexibility** | Planning (NFRs), Testing | 2026-11-16 |
-| **ISTQB Foundation Level syllabus** (testing terms and principles) | CTFL (Certified Tester Foundation Level) **v4.0** (April 2023; errata release v4.0.1, Sept 2024) — seven testing principles ("tests wear out" was called the "pesticide paradox" in older editions); maintenance testing = checking the change + regression | Testing §4.13 | 2026-11-16 |
+| **Semantic Versioning** | 2.0.0 (semver.org) — `MAJOR.MINOR.PATCH`, pre-release `-…`, build metadata `+…` | Development, Design, Deployment | 2026-11-27 |
+| **Conventional Commits** | 1.0.0 | Development | 2026-11-27 |
+| **ISO/IEC 25010** (software quality model) | 2023 edition — usability renamed **interaction capability** (accessibility split into *inclusivity* and *user assistance*); **safety** added; portability renamed **flexibility** | Planning (NFRs), Testing | 2026-11-27 |
+| **ISTQB Foundation Level syllabus** (testing terms and principles) | CTFL (Certified Tester Foundation Level) **v4.0** (April 2023; errata release v4.0.1, Sept 2024) — seven testing principles ("tests wear out" was called the "pesticide paradox" in older editions); maintenance testing = checking the change + regression | Testing §4.13 | 2026-11-27 (CTFL v4.0 is the current syllabus on istqb.org; the v4.0.1 errata date was not re-checked) |
 | **WCAG** (accessibility) | 2.2 (W3C Recommendation, republished 12 Dec 2024; success criterion 4.1.1 Parsing removed), level AA as default target. AA includes text contrast 4.5:1 and a minimum touch-target size of 24×24 CSS pixels | Planning, Design, Development, Testing | 2026-11-26 |
 | **European Accessibility Act** | Applies since 28 June 2025 | Planning | next review |
 | **GDPR** (EU data protection) | Regulation (EU) 2016/679 | Planning, Design, Maintenance | next review |
-| **EU Cyber Resilience Act** | Reporting duties since **11 Sep 2026**; full application **11 Dec 2027** | Deployment, Maintenance | 2026-11-13 |
-| **OpenAPI** | **3.2** (Sept 2025); 3.1 still widely supported | Design | 2026-11-13 |
-| **RFC 9457** Problem Details / **RFC 9745** Deprecation / **RFC 8594** Sunset / **RFC 9116** security.txt | Published RFCs | Design, Development, Maintenance | 2026-11-26 (9457), 2026-11-13 (9745); others next review |
-| **DORA metrics** | **Five** metrics: change lead time, deployment frequency, failed deployment recovery time, change fail rate, deployment rework rate | Deployment, Maintenance | 2026-11-13 |
+| **EU Cyber Resilience Act** | Reporting duties since **11 Sep 2026**; full application **11 Dec 2027** | Deployment, Maintenance | 2026-11-27 (European Commission page: reporting from 11 Sep 2026, main obligations from 11 Dec 2027; the Commission published guidance on 27 July 2026) |
+| **OpenAPI** | **3.2.0** (19 Sept 2025) and patch **3.2.1** (10 Sept 2026); 3.1 still widely supported | Design | 2026-11-27 |
+| **RFC 9457** Problem Details / **RFC 9745** Deprecation / **RFC 8594** Sunset / **RFC 9116** security.txt | Published RFCs | Design, Development, Maintenance | 2026-11-27 (all four RFC pages read: 9457 July 2023, 9745 March 2025, 8594 May 2019, 9116 April 2022) |
+| **DORA metrics** | **Five** metrics: change lead time, deployment frequency, failed deployment recovery time, change fail rate, deployment rework rate | Deployment, Maintenance | 2026-11-27 (dora.dev: five-metric model; MTTR replaced by failed deployment recovery time) |
 | **Core Web Vitals** (web.dev) | LCP ≤ 2.5 s, INP ≤ 200 ms, CLS ≤ 0.1, measured at the 75th percentile of real page loads; INP replaced FID in 2024 | Design, Testing, Maintenance | 2026-11-26 |
 | **Team effectiveness research** (Google re:Work, "Understand team effectiveness", Project Aristotle) | Five dynamics: psychological safety, dependability, structure and clarity, meaning, impact | README §6.6, working-agreement template | 2026-11-26 (re:Work page https://rework.withgoogle.com/intl/en/guides/understand-team-effectiveness read via a search result; not the full study) |
 | **Browser security features** (MDN) | Cookies `HttpOnly`, `Secure`, `SameSite`; strict CSP with nonce or hash (test in Report-Only first); SRI with `integrity` + `crossorigin`; viewport meta `width=device-width` | Development, Deployment | 2026-11-26 |
@@ -485,4 +485,4 @@ The external standards, laws and specifications this guide relies on. **Review o
 | **HTTP caching** (`Cache-Control`, `immutable`, RFC 9111 / RFC 8246) | Hashed files: long `max-age` + `immutable`; HTML: `no-cache`; personal data: `private` | Design, Deployment | 2026-11-26 (MDN) |
 | **Cloud shared responsibility** (provider "of the cloud", customer "in the cloud") and availability zones | AWS model used as the reference; other providers use the same idea | Design | 2026-11-26 (AWS docs) |
 | **Node.js release schedule** | Use an Active or Maintenance LTS line (v26 Active LTS, v24 & v22 Maintenance LTS; v20 EOL April 30, 2026); from Node.js 27, one major per year and every major becomes LTS | Development, Maintenance | 2026-11-26 |
-| **npm registry security** | Classic tokens revoked 9 Dec 2025; granular write tokens ≤ 90 days; trusted publishing (OIDC) recommended; `min-release-age` cooldown since npm 11.10.0 | Development, Deployment | 2026-11-13 |
+| **npm registry security** | Classic tokens revoked 9 Dec 2025; granular write tokens ≤ 90 days; trusted publishing (OIDC) recommended; `min-release-age` cooldown since npm 11.10.0 | Development, Deployment | 2026-11-13; classic-token revocation (9 Dec 2025) re-read on the GitHub changelog 2026-11-27 |

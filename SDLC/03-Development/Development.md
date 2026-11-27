@@ -2,7 +2,7 @@
 
 **SDLC series — Phase 3 of 6.** How professional backend teams do **Development** today: the lecture's core tasks, the Waterfall way vs. the modern way, and the industry practices the lecture does not cover.
 
-> **Last reviewed:** 2026-11-26 · **Next review due:** 2027-05-26 · **Review owner:** Tech Lead · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
+> **Last reviewed:** 2026-11-27 · **Next review due:** 2027-05-27 · **Review owner:** Tech Lead · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
 
 [← Design](../02-Design/Design.md) · [Guide README](../README.md) · [Overview](../../6-Phases-of-SDLC-Modern-Best-Practices.md) · [Testing →](../04-Testing/Testing.md)
 
@@ -228,6 +228,9 @@ Closes #42 (REQ-07). Adds rating 1–5 to reviews.
 
 - More rules with examples: [7 Coding Laws of Senior Developer](../../7-Coding-Laws-of-Senior-Developer.md) and [10 Backend Design Patterns](../../10-Backend-Design-Pattern-Laws-of-Senior-Engineers-and-Architects.md).
 - **Keep functions small automatically:** turn on lint rules such as ESLint `complexity`, `max-depth` and `max-lines-per-function`, so very complex code fails CI instead of waiting for a reviewer to notice.
+- **Keep branching flat and explicit:** use **guard clauses** (early `return` on invalid inputs) instead of deeply nested `if/else` trees, prefer strict equality (`===` / `!==`) over loose `==`, and prevent unintentional `switch` fall-through with `break`/`return` (and `default`), a `Map` (or a lookup object read with `Object.hasOwn`, because a plain object also returns inherited keys such as `constructor`), or ESLint `eqeqeq` and `no-fallthrough`.
+- **Use explicit constants, immutability, and the right container:** default to `const` (ESLint `prefer-const`), replace magic numbers/literals with named constants or validated startup config (and freeze or clone shared `const` objects/arrays when mutation would leak across requests), choose `Map` or `Set` over repeated `Array.find()` scans on large in-memory sets, and bound dynamic arrays or use `TypedArray` / streaming for large binary payloads.
+- **Prefer small functions, composition, and strict encapsulation:** favor small pure functions and **composition** (passing dependencies via parameters) over deep class inheritance chains, and when a class owns stateful invariants, enforce them with `#private` fields or closures rather than exposing mutable public internals.
 - **Ports and adapters** ([Design 4.2](../02-Design/Design.md#42-choose-an-architecture-style)): services receive their repositories and external clients as parameters, so tests can pass in fakes.
 
 ```text
@@ -414,7 +417,7 @@ services:
 - **Check versions in AI suggestions.** AI tools learn from older code, so they often suggest **outdated APIs** or old package versions (for example Express 4 patterns in an Express 5 project). Check the version you actually use and its official docs.
 - **Check every new package an AI suggests.** AI tools sometimes invent package names that do not exist, and attackers register those names with malware ("slopsquatting"). Confirm the package exists, is popular and is maintained **before** installing it.
 - **AI agents that run commands** (in your editor or CI) get the **least privilege** they need: no production credentials, no access to secrets they do not need, and every change still goes through a PR.
-- **If your product itself uses an LLM (Large Language Model)**, also follow the **OWASP Top 10 for LLM Applications (2025)** — for example **prompt injection**: never let model output decide permissions or run commands without checks.
+- **If your product itself uses an LLM (Large Language Model)**, also follow the **OWASP Top 10 for LLM Applications (2026 edition; the 2025 edition is the previous one)** — for example **prompt injection**: never let model output decide permissions or run commands without checks.
 
 ### 4.12 Collaboration and documentation
 
@@ -487,12 +490,14 @@ Set-Cookie: sid=<value>; Secure; HttpOnly; SameSite=Lax; Path=/
 
 ### 4.15 Database access, ORMs, and migrations
 
-> From course note [module 2, 03 The Importance of Back-End Development](../../course-1-introduction-to-software-engineering/module-2-introduction-to-software-development/notes/03-the-importance-of-back-end-development.md). Using an **ORM (Object-Relational Mapping)** tool speeds up CRUD (Create, Read, Update, Delete) code, but does not remove the need to understand SQL and database performance.
+> From course notes [module 2, 03 The Importance of Back-End Development](../../course-1-introduction-to-software-engineering/module-2-introduction-to-software-development/notes/03-the-importance-of-back-end-development.md) and [module 3, 02 Query and Assembly Programming Languages](../../course-1-introduction-to-software-engineering/module-3-basics-of-programming/notes/02-query-and-assembly-programming-languages.md). Using an **ORM (Object-Relational Mapping)** tool speeds up CRUD (Create, Read, Update, Delete) code, but does not remove the need to understand SQL and database performance.
 
 - **Use connection pooling:** Reuse a bounded pool of open database connections instead of opening a new connection on every HTTP request.
 - **Prevent N+1 query loops:** Never load a list of `N` records in one query and then run `N` separate queries inside a loop to fetch related rows. Inspect generated SQL logs in development and use **eager loading** (loading related rows upfront in one query instead of inside a loop) or an explicit SQL `JOIN`.
 - **Keep SQL fundamentals sharp:** Use typed ORMs or query builders (for example Prisma, Drizzle ORM, SQLAlchemy, or Django ORM) for standard queries and bound parameters, and drop to parameterized raw SQL when complex reports or tuned indexes need it.
-- **Bound every list and search:** Enforce pagination (`limit` and cursor/offset) on search and list endpoints, and back search filters with proper indexes (such as PostgreSQL full-text indexes) instead of unindexed `LIKE '%term%'` scans on large tables.
+- **Inspect query plans and set timeouts:** Check slow `SELECT` queries with `EXPLAIN` (and add indexes before shipping), and enforce query timeouts (for example `statement_timeout` in PostgreSQL; in MySQL `max_execution_time` limits read-only `SELECT` statements only, so also use client-side or driver timeouts) so one slow query cannot exhaust the connection pool.
+- **Bound every list and search:** Enforce pagination (`limit` and cursor/offset) on search and list endpoints, and back search filters with proper indexes (such as PostgreSQL full-text indexes and `jsonb` GIN, Generalized Inverted Index, indexes) instead of unindexed `LIKE '%term%'` scans on large tables.
+- **Separate runtime and migration DB (Database) roles:** Run the application with a least-privilege DB role (`SELECT`, `INSERT`, `UPDATE`, `DELETE` plus schema/sequence `USAGE` where needed — never `DROP` or `GRANT`), and reserve DDL (Data Definition Language: `CREATE`, `ALTER`, `DROP`) on shared and production databases for the pipeline's migration step.
 - **Track every schema change with versioned migrations:** Store database schema changes as reviewed migration files in Git, keep them backward-compatible during rolling deploys (add new columns before dropping old ones), and run migrations as a controlled pipeline step before or alongside app rollout.
 
 ## 5. Development is "done" when... (a typical Definition of Done)
@@ -578,7 +583,7 @@ Set-Cookie: sid=<value>; Secure; HttpOnly; SameSite=Lax; Path=/
 23. **should** — Every API call checks for HTTP errors, has a timeout, and the UI shows loading, empty and error states.
 24. **should** — New front-end code is **TypeScript** (or JavaScript with JSDoc types checked in CI); a project uses **one** styling approach; Sass code uses `@use`, not `@import`.
 25. **should** — Third-party scripts are approved by the Tech Lead or listed in the project's dependency list, and scripts and stylesheets loaded from a CDN use **SRI** (Subresource Integrity: `integrity` + `crossorigin`).
-26. **should** — Database access uses **connection pooling** and **versioned schema migrations**; developers inspect generated ORM queries in development to prevent `N+1` query loops (§4.15).
+26. **should** — Database access uses **connection pooling**, query timeouts, **least-privilege runtime roles** (no `DROP` or `GRANT` in app credentials), and **versioned schema migrations**; developers check slow queries with `EXPLAIN` and inspect generated ORM queries in development to prevent `N+1` query loops (§4.15). Owner: Tech Lead.
 27. **should** — A commit made by a pair carries a `Co-authored-by: Name <email>` trailer for the second person (the first is the commit author), so both are credited in Git history. Use the email linked to the person's GitHub account, or their GitHub no-reply address.
 28. **must** (restates rule 1 for pairs) — **Pairing never replaces review:** every pull request is approved by someone **outside the pair**, as rule 1 and gate G3 already require. Pairing is an extra layer and a good way to onboard. On a team too small to have an outsider (a prototype), the Tech Lead or another LumenVenture developer reviews; write that arrangement in the project brief §10.
 29. **should** (**must** on client and regulated projects) — CI runs `git diff --check origin/main...HEAD` (with full-depth checkout) so that leftover **conflict markers** (`<<<<<<<`) fail the build; whitespace warnings follow the repository's `core.whitespace` / `.gitattributes` settings (Markdown line breaks, lockfiles and generated files are excluded). A pre-commit hook may run `git diff --cached --check` as an early warning, but CI is the enforcement. Conflicts are resolved by a developer who has **read both sides**.
