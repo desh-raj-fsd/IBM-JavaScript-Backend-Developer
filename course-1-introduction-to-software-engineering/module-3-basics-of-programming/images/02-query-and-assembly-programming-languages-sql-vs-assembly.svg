@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" font-family="Helvetica, Arial, sans-serif">
+<rect width="900" height="470" fill="#ffffff"/>
+<text x="450" y="38" text-anchor="middle" font-size="22" font-weight="bold" fill="#1f2937">How Query Languages and Assembly Languages Execute</text>
+<text x="450" y="62" text-anchor="middle" font-size="13" fill="#6b7280">Declarative SQL CRUD statements talk to a DBMS; assembly lines feed an assembler for one CPU</text>
+
+<!-- Top Track: Query Language -->
+<rect x="40" y="90" width="820" height="155" rx="14" fill="#f0fdfa" stroke="#0d9488" stroke-width="2"/>
+<text x="65" y="118" font-size="15" font-weight="bold" fill="#115e59">Path A — Query Language (High-Level Declarative SQL / CRUD)</text>
+
+<rect x="65" y="135" width="225" height="86" rx="10" fill="#ffffff" stroke="#5eead4" stroke-width="1.5"/>
+<text x="177" y="158" text-anchor="middle" font-size="12" font-weight="bold" fill="#115e59">1. App sends query</text>
+<text x="177" y="178" text-anchor="middle" font-size="11" font-family="Courier, monospace" fill="#134e4a">SELECT title FROM books</text>
+<text x="177" y="196" text-anchor="middle" font-size="11" font-family="Courier, monospace" fill="#134e4a">WHERE rating &gt;= $1;</text>
+<text x="177" y="213" text-anchor="middle" font-size="10" fill="#64748b">Parameterized (blocks SQL injection)</text>
+
+<line x1="290" y1="178" x2="330" y2="178" stroke="#0d9488" stroke-width="2.5"/>
+<polygon points="336,178 325,172 325,184" fill="#0d9488"/>
+
+<rect x="338" y="135" width="235" height="86" rx="10" fill="#ffffff" stroke="#5eead4" stroke-width="1.5"/>
+<text x="455" y="158" text-anchor="middle" font-size="12" font-weight="bold" fill="#115e59">2. DBMS plans &amp; runs</text>
+<text x="455" y="178" text-anchor="middle" font-size="11" fill="#134e4a">Checks permissions &amp; indexes</text>
+<text x="455" y="196" text-anchor="middle" font-size="11" fill="#134e4a">Reads / updates table rows</text>
+<text x="455" y="213" text-anchor="middle" font-size="10" fill="#64748b">SQL: tables+jsonb | NoSQL: CQL/docs</text>
+
+<line x1="573" y1="178" x2="613" y2="178" stroke="#0d9488" stroke-width="2.5"/>
+<polygon points="619,178 608,172 608,184" fill="#0d9488"/>
+
+<rect x="621" y="135" width="215" height="86" rx="10" fill="#ffffff" stroke="#0d9488" stroke-width="1.5"/>
+<text x="728" y="158" text-anchor="middle" font-size="12" font-weight="bold" fill="#115e59">3. Ordered result set</text>
+<text x="728" y="178" text-anchor="middle" font-size="11" fill="#134e4a">Select -> matching rows</text>
+<text x="728" y="196" text-anchor="middle" font-size="11" fill="#134e4a">Action -> rows changed</text>
+<text x="728" y="213" text-anchor="middle" font-size="10" fill="#64748b">Multi-step SQL writes use ACID</text>
+
+<!-- Bottom Track: Assembly Language -->
+<rect x="40" y="265" width="820" height="155" rx="14" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+<text x="65" y="293" font-size="15" font-weight="bold" fill="#9a3412">Path B — Assembly Language (Low-Level Hardware Instructions)</text>
+
+<rect x="65" y="310" width="225" height="86" rx="10" fill="#ffffff" stroke="#fdba74" stroke-width="1.5"/>
+<text x="177" y="333" text-anchor="middle" font-size="12" font-weight="bold" fill="#9a3412">1. One statement per line</text>
+<text x="177" y="353" text-anchor="middle" font-size="11" font-family="Courier, monospace" fill="#7c2d12">{label:} add w0, w0, #5</text>
+<text x="177" y="371" text-anchor="middle" font-size="11" fill="#7c2d12">Mnemonic + Operands</text>
+<text x="177" y="388" text-anchor="middle" font-size="10" fill="#64748b">Real ARM64 (LMC uses LDA/STA/INP)</text>
+
+<line x1="290" y1="353" x2="330" y2="353" stroke="#ea580c" stroke-width="2.5"/>
+<polygon points="336,353 325,347 325,359" fill="#ea580c"/>
+
+<rect x="338" y="310" width="235" height="86" rx="10" fill="#ffffff" stroke="#fdba74" stroke-width="1.5"/>
+<text x="455" y="333" text-anchor="middle" font-size="12" font-weight="bold" fill="#9a3412">2. Assembler translates</text>
+<text x="455" y="353" text-anchor="middle" font-size="11" fill="#7c2d12">Opcodes -> 1 binary instruction</text>
+<text x="455" y="371" text-anchor="middle" font-size="11" fill="#7c2d12">Pseudo-instructions -> 2+ steps</text>
+<text x="455" y="388" text-anchor="middle" font-size="10" fill="#64748b">Directives (.data) -> 0 instructions</text>
+
+<line x1="573" y1="353" x2="613" y2="353" stroke="#ea580c" stroke-width="2.5"/>
+<polygon points="619,353 608,347 608,359" fill="#ea580c"/>
+
+<rect x="621" y="310" width="215" height="86" rx="10" fill="#ffffff" stroke="#ea580c" stroke-width="1.5"/>
+<text x="728" y="333" text-anchor="middle" font-size="12" font-weight="bold" fill="#9a3412">3. Machine code on CPU</text>
+<text x="728" y="353" text-anchor="middle" font-size="11" fill="#7c2d12">0s and 1s run on target ISA</text>
+<text x="728" y="371" text-anchor="middle" font-size="11" fill="#7c2d12">x86-64 != ARM64 != MIPS</text>
+<text x="728" y="388" text-anchor="middle" font-size="10" fill="#64748b">OS syscalls handle I/O safely</text>
+
+<text x="450" y="448" text-anchor="middle" font-size="13" fill="#374151">Query languages express what data you want; assembly expresses exact CPU steps for one chip.</text>
+</svg>

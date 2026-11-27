@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 440" width="920" height="440" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <rect width="920" height="440" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="460" y="34" text-anchor="middle" font-size="19" font-weight="700" fill="#0f172a">Procedural vs. Object-Oriented Programming &amp; Modern JS Objects</text>
+  <text x="460" y="56" text-anchor="middle" font-size="12.5" fill="#475569">Objects group state (properties/fields) and behavior (methods), whereas procedural code keeps data and functions separate</text>
+
+  <!-- Left Panel: Procedural -->
+  <g transform="translate(24, 78)">
+    <rect width="426" height="278" rx="10" fill="#f8fafc" stroke="#2563eb" stroke-width="2"/>
+    <rect width="426" height="36" rx="10" fill="#2563eb"/>
+    <rect y="22" width="426" height="14" fill="#2563eb"/>
+    <text x="213" y="23" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">Procedure-Oriented Programming</text>
+
+    <rect x="28" y="54" width="166" height="92" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="111" y="75" text-anchor="middle" font-size="12" font-weight="700" fill="#1e3a8a">Separate Data</text>
+    <text x="111" y="94" text-anchor="middle" font-size="11" fill="#1e40af">order = {</text>
+    <text x="111" y="110" text-anchor="middle" font-size="11" fill="#1e40af">  subtotal: 100,</text>
+    <text x="111" y="125" text-anchor="middle" font-size="11" fill="#1e40af">  status: "pending"</text>
+    <text x="111" y="139" text-anchor="middle" font-size="11" fill="#1e40af">}</text>
+
+    <line x1="194" y1="100" x2="232" y2="100" stroke="#2563eb" stroke-width="2"/>
+    <polygon points="234,100 226,95 226,105" fill="#2563eb"/>
+
+    <rect x="234" y="54" width="166" height="92" rx="8" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+    <text x="317" y="77" text-anchor="middle" font-size="12" font-weight="700" fill="#075985">Separate Functions</text>
+    <text x="317" y="100" text-anchor="middle" font-size="11" fill="#0c4a6e">finalizeOrder(</text>
+    <text x="317" y="116" text-anchor="middle" font-size="11" fill="#0c4a6e">  order, taxRate</text>
+    <text x="317" y="132" text-anchor="middle" font-size="11" fill="#0c4a6e">)</text>
+
+    <text x="213" y="174" text-anchor="middle" font-size="11.5" font-weight="600" fill="#334155">Functions operate on separate data passed in</text>
+    <rect x="20" y="192" width="386" height="68" rx="6" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="213" y="213" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1e3a8a">Modern Backend Nuance:</text>
+    <text x="213" y="231" text-anchor="middle" font-size="11" fill="#1e40af">Node.js services frequently combine plain data objects</text>
+    <text x="213" y="247" text-anchor="middle" font-size="11" fill="#1e40af">with pure stateless functions intentionally for clarity!</text>
+  </g>
+
+  <!-- Right Panel: OOP -->
+  <g transform="translate(470, 78)">
+    <rect width="426" height="278" rx="10" fill="#f8fafc" stroke="#0d9488" stroke-width="2"/>
+    <rect width="426" height="36" rx="10" fill="#0d9488"/>
+    <rect y="22" width="426" height="14" fill="#0d9488"/>
+    <text x="213" y="23" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">Object-Oriented Programming (OOP)</text>
+
+    <!-- Bundled object box -->
+    <rect x="34" y="48" width="358" height="114" rx="8" fill="#ffffff" stroke="#0d9488" stroke-width="1.8"/>
+    <text x="213" y="66" text-anchor="middle" font-size="12" font-weight="700" fill="#134e4a">Object: BankAccount (Data + Code Together)</text>
+
+    <rect x="48" y="76" width="160" height="74" rx="6" fill="#ccfbf1" stroke="#0d9488" stroke-width="1.2"/>
+    <text x="128" y="95" text-anchor="middle" font-size="11.5" font-weight="700" fill="#134e4a">State (Fields)</text>
+    <text x="128" y="114" text-anchor="middle" font-size="11" fill="#0f766e">owner: "Maya"</text>
+    <text x="128" y="131" text-anchor="middle" font-size="11" fill="#0f766e">#balance: 150</text>
+
+    <rect x="218" y="76" width="160" height="74" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1.2"/>
+    <text x="298" y="95" text-anchor="middle" font-size="11.5" font-weight="700" fill="#14532d">Behavior (Methods)</text>
+    <text x="298" y="114" text-anchor="middle" font-size="11" fill="#166534">deposit(amount)</text>
+    <text x="298" y="131" text-anchor="middle" font-size="11" fill="#166534">getBalance()</text>
+
+    <text x="213" y="180" text-anchor="middle" font-size="11.5" font-weight="600" fill="#334155">Operates on its own encapsulated internal fields</text>
+    <rect x="20" y="192" width="386" height="68" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="213" y="213" text-anchor="middle" font-size="11.5" font-weight="700" fill="#14532d">Modern JS Encapsulation (Mozilla Docs):</text>
+    <text x="213" y="231" text-anchor="middle" font-size="11" fill="#166534">JS supports object literals {} and classes</text>
+    <text x="213" y="247" text-anchor="middle" font-size="11" fill="#166534">with runtime #private fields (classes optional)</text>
+  </g>
+
+  <!-- Bottom Architecture Bar -->
+  <rect x="24" y="372" width="872" height="48" rx="8" fill="#fefce8" stroke="#ca8a04" stroke-width="1.5"/>
+  <text x="460" y="393" text-anchor="middle" font-size="12.5" font-weight="700" fill="#854d0e">Design Principle: Prefer Composition Over Deep Class Inheritance</text>
+  <text x="460" y="411" text-anchor="middle" font-size="11.5" fill="#713f12">Inject helper dependencies cleanly (ports &amp; adapters) and enforce state rules inside private # fields or pure functions</text>
+</svg>

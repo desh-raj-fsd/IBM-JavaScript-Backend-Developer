@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" font-family="Helvetica, Arial, sans-serif">
+<rect width="900" height="460" fill="#ffffff"/>
+<text x="450" y="38" text-anchor="middle" font-size="22" font-weight="bold" fill="#1f2937">High-Level vs. Low-Level Programming Languages</text>
+<text x="450" y="62" text-anchor="middle" font-size="13" fill="#6b7280">Higher levels trade hardware control for coding speed, safety, and portability</text>
+
+<!-- High-level -->
+<rect x="45" y="95" width="380" height="305" rx="14" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<rect x="45" y="95" width="380" height="46" rx="14" fill="#dbeafe"/>
+<text x="235" y="124" text-anchor="middle" font-size="16" font-weight="bold" fill="#1e3a8a">High-Level Languages</text>
+<text x="235" y="164" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e40af">SQL  |  Python  |  JS / TS  |  Pascal</text>
+<rect x="65" y="182" width="340" height="62" rx="8" fill="#ffffff" stroke="#93c5fd"/>
+<text x="235" y="206" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e3a8a">English-like keywords &amp; abstractions</text>
+<text x="235" y="226" text-anchor="middle" font-size="11" fill="#1e40af">1 statement -> many machine instructions</text>
+<rect x="65" y="258" width="340" height="62" rx="8" fill="#ffffff" stroke="#93c5fd"/>
+<text x="235" y="282" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e3a8a">Fast coding, debugging, portability</text>
+<text x="235" y="302" text-anchor="middle" font-size="11" fill="#1e40af">Runs across CPUs via runtimes/compilers</text>
+<text x="235" y="352" text-anchor="middle" font-size="12" font-weight="bold" fill="#1d4ed8">Used for: Web APIs, DB queries, Apps</text>
+<text x="235" y="372" text-anchor="middle" font-size="11" fill="#475569">SQL is declarative; Python is multi-paradigm</text>
+
+<!-- Arrow between -->
+<line x1="430" y1="245" x2="470" y2="245" stroke="#64748b" stroke-width="2.5"/>
+<polygon points="475,245 464,239 464,251" fill="#64748b"/>
+<text x="450" y="226" text-anchor="middle" font-size="11" fill="#475569">Compile</text>
+<text x="450" y="270" text-anchor="middle" font-size="11" fill="#475569">to ISA</text>
+
+<!-- Low-level -->
+<rect x="475" y="95" width="380" height="305" rx="14" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+<rect x="475" y="95" width="380" height="46" rx="14" fill="#ffedd5"/>
+<text x="665" y="124" text-anchor="middle" font-size="16" font-weight="bold" fill="#9a3412">Low-Level Assembly &amp; Machine Code</text>
+<text x="665" y="164" text-anchor="middle" font-size="13" font-weight="bold" fill="#c2410c">x86-64  |  ARM64  |  MIPS  |  RISC-V</text>
+<rect x="495" y="182" width="340" height="62" rx="8" fill="#ffffff" stroke="#fdba74"/>
+<text x="665" y="206" text-anchor="middle" font-size="12" font-weight="bold" fill="#9a3412">Symbolic mnemonics + operands</text>
+<text x="665" y="226" text-anchor="middle" font-size="11" fill="#7c2d12">Opcode (what) + Operand (where)</text>
+<rect x="495" y="258" width="340" height="62" rx="8" fill="#ffffff" stroke="#fdba74"/>
+<text x="665" y="282" text-anchor="middle" font-size="12" font-weight="bold" fill="#9a3412">Tied directly to one CPU ISA</text>
+<text x="665" y="302" text-anchor="middle" font-size="11" fill="#7c2d12">Assembler translates to binary 1s and 0s</text>
+<text x="665" y="352" text-anchor="middle" font-size="12" font-weight="bold" fill="#9a3412">Used for: Bootloaders, kernels, SIMD</text>
+<text x="665" y="372" text-anchor="middle" font-size="11" fill="#475569">Pseudo-instructions can expand to 2+ opcodes</text>
+
+<text x="450" y="436" text-anchor="middle" font-size="13" fill="#374151">Backend tip: write apps in high-level languages; let compilers and Docker target the right CPU ISA.</text>
+</svg>

@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 420" width="920" height="420" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <rect width="920" height="420" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="460" y="34" text-anchor="middle" font-size="19" font-weight="700" fill="#0f172a">Functions &amp; Modular Programming: Define, Declare, and Call</text>
+  <text x="460" y="56" text-anchor="middle" font-size="12.5" fill="#475569">Stand-alone reusable units take parameters as input, run logic, and return a result</text>
+
+  <!-- Panel 1: Define -->
+  <g transform="translate(24, 78)">
+    <rect width="276" height="260" rx="10" fill="#f8fafc" stroke="#2563eb" stroke-width="2"/>
+    <rect width="276" height="36" rx="10" fill="#2563eb"/>
+    <rect y="22" width="276" height="14" fill="#2563eb"/>
+    <text x="138" y="23" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">1. Define Function &amp; Params</text>
+
+    <rect x="20" y="52" width="236" height="48" rx="6" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="138" y="71" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1e3a8a">function calcTax(amt, rate)</text>
+    <text x="138" y="88" text-anchor="middle" font-size="11" fill="#1e40af">const add = (a, b) =&gt; a + b</text>
+
+    <text x="138" y="122" text-anchor="middle" font-size="11.5" font-weight="600" fill="#334155">Block syntax varies by language:</text>
+    <text x="138" y="140" text-anchor="middle" font-size="11" fill="#475569">Braces {} (JS, C++, Java)</text>
+    <text x="138" y="156" text-anchor="middle" font-size="11" fill="#475569">Indentation (Python) / begin-end</text>
+
+    <rect x="20" y="172" width="236" height="70" rx="6" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+    <text x="138" y="191" text-anchor="middle" font-size="11" font-weight="700" fill="#92400e">Syntax Correction:</text>
+    <text x="138" y="208" text-anchor="middle" font-size="11" fill="#78350f">Not all functions use the word</text>
+    <text x="138" y="223" text-anchor="middle" font-size="11" fill="#78350f">"function" (Python def, C/Java</text>
+    <text x="138" y="237" text-anchor="middle" font-size="11" fill="#78350f">return types, JS arrow =&gt;)</text>
+  </g>
+
+  <!-- Panel 2: Declare & Call -->
+  <g transform="translate(322, 78)">
+    <rect width="276" height="260" rx="10" fill="#f8fafc" stroke="#0d9488" stroke-width="2"/>
+    <rect width="276" height="36" rx="10" fill="#0d9488"/>
+    <rect y="22" width="276" height="14" fill="#0d9488"/>
+    <text x="138" y="23" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">2. Declare (C/C++) &amp; Call</text>
+
+    <rect x="20" y="52" width="236" height="48" rx="6" fill="#ccfbf1" stroke="#0d9488" stroke-width="1.5"/>
+    <text x="138" y="71" text-anchor="middle" font-size="12" font-weight="700" fill="#134e4a">const tax = calcTax(100, 0.08);</text>
+    <text x="138" y="88" text-anchor="middle" font-size="11" fill="#0f766e">Passes arguments, returns 8</text>
+
+    <text x="138" y="122" text-anchor="middle" font-size="11.5" font-weight="600" fill="#334155">Parameters vs. Arguments:</text>
+    <text x="138" y="140" text-anchor="middle" font-size="11" fill="#475569">Parameters: named slots in def</text>
+    <text x="138" y="156" text-anchor="middle" font-size="11" fill="#475569">Arguments: real values on call</text>
+
+    <rect x="20" y="172" width="236" height="70" rx="6" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+    <text x="138" y="191" text-anchor="middle" font-size="11" font-weight="700" fill="#075985">Forward Declarations:</text>
+    <text x="138" y="208" text-anchor="middle" font-size="11" fill="#0c4a6e">C/C++ headers declare upfront</text>
+    <text x="138" y="223" text-anchor="middle" font-size="11" fill="#0c4a6e">for top-down compiling; JS</text>
+    <text x="138" y="237" text-anchor="middle" font-size="11" fill="#0c4a6e">hoists function declarations</text>
+  </g>
+
+  <!-- Panel 3: Built-in vs User-defined -->
+  <g transform="translate(620, 78)">
+    <rect width="276" height="260" rx="10" fill="#f8fafc" stroke="#7c3aed" stroke-width="2"/>
+    <rect width="276" height="36" rx="10" fill="#7c3aed"/>
+    <rect y="22" width="276" height="14" fill="#7c3aed"/>
+    <text x="138" y="23" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">3. Built-In vs. User-Defined</text>
+
+    <rect x="20" y="52" width="236" height="48" rx="6" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+    <text x="138" y="71" text-anchor="middle" font-size="11.5" font-weight="700" fill="#4c1d95">console.log("hi") / custom fn</text>
+    <text x="138" y="88" text-anchor="middle" font-size="11" fill="#5b21b6">Write once, reuse everywhere</text>
+
+    <text x="138" y="122" text-anchor="middle" font-size="11.5" font-weight="600" fill="#334155">Dividing complex codebases:</text>
+    <text x="138" y="140" text-anchor="middle" font-size="11" fill="#475569">Subroutines, procedures, methods</text>
+    <text x="138" y="156" text-anchor="middle" font-size="11" fill="#475569">One focused task per function</text>
+
+    <rect x="20" y="172" width="236" height="70" rx="6" fill="#fff1f2" stroke="#e11d48" stroke-width="1.5"/>
+    <text x="138" y="191" text-anchor="middle" font-size="11" font-weight="700" fill="#9f1239">JavaScript Print() Warning:</text>
+    <text x="138" y="208" text-anchor="middle" font-size="11" fill="#881337">JS has console.log(), not Print()!</text>
+    <text x="138" y="223" text-anchor="middle" font-size="11" fill="#881337">Calling Print() throws an error</text>
+    <text x="138" y="237" text-anchor="middle" font-size="11" fill="#881337">in Node.js (Python uses print)</text>
+  </g>
+
+  <!-- Bottom Best Practice Bar -->
+  <rect x="24" y="354" width="872" height="48" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="460" y="375" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1e3a8a">Modern Modular Practice: Small Focused Functions + Explicit Inputs</text>
+  <text x="460" y="393" text-anchor="middle" font-size="11.5" fill="#1e40af">Keep each function short with explicit parameters and no hidden global mutations so unit tests run easily</text>
+</svg>

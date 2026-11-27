@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 420" width="920" height="420" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <rect width="920" height="420" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="460" y="34" text-anchor="middle" font-size="19" font-weight="700" fill="#0f172a">Identifiers in Programming: Constants, Variables, and Containers</text>
+  <text x="460" y="56" text-anchor="middle" font-size="12.5" fill="#475569">Custom named labels reference values, functions, classes, or multi-element collections</text>
+
+  <!-- Panel 1: Constant -->
+  <g transform="translate(24, 78)">
+    <rect width="276" height="260" rx="10" fill="#f8fafc" stroke="#2563eb" stroke-width="2"/>
+    <rect width="276" height="36" rx="10" fill="#2563eb"/>
+    <rect y="22" width="276" height="14" fill="#2563eb"/>
+    <text x="138" y="23" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">1. Named Constant (const)</text>
+
+    <rect x="20" y="52" width="236" height="44" rx="6" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="138" y="71" text-anchor="middle" font-size="12" font-weight="700" fill="#1e3a8a">const TAX_RATE = 0.08;</text>
+    <text x="138" y="88" text-anchor="middle" font-size="11" fill="#1e40af">Locked binding (no reassign)</text>
+
+    <text x="138" y="118" text-anchor="middle" font-size="11.5" font-weight="600" fill="#334155">Why teams use constants:</text>
+    <text x="138" y="136" text-anchor="middle" font-size="11" fill="#475569">Readable vs. magic numbers</text>
+    <text x="138" y="153" text-anchor="middle" font-size="11" fill="#475569">Single place to update value</text>
+
+    <rect x="20" y="170" width="236" height="72" rx="6" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+    <text x="138" y="190" text-anchor="middle" font-size="11" font-weight="700" fill="#92400e">JavaScript Rule (Mozilla Docs):</text>
+    <text x="138" y="207" text-anchor="middle" font-size="11" fill="#78350f">const blocks reassignment,</text>
+    <text x="138" y="222" text-anchor="middle" font-size="11" fill="#78350f">not object/array edits —</text>
+    <text x="138" y="236" text-anchor="middle" font-size="11" fill="#78350f">use Object.freeze() if needed</text>
+  </g>
+
+  <!-- Panel 2: Variable -->
+  <g transform="translate(322, 78)">
+    <rect width="276" height="260" rx="10" fill="#f8fafc" stroke="#0d9488" stroke-width="2"/>
+    <rect width="276" height="36" rx="10" fill="#0d9488"/>
+    <rect y="22" width="276" height="14" fill="#0d9488"/>
+    <text x="138" y="23" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">2. Variable (let / Mutable)</text>
+
+    <rect x="20" y="52" width="236" height="44" rx="6" fill="#ccfbf1" stroke="#0d9488" stroke-width="1.5"/>
+    <text x="138" y="71" text-anchor="middle" font-size="12" font-weight="700" fill="#134e4a">let score = 0; score = 42;</text>
+    <text x="138" y="88" text-anchor="middle" font-size="11" fill="#0f766e">Value updates at runtime</text>
+
+    <text x="138" y="118" text-anchor="middle" font-size="11.5" font-weight="600" fill="#334155">When variables are required:</text>
+    <text x="138" y="136" text-anchor="middle" font-size="11" fill="#475569">Runtime inputs: age, userName</text>
+    <text x="138" y="153" text-anchor="middle" font-size="11" fill="#475569">Avoids hard-coding unknowns</text>
+
+    <rect x="20" y="170" width="236" height="72" rx="6" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+    <text x="138" y="190" text-anchor="middle" font-size="11" font-weight="700" fill="#075985">Modern JS Discipline:</text>
+    <text x="138" y="207" text-anchor="middle" font-size="11" fill="#0c4a6e">Default to const everywhere;</text>
+    <text x="138" y="222" text-anchor="middle" font-size="11" fill="#0c4a6e">use let only when reassigned;</text>
+    <text x="138" y="236" text-anchor="middle" font-size="11" fill="#0c4a6e">avoid legacy var hoisting</text>
+  </g>
+
+  <!-- Panel 3: Container -->
+  <g transform="translate(620, 78)">
+    <rect width="276" height="260" rx="10" fill="#f8fafc" stroke="#7c3aed" stroke-width="2"/>
+    <rect width="276" height="36" rx="10" fill="#7c3aed"/>
+    <rect y="22" width="276" height="14" fill="#7c3aed"/>
+    <text x="138" y="23" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">3. Container Identifier</text>
+
+    <rect x="20" y="52" width="236" height="44" rx="6" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+    <text x="138" y="71" text-anchor="middle" font-size="12" font-weight="700" fill="#4c1d95">const scores = [10, 25, 40];</text>
+    <text x="138" y="88" text-anchor="middle" font-size="11" fill="#5b21b6">One name holds N elements</text>
+
+    <text x="138" y="118" text-anchor="middle" font-size="11.5" font-weight="600" fill="#334155">Replaces 1,000+ variables:</text>
+    <text x="138" y="136" text-anchor="middle" font-size="11" fill="#475569">Index starts at zero: scores[0]</text>
+    <text x="138" y="153" text-anchor="middle" font-size="11" fill="#475569">Loops process all items fast</text>
+
+    <rect x="20" y="170" width="236" height="72" rx="6" fill="#f3e8ff" stroke="#9333ea" stroke-width="1.5"/>
+    <text x="138" y="190" text-anchor="middle" font-size="11" font-weight="700" fill="#581c87">Beyond Arrays &amp; Vectors:</text>
+    <text x="138" y="207" text-anchor="middle" font-size="11" fill="#6b21a8">JS uses Array (dynamic),</text>
+    <text x="138" y="222" text-anchor="middle" font-size="11" fill="#6b21a8">TypedArray (fixed numbers),</text>
+    <text x="138" y="236" text-anchor="middle" font-size="11" fill="#6b21a8">plus Map and Set collections</text>
+  </g>
+
+  <!-- Bottom Naming & Config Bar -->
+  <rect x="24" y="354" width="872" height="48" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="460" y="375" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1e3a8a">Naming &amp; Config Rule: Meaningful Identifiers + Environment Config</text>
+  <text x="460" y="393" text-anchor="middle" font-size="11.5" fill="#1e40af">Use UPPER_SNAKE_CASE for true constants (TAX_RATE), camelCase for JS bindings (cartTotal), and env vars for runtime config</text>
+</svg>

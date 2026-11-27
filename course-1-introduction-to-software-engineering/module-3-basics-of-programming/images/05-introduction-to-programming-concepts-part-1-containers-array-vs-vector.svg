@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 440" width="920" height="440" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <rect width="920" height="440" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="460" y="34" text-anchor="middle" font-size="19" font-weight="700" fill="#0f172a">Fixed-Size Array vs. Dynamic Vector (Sequential Memory Reality)</text>
+  <text x="460" y="56" text-anchor="middle" font-size="12.5" fill="#475569">Both store elements contiguously for fast indexed access; dynamic resizing trades capacity for flexibility</text>
+
+  <!-- Left Panel: Fixed Array -->
+  <g transform="translate(24, 78)">
+    <rect width="426" height="278" rx="10" fill="#f8fafc" stroke="#2563eb" stroke-width="2"/>
+    <rect width="426" height="36" rx="10" fill="#2563eb"/>
+    <rect y="22" width="426" height="14" fill="#2563eb"/>
+    <text x="213" y="23" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">Fixed Array (C++ std::array / JS Int32Array)</text>
+
+    <text x="213" y="58" text-anchor="middle" font-size="12" font-weight="600" fill="#1e3a8a">Contiguous Memory Block (Fixed Size = 4)</text>
+
+    <!-- 4 memory boxes -->
+    <rect x="49" y="74" width="80" height="48" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.8"/>
+    <text x="89" y="96" text-anchor="middle" font-size="13" font-weight="700" fill="#0f172a">10</text>
+    <text x="89" y="114" text-anchor="middle" font-size="10.5" fill="#1e40af">[0]</text>
+
+    <rect x="131" y="74" width="80" height="48" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.8"/>
+    <text x="171" y="96" text-anchor="middle" font-size="13" font-weight="700" fill="#0f172a">20</text>
+    <text x="171" y="114" text-anchor="middle" font-size="10.5" fill="#1e40af">[1]</text>
+
+    <rect x="213" y="74" width="80" height="48" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.8"/>
+    <text x="253" y="96" text-anchor="middle" font-size="13" font-weight="700" fill="#0f172a">30</text>
+    <text x="253" y="114" text-anchor="middle" font-size="10.5" fill="#1e40af">[2]</text>
+
+    <rect x="295" y="74" width="80" height="48" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.8"/>
+    <text x="335" y="96" text-anchor="middle" font-size="13" font-weight="700" fill="#0f172a">40</text>
+    <text x="335" y="114" text-anchor="middle" font-size="10.5" fill="#1e40af">[3]</text>
+
+    <text x="213" y="148" text-anchor="middle" font-size="11.5" font-weight="600" fill="#334155">Syntax examples: int scores[4]; / new Int32Array(4)</text>
+    <text x="213" y="168" text-anchor="middle" font-size="11" fill="#475569">No slack capacity or resize overhead</text>
+    <text x="213" y="186" text-anchor="middle" font-size="11" fill="#475569">Zero-indexed read arr[i] runs in O(1) time</text>
+
+    <rect x="20" y="204" width="386" height="58" rx="6" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+    <text x="213" y="224" text-anchor="middle" font-size="11.5" font-weight="700" fill="#92400e">JavaScript Warning (per Mozilla Developer Network):</text>
+    <text x="213" y="242" text-anchor="middle" font-size="11" fill="#78350f">Standard JS Array ([10, 20]) is DYNAMIC, not fixed-size!</text>
+    <text x="213" y="256" text-anchor="middle" font-size="11" fill="#78350f">Use TypedArray (Int32Array) when fixed size is needed.</text>
+  </g>
+
+  <!-- Right Panel: Dynamic Vector / JS Array -->
+  <g transform="translate(470, 78)">
+    <rect width="426" height="278" rx="10" fill="#f8fafc" stroke="#0d9488" stroke-width="2"/>
+    <rect width="426" height="36" rx="10" fill="#0d9488"/>
+    <rect y="22" width="426" height="14" fill="#0d9488"/>
+    <text x="213" y="23" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">Vector / Dynamic Array (std::vector / JS Array)</text>
+
+    <!-- Header struct box -->
+    <rect x="44" y="48" width="338" height="28" rx="6" fill="#ccfbf1" stroke="#0d9488" stroke-width="1.5"/>
+    <text x="213" y="66" text-anchor="middle" font-size="11.5" font-weight="700" fill="#134e4a">Header: data ptr | size: 4 | capacity: 6</text>
+
+    <!-- 4 used + 2 slack contiguous cells -->
+    <rect x="27" y="88" width="60" height="44" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.8"/>
+    <text x="57" y="108" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f172a">10</text>
+    <text x="57" y="124" text-anchor="middle" font-size="10" fill="#14532d">[0]</text>
+
+    <rect x="89" y="88" width="60" height="44" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.8"/>
+    <text x="119" y="108" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f172a">20</text>
+    <text x="119" y="124" text-anchor="middle" font-size="10" fill="#14532d">[1]</text>
+
+    <rect x="151" y="88" width="60" height="44" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.8"/>
+    <text x="181" y="108" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f172a">30</text>
+    <text x="181" y="124" text-anchor="middle" font-size="10" fill="#14532d">[2]</text>
+
+    <rect x="213" y="88" width="60" height="44" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.8"/>
+    <text x="243" y="108" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f172a">40</text>
+    <text x="243" y="124" text-anchor="middle" font-size="10" fill="#14532d">[3]</text>
+
+    <rect x="275" y="88" width="60" height="44" rx="4" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <text x="305" y="108" text-anchor="middle" font-size="11" fill="#64748b">slack</text>
+    <text x="305" y="124" text-anchor="middle" font-size="10" fill="#64748b">[4]</text>
+
+    <rect x="337" y="88" width="60" height="44" rx="4" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <text x="367" y="108" text-anchor="middle" font-size="11" fill="#64748b">slack</text>
+    <text x="367" y="124" text-anchor="middle" font-size="10" fill="#64748b">[5]</text>
+
+    <text x="213" y="154" text-anchor="middle" font-size="11.5" font-weight="600" fill="#334155">Syntax: vector&lt;int&gt; scores; / const scores = [];</text>
+    <text x="213" y="174" text-anchor="middle" font-size="11" fill="#475569">Extra RAM = header metadata + reserved slack slots</text>
+    <text x="213" y="191" text-anchor="middle" font-size="11" fill="#475569">Resize cost hits only when full capacity reallocates</text>
+
+    <rect x="20" y="204" width="386" height="58" rx="6" fill="#ecfeff" stroke="#0891b2" stroke-width="1.5"/>
+    <text x="213" y="224" text-anchor="middle" font-size="11.5" font-weight="700" fill="#155e75">Correction (per cppreference.com):</text>
+    <text x="213" y="242" text-anchor="middle" font-size="11" fill="#164e63">Contiguous storage makes indexed reads FAST O(1) —</text>
+    <text x="213" y="256" text-anchor="middle" font-size="11" fill="#164e63">sequential memory helps cache speed, never slows reads.</text>
+  </g>
+
+  <!-- Bottom Selection Bar -->
+  <rect x="24" y="372" width="872" height="48" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="460" y="393" text-anchor="middle" font-size="12.5" font-weight="700" fill="#14532d">Backend Container Selection Guide</text>
+  <text x="460" y="411" text-anchor="middle" font-size="11.5" fill="#166534">Ordered list: Array / vector | Fixed numeric buffer: TypedArray | Unique items: Set | Fast key-value lookup: Map / Object</text>
+</svg>

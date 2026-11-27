@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" font-family="Helvetica, Arial, sans-serif">
+<rect width="900" height="470" fill="#ffffff"/>
+<text x="450" y="38" text-anchor="middle" font-size="22" font-weight="bold" fill="#1f2937">The Execution Spectrum: From Source Code to Machine Code</text>
+<text x="450" y="62" text-anchor="middle" font-size="13" fill="#6b7280">Modern languages sit on a spectrum rather than in two strict boxes</text>
+
+<!-- Column 1: AOT Native -->
+<rect x="35" y="95" width="260" height="315" rx="14" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+<rect x="35" y="95" width="260" height="48" rx="14" fill="#ffedd5"/>
+<text x="165" y="125" text-anchor="middle" font-size="16" font-weight="bold" fill="#9a3412">1. AOT Native Compiled</text>
+<rect x="55" y="160" width="220" height="44" rx="8" fill="#ffffff" stroke="#fdba74"/>
+<text x="165" y="187" text-anchor="middle" font-size="13" font-weight="bold" fill="#7c2d12">C  |  C++  |  Rust  |  Go</text>
+<line x1="165" y1="204" x2="165" y2="228" stroke="#ea580c" stroke-width="2"/>
+<polygon points="165,233 159,223 171,223" fill="#ea580c"/>
+<rect x="55" y="235" width="220" height="58" rx="8" fill="#ffffff" stroke="#fdba74"/>
+<text x="165" y="259" text-anchor="middle" font-size="12" font-weight="bold" fill="#9a3412">Compiled at build time</text>
+<text x="165" y="278" text-anchor="middle" font-size="11" fill="#7c2d12">Directly to CPU machine code</text>
+<line x1="165" y1="293" x2="165" y2="317" stroke="#ea580c" stroke-width="2"/>
+<polygon points="165,322 159,312 171,312" fill="#ea580c"/>
+<rect x="55" y="324" width="220" height="64" rx="8" fill="#ffffff" stroke="#ea580c"/>
+<text x="165" y="348" text-anchor="middle" font-size="12" font-weight="bold" fill="#9a3412">OS-specific binary</text>
+<text x="165" y="366" text-anchor="middle" font-size="11" fill="#7c2d12">Fastest startup; no VM needed</text>
+<text x="165" y="381" text-anchor="middle" font-size="11" fill="#7c2d12">Used in OS kernels, DBs, CLIs</text>
+
+<!-- Column 2: Bytecode + VM / JIT -->
+<rect x="320" y="95" width="260" height="315" rx="14" fill="#f0fdfa" stroke="#0d9488" stroke-width="2"/>
+<rect x="320" y="95" width="260" height="48" rx="14" fill="#ccfbf1"/>
+<text x="450" y="125" text-anchor="middle" font-size="16" font-weight="bold" fill="#115e59">2. Bytecode + VM / JIT</text>
+<rect x="340" y="160" width="220" height="44" rx="8" fill="#ffffff" stroke="#5eead4"/>
+<text x="450" y="187" text-anchor="middle" font-size="12" font-weight="bold" fill="#134e4a">Java | C# | Python | Lua</text>
+<line x1="450" y1="204" x2="450" y2="228" stroke="#0d9488" stroke-width="2"/>
+<polygon points="450,233 444,223 456,223" fill="#0d9488"/>
+<rect x="340" y="235" width="220" height="58" rx="8" fill="#ffffff" stroke="#5eead4"/>
+<text x="450" y="259" text-anchor="middle" font-size="12" font-weight="bold" fill="#115e59">Compiled to bytecode first</text>
+<text x="450" y="278" text-anchor="middle" font-size="11" fill="#134e4a">JVM / CLR / Python VM / Lua VM</text>
+<line x1="450" y1="293" x2="450" y2="317" stroke="#0d9488" stroke-width="2"/>
+<polygon points="450,322 444,312 456,312" fill="#0d9488"/>
+<rect x="340" y="324" width="220" height="64" rx="8" fill="#ffffff" stroke="#0d9488"/>
+<text x="450" y="348" text-anchor="middle" font-size="12" font-weight="bold" fill="#115e59">Portable across OSes</text>
+<text x="450" y="366" text-anchor="middle" font-size="11" fill="#134e4a">Java and C# add JIT (or AOT)</text>
+<text x="450" y="381" text-anchor="middle" font-size="11" fill="#134e4a">Python and Lua run VM bytecode</text>
+
+<!-- Column 3: Modern JS / TS + Wasm -->
+<rect x="605" y="95" width="260" height="315" rx="14" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+<rect x="605" y="95" width="260" height="48" rx="14" fill="#dbeafe"/>
+<text x="735" y="125" text-anchor="middle" font-size="16" font-weight="bold" fill="#1e3a8a">3. Modern JS / TS + Wasm</text>
+<rect x="625" y="160" width="220" height="44" rx="8" fill="#ffffff" stroke="#93c5fd"/>
+<text x="735" y="187" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e3a8a">JS | TypeScript | Wasm</text>
+<line x1="735" y1="204" x2="735" y2="228" stroke="#2563eb" stroke-width="2"/>
+<polygon points="735,233 729,223 741,223" fill="#2563eb"/>
+<rect x="625" y="235" width="220" height="58" rx="8" fill="#ffffff" stroke="#93c5fd"/>
+<text x="735" y="259" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e3a8a">Bytecode + JIT (V8)</text>
+<text x="735" y="278" text-anchor="middle" font-size="11" fill="#1e40af">Hot code becomes machine code</text>
+<line x1="735" y1="293" x2="735" y2="317" stroke="#2563eb" stroke-width="2"/>
+<polygon points="735,322 729,312 741,312" fill="#2563eb"/>
+<rect x="625" y="324" width="220" height="64" rx="8" fill="#ffffff" stroke="#2563eb"/>
+<text x="735" y="348" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e3a8a">Browsers + Node.js Servers</text>
+<text x="735" y="366" text-anchor="middle" font-size="11" fill="#1e40af">TypeScript checks types at build</text>
+<text x="735" y="381" text-anchor="middle" font-size="11" fill="#1e40af">Wasm runs C/Rust in browsers</text>
+
+<text x="450" y="445" text-anchor="middle" font-size="13" fill="#374151">Key takeaway: modern JS and Python compile to bytecode or JIT machine code under the hood.</text>
+</svg>

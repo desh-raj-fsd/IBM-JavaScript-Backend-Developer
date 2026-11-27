@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" font-family="Helvetica, Arial, sans-serif">
+<rect width="900" height="470" fill="#ffffff"/>
+<text x="450" y="36" text-anchor="middle" font-size="22" font-weight="bold" fill="#1f2937">Standard Flowchart Symbols (ISO 5807) &amp; Worked Example</text>
+<text x="450" y="60" text-anchor="middle" font-size="13" fill="#6b7280">Five standard symbols on the left; the lecture's "Add Two Numbers" flowchart on the right</text>
+
+<!-- Left Panel: Standard Shapes -->
+<rect x="40" y="85" width="430" height="335" rx="14" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+<text x="255" y="114" text-anchor="middle" font-size="16" font-weight="bold" fill="#1e293b">Standard Flowchart Shapes</text>
+
+<!-- Capsule -->
+<rect x="70" y="132" width="120" height="36" rx="18" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+<text x="130" y="155" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e3a8a">Start / End</text>
+<text x="215" y="148" font-size="12" font-weight="bold" fill="#1e293b">Terminator (Capsule)</text>
+<text x="215" y="165" font-size="11" fill="#475569">Starts or ends the program</text>
+
+<!-- Parallelogram -->
+<polygon points="82,190 190,190 178,226 70,226" fill="#ccfbf1" stroke="#0d9488" stroke-width="2"/>
+<text x="130" y="213" text-anchor="middle" font-size="12" font-weight="bold" fill="#115e59">Data</text>
+<text x="215" y="206" font-size="12" font-weight="bold" fill="#1e293b">Data (Parallelogram)</text>
+<text x="215" y="223" font-size="11" fill="#475569">Reads input or prints output</text>
+
+<!-- Rectangle -->
+<rect x="70" y="246" width="120" height="36" rx="4" fill="#ffedd5" stroke="#ea580c" stroke-width="2"/>
+<text x="130" y="269" text-anchor="middle" font-size="12" font-weight="bold" fill="#9a3412">Process</text>
+<text x="215" y="262" font-size="12" font-weight="bold" fill="#1e293b">Process (Rectangle)</text>
+<text x="215" y="279" font-size="11" fill="#475569">Calculation or action step</text>
+
+<!-- Diamond -->
+<polygon points="130,300 185,325 130,350 75,325" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+<text x="130" y="329" text-anchor="middle" font-size="11" font-weight="bold" fill="#92400e">Decision</text>
+<text x="215" y="322" font-size="12" font-weight="bold" fill="#1e293b">Decision (Diamond)</text>
+<text x="215" y="339" font-size="11" fill="#475569">Yes / No branch condition</text>
+
+<!-- Arrow -->
+<line x1="75" y1="382" x2="178" y2="382" stroke="#334155" stroke-width="2.5"/>
+<polygon points="186,382 174,376 174,388" fill="#334155"/>
+<text x="215" y="380" font-size="12" font-weight="bold" fill="#1e293b">Connector (Arrow)</text>
+<text x="215" y="397" font-size="11" fill="#475569">Shows step execution order</text>
+
+<!-- Right Panel: Add Two Numbers -->
+<rect x="500" y="85" width="360" height="335" rx="14" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+<text x="680" y="114" text-anchor="middle" font-size="16" font-weight="bold" fill="#1e293b">Example: Add Two Numbers</text>
+
+<rect x="615" y="130" width="130" height="34" rx="17" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+<text x="680" y="152" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e3a8a">Start</text>
+<line x1="680" y1="164" x2="680" y2="184" stroke="#334155" stroke-width="2"/>
+<polygon points="680,189 675,180 685,180" fill="#334155"/>
+
+<polygon points="585,191 790,191 775,227 570,227" fill="#ccfbf1" stroke="#0d9488" stroke-width="2"/>
+<text x="680" y="213" text-anchor="middle" font-size="12" font-weight="bold" fill="#115e59">Input n1, Input n2</text>
+<line x1="680" y1="227" x2="680" y2="247" stroke="#334155" stroke-width="2"/>
+<polygon points="680,252 675,243 685,243" fill="#334155"/>
+
+<rect x="590" y="254" width="180" height="36" rx="4" fill="#ffedd5" stroke="#ea580c" stroke-width="2"/>
+<text x="680" y="277" text-anchor="middle" font-size="12" font-weight="bold" fill="#9a3412">Sum = n1 + n2</text>
+<line x1="680" y1="290" x2="680" y2="310" stroke="#334155" stroke-width="2"/>
+<polygon points="680,315 675,306 685,306" fill="#334155"/>
+
+<polygon points="605,317 770,317 755,353 590,353" fill="#ccfbf1" stroke="#0d9488" stroke-width="2"/>
+<text x="680" y="339" text-anchor="middle" font-size="12" font-weight="bold" fill="#115e59">Print Sum</text>
+<line x1="680" y1="353" x2="680" y2="371" stroke="#334155" stroke-width="2"/>
+<polygon points="680,376 675,367 685,367" fill="#334155"/>
+
+<rect x="615" y="378" width="130" height="32" rx="16" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+<text x="680" y="399" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e3a8a">End</text>
+
+<text x="450" y="448" text-anchor="middle" font-size="13" fill="#374151">In modern repos, write these flows as Mermaid text inside Markdown so Git tracks every change.</text>
+</svg>
