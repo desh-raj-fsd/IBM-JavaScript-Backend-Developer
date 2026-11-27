@@ -1,10 +1,10 @@
 # Phase 5 — Deployment: "Automated, Small, Reversible"
 
-**SDLC series — Phase 5 of 6.** How professional backend teams do **Deployment** today: the lecture's core tasks, the Waterfall way vs. the modern way, and the industry practices the lecture does not cover.
+**SDLC series — Phase 5 of 6.** How professional backend teams do **Deployment** today: the core tasks, the Waterfall way vs. the modern way, and the industry practices modern teams add.
 
 > **Last reviewed:** 2026-11-27 · **Next review due:** 2027-05-27 · **Review owner:** Tech Lead · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
 
-[← Testing](../04-Testing/Testing.md) · [Guide README](../README.md) · [Overview](../../6-Phases-of-SDLC-Modern-Best-Practices.md) · [Maintenance →](../06-Maintenance/Maintenance.md)
+[← Testing](../04-Testing/Testing.md) · [Guide README](../README.md) · [Maintenance →](../06-Maintenance/Maintenance.md)
 
 ---
 
@@ -41,12 +41,12 @@
 ## 1. The job
 
 - Release the software to users **safely**: no downtime, a small blast radius if something is wrong, and a fast way back.
-- **Core tasks from the lecture (still true in every model):**
+- **Core tasks (still true in every model):**
   1. Release the application into the **production environment** and make it **available to users**.
   2. Release **in stages**: first to a **UAT (User Acceptance Testing) platform**, then to production.
   3. Get **customer sign-off** on the functionality before production.
   4. Deliver to the right **target**: a **website**, a **mobile app store**, or a **software distribution server** on a corporate network.
-- **Deploy ≠ release** (a key modern idea, not in the lecture):
+- **Deploy ≠ release** (a key modern idea):
 
   | | **Deploy** | **Release** |
   |---|---|---|
@@ -204,7 +204,7 @@ kubectl rollout status deployment/book-review-api   # watch it recover
 # otherwise the tool will "fix" the cluster back to the bad version.
 ```
 
-## 4. Industry practices the lecture does not cover
+## 4. Industry practices beyond the classic tasks
 
 ### 4.1 Building a good container image
 
@@ -215,8 +215,8 @@ kubectl rollout status deployment/book-review-api   # watch it recover
 - **`.dockerignore`** so `node_modules`, `.git`, `.env` and test files never enter the image.
 - **Never bake secrets into the image** — they stay readable in the image layers forever. Inject them at runtime.
 - **Start `node` directly**, not through `npm start`, so the process receives shutdown signals (`SIGTERM`) correctly.
-- **OS packages in a Dockerfile:** install with `apt-get`, not `dpkg -i` (dpkg does not resolve dependencies automatically), in **one** `RUN` layer, and clean the package lists: `RUN apt-get update && apt-get install -y --no-install-recommends <packages> && rm -rf /var/lib/apt/lists/*` (Docker's build best practices). **Pin base images:** a digest for production images (tags are mutable), a version tag at minimum; Renovate or Dependabot update the pins (Docker build best practices). More: [course note 07](../../course-1-introduction-to-software-engineering/module-2-introduction-to-software-development/notes/07-more-application-development-tools.md).
-- **Target CPU (Central Processing Unit) architecture (`--platform`):** compiled binaries and native C/C++ add-ons depend on both the OS (Operating System) and CPU architecture (for example, an Apple Silicon `arm64` build fails on an `amd64` Linux server). Default to building release images in CI for your single production target architecture (typically `linux/amd64`); add multi-platform builds (`docker buildx build --platform linux/amd64,linux/arm64`, per Docker Docs) only when production runs on both, to avoid QEMU (Quick Emulator) emulation in CI, which Docker's multi-platform build docs describe as the fallback when no native builder exists and which is typically slower than native builds (general knowledge). More: [module 3, note 01](../../course-1-introduction-to-software-engineering/module-3-basics-of-programming/notes/01-interpreted-and-compiled-programming-languages.md).
+- **OS packages in a Dockerfile:** install with `apt-get`, not `dpkg -i` (dpkg does not resolve dependencies automatically), in **one** `RUN` layer, and clean the package lists: `RUN apt-get update && apt-get install -y --no-install-recommends <packages> && rm -rf /var/lib/apt/lists/*` (Docker's build best practices). **Pin base images:** a digest for production images (tags are mutable), a version tag at minimum; Renovate or Dependabot update the pins (Docker build best practices).
+- **Target CPU (Central Processing Unit) architecture (`--platform`):** compiled binaries and native C/C++ add-ons depend on both the OS (Operating System) and CPU architecture (for example, an Apple Silicon `arm64` build fails on an `amd64` Linux server). Default to building release images in CI for your single production target architecture (typically `linux/amd64`); add multi-platform builds (`docker buildx build --platform linux/amd64,linux/arm64`, per Docker Docs) only when production runs on both, to avoid QEMU (Quick Emulator) emulation in CI, which Docker's multi-platform build docs describe as the fallback when no native builder exists and which is typically slower than native builds (general knowledge).
 
 ```dockerfile
 # Dockerfile — multi-stage, small, non-root
@@ -335,7 +335,7 @@ The **DORA (DevOps Research and Assessment)** research program measures software
 
 ### 4.10 Go-live web baseline: DNS, HTTPS and CDN
 
-> From course note [module 2, 01 Overview of Web and Cloud Development](../../course-1-introduction-to-software-engineering/module-2-introduction-to-software-development/notes/01-overview-of-web-and-cloud-development.md). Do these checks **before the first public release** and after any domain or edge change. The design side is in [Design 4.12](../02-Design/Design.md#412-web-delivery-and-cloud-baseline).
+> Do these checks **before the first public release** and after any domain or edge change. The design side is in [Design 4.12](../02-Design/Design.md#412-web-delivery-and-cloud-baseline).
 
 - **DNS (Domain Name System):** the domain points to the load balancer or CDN. Keep the **TTL** (how long DNS answers are cached) **low (for example 300 seconds) before a migration**, so you can switch fast, and raise it afterwards. Keep DNS records in **Infrastructure as Code**, and turn on registrar lock and 2FA for the domain account.
 - **HTTPS only:**
@@ -345,7 +345,7 @@ The **DORA (DevOps Research and Assessment)** research program measures software
   - **HSTS** (`Strict-Transport-Security`) is sent on HTTPS responses: `max-age=31536000; includeSubDomains` (1 year) once every subdomain works over HTTPS. **Preloading** (the `preload` flag) is hard to undo, so it needs a Tech Lead decision.
 - **CDN and cache headers:** hashed static files use `Cache-Control: public, max-age=31536000, immutable`; HTML uses `no-cache`; personal responses use `private` ([Design 4.12](../02-Design/Design.md#412-web-delivery-and-cloud-baseline)). **Check on staging with `curl -I`** that no personal response is cached by the CDN.
 - **Health endpoints reachable by the load balancer:** liveness and readiness exist (see the manifest in §3) and do **not** go through the CDN cache.
-- **Browser security for web UIs** (not in the lecture; from [module 2, 02](../../course-1-introduction-to-software-engineering/module-2-introduction-to-software-development/notes/02-learning-front-end-development.md)):
+- **Browser security for web UIs**:
   - Send a **Content-Security-Policy (CSP)** header. A **strict** policy uses a **nonce or hash** for scripts (server-rendered pages use nonces; static sites use hashes), avoids `unsafe-inline`, and sets `object-src 'none'` and `base-uri 'none'`. **Start with `Content-Security-Policy-Report-Only`**, fix the reports, then enforce.
   - Session cookies carry `Secure`, `HttpOnly` and `SameSite` ([Development 4.14](../03-Development/Development.md#414-front-end-code-standards)).
   - Scripts and stylesheets from a CDN use **SRI** (Subresource Integrity: `integrity` with `crossorigin="anonymous"`).
@@ -441,4 +441,4 @@ The **DORA (DevOps Research and Assessment)** research program measures software
 
 ---
 
-[← Testing](../04-Testing/Testing.md) · [Guide README](../README.md) · [Overview](../../6-Phases-of-SDLC-Modern-Best-Practices.md) · [Maintenance →](../06-Maintenance/Maintenance.md)
+[← Testing](../04-Testing/Testing.md) · [Guide README](../README.md) · [Maintenance →](../06-Maintenance/Maintenance.md)

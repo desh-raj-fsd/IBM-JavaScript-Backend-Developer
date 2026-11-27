@@ -1,10 +1,10 @@
 # Phase 1 — Planning: "Broad First, Detail Later"
 
-**SDLC series — Phase 1 of 6.** How professional backend teams do **Planning** today: the lecture's core tasks, the Waterfall way vs. the modern way, and the industry practices the lecture does not cover.
+**SDLC series — Phase 1 of 6.** How professional backend teams do **Planning** today: the core tasks, the Waterfall way vs. the modern way, and the industry practices modern teams add.
 
 > **Last reviewed:** 2026-11-27 · **Next review due:** 2027-05-27 · **Review owner:** Product Owner · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
 
-[← Overview](../../6-Phases-of-SDLC-Modern-Best-Practices.md) · [Guide README](../README.md) · [Overview](../../6-Phases-of-SDLC-Modern-Best-Practices.md) · [Design →](../02-Design/Design.md)
+[Guide README](../README.md) · [Design →](../02-Design/Design.md)
 
 ---
 
@@ -145,7 +145,7 @@ flowchart TD
 
 ## 3. The eight planning factors: then and now
 
-The lecture lists eight factors to consider. All eight are still required today. What changed is **how** teams work them out.
+Eight factors are traditionally considered in planning. All eight are still required today. What changed is **how** teams work them out.
 
 | #   | Factor                              | Question it answers                           | Waterfall way                                                     | ✅ Modern way                                                                                                                                                                                                                                                                                                                                                                                                         |
 | --- | ----------------------------------- | --------------------------------------------- | ----------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -169,7 +169,7 @@ The lecture lists eight factors to consider. All eight are still required today.
 
 ## 4. Often-missed parts of a good plan
 
-These are not named in the lecture, but professional teams treat them as part of planning.
+These are often missing from classic textbooks, but professional teams treat them as part of planning.
 
 ### 4.1 Stakeholder identification and analysis
 
@@ -307,7 +307,7 @@ Scenario: Reviews work well
   Key result 3:     App store rating of 4.5 or higher by 31 December.
   ```
 
-  - Watch the words: in OKRs the "objective" is the **qualitative** part, and the **key results** are what the lecture calls "objectives".
+  - Watch the words: in OKRs the "objective" is the **qualitative** part, and the **key results** are what classic textbooks call "objectives".
 - **Outcome over output.** "We shipped search" is **output**. "Users find a book 40% faster" is an **outcome**. Set targets on outcomes, and check them after each release with product analytics.
 - **Give objectives IDs** (`OBJ-1`, `OBJ-2`) so stories can point to them. This gives one chain from **goal → objective → epic → requirement → test → measured result**:
 
@@ -424,16 +424,16 @@ flowchart TD
 
 ### 4.15 Which requirement documents to write
 
-The course names three documents: **URS** (user needs), **SRS** (software — the most common) and **SysRS** (the whole system, including hardware and people). The standard **ISO/IEC/IEEE 29148:2018** uses four levels and lets you **combine** them when that is simpler.
+Classic textbooks name three documents: **URS** (user needs), **SRS** (software — the most common) and **SysRS** (the whole system, including hardware and people). The standard **ISO/IEC/IEEE 29148:2018** uses four levels and lets you **combine** them when that is simpler.
 
-| ISO 29148 | Course name | Covers | **At LumenVenture** |
+| ISO 29148 | Classic name | Covers | **At LumenVenture** |
 |-----------|-------------|--------|---------------------|
 | **BRS** — Business Requirements Specification | (scope part of the SRS) | Business purpose, goals, processes | [Project brief](templates/project-brief.md) §1–2 — every project |
 | **StRS** — Stakeholder Requirements Specification | **URS** | User and stakeholder needs as stories or use cases; checked by **UAT** | Client: [client PRD](templates/client-prd.md) + user stories. Internal: stories + personas. GxP clients: a real URS |
 | **SyRS** — System Requirements Specification | **SysRS** | Software + hardware + people + policy + regulation; system acceptance criteria | Only when the product includes **devices, hardware or operators** (IoT, kiosks). Cloud-only: design doc + C4 + infrastructure as code + SLOs |
 | **SRS** — Software Requirements Specification | **SRS** | Functional, external interface, system features, non-functional; constraints, assumptions, dependencies | Default: backlog + NFRs as numbers + OpenAPI contract. Regulated or contract asks: full SRS + traceability matrix |
 
-![Requirement documents: ISO 29148 levels, course names, and what LumenVenture writes for each](images/sdlc-modern-requirement-documents.svg)
+![Requirement documents: ISO 29148 levels, classic names, and what LumenVenture writes for each](images/sdlc-modern-requirement-documents.svg)
 
 - **Pharmaceutical and medical clients (GxP — "good practice" rules such as good manufacturing practice):** regulators expect computer systems to be **validated**. The industry guide **GAMP 5** (2nd edition, 2022) starts validation from a **URS** with objective, verifiable requirements. It also supports Agile, iterative work. On such projects the URS is a **must** (see [8.2](#82-required-outputs)).
 - **Use cases vs. user stories:** a use case states **who** (actor) and **what** (steps), but often not **why** — add the business reason when you use them.
@@ -760,4 +760,4 @@ flowchart TD
 
 ---
 
-[← Overview](../../6-Phases-of-SDLC-Modern-Best-Practices.md) · [Guide README](../README.md) · [Overview](../../6-Phases-of-SDLC-Modern-Best-Practices.md) · [Design →](../02-Design/Design.md)
+[Guide README](../README.md) · [Design →](../02-Design/Design.md)

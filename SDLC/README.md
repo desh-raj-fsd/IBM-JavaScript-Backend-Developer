@@ -23,6 +23,8 @@
 | [05-Deployment](05-Deployment/Deployment.md) | `Deployment.md` | how software reaches users safely | setting up the pipeline; every release |
 | [06-Maintenance](06-Maintenance/Maintenance.md) | `Maintenance.md` | how the running service is kept healthy | going live; incidents; monthly service reviews |
 
+Also in this folder: the [CHANGELOG](CHANGELOG.md) (review log), `images/` (diagrams for this README) and `tools/check.py` (the check script, [9.2](#92-pull-request-rule-and-checks)). Nothing outside this folder is needed to use or change the guide.
+
 Each phase file has the same shape:
 
 1. **Jargon** — the terms used in that phase.
@@ -393,9 +395,10 @@ flowchart TD
 
 ## 9. Changing This Guide
 
-- Anyone can propose a change by **pull request**; the change needs approval from **one Tech Lead and one Delivery Lead**.
+- Anyone can propose a change by **pull request** ([9.2](#92-pull-request-rule-and-checks)). Approvals depend on what changes: the file's **review owner and second reviewer** ([9.1](#91-review-schedule)); a change to a **must** rule also needs both **guide owners**.
+- **This folder is self-contained (must):** it is the single source of truth. Do not link to files outside it, and do not copy text from courses, lectures, notes or other repositories. Links to public web pages, standards and articles are fine, and every changed fact names its public source (9.1). The check script ([9.2](#92-pull-request-rule-and-checks)) fails on links that leave the folder and on references to course material.
 - Good sources of changes: **retrospectives**, **postmortems**, and new industry practice.
-- **Source of truth:** this guide follows **current industry-standard practice**. Course material and older documents give background only; when they disagree with current practice, the guide follows current practice.
+- **Source of truth:** this guide follows **current industry-standard practice**. Textbooks and older documents give background only; when they disagree with current practice, the guide follows current practice.
 - Every file is reviewed on a fixed schedule — see [9.1](#91-review-schedule).
 - Projects may **deviate** from a "should" rule with a written reason (ADR or project brief). "Must" rules need approval from the guide owners.
 
@@ -444,6 +447,32 @@ Review the affected file **within 2 weeks** when:
 2. Update the file's **Last reviewed** and **Next review due** dates (next = review date + 6 months), even if nothing else changed.
 3. Add an entry to the [review log](CHANGELOG.md): date, file, reviewers, what changed (or "no changes needed"), sources checked.
 4. Approval: the review owner + the second reviewer; changes to **must** rules also need the guide owners.
+
+---
+
+### 9.2 Pull request rule and checks
+
+**Rule (must):** every change to this guide, including a change to a template, goes through a **pull request** into `main`. Nobody pushes to `main` directly.
+
+1. **Branch protection on `main`:** pull request required, at least **2 approvals** (the review owner and the second reviewer from the table in [9.1](#91-review-schedule)), approvals dismissed when new commits arrive, status check below required, no force-push.
+2. **Guide owners** are required reviewers for any change to a **must** rule or any new **must** rule (set this with a `CODEOWNERS` entry for the phase files).
+3. **Required check:** `python3 tools/check.py` (standard library only) must pass. It finds broken links and anchors, links that leave this folder, skipped or duplicate rule numbers, templates and images that no file mentions, references to course material, and files whose review date has passed.
+4. **Every pull request** adds an entry at the top of the [CHANGELOG](CHANGELOG.md) (files, what changed, sources checked, not re-checked), updates "Last reviewed" and "Next review due" only in the files it changed, and links the **public source** of each changed fact.
+5. **Emergency fix** (a wrong fact that could cause harm): the Tech Lead may merge with **one** approval, and the second review happens within 2 working days.
+
+Example CI job (copy to `.github/workflows/sdlc-check.yml`; pin third-party actions to a full commit SHA, see [Deployment rule 24](05-Deployment/Deployment.md#64-rules)):
+
+```yaml
+name: sdlc-check
+on: { pull_request: { paths: ["**"] } }
+permissions: { contents: read }
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - run: python3 tools/check.py
+```
 
 ---
 

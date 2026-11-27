@@ -1,10 +1,10 @@
 # Phase 2 — Design: "Lightweight, Versioned, API-First"
 
-**SDLC series — Phase 2 of 6.** How professional backend teams do **Design** today: the lecture's core tasks, the Waterfall way vs. the modern way, and the industry practices the lecture does not cover.
+**SDLC series — Phase 2 of 6.** How professional backend teams do **Design** today: the core tasks, the Waterfall way vs. the modern way, and the industry practices modern teams add.
 
 > **Last reviewed:** 2026-11-27 · **Next review due:** 2027-05-27 · **Review owner:** Tech Lead · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
 
-[← Planning](../01-Planning/Planning.md) · [Guide README](../README.md) · [Overview](../../6-Phases-of-SDLC-Modern-Best-Practices.md) · [Development →](../03-Development/Development.md)
+[← Planning](../01-Planning/Planning.md) · [Guide README](../README.md) · [Development →](../03-Development/Development.md)
 
 ---
 
@@ -38,7 +38,7 @@
 ## 1. The job
 
 - Decide **how** the system will be built to meet the requirements: its parts, data, APIs, security, how it scales, and how it runs in production.
-- **Core tasks from the lecture (still true in every model):**
+- **Core tasks (still true in every model):**
   1. Use the **requirements** (from the SRS or the stories) as the input.
   2. **Several team members work together** to design the **software architecture**.
   3. The architecture is **reviewed by stakeholders and the team**.
@@ -162,7 +162,7 @@ flowchart TD
 
 ## 4. The design areas a complete design must cover
 
-The lecture says "develop the software architecture". In practice, a complete backend design answers questions in **all** of these areas.
+The classic task is "develop the software architecture". In practice, a complete backend design answers questions in **all** of these areas.
 
 ### 4.1 Non-functional requirements drive the architecture
 
@@ -200,7 +200,7 @@ The lecture says "develop the software architecture". In practice, a complete ba
 
 ### 4.3 Data design
 
-- **Choose the database by access patterns** — how the data will be read and written — not by habit. (See [7 Database Laws](../../7-Database-Laws-of-Senior-Backend-Developer.md).)
+- **Choose the database by access patterns** — how the data will be read and written — not by habit. (See [Use The Index, Luke](https://use-the-index-luke.com/) and the [PostgreSQL index docs](https://www.postgresql.org/docs/current/indexes.html).)
 - Design the **schema**: tables or collections, fields, types, relations.
 - **Enforce business rules in the database too** (NOT NULL, UNIQUE, FOREIGN KEY, CHECK), not only in the code.
 - Plan **indexes** for the most common queries.
@@ -246,7 +246,7 @@ try {
 
 ### 4.4 API design
 
-(See [8 API Laws](../../8-API-Laws-of-Senior-Backend-Developer.md) for details.)
+(See the [OpenAPI specification](https://spec.openapis.org/oas/latest.html) and the [OWASP REST Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html).)
 
 - **Resources, not actions:** `POST /books/{isbn}/reviews`, not `POST /createReview`.
 - **Correct HTTP methods and status codes** (`200` OK, `201` created, `400` bad input, `401` not logged in, `403` not allowed, `404` not found, `405` method not allowed, `409` conflict, `422` validation error, `429` too many requests for rate limiting — **OWASP API4:2023** Unrestricted Resource Consumption).
@@ -296,7 +296,7 @@ flowchart TD
 
 ### 4.5 Security design
 
-(See [7 Authentication Concepts](../../7-Authentication-Concepts-Every-Senior-Developer-Should-Know.md) for details.)
+(See the OWASP [Authentication](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html) and [Session Management](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html) cheat sheets, and RFC 9700 for OAuth 2.0.)
 
 - **Authentication:** how users prove who they are (sessions, JWT, OAuth 2.0 / OpenID Connect). Add **MFA (multi-factor authentication)** for staff and admin accounts, and offer **passkeys** (WebAuthn, phishing-resistant) to end users where the product holds personal or payment data (OWASP Multifactor Authentication Cheat Sheet; NIST SP 800-63B-4, final July 2025).
 - **Authorization:** who may do what — check **ownership** on the server for every request (for example only the author can delete a review), preventing **BOLA (Broken Object Level Authorization)** (**API1:2023** in the OWASP API Security Top 10:2023).
@@ -312,7 +312,7 @@ flowchart TD
 - **Timeouts** on every call to another service or database — never wait forever.
 - **Retries with backoff and jitter** (wait longer each time, plus a small random delay so all clients do not retry at the same moment) only for safe, idempotent operations.
 - **Bulkheads and rate limits:** separate pools (connections, workers) for different kinds of work, and limits per client, so one slow or abusive part cannot use up all resources.
-- **Circuit breakers** to stop calling a service that is failing (see [10 Backend Design Patterns](../../10-Backend-Design-Pattern-Laws-of-Senior-Engineers-and-Architects.md)).
+- **Circuit breakers** to stop calling a service that is failing (see Martin Fowler's [Circuit Breaker](https://martinfowler.com/bliki/CircuitBreaker.html)).
 - **Graceful degradation:** if the "recommended books" service is down, still show the reviews.
 - **Queues** for slow or unreliable work (sending emails) so the user does not wait.
 - **Backups and a restore test** — a backup you never restored is not a backup.
@@ -363,10 +363,10 @@ flowchart TD
 
 ### 4.9 UI/UX design and prototypes
 
-- Even for a backend course, the full SDLC design phase includes the **user experience**: **wireframes** (simple screen sketches), **mock-ups**, and clickable **prototypes** (for example in Figma).
+- Even for a backend team, the full SDLC design phase includes the **user experience**: **wireframes** (simple screen sketches), **mock-ups**, and clickable **prototypes** (for example in Figma).
 - Use a **design system** (shared components and styles) so all screens look and behave the same.
 - Design for **accessibility** (WCAG) from the start — adding it later is expensive.
-- The lecture's design-phase **prototype** (a preliminary mock-up for demonstration) fits here: show it to stakeholders before building.
+- The classic design-phase **prototype** (a preliminary mock-up for demonstration) fits here: show it to stakeholders before building.
 
 ### 4.10 The design document (RFC) template
 
@@ -394,7 +394,7 @@ Many companies write a short design doc, often called an **RFC (Request for Comm
 
 ### 4.12 Web delivery and cloud baseline
 
-> From course note [module 2, 01 Overview of Web and Cloud Development](../../course-1-introduction-to-software-engineering/module-2-introduction-to-software-development/notes/01-overview-of-web-and-cloud-development.md). The lecture explains the client-server model and what "cloud" means. This section turns it into design decisions.
+> This section turns the client-server model and the cloud basics into design decisions.
 
 **1. Choose how each page or screen is delivered.** Decide this per part of the product, not once for everything.
 
@@ -438,7 +438,7 @@ Many companies write a short design doc, often called an **RFC (Request for Comm
 
 ### 4.13 Front-end design decisions
 
-> From course note [module 2, 02 Learning Front-End Development](../../course-1-introduction-to-software-engineering/module-2-introduction-to-software-development/notes/02-learning-front-end-development.md). The lecture names HTML, CSS, JavaScript, Sass, Less and three frameworks. This section turns them into design decisions. For delivery style (static, server-rendered, single-page app) and the CDN, see [4.12](#412-web-delivery-and-cloud-baseline).
+> This section turns the front-end building blocks (HTML, CSS, JavaScript, Sass, Less and the main frameworks) into design decisions. For delivery style (static, server-rendered, single-page app) and the CDN, see [4.12](#412-web-delivery-and-cloud-baseline).
 
 | Decision | Default | Why |
 |----------|---------|-----|
@@ -451,14 +451,14 @@ Many companies write a short design doc, often called an **RFC (Request for Comm
 | **Styling** | One approach per project: plain modern CSS, CSS Modules, utility CSS, or Sass | Mixed systems are hard to maintain. Browsers now support custom properties and nesting, so a preprocessor is optional for new projects |
 | **Shared UI** | Reusable components and **design tokens** when the product has many screens | Same look and one place to change a color |
 
-- **Frameworks sit on a range** from **minimal** (Express for Node.js: routing and middleware; you choose validation, structure and database layer) to **opinionated** (Django and Angular decide folders, names and workflow; NestJS gives an out-of-the-box architecture inspired by Angular and runs on Express by default), so you make fewer decisions but follow their rules. A framework **calls your code** (inversion of control), so it shapes your architecture; choose with care early. Changing it later is **possible but costly**: migrate **step by step** (strangler approach, [Maintenance 4.10](../06-Maintenance/Maintenance.md#410-legacy-systems-and-modernization)). More: [course note 06](../../course-1-introduction-to-software-engineering/module-2-introduction-to-software-development/notes/06-application-development-tools.md).
+- **Frameworks sit on a range** from **minimal** (Express for Node.js: routing and middleware; you choose validation, structure and database layer) to **opinionated** (Django and Angular decide folders, names and workflow; NestJS gives an out-of-the-box architecture inspired by Angular and runs on Express by default), so you make fewer decisions but follow their rules. A framework **calls your code** (inversion of control), so it shapes your architecture; choose with care early. Changing it later is **possible but costly**: migrate **step by step** (strangler approach, [Maintenance 4.10](../06-Maintenance/Maintenance.md#410-legacy-systems-and-modernization)).
 - **Write an ADR for the front-end approach** (rule 5 already requires one for a major dependency). It must list the **support window and end-of-life date** of the framework. Real examples: AngularJS support ended in January 2022 and Vue 2 reached end of life on 31 December 2023, so teams on them had to migrate.
 - **The browser is not part of the trusted system.** Everything the user's browser holds can be read or changed, so design validation, authorization and secrets on the **server** (rule 3; [Development 4.14](../03-Development/Development.md#414-front-end-code-standards)).
 - **Checklist for the team:** [frontend-checklist.md](../03-Development/templates/frontend-checklist.md).
 
 ### 4.14 Choosing the technology stack
 
-> From course note [module 2, 08 Introduction to Software Stacks](../../course-1-introduction-to-software-engineering/module-2-introduction-to-software-development/notes/08-introduction-to-software-stacks.md). A **software stack** is the layered set of languages, frameworks, runtime, web and application servers, messaging and database. A **technology stack** adds the hardware and infrastructure (virtual machines, containers, storage, load balancers). We record **both**: the software choices and who runs the infrastructure.
+> A **software stack** is the layered set of languages, frameworks, runtime, web and application servers, messaging and database. A **technology stack** adds the hardware and infrastructure (virtual machines, containers, storage, load balancers). We record **both**: the software choices and who runs the infrastructure.
 
 - **Layers:** name the presentation, business logic and data layers of the product ([4.2](#42-choose-an-architecture-style)) and the technology in each. Use only the layers you need.
 - **Decide with criteria, not with a brand name** (acronyms such as LAMP, MEAN or MERN only describe one combination):
@@ -474,7 +474,7 @@ Many companies write a short design doc, often called an **RFC (Request for Comm
 
 - **Data:** relational databases can also hold flexible data (PostgreSQL `jsonb`, MySQL JSON columns), and MongoDB supports multi-document ACID transactions (on replica sets and sharded clusters), so "relational vs unstructured" is rarely a hard split. Prefer **one primary database** and add a second kind of store only when an access pattern needs it.
 - **One language end to end** (for example JavaScript or TypeScript with Node.js) is a convenience, not a rule. A front end can call a back end in any language through an API.
-- **Execution model and memory safety** ([module 3, note 01](../../course-1-introduction-to-software-engineering/module-3-basics-of-programming/notes/01-interpreted-and-compiled-programming-languages.md)): match the runtime to the workload—ahead-of-time (AOT) compiled binaries (for example Go, Rust, .NET Native AOT, or GraalVM Native Image) start fastest for serverless cold starts; JIT-compiled (Just-In-Time) or bytecode runtimes (Node.js/TypeScript, Python, JVM — Java Virtual Machine, .NET CLR — Common Language Runtime) favor fast iteration and rich ecosystems. Prefer memory-safe languages or runtimes over raw C/C++ for new services, and consider **WebAssembly (Wasm)** only when a browser UI needs near-native compute speed alongside JavaScript. Record the runtime choice in the stack ADR (rule 24).
+- **Execution model and memory safety**: match the runtime to the workload—ahead-of-time (AOT) compiled binaries (for example Go, Rust, .NET Native AOT, or GraalVM Native Image) start fastest for serverless cold starts; JIT-compiled (Just-In-Time) or bytecode runtimes (Node.js/TypeScript, Python, JVM — Java Virtual Machine, .NET CLR — Common Language Runtime) favor fast iteration and rich ecosystems. Prefer memory-safe languages or runtimes over raw C/C++ for new services, and consider **WebAssembly (Wasm)** only when a browser UI needs near-native compute speed alongside JavaScript. Record the runtime choice in the stack ADR (rule 24).
 - **Stack names age:** check what a name means today (for example ASP.NET today is ASP.NET Core, which is cross-platform).
 
 ## 5. Design is "done enough" when...
@@ -578,4 +578,4 @@ Many companies write a short design doc, often called an **RFC (Request for Comm
 
 ---
 
-[← Planning](../01-Planning/Planning.md) · [Guide README](../README.md) · [Overview](../../6-Phases-of-SDLC-Modern-Best-Practices.md) · [Development →](../03-Development/Development.md)
+[← Planning](../01-Planning/Planning.md) · [Guide README](../README.md) · [Development →](../03-Development/Development.md)

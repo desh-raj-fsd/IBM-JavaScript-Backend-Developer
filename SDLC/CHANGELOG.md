@@ -3,14 +3,24 @@
 > One entry per review or significant change, **newest first**. Rules: [README §9.1 Review schedule](README.md#91-review-schedule).
 > Each entry lists the date, the files, the reviewers, what changed (or "no changes needed") and the sources checked.
 
-## 2026-11-27 — Review: guides and module 1 (repo-audit)
+## 2026-11-27 — Self-contained guide and pull request rule
 
-- **Files:** `README.md` (§10 ISO 29148 row), top-level guides (`6-Phases…`, `7-Authentication…`, `8-API-Laws…`, `7-Database-Laws…`, `7-Coding-Laws…`), `master-prompt.md` (OWASP name only), module 1 notes 03 and 05
-- **Scope:** **targeted** re-check of time-sensitive facts in the guides and module 1 notes; guide code blocks syntax-checked (fragments need imports, no real bugs found).
+- **Files:** `README.md` (§9, new §9.2, §1), all phase files (header, navigation, section titles), `Planning.md`, `Design.md`, `Development.md`, `Testing.md`, `Deployment.md`, `Maintenance.md`, three SVGs, `CHANGELOG.md`, new `tools/check.py`
+- **Scope:** **structural change**, no practice changed. The guide no longer links to anything outside this folder (the root overview, five reference guides, and 17 links to course notes) and no longer mentions lectures, courses or notes.
+- **Reviewers:** <Tech Lead>, <Delivery Lead> — *to be filled in when the pull request is approved*
+- **What changed:** removed the "Overview" navigation links; replaced links to reference guides with public sources (OWASP cheat sheets, OpenAPI specification, refactoring catalog, design patterns catalog, Circuit Breaker article, *Use The Index, Luke*); removed "from course note" lines and "More:" links; phase sections renamed ("Core tasks", "Industry practices beyond the classic tasks"); old CHANGELOG entries no longer name course notes. README §9 now states that the folder is self-contained, and §9.2 settles the pull request rule (branch protection, 2 approvals, guide owners for **must** rules, required check, CHANGELOG entry, emergency path). New `tools/check.py` checks links, anchors, links that leave the folder, rule numbers, unlinked templates and images, course references and overdue reviews.
+- **Sources checked (2026-11-27):** all new external links return HTTP 200 (refactoring.com, refactoring.guru, use-the-index-luke.com, spec.openapis.org, OWASP cheat sheets, martinfowler.com, postgresql.org).
+- **Not re-checked:** GitHub branch-protection option names (settings screens change; check when setting up the repository).
+- **Next review due:** README 2027-05-27.
+
+## 2026-11-27 — Review: ISO 29148 status and spelling of OWASP
+
+- **Files:** `README.md` (§10 ISO 29148 row)
+- **Scope:** **targeted** re-check of time-sensitive facts.
 - **Reviewers:** <Tech Lead>, <Developers> — *to be filled in when the pull request is approved*
-- **What changed:** OWASP name now "Open Worldwide Application Security Project" everywhere. Auth guide: scrypt example uses OWASP's minimum (N=2^17, r=8, p=1, `maxmem` raised). API guide: `Deprecation` header is a Date (`@<unix-seconds>`, RFC 9745), `Sunset` is an HTTP-date (RFC 8594), Stripe version example is `2024-09-30.acacia`. Overview guide: DORA now five metrics, CI example and Node.js 26 match the SDLC. ISO/IEC/IEEE 29148: confirmed 2024, revision under way.
-- **Sources checked (2026-11-27):** owasp.org Password Storage cheat sheet; rfc-editor.org RFC 9700, 9745, 8594; docs.stripe.com versioning (current version `2026-11-18.endive`); iso.org 29148:2018, 26514:2022, 25010:2023; ISO/IEC/IEEE 29119-3:2021 (web search).
-- **Not re-checked:** Standish CHAOS figures and other historical facts in module 1 note 01; guides' prose outside the facts above.
+- **What changed:** ISO/IEC/IEEE 29148 row: confirmed by ISO in 2024, a revision is under way (re-check at the next review). OWASP is spelled out as Open Worldwide Application Security Project.
+- **Sources checked (2026-11-27):** iso.org 29148:2018 (status page); owasp.org.
+- **Not re-checked:** facts in older entries.
 - **Next review due:** 2027-05-27.
 
 ## 2026-11-27 — Full SDLC folder review: broken-item check, fact check, missing practices
@@ -23,16 +33,16 @@
 - **Not re-checked:** EAA date (EUR-Lex page would not load; the 28 June 2025 date is unchanged from the earlier check), GDPR text, ISTQB errata date, npm token limits, NIST SP 800-52 Rev. 3 (still only planned).
 - **Next review due:** README, Planning, Design, Deployment, Maintenance 2027-05-27.
 
-## 2026-11-27 — Deep review of module 4 notes 01–07 and their SDLC changes (corrections)
+## 2026-11-27 — Review: architecture and deployment additions (corrections)
 
-- **Files:** module-4 notes 02–07 and `images/07-production-deployment-components-proxy-and-lb.svg`; `02-Design/Design.md` (§4.12 item 6 wording)
-- **Scope:** **targeted fact check** of the module-4 sync (not a full review). All 7 code blocks re-run on Node.js v24.18.0: output matches the notes.
-- **What changed:** note 02 no longer credits `c4model.com` with a claim it does not make (it says ad hoc diagrams have inconsistent notation; C4 is inspired by UML); concurrency overclaim removed. Note 05 `/toString` example was wrong (keys start with `/`): fixed and checked locally. Note 07: nginx active `/healthz` probes need NGINX Plus or a cloud load balancer (open-source nginx has passive checks); WAF does not replace authorization for BOLA. Note 06: a VPC is not a private cloud. Note 03: full `ReferenceError` text. Note 04: timeout wording. Design §4.12 item 6: VPC (AWS, Google) / VNet (Azure).
-- **Sources checked (2026-11-27):** `nginx.org` load-balancing and upstream docs (`least_time` open source since 1.31.0; `health_check` commercial); `c4model.com` introduction and FAQ; `omg.org/spec/UML/` (still 2.5.1); `expressjs.com/en/guide/behind-proxies.html`; `martinfowler.com` microservices and event-driven articles (choreography preference, Event Notification); `12factor.net` processes and dev-prod parity; `kubernetes.io` Service page; `mermaid.js.org`; `rfc-editor.org/info/rfc9457`.
-- **Not re-checked:** exact "Lecture wording (for the quiz)" lines (transcripts were not kept); AWS/Azure/GCP naming of the private-network term beyond common usage.
+- **Files:** `02-Design/Design.md` (§4.12 item 6 wording)
+- **Scope:** **targeted fact check** of the latest architecture and deployment additions (Design §4.1–§4.2 and §4.12, Development §4.7 `trust proxy` row). Not a full review.
+- **What changed:** Design §4.12 item 6 now says VPC (AWS, Google Cloud) / VNet (Azure). The API gateway, choreography vs. orchestration and `trust proxy` guidance were re-checked and kept.
+- **Sources checked (2026-11-27):** `nginx.org` load-balancing and upstream docs (`least_time` open source since 1.31.0; `health_check` commercial); `expressjs.com/en/guide/behind-proxies.html`; `martinfowler.com` microservices article (choreography preference); `12factor.net` processes and dev-prod parity; `kubernetes.io` Service page; `rfc-editor.org/info/rfc9457`.
+- **Not re-checked:** AWS/Azure/GCP naming of the private-network term beyond common usage.
 - **Next review due:** Design 2027-05-27.
 
-## 2026-11-27 — Reverse proxy `trust proxy` pitfall: module-4 note-07 "Production Deployment Components" findings
+## 2026-11-27 — Reverse proxy `trust proxy` pitfall
 
 - **Files:** `03-Development/Development.md` (§4.7 Node.js pitfalls table extended with **Missing `trust proxy` behind a reverse proxy**)
 - **Scope:** **targeted** 1-row extension to `Development §4.7` (load balancers, health checks, multi-AZ HA replicas, CDN, TLS, and backups were already present in `Design §4.12`, `Deployment §4.2`, and `Maintenance §4.6`).
@@ -41,7 +51,7 @@
 - **Sources checked (2026-11-27):** `expressjs.com/en/guide/behind-proxies.html` (`trust proxy` and internal IP behavior); `nginx.org/en/docs/http/load_balancing.html` (load-balancing algorithms and health checks).
 - **Next review due:** Development 2027-05-27.
 
-## 2026-11-27 — Cloud hosting models & VPC defense: module-4 note-06 "Application Deployment Environments" findings
+## 2026-11-27 — Cloud hosting models & VPC defense
 
 - **Files:** `02-Design/Design.md` (§4.12 item 6 added on public vs. private/hybrid/on-premises selection and defense-in-depth beyond perimeter firewalls)
 - **Scope:** **targeted** extension to existing `Design §4.12` (staging/production pipelines, immutable Docker promotion, IaC, Twelve-Factor dev/prod parity, and shared cloud responsibility were already covered in `Design §4.12` and `Deployment.md §3`).
@@ -50,7 +60,7 @@
 - **Sources checked (2026-11-27):** `12factor.net/dev-prod-parity` (keeping development, staging, and production similar).
 - **Next review due:** Design 2027-05-27.
 
-## 2026-11-27 — API Gateway & choreography vs. orchestration: module-4 note-05 "Architectural Patterns in Software" findings
+## 2026-11-27 — API Gateway & choreography vs. orchestration
 
 - **Files:** `02-Design/Design.md` (§4.2 extended with thin **API gateway** boundaries and **choreography vs. orchestration** guidance)
 - **Scope:** **targeted** extension to existing `Design §4.2` (modular monolith, microservices, serverless, event-driven patterns, combination guidance, and `AsyncAPI` were already present).
@@ -59,7 +69,7 @@
 - **Sources checked (2026-11-27):** `martinfowler.com/articles/microservices.html` ("smart endpoints and dumb pipes"); `martinfowler.com/articles/201701-event-driven.html` ("Event Notification").
 - **Next review due:** Design 2027-05-27.
 
-## 2026-11-27 — High cohesion & loose coupling: module-4 note-02 "Software Design and Modeling" findings
+## 2026-11-27 — High cohesion & loose coupling
 
 - **Files:** `02-Design/Design.md` (§4.2 module boundaries bullet extended with explicit **high cohesion** and **loose coupling**)
 - **Scope:** **targeted** extension to existing `Design §4.2` (Mermaid/PlantUML diagrams as code, C4 levels, ports & adapters, fitness functions, and state-transition testing in `Testing.md` were already present).
@@ -68,7 +78,7 @@
 - **Sources checked (2026-11-27):** `c4model.com/introduction`, `mermaid.js.org/syntax/sequenceDiagram.html`, `mermaid.js.org/syntax/stateDiagram.html`, `omg.org/spec/UML/` (UML 2.5.1).
 - **Next review due:** Design 2027-05-27.
 
-## 2026-11-27 — Quality attributes interoperability & manageability: module-4 note-01 "Introduction to Software Architecture" findings
+## 2026-11-27 — Quality attributes interoperability & manageability
 
 - **Files:** `02-Design/Design.md` (§4.1 quality-attributes table extended with **Interoperability** and **Manageability**; `Last reviewed` updated to `2026-11-27`)
 - **Scope:** **targeted** extension to existing `Design §4.1` (architecture styles, C4 diagrams, ADRs, OpenAPI contracts, tech stack ADRs, fitness functions, and production load-balanced stateless rules were already present in `§4.2`, `§4.8`, `§4.14`, and rules 1–25).
@@ -77,65 +87,65 @@
 - **Sources checked (2026-11-27):** `c4model.com`, `adr.github.io`, `martinfowler.com/architecture/`, `omg.org/spec/UML/` (UML 2.5.1).
 - **Next review due:** Design 2027-05-27.
 
-## 2026-11-27 — Full-folder fact check after module 3 (corrections)
+## 2026-11-27 — Full-folder fact check (corrections)
 
-- **Files:** `README.md` (§10 standards table), `02-Design/Design.md`, `03-Development/Development.md`, `04-Testing/Testing.md` (+ `images/sdlc-modern-v-model-in-ci.svg`), `05-Deployment/Deployment.md`, root `6-Phases-of-SDLC-Modern-Best-Practices.md`
-- **Scope:** a **review**, not new content: module-3 changes and the time-sensitive facts of the whole guide were re-checked against primary sources.
+- **Files:** `README.md` (§10 standards table), `02-Design/Design.md`, `03-Development/Development.md`, `04-Testing/Testing.md` (+ `images/sdlc-modern-v-model-in-ci.svg`), `05-Deployment/Deployment.md`
+- **Scope:** a **review**, not new content: recent changes and the time-sensitive facts of the whole guide were re-checked against primary sources.
 - **Reviewers:** <Tech Lead> — *to be filled in when the pull request is approved*
 - **What changed:** OWASP Top 10 for LLM Applications is now the **2026** edition (was "2025"; README row and Development §4.8); SLSA row now **v1.2**; NIST SSDF row notes the **Rev. 1 / v1.2 initial public draft**; OpenAPI row adds patch **3.2.1** (10 Sept 2026); **ZAP** is now "ZAP by Checkmarx" (was "OWASP ZAP"; Testing, one diagram, root overview); MySQL `max_execution_time` limits only read-only `SELECT` statements (Development §4.15); the "lookup object" advice now says to read keys with `Object.hasOwn` or use a `Map` (a plain object returns inherited keys such as `constructor`); Docker QEMU wording hedged (Deployment §4.1); the Design execution-model bullet points to the stack ADR (rule 24); "Last checked" dates updated for every row verified today.
 - **Verified today (primary sources):** owasp.org (Top 10:2025 list incl. A10 and SSRF inside A01, ASVS 5.0.0 published 30 May 2025, SAMM, API Security 2023, LLM Top 10 2026); pcisecuritystandards.org (v4.0.1); iso.org (29148:2018, 25010:2023, 14764:2022); semver.org 2.0.0; conventionalcommits.org 1.0.0; spec.openapis.org (3.2.0 of 19 Sept 2025, 3.2.1 of 10 Sept 2026); rfc-editor.org (9457, 9745, 8594, 9116); dora.dev (five metrics); European Commission CRA page (reporting from 11 Sep 2026, main obligations from 11 Dec 2027); GitHub changelog (npm classic tokens revoked 9 Dec 2025); docs.github.com (Dependabot default 3-day cooldown, not for security updates); docs.npmjs.com (`min-release-age`, trusted publishing); expressjs.com (Express 5 rejected promises call `next`); OWASP Password Storage cheat sheet (Argon2id 19 MiB, 2 iterations, 1 degree of parallelism); zaproxy.org; nodejs.org release rules; Docker multi-platform docs; PostgreSQL `statement_timeout`; MySQL optimizer-hints/blog (via search).
 - **Not re-checked:** European Accessibility Act date and GDPR (stable law, general knowledge); ISTQB CTFL v4.0.1 errata date; npm "granular tokens at most 90 days"; Node.js LTS line numbers (read 2026-11-26).
 - **Next review due:** README at the next full-guide review (2027-05-13); changed phase files 2027-05-27.
 
-## 2026-11-27 — Composition & encapsulation: module-3 note-06 "Introduction to Programming Concepts Part 2" findings
+## 2026-11-27 — Composition & encapsulation
 
 - **Files:** `03-Development/Development.md` (§4.4 extended with composition-over-inheritance and `#private`/closure state encapsulation)
-- **Scope:** **targeted** 1-bullet extension to existing §4.4 (modular layered architecture, SOLID, and stateless processes were already present). Correction sweep: 0 wrong lecture claims found in `SDLC/`.
+- **Scope:** **targeted** 1-bullet extension to existing §4.4 (modular layered architecture, SOLID, and stateless processes were already present). Correction sweep: no wrong claims found.
 - **Reviewers:** <Tech Lead>, <Developers> — *to be filled in when the pull request is approved*
 - **What changed:** `Development §4.4` recommends favoring small pure functions and composition over deep class inheritance trees, and using `#private` fields or closures when classes guard internal invariants.
 - **Sources checked (2026-11-27):** MDN (`developer.mozilla.org` — Functions guide, Arrow functions, Parameter glossary, Private `#` class properties).
 - **Next review due:** Development 2027-05-27.
 
-## 2026-11-27 — Constants, immutability & container choice: module-3 note-05 "Introduction to Programming Concepts Part 1" findings
+## 2026-11-27 — Constants, immutability & container choice
 
 - **Files:** `03-Development/Development.md` (§4.4 extended with `const`/magic-number discipline, shared-object immutability, and `Map`/`Set`/`TypedArray` selection)
-- **Scope:** **targeted** 1-bullet extension to existing §4.4 (runtime config validation and `N+1`/DB bounds were already present). Correction sweep: 0 wrong lecture claims found in `SDLC/`.
+- **Scope:** **targeted** 1-bullet extension to existing §4.4 (runtime config validation and `N+1`/DB bounds were already present). Correction sweep: no wrong claims found.
 - **Reviewers:** <Tech Lead>, <Developers> — *to be filled in when the pull request is approved*
 - **What changed:** `Development §4.4` recommends defaulting to `const` (ESLint `prefer-const`), avoiding magic numbers, freezing/cloning shared config objects, picking `Map`/`Set` over repeated scans on large sets, and bounding dynamic arrays (`TypedArray`/streaming for large binary payloads).
 - **Sources checked (2026-11-27):** MDN (`developer.mozilla.org` — `const` reassignment vs object mutation, JS `Array` resizable behavior, `TypedArray`); `cppreference.com` (`std::vector` contiguous memory and capacity reallocation).
 - **Next review due:** Development 2027-05-27.
 
-## 2026-11-27 — Branching hygiene & guard clauses: module-3 note-04 "Branching and Looping Programming Logic" findings
+## 2026-11-27 — Branching hygiene & guard clauses
 
 - **Files:** `03-Development/Development.md` (§4.4 extended with flat branching / guard clauses, strict `===`, and `switch` fall-through prevention)
-- **Scope:** **targeted** 1-bullet extension to existing §4.4 (ESLint `complexity`/`max-depth`, `===`, and event-loop safety were already present). Correction sweep: 0 wrong lecture claims found in `SDLC/`.
+- **Scope:** **targeted** 1-bullet extension to existing §4.4 (ESLint `complexity`/`max-depth`, `===`, and event-loop safety were already present). Correction sweep: no wrong claims found.
 - **Reviewers:** <Tech Lead>, <Developers> — *to be filled in when the pull request is approved*
 - **What changed:** `Development §4.4` recommends guard clauses (early returns), strict equality (`===`/`!==`), and preventing `switch` fall-through via `break`/`return` + `default`, a `Map` (or a lookup object read with `Object.hasOwn`), or ESLint `eqeqeq` and `no-fallthrough`.
 - **Sources checked (2026-11-27):** MDN (`developer.mozilla.org` — JavaScript `switch` fall-through & `for` pre-check); Python docs (`docs.python.org` — compound statements); Oracle Java SE docs (`docs.oracle.com` — unused `goto` keyword).
 - **Next review due:** Development 2027-05-27.
 
-## 2026-11-27 — Query plans & DB least privilege: module-3 note-02 "Query and Assembly Programming Languages" findings
+## 2026-11-27 — Query plans & DB least privilege
 
 - **Files:** `03-Development/Development.md` (§4.15 extended with `EXPLAIN` / timeouts, `jsonb` GIN indexes, and least-privilege runtime DB role; rule 26 updated)
-- **Scope:** **targeted** change extending existing §4.15 (least privilege, JSONB, parameterized queries, and migrations were already present). Correction sweep: 0 wrong lecture claims found in `SDLC/`.
+- **Scope:** **targeted** change extending existing §4.15 (least privilege, JSONB, parameterized queries, and migrations were already present). Correction sweep: no wrong claims found.
 - **Reviewers:** <Tech Lead>, <Developers> — *to be filled in when the pull request is approved*
 - **What changed:** `Development §4.15` and rule 26 add `EXPLAIN` query-plan checks, query timeouts (`statement_timeout` / `max_execution_time`), `jsonb` GIN index note, and separating the runtime CRUD DB role (including sequence `USAGE`) from shared/production DDL migrations.
 - **Sources checked (2026-11-26/27):** PostgreSQL docs (`postgresql.org/docs/current/datatype-json.html`, `runtime-config-client.html`, `ddl-priv.html`, `sql-explain.html` — `jsonb` + GIN indexing, `statement_timeout`, sequence `USAGE`, `EXPLAIN`); Apache Cassandra docs (`cassandra.apache.org` — CQL typed table schemas); MongoDB docs (`mongodb.com` — JSON Schema validation).
 - **Next review due:** Development 2027-05-27.
 
-## 2026-11-26 — Execution model & target CPU builds: module-3 note-01 "Interpreted and Compiled Programming Languages" findings
+## 2026-11-26 — Execution model & target CPU builds
 
 - **Files:** `02-Design/Design.md` (§4.14 execution model and memory-safety bullet), `05-Deployment/Deployment.md` (§4.1 target CPU architecture `--platform` bullet, rule 23), `05-Deployment/templates/pipeline-checklist.md` (target architecture build item)
-- **Scope:** **targeted** change adding execution-model selection guidance and explicit target CPU architecture container builds from module 3 note 01. Correction sweep: 0 wrong lecture claims found in `SDLC/`.
+- **Scope:** **targeted** change adding execution-model selection guidance and explicit target CPU architecture container builds. Correction sweep: no wrong claims found.
 - **Reviewers:** <Tech Lead>, <Developers> — *to be filled in when the pull request is approved*
 - **What changed:** `Design §4.14` adds AOT vs. JIT/bytecode cold-start and memory-safety trade-offs plus optional WebAssembly; `Deployment §4.1`, `pipeline-checklist.md`, and **should** rule 23 recommend pinning the explicit target CPU architecture in CI (default `linux/amd64`).
 - **Sources checked (2026-11-26):** Docker Docs Multi-platform builds (`docs.docker.com/build/building/multi-platform/` — `--platform linux/amd64,linux/arm64`); WebAssembly (`webassembly.org`); V8 (`v8.dev`), Python glossary (`docs.python.org/3/glossary.html`), .NET managed execution (`learn.microsoft.com`), Android (`developer.android.com/kotlin/first`), Lua (`lua.org/about.html`).
 - **Next review due:** Design, Deployment 2027-05-26.
 
-## 2026-11-26 — Stacks: note 08 "Introduction to Software Stacks"
+## 2026-11-26 — Stacks
 
 - **Files:** `02-Design/Design.md` (new §4.14, rules 24–25), `03-Development/Development.md` (§4.8 license bullet, §4.10 Compose bullet)
-- **Scope:** **targeted**. Already covered: ADR for new dependencies (Design rule 5), layered structure, front-end framework choice (§4.13), build vs buy, managed services. Correction sweep: none of the lecture's wrong claims (LAMP tied to Linux, relational databases cannot hold unstructured data, MongoDB as open source, React as a framework, Vue as "much newer") was found in the guide.
+- **Scope:** **targeted**. Already covered: ADR for new dependencies (Design rule 5), layered structure, front-end framework choice (§4.13), build vs buy, managed services. Correction sweep: none of the wrong claims (LAMP tied to Linux, relational databases cannot hold unstructured data, MongoDB as open source, React as a framework, Vue as "much newer") was found in the guide.
 - **What changed:** Design §4.14 (software stack vs technology stack, layers, a criteria table for choosing a stack, data and license notes); rule 24 (stack ADR with two alternatives, license check, support dates; must on client and internal projects, should on prototypes; an acronym is not a decision), 25 (default to one primary database; extra store types need an ADR); source-available licenses such as SSPL can add duties (checked by the Tech Lead with the client's legal contact); Compose: containers use service names, `depends_on` does not wait for readiness.
 - **Sources checked (2026-11-26):** MongoDB docs (multi-document ACID transactions); OSI "The SSPL is Not an Open Source License"; MySQL 8.4 manual (JSON data type, via search); PostgreSQL docs (json and jsonb); Microsoft docs (ASP.NET Core cross-platform); Docker Compose docs (service-name networking; Compose "does not wait until a container is ready", `service_healthy`).
 - **Reviewers:** <Tech Lead> — *to be filled in when the pull request is approved*
@@ -143,28 +153,28 @@
 - **Not re-checked:** "default to one primary database" is a LumenVenture default, not an industry rule.
 - **Next review due:** Design, Development 2027-05-26.
 
-## 2026-11-26 — Build and package tools: note 07 "More Application Development Tools" (notes 05–07 sync completed)
+## 2026-11-26 — Build and package tools
 
 - **Files:** `03-Development/Development.md` (§4.8 publishing bullet, §4.14 build-tool row, rule 30), `05-Deployment/Deployment.md` (§4.1 OS packages, rule 22)
-- **Scope:** **targeted**; notes 05 and 06 were synced earlier today (entry below). Most of note 07 was already covered: CD vs deployment table (Deployment §3), build once and promote, pinned actions, trusted publishing, SBOM, lockfile and `npm ci`. Correction sweep: none of the lecture's wrong claims (CD as "deploy to staging", WebAssembly as a build tool, dpkg as a full package manager, "Red Hat Package Manager") was found in the guide. WebAssembly has no SDLC rule (no gap worth a rule).
+- **Scope:** **targeted**; earlier changes (entry below) covered related topics. Most of this topic was already covered: CD vs deployment table (Deployment §3), build once and promote, pinned actions, trusted publishing, SBOM, lockfile and `npm ci`. Correction sweep: none of the wrong claims (CD as "deploy to staging", WebAssembly as a build tool, dpkg as a full package manager, "Red Hat Package Manager") was found in the guide. WebAssembly has no SDLC rule (no gap worth a rule).
 - **What changed:** Dockerfile OS packages with `apt-get` (not `dpkg -i`), one layer, clean lists; CI feedback in about 10 minutes (rule 22); package `files` allowlist and `npm pack --dry-run` before publish (rule 30); build-tool row for front ends and back ends. Numbering corrected before commit: the pairing rules of the entry below are 27–29 (a clash with rule 26, published earlier, was caught by the new `audit.py --rules`). After the independent review: rule 22 now says "pull-request pipeline" and has an owner and a 1-hour default (consistent with Testing rule 14, and Testing §3 now says CI runs the pull-request test set); rule 30 fails the release job on forbidden paths; the build-tool row is front-end only.
 - **Sources checked (2026-11-26):** Martin Fowler, Continuous Integration ("XP guideline of a ten minute build"); Docker build best practices (`apt-get update && apt-get install -y --no-install-recommends`, `rm -rf /var/lib/apt/lists/*`); Debian Reference (dpkg does not resolve dependencies); npm docs (`files`, `.npmignore`, `npm pack` `dry-run` and `json`); Docker best practices (pin base images, digests).
 - **Not re-checked:** that every modern project reaches a 10-minute build (Fowler says "most"); Vite, esbuild and Rollup as the common choices (general practice).
 - **Next review due:** Development, Deployment, Testing 2027-05-26.
 
-## 2026-11-26 — Pairing and tools: notes 05 "Pair Programming" and 06 "Application Development Tools"
+## 2026-11-26 — Pairing and tools
 
 - **Files:** `03-Development/Development.md` (§4.12, §4.8, rules 27–29), `02-Design/Design.md` (§4.13), `01-Planning/templates/working-agreement.md`
-- **Scope:** **targeted**, small delta (most of both notes was already covered: pairing and mob rule 11, dependency checks §4.8, strangler pattern in Maintenance §4.10, ADR for new dependencies in Design rule 5). Correction sweep: none of the lecture's wrong claims (version control "tied to storage", Git "resolving" conflicts, frameworks "can't be incorporated" later, pairing as a "type of Agile") was found in the guide.
+- **Scope:** **targeted**, small delta (most was already covered: pairing and mob rule 11, dependency checks §4.8, strangler pattern in Maintenance §4.10, ADR for new dependencies in Design rule 5). Correction sweep: none of the wrong claims (version control "tied to storage", Git "resolving" conflicts, frameworks "can't be incorporated" later, pairing as a "type of Agile") was found in the guide.
 - **What changed:** pairing styles, remote pairing and `Co-authored-by` credit (§4.12); rules 27 (credit both), 28 (pairing does not replace the pull request review), 29 (`git diff --check` fails leftover conflict markers); library check now asks "do we need it?" and "how hard to replace?"; Design §4.13 describes the minimal-to-opinionated range of frameworks and step-by-step migration; working-agreement pairing line.
-- **Sources checked (2026-11-26):** git-scm.com `git diff --check` ("Warn if changes introduce conflict markers or whitespace errors", non-zero exit); GitHub Docs co-author trailer format and Git vs GitHub (checked while writing the notes); Fowler's inversion-of-control and pair-programming articles; Falco's strong-style post. 
-- **Not re-checked:** whether a pair partner may count as the PR approver (we chose the safe default: an outside approval). A light review (separate subagent, no web) was run later the same day on notes 05 and 06 and this change; its 20 findings were applied: rule 28 is now a pointer to rule 1 and gate G3 (must), rule 29 gives the command and the tailoring (must on client and regulated), sources added for Git usage, React and Vue claims. Spot-checked later the same day: Git as a distributed VCS (Pro Git book), NestJS (docs.nestjs.com: out-of-the-box architecture, Express default, Fastify option) and pair programming as an XP practice (extremeprogramming.org and Beck's 1999 book, via a search result).
+- **Sources checked (2026-11-26):** git-scm.com `git diff --check` ("Warn if changes introduce conflict markers or whitespace errors", non-zero exit); GitHub Docs co-author trailer format and Git vs GitHub; Fowler's inversion-of-control and pair-programming articles; Falco's strong-style post. 
+- **Not re-checked:** whether a pair partner may count as the PR approver (we chose the safe default: an outside approval). A light review (separate subagent, no web) was run later the same day on this change; its 20 findings were applied: rule 28 is now a pointer to rule 1 and gate G3 (must), rule 29 gives the command and the tailoring (must on client and regulated), sources added for Git usage, React and Vue claims. Spot-checked later the same day: Git as a distributed VCS (Pro Git book), NestJS (docs.nestjs.com: out-of-the-box architecture, Express default, Fastify option) and pair programming as an XP practice (extremeprogramming.org and Beck's 1999 book, via a search result).
 - **Next review due:** Development, Design 2027-05-26.
 
-## 2026-11-26 — Teamwork: note-04 module-2 "Teamwork and Squads" findings
+## 2026-11-26 — Teamwork
 
 - **Files:** `README.md` (§2 step 5a, §3.3 rule 8, §6.6 rules 7–9, §7 docs tree, §8 templates, §10 Scrum Guide and new team-research rows), `01-Planning/Planning.md` (§8 required output, Gate G1 item, template table), `03-Development/Development.md` (§4.12 pair programming detail), new template `01-Planning/templates/working-agreement.md`
-- **Scope:** **targeted** change: team practices from course note "04 Teamwork and Squads" that the guide was missing. Not a full review; README "Last reviewed" stays at the last full-guide review (2026-11-13). Planning review date moved to 2026-11-26. Correction sweep: "squad leader", "up to 10 developers" and "retrospective at project end" were not found in the guide.
+- **Scope:** **targeted** change: team practices from a source review that the guide was missing. Not a full review; README "Last reviewed" stays at the last full-guide review (2026-11-13). Planning review date moved to 2026-11-26. Correction sweep: "squad leader", "up to 10 developers" and "retrospective at project end" were not found in the guide.
 - **Reviewers:** <Delivery Lead>, <Tech Lead> — *to be filled in when the pull request is approved*
 - **What changed:**
   - **README §6.6 rules 7–9:** written working agreement at kickoff (must), team health check about every 3 sprints (should; never to rate individuals), deliberate knowledge sharing with bus factor of at least 2, buddy and onboarding (should).
@@ -178,10 +188,10 @@
 - **Not re-checked:** Brooks's law and The Mythical Man-Month (1975); Tuckman's team stages; Team Topologies' four team types (checked in the 2026-11-16 roles entry); the Google study itself (only the re:Work summary was read).
 - **Next review due:** Planning, Development 2027-05-26; README §6.6 at the next full-guide review (2027-05-13).
 
-## 2026-11-26 — Back-end baseline & payments: note-03 module-2 "The Importance of Back-End Development" findings
+## 2026-11-26 — Back-end baseline & payments
 
 - **Files:** `README.md` (§10 standards table: `OWASP API Security Top 10` updated, new `PCI DSS` row, `RFC 9457` and `Node.js release schedule` dates updated), `02-Design/Design.md` (§4.4 status codes + `API4:2023`, §4.5 BOLA `API1:2023` + PCI DSS v4.0.1 tokenization, rule 23), `03-Development/Development.md` (§4.9 ORM expansion, `API4:2023` rate limiting, payment/card data row, new §4.15 Database access, ORMs, and migrations, rule 26)
-- **Scope:** **targeted** change: add the back-end practices from course note "03 The Importance of Back-End Development" that the guide was missing or needed to harden. Not a full review; README "Last reviewed" stays at the last full-guide review (2026-11-13); Design and Development review dates stay 2026-11-26. Correction sweep: none of the note's corrected lecture claims ("API is code", "route is a path to a website", "Node.js is a framework", storing raw credit card numbers) was found in the guide.
+- **Scope:** **targeted** change: add the back-end practices from a source review that the guide was missing or needed to harden. Not a full review; README "Last reviewed" stays at the last full-guide review (2026-11-13); Design and Development review dates stay 2026-11-26. Correction sweep: none of corrected claims ("API is code", "route is a path to a website", "Node.js is a framework", storing raw credit card numbers) was found in the guide.
 - **Reviewers:** <Tech Lead>, <Security Champion>, <Developers> — *to be filled in when the pull request is approved*
 - **What changed:**
   - **Design §4.4, §4.5 & rule 23:** added `405` / `422` / `429` status codes (`OWASP API4:2023` Unrestricted Resource Consumption), explicitly referenced `OWASP API1:2023` BOLA (Broken Object Level Authorization), and added PCI DSS v4.0.1 payment tokenization guidance plus **must** rule 23 forbidding raw PAN/CVV storage in application databases or logs.
@@ -191,10 +201,10 @@
 - **Not re-checked:** RFC 9745, RFC 8594, RFC 9116 (dates in README §10 kept as-is); ORM/tool names used as examples (Prisma, Drizzle, SQLAlchemy, Django ORM).
 - **Next review due:** Design, Development 2027-05-26.
 
-## 2026-11-26 — Front end: note-02 module-2 "Learning Front-End Development" findings
+## 2026-11-26 — Front end
 
 - **Files:** `README.md` (§8 template row, §10 standards rows: WCAG updated, new Core Web Vitals and browser-security rows), `02-Design/Design.md` (new §4.13, rules 18–22, done-when and G2 items), `03-Development/Development.md` (new §4.14, rules 20–25, Definition of Done line), `04-Testing/Testing.md` (new §4.16, rules 18–19, exit-criteria line), `05-Deployment/Deployment.md` (§4.10 browser-security bullets, rules 20–21, G4 item), `06-Maintenance/Maintenance.md` (new §4.12, rules 18–19, healthy-service item), new template `03-Development/templates/frontend-checklist.md`, templates `definition-of-done.md`, `05-Deployment/templates/pipeline-checklist.md`, `06-Maintenance/templates/service-review.md`
-- **Scope:** **targeted** change: add the front-end practices from course note "02 Learning Front-End Development" that the guide was missing. Not a full review; README "Last reviewed" stays at the last full-guide review (2026-11-13). Review dates of the five edited phase files moved to 2026-11-26. Correction sweep: none of the note's corrected lecture claims (HTML "physical structure" and "formatting", JavaScript "object-oriented", "SAS", "Learner Style Sheets", React "Facebook", "Vue layer") was found in the guide.
+- **Scope:** **targeted** change: add the front-end practices from a source review that the guide was missing. Not a full review; README "Last reviewed" stays at the last full-guide review (2026-11-13). Review dates of the five edited phase files moved to 2026-11-26. Correction sweep: none of corrected claims (HTML "physical structure" and "formatting", JavaScript "object-oriented", "SAS", "Learner Style Sheets", React "Facebook", "Vue layer") was found in the guide.
 - **Reviewers:** <Tech Lead>, <QA Engineer>, <Developers> — *to be filled in when the pull request is approved*
 - **What changed:**
   - **Design §4.13:** front-end decisions with defaults: approach and ADR with framework end-of-life date; responsive, mobile-first, same content on every device; written browser support policy; WCAG 2.2 AA and Core Web Vitals targets; one styling approach; shared components and design tokens. Rules 18–22.
@@ -204,14 +214,14 @@
   - **Maintenance §4.12:** real-user Core Web Vitals, front-end error tracking, end-of-life tracking (AngularJS, Vue 2, Sass `@import`, INP replacing FID). Rules 18–19.
   - **New template:** `frontend-checklist.md` (decisions, tooling, every UI change, security, performance, after release).
   - **README §10:** WCAG row now records the 12 December 2024 republication and removal of 4.1.1; new Core Web Vitals and browser-security rows.
-- **Sources checked (2026-11-26):** web.dev Core Web Vitals (thresholds, 75th percentile, INP replaced FID in 2024); W3C WCAG 2.2 and the Understanding page for 2.5.8 (Recommendation of 12 Dec 2024, 4.1.1 removed, contrast 4.5:1, target size 24×24 CSS px at AA); MDN Set-Cookie, Content-Security-Policy implementation guide, Subresource Integrity and Viewport meta element; sass-lang.com (`@import` deprecated since Dart Sass 1.80.0, removal in 3.0.0; also reproduced locally with Dart Sass 1.108); lesscss.org ("Leaner Style Sheets"); angular.dev releases page (v20 28 May 2025, v21 19 Nov 2025, v22 3 June 2026; 12-month major cycle from v22); docs.angularjs.org (support ended January 2022); vuejs.org FAQ (Vue 3 current, Vue 2 end of life 31 Dec 2023); react.dev (framework recommendation, React Foundation launched 24 Feb 2026, React 19.3 on 9 Sep 2026); GoogleChrome/web-vitals repository; playwright.dev browsers page. Two independent reviewers (separate subagents) re-checked the note and the guide changes. They agreed on all verified facts (Core Web Vitals, WCAG 2.2, Sass, cookies, CSP, SRI, viewport, web-vitals, Playwright, AngularJS and Vue 2 end of life). They found three wrong Angular dates in the **course note** (Baseline dates, not release dates; fixed from the angular.dev releases page) and several wording and strength problems in the guide: accessibility table vs rule 18, rule 18 scope for internal tools, rule 19 overlap with Maintenance rule 9, CSP `unsafe-inline` scope, a missing CSRF note (`SameSite=Lax` is not a full defence), the `browserslist` example, and missing acronym expansions. All are fixed.
-- **Not re-checked:** the `eslint.config.js` flat config claim is from the earlier module-2 entry; Sass first release date (2006) comes from a secondary source (Wikipedia); tool names such as axe, Lighthouse, Stylelint, Testing Library, Dependabot and Renovate are not re-verified.
+- **Sources checked (2026-11-26):** web.dev Core Web Vitals (thresholds, 75th percentile, INP replaced FID in 2024); W3C WCAG 2.2 and the Understanding page for 2.5.8 (Recommendation of 12 Dec 2024, 4.1.1 removed, contrast 4.5:1, target size 24×24 CSS px at AA); MDN Set-Cookie, Content-Security-Policy implementation guide, Subresource Integrity and Viewport meta element; sass-lang.com (`@import` deprecated since Dart Sass 1.80.0, removal in 3.0.0; also reproduced locally with Dart Sass 1.108); lesscss.org ("Leaner Style Sheets"); angular.dev releases page (v20 28 May 2025, v21 19 Nov 2025, v22 3 June 2026; 12-month major cycle from v22); docs.angularjs.org (support ended January 2022); vuejs.org FAQ (Vue 3 current, Vue 2 end of life 31 Dec 2023); react.dev (framework recommendation, React Foundation launched 24 Feb 2026, React 19.3 on 9 Sep 2026); GoogleChrome/web-vitals repository; playwright.dev browsers page. Two independent reviewers (separate subagents) re-checked the changes. They agreed on all verified facts (Core Web Vitals, WCAG 2.2, Sass, cookies, CSP, SRI, viewport, web-vitals, Playwright, AngularJS and Vue 2 end of life). They found three wrong Angular dates in an earlier draft (Baseline dates, not release dates; fixed from the angular.dev releases page) and several wording and strength problems in the guide: accessibility table vs rule 18, rule 18 scope for internal tools, rule 19 overlap with Maintenance rule 9, CSP `unsafe-inline` scope, a missing CSRF note (`SameSite=Lax` is not a full defence), the `browserslist` example, and missing acronym expansions. All are fixed.
+- **Not re-checked:** the `eslint.config.js` flat config claim is from an earlier entry; Sass first release date (2006) comes from a secondary source (Wikipedia); tool names such as axe, Lighthouse, Stylelint, Testing Library, Dependabot and Renovate are not re-verified.
 - **Next review due:** Design, Development, Testing, Deployment, Maintenance 2027-05-26.
 
-## 2026-11-26 — Web and cloud baseline: note-01 module-2 "Overview of Web and Cloud Development" (second pass)
+## 2026-11-26 — Web and cloud baseline (second pass)
 
 - **Files:** `README.md` (§10 standards table), `02-Design/Design.md` (new §4.12, done-when and G2 items, rules 14–17), `03-Development/Development.md` (Twelve-Factor map in §4.5, rules 18–19, duplicate §4.11 renumbered), `05-Deployment/Deployment.md` (new §4.10, done-when and G4 items, rules 16–19), `06-Maintenance/Maintenance.md` (new §4.4.1, rules 16–17), templates `05-Deployment/templates/pipeline-checklist.md` and `06-Maintenance/templates/go-live-checklist.md`
-- **Scope:** **targeted** change: the web and cloud practices from the module-2 note that the guide was missing. Not a full review; README "Last reviewed" stays at the last full-guide review (2026-11-13). Review dates of the four edited phase files moved to 2026-11-26.
+- **Scope:** **targeted** change: the web and cloud practices from a source review that the guide was missing. Not a full review; README "Last reviewed" stays at the last full-guide review (2026-11-13). Review dates of the four edited phase files moved to 2026-11-26.
 - **Reviewers:** <Tech Lead>, <Developers> — *to be filled in when the pull request is approved*
 - **What changed:**
   - **Design §4.12:** delivery style per part (static, SSR, SPA, API), CDN and cache-header defaults, cloud service models with shared responsibility, availability zones (multi-AZ default; multi-region only with an ADR and RTO/RPO), link to Twelve-Factor. Rules 14–17: stateless and 2+ instances in 2+ zones, CDN and cache headers, multi-region needs an ADR, provider vs our responsibilities listed.
@@ -219,16 +229,16 @@
   - **Deployment §4.10:** go-live web baseline: DNS TTL and IaC, HTTPS-only with redirect, TLS 1.2 minimum / 1.3 preferred, HSTS, cache-header checks with `curl -I`, check from outside the network. Rules 16–19, gate G4 and done-when items.
   - **Maintenance §4.4.1:** triage by four boundaries (client, edge and network, application, persistence). Rules 16–17.
   - **Templates:** pipeline checklist and go-live checklist got DNS, HTTPS, HSTS, CDN and multi-AZ checks.
-  - **Course note fixes (own additions):** "valid TLS 1.3 certificate" corrected (a certificate has no TLS version) and `.eslintrc` replaced by the ESLint flat config.
+  - **Fixes to earlier additions:** "valid TLS 1.3 certificate" corrected (a certificate has no TLS version) and `.eslintrc` replaced by the ESLint flat config.
 - **Gap-analysis note:** the first keyword search had a wrong pattern and listed graceful shutdown, readiness/liveness probes and environment-variable config as missing. They are already in Deployment §4.2, §3 and Development §4.5, so they were **not** added again.
 - **Sources checked:** 12factor.net (12 factors, last updated 2017); MDN Strict-Transport-Security and Cache-Control; NIST SP 800-52 Rev. 2 page (TLS 1.2 baseline, TLS 1.3 support by 1 Jan 2024; a Rev. 3 is planned); AWS Shared Responsibility Model and AWS Availability Zones whitepaper; eslint.org flat config page.
 - **Not re-checked:** RFC numbers (6797, 8446, 8996, 9111, 8246) were taken from memory, not re-read; the AWS pages are one provider's wording (Azure and GCP use the same idea); no second independent verification round was run.
 - **Next review due:** Design, Development, Deployment, Maintenance 2027-05-26.
 
-## 2026-11-16 — Development environment: note-01 module-2 "Overview of Web and Cloud Development" findings
+## 2026-11-16 — Development environment
 
 - **Files:** `03-Development/Development.md` (new §4.11 Development environments and editor standards), `03-Development/templates/repo-setup-checklist.md` (Repository section: `.editorconfig` and DevContainers)
-- **Scope:** **targeted** change: add editor configuration and containerized development environment standards from course note "01 Overview of Web and Cloud Development". Correction sweep: confirmed Atom is not referenced in the SDLC guide, and legacy unmaintained editors are formally retired in §4.11.
+- **Scope:** **targeted** change: add editor configuration and containerized development environment standards from a source review. Correction sweep: confirmed Atom is not referenced in the SDLC guide, and legacy unmaintained editors are formally retired in §4.11.
 - **Reviewers:** <Tech Lead>, <Developers> — *to be filled in when the pull request is approved*
 - **What changed:**
   - **Development §4.11:** Development environments and editor standards: required `.editorconfig` in repository root (UTF-8, LF, 2 spaces, trim whitespace, final newline); containerized reproducible setups via DevContainers (`.devcontainer/devcontainer.json`); retirement of unmaintained editors (e.g. Atom, sunset Dec 2022) in favor of modern LSP-driven tools.
@@ -237,9 +247,9 @@
 - **Not re-checked:** None.
 - **Next review due:** Development 2027-05-16.
 
-## 2026-11-16 — Roles: note-10 "Roles in Software Engineering Projects" findings
+## 2026-11-16 — Roles
 - **Files:** `README.md` (§2 kickoff step 1, §3 DL row and hats note, §3.1 two RACI rows, new §3.2 optional and shared roles, new §3.3 role rules 1–7, §7 docs tree, §8 templates, §10 Scrum Guide row), `01-Planning/Planning.md` (§8.2 required outputs, §8.3 Gate G1, §8.5 templates), new template `01-Planning/templates/team-roles.md`
-- **Scope:** **targeted** change: add the role practices from course note "10 Roles in Software Engineering Projects" that the guide was missing. Not a full review of the phase files; README "Last reviewed" stays the last **full-guide** review (2026-11-13). Correction sweep: none of the note's corrected lecture claims ("in Agile the equivalent role [of a project manager] is called a Scrum master", stakeholders are only "the people for whom the product is being designed", "SRE, sometimes called … ops engineer", the PO/PM "leading development efforts") was found in the guide (Development §1 "a project manager assigns all tasks" is in the Waterfall column, which is correct).
+- **Scope:** **targeted** change: add the role practices from a source review that the guide was missing. Not a full review of the phase files; README "Last reviewed" stays the last **full-guide** review (2026-11-13). Correction sweep: none of corrected claims ("in Agile the equivalent role [of a project manager] is called a Scrum master", stakeholders are only "the people for whom the product is being designed", "SRE, sometimes called … ops engineer", the PO/PM "leading development efforts") was found in the guide (Development §1 "a project manager assigns all tasks" is in the Waterfall column, which is correct).
 - **Reviewers:** <Delivery Lead>, <Tech Lead>; Planning: <Product Owner> — *to be filled in when the pull request is approved*
 - **What changed:**
   - **README §3.2 optional and shared roles:** UX / product designer, technical writer, SRE / platform team (shared), business analyst, solution architect, line manager (outside the team) — when we add each one, and who covers it if absent; SRE is not "ops" and never takes over the team's on-call; the Delivery Lead is not a task-assigning project manager (PM work split between PO, Developers, DL and Sponsor); product manager ≠ Product Owner; Mermaid "who decides what".
@@ -247,14 +257,14 @@
   - **README §3.1 RACI:** rows for UX design and usability tests, and user documentation (A = PO, matching §7.1).
   - **New template:** `team-roles.md`: core and optional roles, share of time, backups, line managers, checks before G1, RACI changes; filled example for the Book Review API.
   - **Planning:** team-roles record is a required output (prototypes: should) and a Gate G1 check.
-- **Sources checked:** scrumguides.org (2020 Scrum Guide text, still "Official Current Version"; Scrum Master and Product Owner accountabilities; "typically 10 or fewer people"); github.com/ScrumGuides/ScrumGuide-ExpansionPack (Expansion Pack is "an optional companion", not a replacement); PMI stakeholder definition (PMBOK Guide wording; PMI Lexicon v5.0 confirmed to exist, but its exact word order was not readable, so the note quotes the PMBOK wording); sre.google/sre-book/introduction (SRE definition, 2003, 50% ops cap); ACM Queue "A Conversation with Werner Vogels" (2006, "You build it, you run it"); teamtopologies.com/key-concepts (four team types); GitHub Docs (PR authors cannot approve their own pull requests). A second, independent verification round by a separate reviewer agreed on all of these except the PMI word order, which is now avoided.
-- **Not re-checked:** the PRINCE2 expansion (only secondary sources found; used in the note only, not in the guide).
+- **Sources checked:** scrumguides.org (2020 Scrum Guide text, still "Official Current Version"; Scrum Master and Product Owner accountabilities; "typically 10 or fewer people"); github.com/ScrumGuides/ScrumGuide-ExpansionPack (Expansion Pack is "an optional companion", not a replacement); PMI stakeholder definition (PMBOK Guide wording; PMI Lexicon v5.0 confirmed to exist, but its exact word order was not readable, so the guide quotes the PMBOK wording); sre.google/sre-book/introduction (SRE definition, 2003, 50% ops cap); ACM Queue "A Conversation with Werner Vogels" (2006, "You build it, you run it"); teamtopologies.com/key-concepts (four team types); GitHub Docs (PR authors cannot approve their own pull requests). A second, independent verification round by a separate reviewer agreed on all of these except the PMI word order, which is now avoided.
+- **Not re-checked:** the PRINCE2 expansion (only secondary sources found; not used in the guide).
 - **Next review due:** Planning 2027-05-16; README §3 at the next full-guide review (2027-05-13).
 
-## 2026-11-16 — Documentation: note-09 "Software Documentation" findings
+## 2026-11-16 — Documentation
 
 - **Files:** `README.md` (§7 docs tree, new §7.1 documentation map, new §7.2 documentation rules 1–9, §8 templates), `03-Development/Development.md` (§4.12, §5, §6.2, pointer in §6.4, §6.5), new template `03-Development/templates/sop.md`, templates `definition-of-done.md`, `pull_request_template.md`, `05-Deployment/templates/pipeline-checklist.md`, `06-Maintenance/templates/service-review.md`, `06-Maintenance/templates/runbook.md`
-- **Scope:** a **targeted** change: add the documentation practices from the course note "09 Software Documentation" that the guide was missing. Not a full review of the phase files; the README "Last reviewed" date stays at the last **full-guide** review (2026-11-13), as for the earlier targeted changes. Correction sweep: none of the note's corrected lecture claims ("process documentation describes how to complete a task", "user acceptance specifications", working papers as technical documentation, "updating documentation happens during the maintenance phase") were found in the guide.
+- **Scope:** a **targeted** change: add the documentation practices from a source review that the guide was missing. Not a full review of the phase files; the README "Last reviewed" date stays at the last **full-guide** review (2026-11-13), as for the earlier targeted changes. Correction sweep: none of corrected claims ("process documentation describes how to complete a task", "user acceptance specifications", working papers as technical documentation, "updating documentation happens during the maintenance phase") were found in the guide.
 - **Reviewers:** <Delivery Lead>, <Tech Lead>; Development: <a developer>; Maintenance templates: <Security Champion> — *to be filled in when the pull request is approved*
 - **What changed:**
   - **README §7.1 documentation map:** product documentation (requirements, design, technical, QA, user) and process documentation (plans and standards, reports and notes, SOPs and runbooks), each with documents, owner role (consistent with the RACI), audience and when it is updated; Mermaid diagram.
@@ -262,14 +272,14 @@
   - **New template:** `sop.md` — SOP structure plus the filled example "Merging a change to `main`".
   - **Development:** §4.12 docs in the same PR, product vs. process docs, SOPs enforced by tools, docs checks in CI with pinned tools (YAML excerpt); §5 DoD line; §6.2 rows for SOPs and docs checks; §6.4 points to README §7.2.
   - **Templates:** Definition of Done docs item is now ★ (same PR or "no docs change"); PR template docs line; pipeline checklist docs checks; service review lists overdue SOPs and runbooks; runbook gets Last reviewed / Next review due.
-- **Sources checked:** EPA QA/G-6 *Guidance for Preparing Standard Operating Procedures* (April 2007 — SOP definition, update when the procedure changes, periodic review "e.g. every 1–2 years"); GitHub Docs "About code owners" and rulesets (any one listed owner is enough; last matching pattern wins); markdownlint-cli2 README (`"#node_modules"` negation); Redocly CLI docs (`lint`, `build-docs --output`); Diátaxis (diataxis.fr); for the note also ISO/IEC/IEEE 29119-3:2021 and ISO/IEC/IEEE 26514:2022 (IEEE SA and ISO catalogue pages) and agilemanifesto.org. Second, independent verification round by a separate reviewer: all facts agreed.
+- **Sources checked:** EPA QA/G-6 *Guidance for Preparing Standard Operating Procedures* (April 2007 — SOP definition, update when the procedure changes, periodic review "e.g. every 1–2 years"); GitHub Docs "About code owners" and rulesets (any one listed owner is enough; last matching pattern wins); markdownlint-cli2 README (`"#node_modules"` negation); Redocly CLI docs (`lint`, `build-docs --output`); Diátaxis (diataxis.fr); also ISO/IEC/IEEE 29119-3:2021 and ISO/IEC/IEEE 26514:2022 (IEEE SA and ISO catalogue pages) and agilemanifesto.org. Second, independent verification round by a separate reviewer: all facts agreed.
 - **Not re-checked:** lychee-action version (left as a placeholder to pin); WCAG 2.2 row in §10 stays "next review".
 - **Next review due:** Development 2027-05-16; README §7 at the next full-guide review (2027-05-13).
 
-## 2026-11-16 — Testing: note-08 "Software Testing" findings
+## 2026-11-16 — Testing
 
 - **Files:** `04-Testing/Testing.md` (jargon, §1, §3, §4.1, §4.2, new §4.13–§4.15, §5, §6.2, §6.3, rules 11 example, 13–17, §6.5), new template `04-Testing/templates/test-case.md`, `04-Testing/templates/test-strategy.md` (§2.1, §2.2, §5), `04-Testing/templates/bug-report.md`, `03-Development/templates/definition-of-done.md`, `05-Deployment/templates/release-checklist.md`, `06-Maintenance/Maintenance.md` (§4.5, §5, rule 5), `README.md` (§7 docs tree, §8 templates, §10 standards); new diagram `04-Testing/images/sdlc-modern-regression-cadence.svg`
-- **Scope:** a **targeted** change: add the testing practices from the course note "08 Software Testing" that the guide was missing. Not a full review of the phase files. Correction sweep: none of the note's corrected lecture claims (for example "error-free software", "regression testing, also called maintenance testing", "system testing validates", "acceptance testing during maintenance") were found in the guide.
+- **Scope:** a **targeted** change: add the testing practices from a source review that the guide was missing. Not a full review of the phase files. Correction sweep: none of corrected claims (for example "error-free software", "regression testing, also called maintenance testing", "system testing validates", "acceptance testing during maintenance") were found in the guide.
 - **Reviewers:** <QA Engineer>, <Tech Lead>; Maintenance: <Security Champion> — *to be filled in when the pull request is approved*
 - **What changed:**
   - **Testing:** §1 testing cannot prove the absence of defects; §3 what each level is for (integration can be black- or white-box; system **verifies**; acceptance **validates, before release**); §4.1 grey-box, change-related testing, the what / how / why classification (Mermaid), usability and accessibility are non-functional (ISO/IEC 25010:2023), maintenance testing contains confirmation and regression testing; §4.2 confirmation, compatibility, documentation, recovery, UAT, OAT and contract / regulatory acceptance; new §4.13 the seven ISTQB testing principles; new §4.14 test-case fields and test design techniques (equivalence partitioning, boundary values, decision tables, state transition) with a `node:test` example; new §4.15 regression schedule (PR affected / `main` full / nightly / release commit / after deploy), test impact analysis, one bug-ID test per fix; §5 exit criteria; §6.2 nightly regression and written test cases; G4 now requires the **full** suite on the release commit. Rules 13–17 (design techniques, regression schedule, bug-ID test that fails without the fix, compatibility matrix and docs checked against OpenAPI, written test cases for manual / UAT / OAT tests). Rule 11 example ID changed to `REQ-10` (REQ-09 already meant "one review per user per book" in Design).
@@ -280,10 +290,10 @@
 - **Not re-checked:** WCAG 2.2 and the other README §10 rows still marked "next review"; tool names used only as examples (k6, Playwright, Pact, Testcontainers, Stryker, fast-check).
 - **Next review due:** Testing, Maintenance 2027-05-16; README §7, §8 and §10 at the next full-guide review (2027-05-13).
 
-## 2026-11-16 — Versioning and compatibility: note-07 "Software Versions" findings
+## 2026-11-16 — Versioning and compatibility
 
 - **Files:** `03-Development/Development.md` (§4.2.1, §4.8, §4.11, §6.2, rules 8 and 14–17, §6.5), new template `03-Development/templates/versioning-policy.md`, `02-Design/Design.md` (§4.4.1, rules 12–13), `05-Deployment/Deployment.md` (§4.5, §4.7, rule 15), `05-Deployment/templates/release-checklist.md`, `06-Maintenance/Maintenance.md` (§4.9), `README.md` (§7 docs tree, §8 templates, §10 standards); new diagrams `03-Development/images/sdlc-modern-one-version-everywhere.svg`, `02-Design/images/sdlc-modern-api-compatibility.svg`
-- **Scope:** a **targeted** change: add the versioning and compatibility practices from the course note "07 Software Versions" that the guide was missing. Not a full review of the phase files.
+- **Scope:** a **targeted** change: add the versioning and compatibility practices from a source review that the guide was missing. Not a full review of the phase files.
 - **Reviewers:** <Tech Lead>, <a developer>; Design: <Security Champion>; Deployment: <Delivery Lead> — *to be filled in when the pull request is approved*
 - **What changed:**
   - **Development:** §4.2.1 versioning policy — SemVer is **3 parts** and is about **compatibility, not size**; pre-release labels and npm dist-tags; build metadata after `+` (four-part numbers are not SemVer); `0.y.z` only before the first client; released versions are immutable; one version everywhere; compare versions with a SemVer library; a `/version` route example. §4.8 version-range table (`^`, `~`, exact, `^0.x`) and runtime version (`engines`, `.nvmrc`, Docker base image, CI matrix). §4.11 AI tools suggest outdated APIs and versions. Rules 14–17; rule 8 now points to the versioning policy.
@@ -291,13 +301,13 @@
   - **Design:** §4.4.1 API compatibility — backward vs. forward compatibility (tolerant reader for responses and events; requests still reject unknown fields), breaking-change table, `/v2` in parallel, notice periods (≥ 6 months external, ≥ 1 month internal), usage tracking, OpenAPI diff in CI. Rules 12–13.
   - **Deployment:** post-deploy smoke test checks `/version`; image tags = version + commit SHA, production by tag or digest, never `latest`; pre-releases never reach production; rule 15. Release checklist: release types now **Major / Minor / Patch** (the old "Minor / Major / Hotfix" list had no Patch), Git tag field, version and `/version` checks.
   - **Maintenance:** §4.9 usage per API version and client; errors split by `service.version`; supported-versions list checked in the service review.
-- **Sources checked:** the course note `07-software-versions.md` (SemVer 2.0.0 rules and precedence; npm range semantics, checked by running the `semver` package; RFC 9745 / RFC 8594 headers; Ubuntu 18.04 point-release dates). **Not re-checked against primary sources in this change** — the SemVer and Conventional Commits rows in README §10 are marked "next review".
+- **Sources checked:** a source review (SemVer 2.0.0 rules and precedence; npm range semantics, checked by running the `semver` package; RFC 9745 / RFC 8594 headers; Ubuntu 18.04 point-release dates). **Not re-checked against primary sources in this change** — the SemVer and Conventional Commits rows in README §10 are marked "next review".
 - **Next review due:** Development, Design, Deployment, Maintenance 2027-05-16.
 
-## 2026-11-16 — Working rhythm and methodology: note-06 "Software Development Methodologies" findings
+## 2026-11-16 — Working rhythm and methodology
 
 - **Files:** `README.md` (§6 rewritten and extended, §10 standards table), `01-Planning/Planning.md` (§4.17, step 7 of §8.6.2, rules 23–24), `01-Planning/templates/project-brief.md` (§9), `04-Testing/Testing.md` (§4.12, rule 12), `05-Deployment/Deployment.md` (rule 14), `06-Maintenance/Maintenance.md` (rule 15); new diagrams `images/sdlc-modern-methodology-by-project-type.svg`, `images/sdlc-modern-sprint-cadence.svg`, `01-Planning/images/sdlc-modern-fixed-time-flex-scope.svg`, `04-Testing/images/sdlc-modern-v-model-in-ci.svg`
-- **Scope:** a **targeted** change: write down **how LumenVenture works** (methodology), using the practices from the course note "06 Software Development Methodologies". Not a full review of the phase files.
+- **Scope:** a **targeted** change: write down **how LumenVenture works** (methodology), using the practices from a source review. Not a full review of the phase files.
 - **Reviewers:** <Delivery Lead>, <Tech Lead>; Planning: <Product Owner>; Testing: <QA Engineer> — *to be filled in when the pull request is approved*
 - **What changed:**
   - **README §6:** rhythm table corrected to Scrum Guide 2020 terms (**Sprint Review**, **Sprint Goal**, Sprint Retrospective; refinement is an activity, not an event); the sprint is **no longer called a "planning-to-release loop"** — releases follow the pipeline. New §6.1 methodology by project type (default Scrum; Kanban for prototypes and after go-live; V-model discipline for regulated work; phase gates kept as governance, not as Waterfall delivery); §6.2 Scrum accountabilities and artifacts mapped to our roles; §6.3 Kanban lane with WIP limit; §6.4 releases are not tied to sprints; §6.5 anti-patterns (Water-Scrum-Fall, mini-waterfall, cargo-cult Agile, velocity as a target); §6.6 six working-rhythm rules.
@@ -306,26 +316,26 @@
   - **Testing:** §4.12 the V-model idea done continuously (each design artifact gets its test in the same sprint; verification vs. validation; full V per increment for ISO 26262 / IEC 62304 / GAMP 5 work); rule 12 — no testing-only sprint or phase.
   - **Deployment:** rule 14 — releases are not tied to the sprint end.
   - **Maintenance:** rule 15 — maintenance and support in a Kanban lane with a WIP limit, same backlog.
-- **Sources checked:** the course note `06-software-development-methodologies.md` (Scrum Guide 2020 accountabilities, events, timeboxes and "Sprint Review is not a gate to releasing value"; Agile Manifesto 2001; Royce 1970; Kanban, XP, Lean). **Not re-checked against primary sources in this change** — the Scrum Guide row in README §10 is marked "next review".
+- **Sources checked:** a source review (Scrum Guide 2020 accountabilities, events, timeboxes and "Sprint Review is not a gate to releasing value"; Agile Manifesto 2001; Royce 1970; Kanban, XP, Lean). **Not re-checked against primary sources in this change** — the Scrum Guide row in README §10 is marked "next review".
 - **Next review due:** README §6 at the next full-guide review (2027-05-13); Planning, Testing, Deployment, Maintenance 2027-05-16.
 
-## 2026-11-16 — Planning (+ Testing): note-05 "Requirements" findings
+## 2026-11-16 — Planning (+ Testing)
 
 - **Files:** `01-Planning/Planning.md`, `01-Planning/templates/` (`user-story.md`, `stakeholder-register.md`, `project-brief.md`), `01-Planning/images/` (4 new SVGs), `04-Testing/Testing.md` (rule 11), `README.md` (§8 template list, §10 standards table)
-- **Scope:** a **targeted** change: add the requirement practices from the course note "05 Requirements" that the guide was missing. Not a full review of either phase file.
+- **Scope:** a **targeted** change: add the requirement practices from a source review that the guide was missing. Not a full review of either phase file.
 - **Reviewers:** <Product Owner>, <Delivery Lead>; Testing rule: <QA Engineer> — *to be filled in when the pull request is approved*
 - **What changed:**
   - **Planning:** new §2.1 **six-step requirements process** (stakeholders → goals → elicit → document → confirm → prioritize) and the three moments it runs; §4.1 expanded with the **power / interest grid**, personas, often-forgotten groups and the one-decision-maker rule; §4.4 constraint vs. assumption (an assumption is a risk); new §4.10 **goals, SMART objectives, OKRs**, outcome over output, `OBJ-n` IDs; §4.11 **elicitation toolbox** + interview rules; §4.12 **EARS** patterns, vague vs. testable, the four SRS categories; §4.13 **ISO 29148 quality characteristics**, validation vs. verification, written approval and baseline; §4.14 **RICE, WSJF, Kano**, value vs. effort; §4.15 **URS / SRS / SysRS** vs. ISO names (BRS, StRS, SyRS, SRS) and what LumenVenture writes; GAMP 5 URS for GxP clients; §4.16 often-missed requirement areas. Jargon, §7 checklist, §8.2 outputs, Gate G1 and rules 18–22 updated.
   - **Templates:** user story gets type, priority, objective, source, EARS rules and a quality-check DoR item; stakeholder register gets power / interest / strategy, a named decision-maker and the forgotten-groups checklist; project brief §2 becomes goals → `OBJ-n` key results.
   - **Testing:** rule 11 — requirement traceability check in CI (should; must on regulated projects).
   - **Diagrams:** `sdlc-modern-requirements-six-steps.svg`, `sdlc-modern-stakeholder-grid.svg`, `sdlc-modern-goal-to-test-chain.svg`, `sdlc-modern-requirement-documents.svg`, plus Mermaid flows in §2.1 and §4.13.
-- **Sources checked:** the course note `05-requirements.md` (which cites ISO/IEC/IEEE 29148:2018, EARS — Mavin et al., Rolls-Royce 2009, GAMP 5 2nd edition 2022, MoSCoW / DSDM, RICE, WSJF / SAFe, Kano). **Not re-checked against primary sources in this change** — GAMP 5 is marked "next review" in README §10.
+- **Sources checked:** a source review (which cites ISO/IEC/IEEE 29148:2018, EARS — Mavin et al., Rolls-Royce 2009, GAMP 5 2nd edition 2022, MoSCoW / DSDM, RICE, WSJF / SAFe, Kano). **Not re-checked against primary sources in this change** — GAMP 5 is marked "next review" in README §10.
 - **Next review due:** Planning 2027-05-16; Testing 2027-05-16.
 
-## 2026-11-13 — Targeted review of all phases: note-04 findings + current facts
+## 2026-11-13 — Targeted review of all phases + current facts
 
 - **Files:** all six phase files, `README.md` (new §10 Standards table), templates `project-brief.md`, `pipeline-checklist.md`, `service-review.md`
-- **Scope:** a **targeted** review: (1) add practices from the course note "04 Building Quality Software" that the guide was missing, (2) re-check time-sensitive facts against current sources. It was not a line-by-line rewrite of every section.
+- **Scope:** a **targeted** review: (1) add practices from a source review that the guide was missing, (2) re-check time-sensitive facts against current sources. It was not a line-by-line rewrite of every section.
 - **Reviewers:** <review owners> — *to be filled in when the pull request is approved*
 - **What changed:**
   - **Planning:** European Accessibility Act (since 28 June 2025); abuse cases and privacy by design; Argon2id; OWASP Top 10:2025 and ASVS 5.0; new §4.9 workshops (story mapping, example mapping, EventStorming); rules 16–17.
@@ -354,5 +364,5 @@
 ## 2026-11-10 — First version of the guide
 
 - **Files:** `README.md`, all six phase files and their templates
-- **What changed:** guide created from the modern-best-practice SDLC notes; LumenVenture Standard sections (owners, outputs, gates, rules, templates) added to each phase.
+- **What changed:** guide created; LumenVenture Standard sections (owners, outputs, gates, rules, templates) added to each phase.
 - **Next review due:** Design, Development, Testing, Deployment, Maintenance — 2027-05-10.

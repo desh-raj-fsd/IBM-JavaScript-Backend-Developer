@@ -1,10 +1,10 @@
 # Phase 6 — Maintenance: "Observe, Learn, Improve Continuously"
 
-**SDLC series — Phase 6 of 6.** How professional backend teams do **Maintenance** today: the lecture's core tasks, the Waterfall way vs. the modern way, and the industry practices the lecture does not cover.
+**SDLC series — Phase 6 of 6.** How professional backend teams do **Maintenance** today: the core tasks, the Waterfall way vs. the modern way, and the industry practices modern teams add.
 
 > **Last reviewed:** 2026-11-27 · **Next review due:** 2027-05-27 · **Review owner:** Tech Lead · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
 
-[← Deployment](../05-Deployment/Deployment.md) · [Guide README](../README.md) · [Overview](../../6-Phases-of-SDLC-Modern-Best-Practices.md) · [Overview →](../../6-Phases-of-SDLC-Modern-Best-Practices.md)
+[← Deployment](../05-Deployment/Deployment.md) · [Guide README](../README.md)
 
 ---
 
@@ -42,7 +42,7 @@
 
 - Keep the software **working, secure, fast and useful** after release, and feed what you learn into the next loop.
 - Maintenance is usually the **longest** phase: software often runs and changes for years after its first release.
-- **Core tasks from the lecture (still true in every model):**
+- **Core tasks (still true in every model):**
   1. Find **bugs** that were **missed during testing**.
   2. Identify **UI (User Interface) issues**.
   3. Identify **requirements that were not listed in the SRS**.
@@ -50,16 +50,16 @@
   5. **High-priority bugs** are fixed now; **others** are added to the requirements of a **future release**.
   6. **Feedback from stakeholders** feeds into **another development cycle**.
 
-### 1.1 The four types of maintenance (classic SDLC theory, not in the lecture)
+### 1.1 The four types of maintenance (classic SDLC theory)
 
-The classic four maintenance categories, used by the software maintenance standard **ISO/IEC/IEEE 14764**, are below. **Corrective** and **adaptive** are *reactive* (responding to a failure or a change); **preventive** and **perfective** are *proactive*. The lecture's tasks fit into them:
+The classic four maintenance categories, used by the software maintenance standard **ISO/IEC/IEEE 14764**, are below. **Corrective** and **adaptive** are *reactive* (responding to a failure or a change); **preventive** and **perfective** are *proactive*. The classic maintenance tasks fit into them:
 
-| Type | Meaning | Lecture task it covers | Example |
+| Type | Meaning | Classic task it covers | Example |
 |------|---------|------------------------|---------|
 | **Corrective** | Fix bugs and failures | "Find bugs missed during testing" | Fix the 500 error on long review text |
-| **Adaptive** | Keep working in a **changing environment** | (not in the lecture) | Upgrade to a newer Node.js LTS; move to a new cloud; follow a new law |
+| **Adaptive** | Keep working in a **changing environment** | — | Upgrade to a newer Node.js LTS; move to a new cloud; follow a new law |
 | **Perfective** | Improve or add features based on feedback | "UI issues", "missing requirements", "code enhancements" | Add "edit my review"; make search faster |
-| **Preventive** | Stop future problems before they happen | (not in the lecture) | Refactor messy code, add missing tests, update dependencies, fix a slow query before traffic grows |
+| **Preventive** | Stop future problems before they happen | — | Refactor messy code, add missing tests, update dependencies, fix a slow query before traffic grows |
 
 ![The four types of maintenance and the feedback loop](images/sdlc-modern-maintenance-types.svg)
 
@@ -152,7 +152,7 @@ router.get('/health/live', async (req, res) => {
 // ✅ Liveness = process only. Readiness = what this pod needs to serve traffic.
 ```
 
-## 4. Industry practices the lecture does not cover
+## 4. Industry practices beyond the classic tasks
 
 ### 4.1 SLI, SLO, SLA and error budgets
 
@@ -261,7 +261,7 @@ groups:
 
 #### 4.4.1 Where is it broken? Triage by boundary
 
-> From course note [module 2, 01 Overview of Web and Cloud Development](../../course-1-introduction-to-software-engineering/module-2-introduction-to-software-development/notes/01-overview-of-web-and-cloud-development.md). A web request crosses four boundaries. Check them **in order**, outside to inside. This keeps the first minutes of an incident calm and fast.
+> A web request crosses four boundaries. Check them **in order**, outside to inside. This keeps the first minutes of an incident calm and fast.
 
 | # | Boundary | Typical problems | First checks |
 |---|----------|------------------|--------------|
@@ -331,7 +331,7 @@ groups:
 
 ### 4.12 Front-end monitoring and upgrades
 
-> From course note [module 2, 02 Learning Front-End Development](../../course-1-introduction-to-software-engineering/module-2-introduction-to-software-development/notes/02-learning-front-end-development.md). The lecture says front-end technologies are upgraded constantly and that sites must keep working in many browsers, operating systems and devices.
+> Front-end technologies change constantly, and sites must keep working in many browsers, operating systems and devices.
 
 - **Real-user monitoring (RUM):** collect **Core Web Vitals** (Largest Contentful Paint, Interaction to Next Paint, Cumulative Layout Shift) from real visitors; INP replaced FID (First Input Delay) in 2024, for example with Google's `web-vitals` library, and look at the **75th percentile**. Lab tests do not show what slow phones and bad networks see.
 - **JavaScript error tracking:** send front-end errors to an error-tracking tool with **source maps** so stack traces are readable. Alert on a **spike after a release** and link the alert to the release version.
@@ -440,4 +440,4 @@ groups:
 
 ---
 
-[← Deployment](../05-Deployment/Deployment.md) · [Guide README](../README.md) · [Overview](../../6-Phases-of-SDLC-Modern-Best-Practices.md) · [Overview →](../../6-Phases-of-SDLC-Modern-Best-Practices.md)
+[← Deployment](../05-Deployment/Deployment.md) · [Guide README](../README.md)

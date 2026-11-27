@@ -1,10 +1,10 @@
 # Phase 3 — Development: "Small Changes, Automated Rules"
 
-**SDLC series — Phase 3 of 6.** How professional backend teams do **Development** today: the lecture's core tasks, the Waterfall way vs. the modern way, and the industry practices the lecture does not cover.
+**SDLC series — Phase 3 of 6.** How professional backend teams do **Development** today: the core tasks, the Waterfall way vs. the modern way, and the industry practices modern teams add.
 
 > **Last reviewed:** 2026-11-27 · **Next review due:** 2027-05-27 · **Review owner:** Tech Lead · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
 
-[← Design](../02-Design/Design.md) · [Guide README](../README.md) · [Overview](../../6-Phases-of-SDLC-Modern-Best-Practices.md) · [Testing →](../04-Testing/Testing.md)
+[← Design](../02-Design/Design.md) · [Guide README](../README.md) · [Testing →](../04-Testing/Testing.md)
 
 ---
 
@@ -40,7 +40,7 @@
 
 - Turn the design into **working, readable, secure, tested code** that the next developer can change easily.
 - **Other names:** the **"building"** phase or the **"implementation"** phase.
-- **Core tasks from the lecture (still true in every model):**
+- **Core tasks (still true in every model):**
   1. Coding starts from a **design** (the design document or the contract for this slice).
   2. **Project planners use the design to determine and assign coding tasks**.
   3. Developers use **programming tools**, **programming languages** and **software stacks**.
@@ -127,7 +127,7 @@ const db2 = connect(process.env.DATABASE_URL);
 // Removing it from history is a second step, not a replacement for rotation.
 ```
 
-## 4. Industry practices the lecture does not cover
+## 4. Industry practices beyond the classic tasks
 
 ### 4.1 Branching strategies
 
@@ -226,7 +226,7 @@ Closes #42 (REQ-07). Adds rating 1–5 to reviews.
   | **SOLID** | Five object-oriented design rules; the most used is **Single Responsibility**: one module, one reason to change. |
   | **Boy Scout Rule** | Leave the code a little cleaner than you found it. |
 
-- More rules with examples: [7 Coding Laws of Senior Developer](../../7-Coding-Laws-of-Senior-Developer.md) and [10 Backend Design Patterns](../../10-Backend-Design-Pattern-Laws-of-Senior-Engineers-and-Architects.md).
+- More examples: Martin Fowler's [refactoring catalog](https://refactoring.com/catalog/) and the [design patterns catalog](https://refactoring.guru/design-patterns) (external).
 - **Keep functions small automatically:** turn on lint rules such as ESLint `complexity`, `max-depth` and `max-lines-per-function`, so very complex code fails CI instead of waiting for a reviewer to notice.
 - **Keep branching flat and explicit:** use **guard clauses** (early `return` on invalid inputs) instead of deeply nested `if/else` trees, prefer strict equality (`===` / `!==`) over loose `==`, and prevent unintentional `switch` fall-through with `break`/`return` (and `default`), a `Map` (or a lookup object read with `Object.hasOwn`, because a plain object also returns inherited keys such as `constructor`), or ESLint `eqeqeq` and `no-fallthrough`.
 - **Use explicit constants, immutability, and the right container:** default to `const` (ESLint `prefer-const`), replace magic numbers/literals with named constants or validated startup config (and freeze or clone shared `const` objects/arrays when mutation would leak across requests), choose `Map` or `Set` over repeated `Array.find()` scans on large in-memory sets, and bound dynamic arrays or use `TypedArray` / streaming for large binary payloads.
@@ -422,10 +422,10 @@ services:
 
 ### 4.12 Collaboration and documentation
 
-- **Pair programming** (two developers, one task) and **mob/ensemble programming** (the whole team, one task) spread knowledge and catch mistakes early. In a pair, the **driver** types and thinks about the small goal; the **navigator** reviews and keeps the bigger picture; **swap roles often** and do not pair all day (Fowler suggests about 6 hours a day as a ceiling, with breaks). Good for onboarding and hard problems; for large unknowns do a short **spike** first. Details: [course note 04](../../course-1-introduction-to-software-engineering/module-2-introduction-to-software-development/notes/04-teamwork-and-squads.md).
+- **Pair programming** (two developers, one task) and **mob/ensemble programming** (the whole team, one task) spread knowledge and catch mistakes early. In a pair, the **driver** types and thinks about the small goal; the **navigator** reviews and keeps the bigger picture; **swap roles often** and do not pair all day (Fowler suggests about 6 hours a day as a ceiling, with breaks). Good for onboarding and hard problems; for large unknowns do a short **spike** first.
   - **Three common styles:** **driver/navigator** (the default; swap on a timer, about every 15–30 minutes), **ping-pong** (one person writes a failing test, the other makes it pass; good for TDD (test-driven development)), **strong-style** (an idea must go through the other person's hands; the expert navigates, the learner types; teams often add a short recap with questions afterwards). Use a **spike** first for big unknowns.
   - **Remote pairing** works well with a shared editor or screen, a headset and a timer; agree who drives first, the swap time and the breaks.
-  - **Credit both people:** add a `Co-authored-by: Name <email>` trailer (after a blank line) to the commit message. **Pairing is an extra review layer, not a replacement for the pull request** (rule 28; the second author's trailer is rule 27). More: [course note 05](../../course-1-introduction-to-software-engineering/module-2-introduction-to-software-development/notes/05-pair-programming.md).
+  - **Credit both people:** add a `Co-authored-by: Name <email>` trailer (after a blank line) to the commit message. **Pairing is an extra review layer, not a replacement for the pull request** (rule 28; the second author's trailer is rule 27).
 - **Docs as code:** a **README** (what it is, how to run it, how to test it), API docs generated from OpenAPI, JSDoc on public functions, ADRs, and a **CHANGELOG** — all in Git and reviewed in PRs.
 - **Comments explain *why*, not *what*.** The code shows *what*.
 - **Docs change in the same PR as the code.** Documentation is updated **with** each change, in every phase — not "later" or "in the maintenance phase". If users read the old docs for weeks, the docs are wrong ([README §7.2](../README.md#72-documentation-rules), rule 2).
@@ -459,7 +459,7 @@ on:
 
 ### 4.14 Front-end code standards
 
-> From course note [module 2, 02 Learning Front-End Development](../../course-1-introduction-to-software-engineering/module-2-introduction-to-software-development/notes/02-learning-front-end-development.md). Design decisions for web UIs are in [Design 4.13](../02-Design/Design.md#413-front-end-design-decisions).
+> Design decisions for web UIs are in [Design 4.13](../02-Design/Design.md#413-front-end-design-decisions).
 
 | Habit | What to do | Why |
 |-------|-----------|-----|
@@ -491,7 +491,7 @@ Set-Cookie: sid=<value>; Secure; HttpOnly; SameSite=Lax; Path=/
 
 ### 4.15 Database access, ORMs, and migrations
 
-> From course notes [module 2, 03 The Importance of Back-End Development](../../course-1-introduction-to-software-engineering/module-2-introduction-to-software-development/notes/03-the-importance-of-back-end-development.md) and [module 3, 02 Query and Assembly Programming Languages](../../course-1-introduction-to-software-engineering/module-3-basics-of-programming/notes/02-query-and-assembly-programming-languages.md). Using an **ORM (Object-Relational Mapping)** tool speeds up CRUD (Create, Read, Update, Delete) code, but does not remove the need to understand SQL and database performance.
+> Using an **ORM (Object-Relational Mapping)** tool speeds up CRUD (Create, Read, Update, Delete) code, but does not remove the need to understand SQL and database performance.
 
 - **Use connection pooling:** Reuse a bounded pool of open database connections instead of opening a new connection on every HTTP request.
 - **Prevent N+1 query loops:** Never load a list of `N` records in one query and then run `N` separate queries inside a loop to fetch related rows. Inspect generated SQL logs in development and use **eager loading** (loading related rows upfront in one query instead of inside a loop) or an explicit SQL `JOIN`.
@@ -603,4 +603,4 @@ Set-Cookie: sid=<value>; Secure; HttpOnly; SameSite=Lax; Path=/
 
 ---
 
-[← Design](../02-Design/Design.md) · [Guide README](../README.md) · [Overview](../../6-Phases-of-SDLC-Modern-Best-Practices.md) · [Testing →](../04-Testing/Testing.md)
+[← Design](../02-Design/Design.md) · [Guide README](../README.md) · [Testing →](../04-Testing/Testing.md)

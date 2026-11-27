@@ -1,10 +1,10 @@
 # Phase 4 — Testing: "Shift-Left, Automate, Pyramid"
 
-**SDLC series — Phase 4 of 6.** How professional backend teams do **Testing** today: the lecture's core tasks, the Waterfall way vs. the modern way, and the industry practices the lecture does not cover.
+**SDLC series — Phase 4 of 6.** How professional backend teams do **Testing** today: the core tasks, the Waterfall way vs. the modern way, and the industry practices modern teams add.
 
 > **Last reviewed:** 2026-11-26 · **Next review due:** 2027-05-26 · **Review owner:** QA Engineer · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
 
-[← Development](../03-Development/Development.md) · [Guide README](../README.md) · [Overview](../../6-Phases-of-SDLC-Modern-Best-Practices.md) · [Deployment →](../05-Deployment/Deployment.md)
+[← Development](../03-Development/Development.md) · [Guide README](../README.md) · [Deployment →](../05-Deployment/Deployment.md)
 
 ---
 
@@ -48,7 +48,7 @@
 ## 1. The job
 
 - Prove the software is **stable**, **secure**, and **meets the requirements** — and find problems as **early and cheaply** as possible.
-- **Core tasks from the lecture (still true in every model):**
+- **Core tasks (still true in every model):**
   1. Code is **thoroughly tested**: **stable**, **secure**, and **meets the requirements** (the SRS or the acceptance criteria).
   2. Testing is **manual**, **automated**, or a **hybrid** of both.
   3. Large projects may have **dedicated testing (QA — Quality Assurance) teams**.
@@ -81,9 +81,9 @@
   2. **Green** — write the smallest code that passes.
   3. **Refactor** — clean up; the test proves nothing broke.
 - **CI runs the pull-request test set on every push and PR** (unit, integration and the affected tests; the full suite runs on `main`, rule 14). A red build blocks the merge.
-- **The test pyramid:** many fast unit tests, fewer integration tests, few end-to-end tests. The lecture's four levels map onto it like this:
+- **The test pyramid:** many fast unit tests, fewer integration tests, few end-to-end tests. The four classic levels map onto it like this:
 
-  | Level (lecture) | What it tests | Speed | How many | Node.js tools |
+  | Level (classic) | What it tests | Speed | How many | Node.js tools |
   |-----------------|---------------|-------|----------|---------------|
   | **Unit** | One function or module alone | Milliseconds | Many | `node:test`, Jest, Vitest |
   | **Integration** | Parts together (route + service + real database) | Seconds | Some | Supertest, Testcontainers (real database in Docker) |
@@ -137,7 +137,7 @@ test('rating works', () => assert.strictEqual(isValidRating(3), true));
 // The bug escapes to production and is found by users — the most expensive place.
 ```
 
-## 4. Industry practices the lecture does not cover
+## 4. Industry practices beyond the classic tasks
 
 ### 4.1 Ways to classify tests
 
@@ -476,7 +476,7 @@ on:
 
 ### 4.16 Front-end testing
 
-> From course note [module 2, 02 Learning Front-End Development](../../course-1-introduction-to-software-engineering/module-2-introduction-to-software-development/notes/02-learning-front-end-development.md). Rules for the UI itself are in [Development 4.14](../03-Development/Development.md#414-front-end-code-standards).
+> Rules for the UI itself are in [Development 4.14](../03-Development/Development.md#414-front-end-code-standards).
 
 - **Layers:** many **unit** tests for logic, some **component** tests (for example Testing Library), and **few end-to-end tests** for key flows (login, checkout) run in **Chromium, Firefox and WebKit** with a tool such as Playwright. This is the cross-browser part of rule 16.
 - **Accessibility:** an automated check (for example axe) finds only **part** of the problems. Add a **keyboard-only test** of every changed screen, and a **screen-reader check** of key flows before a major release. The target is **WCAG (Web Content Accessibility Guidelines) 2.2 level AA**, for example text contrast of at least 4.5:1 (large text 3:1) and touch targets of at least 24×24 CSS pixels, or enough space around a smaller target.
@@ -575,4 +575,4 @@ The release goes to [G4 in Deployment](../05-Deployment/Deployment.md#6-lumenven
 
 ---
 
-[← Development](../03-Development/Development.md) · [Guide README](../README.md) · [Overview](../../6-Phases-of-SDLC-Modern-Best-Practices.md) · [Deployment →](../05-Deployment/Deployment.md)
+[← Development](../03-Development/Development.md) · [Guide README](../README.md) · [Deployment →](../05-Deployment/Deployment.md)
