@@ -197,7 +197,7 @@ flowchart TD
   - **Unit, integration and system testing verify** the product — "did we build it **right**, as specified and designed?"
   - **Acceptance testing validates** the product — "did we build the **right thing** for the customer?"
 
-> ⚠️ **Correction (terms):** "the whole left side is verification and the whole right side is validation" → **verification** means checking against the **specification** ("built right?"), and **validation** means checking against the **user's real needs** ("right thing?") — these are the standard IEEE / ISO meanings. So on the right side, **unit, integration and system testing are verification**, and only **acceptance testing is validation**. The left-side reviews of requirements and designs are also verification.
+> ⚠️ **Correction (terms):** "the whole left side is verification and the whole right side is validation" → **verification** means checking against the **specification** ("built right?"), and **validation** means checking against the **user's real needs** ("right thing?") — these are the standard IEEE (Institute of Electrical and Electronics Engineers) / ISO meanings. So on the right side, **unit, integration and system testing are verification**, and only **acceptance testing is validation**. The left-side reviews of requirements and designs are also verification.
 > **Lecture wording (for the quiz):** "The phases going down the left side of the V are called 'verification'. Then, going up the right side of the V, those phases are called 'validation'." Many course materials use these labels, so expect them in quizzes; in interviews, give the precise meaning.
 
 #### 3.3.2 The four pairs of phases
@@ -261,7 +261,7 @@ flowchart TD
 
   | Industry | Standard or guide (examples) | Why the V fits |
   |----------|------------------------------|----------------|
-  | Automotive | **ISO 26262** (functional safety), **Automotive SPICE** | Every safety requirement must be traced to a test |
+  | Automotive | **ISO 26262** (functional safety), **Automotive SPICE** (Software Process Improvement and Capability dEtermination) | Every safety requirement must be traced to a test |
   | Medical device software | **IEC 62304** (software life cycle for medical devices) | Regulators expect documented verification of each step |
   | Pharmaceutical computerized systems | **GAMP 5** (2nd edition, 2022) | Specifications on the left, verification on the right; GAMP 5 also supports Agile, iterative work |
   | Aerospace, rail, defense | Industry safety standards and contracts | High cost of failure; formal sign-offs |

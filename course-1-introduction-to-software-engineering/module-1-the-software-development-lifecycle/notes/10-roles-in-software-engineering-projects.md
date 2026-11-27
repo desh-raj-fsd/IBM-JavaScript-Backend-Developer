@@ -30,7 +30,7 @@
 | **Product owner** (PO) | The Scrum accountability for "maximizing the value of the product" and for "effective Product Backlog management" (Scrum Guide 2020). | The one person who decides **what** the team builds next, and why. | The head chef who decides the menu. |
 | **Product manager** | A job title: the person who owns the product's strategy — market, users, goals, roadmap and success metrics — often across several teams and releases. | The person who decides where the product should go. | The restaurant owner who decides what kind of restaurant it is. |
 | **Technical writer / information developer** | The person who writes documentation such as user guides, API (Application Programming Interface) reference and help pages. "Information developer" is IBM's job title for this role. | The person who explains the software in clear words. | The person who writes the manual that comes with a new washing machine. |
-| **RACI** *(industry term)* | A matrix that shows, for each activity, who is **R**esponsible (does it), **A**ccountable (owns the result — exactly one), **C**onsulted and **I**nformed. | A table of "who does what". | A family chore chart. |
+| **RACI** (Responsible, Accountable, Consulted, Informed) *(industry term)* | A matrix that shows, for each activity, who is **R**esponsible (does it), **A**ccountable (owns the result — exactly one), **C**onsulted and **I**nformed. | A table of "who does what". | A family chore chart. |
 | **Cross-functional team** *(industry term)* | A team that has all the skills it needs to deliver the product without waiting for other teams. | One team, all skills. | A film crew: camera, sound and lights all on set together. |
 
 ---
@@ -313,7 +313,7 @@ flowchart TD
 #### 3.6.1 ✅ Modern Best Practice: developers own quality, security and operations too
 
 > **Lecture says:** developers write the code that implements the design, the SRS and the UX requirements.
-> **Industry today:** developers also **test**, **review**, **secure** and **run** what they build — "**You build it, you run it**" (Werner Vogels, Amazon CTO — Chief Technology Officer — in an interview in *ACM Queue*, the magazine of the ACM — Association for Computing Machinery, 2006).
+> **Industry today:** developers also **test**, **review**, **secure** and **run** what they build — "**You build it, you run it**" (Werner Vogels, Amazon CTO — Chief Technology Officer — in an interview in *ACM Queue*, the magazine of the ACM (Association for Computing Machinery), 2006).
 
 - **Tests with the code:** unit and integration tests in the same pull request; often **TDD** (Test-Driven Development) ([note 08](08-software-testing.md)).
 - **Code review:** every change is reviewed by another developer before merge.
@@ -375,7 +375,7 @@ flowchart TD
 > **Lecture says:** the SRE bridges development and operations, tracks incidents, automates and ensures reliability.
 > **Industry today:** SREs work with **numbers**: **SLIs** (Service Level Indicators) measure the service, **SLOs** set the target, and the **error budget** decides when the team must stop releasing features and fix reliability. Several related roles share operations work.
 
-- **SLI → SLO → error budget:**
+- **SLI (service level indicator) → SLO (service level objective) → error budget:**
   - **SLI:** what you measure — for example "the share of requests that return a non-5xx answer in under 300 ms".
   - **SLO:** the target — "99.9% of requests in a 30-day window".
   - **Error budget:** what is allowed to fail — 100% − 99.9% = **0.1%** of requests (or, for an availability SLO, about **43 minutes** of downtime in 30 days; see [§5.2](#52-sre-an-error-budget-calculator)).

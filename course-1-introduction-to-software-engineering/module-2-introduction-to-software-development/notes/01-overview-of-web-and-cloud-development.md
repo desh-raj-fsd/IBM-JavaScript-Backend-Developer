@@ -24,7 +24,7 @@
 | **CSS (Cascading Style Sheets)** | A stylesheet language used to describe the visual presentation, styling, colors, and layout of a document written in HTML. | The skin, paint, and clothing of a webpage. | The paint, wallpaper, and furniture that make the house look beautiful. |
 | **JavaScript (JS)** | A lightweight, high-level, interpreted programming language that provides interactivity, dynamic behaviors, and logic on the web. | The muscles and brain of a webpage that allow it to move and act. | The electrical wiring, light switches, and smart thermostat in the house. |
 | **Static Content** | Web assets (HTML, CSS, images, client scripts) stored on a server or CDN (Content Delivery Network) that do not change when requested, serving the exact same content to every visitor. | Pre-made files that are delivered exactly as they were written. | A printed newspaper; everyone who buys today's issue reads the exact same page. |
-| **Dynamic Content** | Web content that is generated on-demand at runtime by server code or client logic, often pulling customized data from databases or APIs (Application Programming Interfaces). | Information created fresh at the moment you ask for it. | An ATM receipt showing your personal bank balance right now. |
+| **Dynamic Content** | Web content that is generated on-demand at runtime by server code or client logic, often pulling customized data from databases or APIs (Application Programming Interfaces). | Information created fresh at the moment you ask for it. | An ATM (automated teller machine) receipt showing your personal bank balance right now. |
 | **Database** | An organized, electronic collection of structured or unstructured data stored and accessed electronically from a computer system. | A secure electronic filing cabinet for saving application data permanently. | A library storage room where books and records are cataloged and kept safe. |
 | **Relational Database (SQL)** | A database that organizes data into tables with predefined columns and rows, using SQL (Structured Query Language) and strict mathematical relationships between tables. | A database shaped like a collection of linked spreadsheets. | An Excel workbook with linked sheets for "Customers", "Orders", and "Products". |
 | **NoSQL Database** | A non-relational database that stores data in flexible formats (such as JSON documents, key-value pairs, or graphs) without requiring rigid tabular schemas. | A database that stores flexible records directly as documents. | A folder of separate paper profiles where each person can have different details. |
@@ -32,7 +32,7 @@
 | **Scalability** | The ability of a software system to handle increased workloads (more users, more requests, more data) by adding compute resources. | The ability to grow smoothly when many visitors arrive at once. | A supermarket opening more cash registers when a long queue forms. |
 | **Resilience** | The capacity of a system to recover quickly from difficulties, server crashes, or network failures without losing data or stopping the entire service. | Staying up and working even when parts break. | An airplane with multiple engines that can keep flying safely even if one engine stops. |
 | **Front-End (Client-Side)** | Everything in an application that runs directly on the user's device (inside the browser or mobile app) that the user can see, click, and interact with. | The user-facing part of an app. | The steering wheel, dashboard, and pedals of a car that the driver touches. |
-| **Back-End (Server-Side)** | The server-side portion of an application that runs on remote computers, handling business logic, calculations, authentication, database operations, and API routing. | The hidden engine room of an app. | The engine, fuel injection system, and transmission under the car's hood. |
+| **Back-End (Server-Side)** | The server-side portion of an application that runs on remote computers, handling business logic, calculations, authentication, database operations, and API (Application Programming Interface) routing. | The hidden engine room of an app. | The engine, fuel injection system, and transmission under the car's hood. |
 | **Full-Stack Developer** | A software engineer who possesses skills, knowledge, and hands-on experience across both front-end (client-side) and back-end (server-side) development. | A developer who can build both the user interface and the server engine. | A home builder who can do both the interior decorating and the foundation plumbing. |
 | **Code Editor** | A specialized text editor designed specifically for writing and editing program source code, featuring syntax highlighting and basic formatting. | A lightweight writing tool built for code. | A digital notepad that understands programming grammar. |
 | **IDE (Integrated Development Environment)** | A comprehensive software suite that combines a source code editor, local build automation tools, a compiler or interpreter, and a visual debugger into a single application. | A complete, all-in-one software workshop for developers. | A fully equipped professional garage containing all tools, lifts, and diagnostic computers needed to fix a car. |
@@ -202,7 +202,7 @@ flowchart TD
 
 #### 3.2.1 Mechanics of Static Content
 
-- **How it works:** A file (HTML, CSS, JavaScript bundle, JPEG image, PDF) is stored on disk or in an object storage bucket (such as AWS S3, Google Cloud Storage, or IBM Cloud Object Storage).
+- **How it works:** A file (HTML, CSS, JavaScript bundle, JPEG image, PDF (Portable Document Format)) is stored on disk or in an object storage bucket (such as AWS S3, Google Cloud Storage, or IBM Cloud Object Storage).
 - **Processing overhead:** Zero server computation. The web server (like NGINX, Apache, or a Node.js file handler) simply reads the binary stream from disk or RAM and transmits it over the network.
 - **Caching:** Highly cacheable. Headers like `ETag` and `Cache-Control: public, max-age=31536000, immutable` allow browsers and edge proxies to store the file for months, eliminating subsequent server hits.
 
@@ -230,7 +230,7 @@ flowchart TD
 #### 3.2.4 ✅ Modern Best Practice: Jamstack, Edge CDNs, and Decoupled APIs
 
 > **Lecture says:** Most websites contain static and dynamic elements to provide the best user experience.
-> **Industry today:** Modern architectures separate static frontend assets from dynamic backend APIs. Static assets are pushed to global CDNs (Cloudflare, AWS CloudFront, Vercel), while backends operate as lightweight, headless REST/GraphQL microservices.
+> **Industry today:** Modern architectures separate static frontend assets from dynamic backend APIs. Static assets are pushed to global CDNs (Cloudflare, AWS CloudFront, Vercel), while backends operate as lightweight, headless REST (Representational State Transfer)/GraphQL microservices.
 
 1. **Edge Caching via CDNs (Content Delivery Networks):** Instead of serving static files from a single centralized server in one country, files are duplicated across hundreds of "Point of Presence" (PoP) edge servers worldwide. A user in Tokyo downloads assets from a Tokyo edge server in 5 milliseconds instead of waiting 250 milliseconds for a server in New York.
 2. **Decoupled (Headless) Architecture:** Rather than having the backend server construct full HTML pages using legacy server-side templates, the backend exposes **pure JSON APIs**. The client (a React, Vue, or Angular Single-Page Application, or a mobile app) requests only the raw data it needs and constructs the UI on the client device.
@@ -322,7 +322,7 @@ Resilience is the ability of an application to withstand infrastructure failures
 |---|---|---|
 | **Compute Services** | On-demand CPU and RAM for executing backend code. Ranges from raw Virtual Machines (IaaS) to containers (CaaS) and serverless execution (FaaS). | IBM Code Engine, Red Hat OpenShift, Kubernetes (EKS/GKE), AWS Lambda, Virtual Server Instances (VSIs). |
 | **Cloud Storage** | Highly durable, distributed storage for binary objects, backups, user uploads, and media. | IBM Cloud Object Storage (COS), Amazon S3, Google Cloud Storage (GCS). |
-| **Managed Databases (DBaaS)** | Cloud-managed relational and document databases with automated patching, automated backups, and multi-region replication. | IBM Cloud Databases for PostgreSQL, MongoDB Atlas, Amazon RDS, Google Cloud Spanner. |
+| **Managed Databases (DBaaS)** | Cloud-managed relational and document databases with automated patching, automated backups, and multi-region replication. | IBM Cloud Databases for PostgreSQL, MongoDB Atlas, Amazon RDS (Relational Database Service), Google Cloud Spanner. |
 | **Networking & Edge** | Global traffic routing, SSL/TLS termination, DDoS (Distributed Denial of Service) protection, and edge caching. | Cloudflare, AWS CloudFront, IBM Cloud Internet Services (CIS). |
 
 #### 3.3.4 ✅ Modern Best Practice: The Twelve-Factor App Methodology
@@ -505,7 +505,7 @@ A professional development environment provides four major productivity pillars:
 - **Multi-Language Support & LSP (Language Server Protocol):** Modern editors use LSP (developed by Microsoft) to separate the editor user interface from language analysis engines. The same underlying JavaScript engine (TypeScript Server / TSServer) powers autocompletion, type hinting, and refactoring across VS Code, Neovim, and Sublime Text.
 - **Source Control Management (Git & GitHub):** Direct visual integration with Git allows engineers to view branch status, inspect side-by-side file diffs, resolve merge conflicts, and stage commits without leaving their editing window.
 - **Integrated Debugging:** Setting breakpoints directly on lines of code, stepping into functions (`Step Over`, `Step Into`, `Step Out`), and inspecting runtime variable values and call stacks in real time, replacing fragile `console.log()` statements.
-- **Extensions and Themes:** Customizing linters, syntax themes, color palettes, and cloud deployment plugins (such as Docker, Kubernetes, and IBM Cloud CLI extensions).
+- **Extensions and Themes:** Customizing linters, syntax themes, color palettes, and cloud deployment plugins (such as Docker, Kubernetes, and IBM Cloud CLI (command-line interface) extensions).
 
 #### 3.5.4 ✅ Modern Best Practice: DevContainers and Reproducible Developer Environments
 

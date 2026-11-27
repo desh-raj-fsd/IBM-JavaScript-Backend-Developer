@@ -331,7 +331,7 @@ flowchart TD
 > **Industry today:** docs live in Git, are changed in the **same PR** as the code, have an **owner** and a **review date**, and **CI** checks them on every change.
 
 - **Same PR rule:** a PR that changes behavior also changes its docs (README, OpenAPI, user guide, runbook). The PR template asks "Docs updated?" and the **Definition of Done** includes it — that is how "allot resources" works in practice.
-- **Generate what you can:** API reference from OpenAPI, CLI help from code, changelog from Conventional Commits.
+- **Generate what you can:** API reference from OpenAPI, CLI (command-line interface) help from code, changelog from Conventional Commits.
 - **Check in CI:** Markdown lint (markdownlint), broken-link check (for example lychee), OpenAPI lint (Spectral), style check (Vale), and a **freshness check** that fails when a page's "last reviewed" date is too old (see [§5.1](#51-a-docs-freshness-check-in-nodejs)).
 - **Owners:** each doc has an owning role; `CODEOWNERS` sends doc changes to the right reviewer.
 - **Periodic review:** a fixed date on each important page ("Last reviewed … · Next review due …"); overdue pages are raised in the retrospective.
@@ -411,7 +411,7 @@ flowchart TD
 
 | Category / type | Document | Where it lives |
 |-----------------|----------|----------------|
-| Product — **requirements** | User stories with acceptance criteria (`REQ-07` rate a book 1–5, found by its ISBN — International Standard Book Number); NFR "p95 < 300 ms" (95% of requests faster than 300 ms) | Backlog; `docs/requirements.md` |
+| Product — **requirements** | User stories with acceptance criteria (`REQ-07` rate a book 1–5, found by its ISBN — International Standard Book Number); NFR (non-functional requirement) "p95 < 300 ms" (95% of requests faster than 300 ms) | Backlog; `docs/requirements.md` |
 | Product — **design** | C4 context and container diagrams; ADR `0003-use-mongodb.md` | `docs/design/`, `docs/adr/` |
 | Product — **technical** | `README.md`, JSDoc on public functions, `openapi.yaml`, `.env.example` | Repository root, `src/` |
 | Product — **QA** | `docs/test-strategy.md`, tests named `REQ-07: …`, CI test report | `docs/`, `test/`, CI |

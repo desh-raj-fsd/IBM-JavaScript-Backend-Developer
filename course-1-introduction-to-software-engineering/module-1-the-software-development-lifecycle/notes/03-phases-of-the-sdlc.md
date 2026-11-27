@@ -261,6 +261,7 @@ flowchart TD
 ```
 
 > ⚠️ **Correction:** The lecture defines a prototype twice — as a "small-scale replica of the end product" (planning) and as a "preliminary mock-up of the system, or parts of the system" (design) → These are **the same idea used for different goals**. In planning, the prototype helps **find out what** users need. In design, it helps **show and test how** a part of the system will work. A prototype is **not** a small finished product; it is usually incomplete and not production quality.
+> **Lecture wording (for the quiz):** "small-scale replica of the end product"; "preliminary mock-up of the system, or parts of the system" *(wording as recorded when this note was written; module 1 predates saved transcripts, so not re-checked against the video)*
 
 #### 3.3.1 ✅ Modern Best Practice: lightweight, versioned design
 
@@ -310,7 +311,7 @@ paths:
   - Example: one developer builds the `/reviews` endpoints, another builds user login, another builds the database layer.
 - **What the developers need:**
   - **Programming tools** — code editors, IDEs (Integrated Development Environments), debuggers, Git.
-  - **Different programming languages** — for example JavaScript for the server, SQL for the database.
+  - **Different programming languages** — for example JavaScript for the server, SQL (Structured Query Language) for the database.
   - **Software stacks** — for example **MERN** (MongoDB, Express, React, Node.js).
 - **Organization standards:** organizations **may have standards or guidelines** that must be followed.
   - Examples: a coding style guide, linting rules (ESLint), naming rules, code review before merging, security rules.
@@ -465,7 +466,7 @@ jobs:
   |--------|---------|
   | **A website** | Deploying a new version of an Express app to a cloud server. |
   | **A mobile device app store** | Releasing an app to the Apple App Store or Google Play (often first to a beta-testing group). |
-  | **A software distribution server on a corporate network** | An IT team pushing a new internal tool to all company computers. |
+  | **A software distribution server on a corporate network** | An IT (information technology) team pushing a new internal tool to all company computers. |
 
 ```mermaid
 flowchart TD
@@ -482,6 +483,7 @@ flowchart TD
 ![Staged deployment: from the UAT platform to production](../images/03-phases-of-the-sdlc-deployment.svg)
 
 > ⚠️ **Correction:** The lecture lists "acceptance testing" in the testing phase and "UAT" in the deployment phase, which can look like two different things → They are the **same activity**: UAT **is** acceptance testing done by the customer, usually on a separate **UAT (or "staging") environment**. Many teams count it as the last step of testing.
+> **Lecture wording (for the quiz):** "acceptance testing" *(wording as recorded when this note was written; module 1 predates saved transcripts, so not re-checked against the video)*
 
 #### 3.6.1 ✅ Modern Best Practice: automated, low-risk releases
 
@@ -598,7 +600,7 @@ flowchart TD
 
 | Phase | What the team does |
 |-------|--------------------|
-| **Planning** | Users: readers and admins. Purpose: share reviews. Inputs: ISBN, rating, text. Outputs: JSON. Compliance: protect users' emails. Risk: spam reviews. QA: every endpoint has automated tests. Resources: 2 developers, 6 weeks. The client finds it hard to explain the rating rules, so the team shows a **prototype** with a 5-star widget. All this goes into the **SRS**. |
+| **Planning** | Users: readers and admins. Purpose: share reviews. Inputs: ISBN (International Standard Book Number), rating, text. Outputs: JSON. Compliance: protect users' emails. Risk: spam reviews. QA: every endpoint has automated tests. Resources: 2 developers, 6 weeks. The client finds it hard to explain the rating rules, so the team shows a **prototype** with a 5-star widget. All this goes into the **SRS**. |
 | **Design** | The architecture: Express API + MongoDB + JWT (JSON Web Token) login. Endpoints and the `reviews` schema are written in the **design document** and reviewed by the client. |
 | **Development** | The planner assigns tasks: Dev A builds `/books` routes, Dev B builds `/auth` and `/reviews`. Both follow the team's ESLint rules. |
 | **Testing** | Unit tests check `isValidRating()`. Integration tests check that a review is saved in MongoDB. A bug — a user can delete someone else's review — is reported, tracked, fixed and retested. |

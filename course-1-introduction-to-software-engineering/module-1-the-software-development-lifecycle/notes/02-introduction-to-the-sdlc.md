@@ -125,6 +125,7 @@ flowchart TD
 ```
 
 > ⚠️ **Correction:** The transcript says the SDLC "began to take shape in the mid-1960s", but the summary says its development was "in the 60s and 70s" → Both are true together: the ideas **started** in the mid-1960s and **matured** through the 1970s. The name **"waterfall"** itself only appeared later — Winston Royce described a staged model in **1970**, and the word "waterfall" was used for it around **1976**. Royce actually warned that a purely linear flow is **risky** and suggested feedback loops between stages.
+> **Lecture wording (for the quiz):** "began to take shape in the mid-1960s"; "in the 60s and 70s" *(wording as recorded when this note was written; module 1 predates saved transcripts, so not re-checked against the video)*
 
 ![History of the SDLC from the mid-1960s to iterative methods](../images/02-introduction-to-the-sdlc-history.svg)
 
@@ -201,6 +202,7 @@ flowchart TD
 ![The seven key advantages of the SDLC](../images/02-introduction-to-the-sdlc-advantages.svg)
 
 > ⚠️ **Correction:** The lecture presents "each phase is discrete" as a pure advantage → In modern iterative and Agile work, phases often **overlap** (for example, testing runs at the same time as coding in CI/CD (Continuous Integration / Continuous Delivery) pipelines). Strict boundaries help with clarity, but very rigid phases can slow a team down. The benefit is **clear responsibilities and exit criteria**, not a ban on overlap.
+> **Lecture wording (for the quiz):** "each phase is discrete" *(wording as recorded when this note was written; module 1 predates saved transcripts, so not re-checked against the video)*
 
 ### 3.5 Lecture Summary
 

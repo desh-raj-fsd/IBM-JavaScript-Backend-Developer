@@ -146,7 +146,7 @@ function process(data) {
 - **What problem it solves:** It converts an unpredictable external dependency into a predictable internal one, and it gives you exactly one place to look when the external contract changes.
 
 ```mermaid
-flowchart LR
+flowchart TD
     A["External Service<br/>(fields it controls)"] --> B["Boundary /<br/>Translation Layer"]
     B --> C["Internal Domain Model<br/>(fields your app controls)"]
     C --> D["Rest of the Application"]
@@ -364,7 +364,7 @@ try {
 - **What problem it solves:** This is the one habit in the list that isn't about how code is written — it's about how code *changes*. Software doesn't get hard to maintain because of the first version; it gets hard when the next fifty changes are each harder to review, test, debug, and roll back than they needed to be.
 
 ```mermaid
-flowchart LR
+flowchart TD
     A["One giant PR:<br/>feature + refactor + DB + frontend + retries"] -.->|hard to review/revert| X["🔴"]
     B1["PR 1: checkout validation"] --> Y["🟢 easy to review"]
     B2["PR 2: payment service refactor"] --> Y

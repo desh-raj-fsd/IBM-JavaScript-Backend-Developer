@@ -47,8 +47,8 @@
 ```mermaid
 flowchart TD
     A["List the application's real reads and writes"] --> B{"What shape are the queries?"}
-    B -->|"Joins across customers, orders, products, payments"| C["Relationship-heavy access pattern"]
-    B -->|"Get value for a known key - e.g. session for user 12345"| D["Single-key lookup access pattern"]
+    B -->|Joins across customers, orders, products, payments| C["Relationship-heavy access pattern"]
+    B -->|Get value for a known key - e.g. session for user 12345| D["Single-key lookup access pattern"]
     C --> E["Relational database fits naturally"]
     D --> F["Key-value or document store fits naturally"]
 ```
@@ -113,8 +113,8 @@ async function getSessionTheHardWay(db, userId) {
 ```mermaid
 flowchart TD
     A["Business operation occurs"] --> B{"Can this value be briefly stale without real harm?"}
-    B -->|"Yes - e.g. recommendations, search freshness"| C["Eventual consistency / async update is acceptable"]
-    B -->|"No - e.g. inventory count, payment, account balance"| D["Requires strong consistency / a transaction"]
+    B -->|Yes - e.g. recommendations, search freshness| C["Eventual consistency / async update is acceptable"]
+    B -->|No - e.g. inventory count, payment, account balance| D["Requires strong consistency / a transaction"]
     D --> E["Must never allow two customers to both win the last item"]
     C --> F["Can lag behind the source of truth briefly"]
 ```
@@ -187,14 +187,14 @@ async function purchaseWithoutLocking(db, productId, customerId) {
 ```mermaid
 flowchart TD
     A["Application feels slow"] --> B{"Have you measured the actual bottleneck?"}
-    B -->|"No"| C["Check query plan"]
+    B -->|No| C["Check query plan"]
     C --> D["Check for missing indexes"]
     D --> E["Check for over-fetching / missing pagination"]
     E --> F["Check for repeated expensive queries - N+1"]
     F --> G["Check connection pool / connection management"]
     G --> H{"Bottleneck found?"}
-    H -->|"Yes"| I["Fix the query, index, or connection config"]
-    H -->|"No, database is genuinely at its limit"| J["Only now consider an architecture change"]
+    H -->|Yes| I["Fix the query, index, or connection config"]
+    H -->|No, database is genuinely at its limit| J["Only now consider an architecture change"]
 ```
 
 **Concrete Example (from the lecture's diagnostic list):**
@@ -326,11 +326,11 @@ async function createOrderThenShowIt(order) {
 ```mermaid
 flowchart TD
     A["Primary database - source of truth"] --> B{"Specific reads become expensive?"}
-    B -->|"Yes"| C["Add a cache - async copy, rebuildable"]
+    B -->|Yes| C["Add a cache - async copy, rebuildable"]
     A --> D{"Search requirements grow?"}
-    D -->|"Yes"| E["Add a search index - async copy, rebuildable"]
+    D -->|Yes| E["Add a search index - async copy, rebuildable"]
     A --> F{"Analytics complexity grows?"}
-    F -->|"Yes"| G["Add an analytics platform - async copy, rebuildable"]
+    F -->|Yes| G["Add an analytics platform - async copy, rebuildable"]
     C --> H["All copies trace back to the primary as the authoritative answer"]
     E --> H
     G --> H
@@ -388,8 +388,8 @@ async function getCustomerAddressAmbiguous(customerId) {
 ```mermaid
 flowchart TD
     A["Evaluate a storage system for a given dataset"] --> B{"If this system's data is lost entirely, can it be rebuilt from another source?"}
-    B -->|"Yes - e.g. cache, session cache, computed aggregates"| C["Fast / in-memory storage is acceptable"]
-    B -->|"No - e.g. order history, payments, account balances"| D["Requires durable storage: replication + backups + recovery plan"]
+    B -->|Yes - e.g. cache, session cache, computed aggregates| C["Fast / in-memory storage is acceptable"]
+    B -->|No - e.g. order history, payments, account balances| D["Requires durable storage: replication + backups + recovery plan"]
     C --> E["Optimize primarily for latency"]
     D --> F["Optimize primarily for durability and recoverability, not just speed"]
 ```
@@ -513,11 +513,11 @@ flowchart TD
     B --> C["Measure real bottlenecks - Law 3"]
     C --> D["Optimize queries first"]
     D --> E{"Real, measured caching problem?"}
-    E -->|"Yes"| F["Add caching"]
+    E -->|Yes| F["Add caching"]
     D --> G{"Real search requirement?"}
-    G -->|"Yes"| H["Add search infrastructure"]
+    G -->|Yes| H["Add search infrastructure"]
     D --> I{"Workload genuinely demands it?"}
-    I -->|"Yes"| J["Move toward distributed storage"]
+    I -->|Yes| J["Move toward distributed storage"]
     F --> K["Continuously ask: what would it cost to change this decision later?"]
     H --> K
     J --> K
@@ -535,8 +535,8 @@ flowchart TD
     D --> E["Build the application and ship it"]
     E --> F["Measure real bottlenecks in production - Law 3"]
     F --> G{"Bottleneck is a query/index/connection issue?"}
-    G -->|"Yes"| H["Fix the query, index, or connection config"]
-    G -->|"No - genuinely a scaling limit"| I["Diagnose which scaling dimension is stressed - Law 4"]
+    G -->|Yes| H["Fix the query, index, or connection config"]
+    G -->|No - genuinely a scaling limit| I["Diagnose which scaling dimension is stressed - Law 4"]
     I --> J["Add exactly one new system per measured problem, with a clear source of truth - Law 5"]
     J --> K["Classify each dataset as fast/rebuildable vs durable/authoritative - Law 6"]
     K --> L["Plan operations: backups, monitoring, failover, managed service, cost model - Law 7"]
@@ -640,8 +640,8 @@ flowchart TD
 flowchart TD
     A["New feature or service"] --> B["List its real reads and writes"]
     B --> C{"Relationship-heavy or single-key?"}
-    C -->|"Relationship-heavy"| D["Relational database fits"]
-    C -->|"Single-key lookup"| E["Key-value / document store fits"]
+    C -->|Relationship-heavy| D["Relational database fits"]
+    C -->|Single-key lookup| E["Key-value / document store fits"]
     D --> F["Validate with a realistic prototype query"]
     E --> F
 ```
@@ -689,8 +689,8 @@ flowchart TD
 ```mermaid
 flowchart TD
     A["Data type or operation"] --> B{"What happens if it's briefly wrong?"}
-    B -->|"Minor / cosmetic impact"| C["Eventual consistency, async update"]
-    B -->|"Real business harm - overselling, double charge"| D["Strong consistency, transaction, locking"]
+    B -->|Minor / cosmetic impact| C["Eventual consistency, async update"]
+    B -->|Real business harm - overselling, double charge| D["Strong consistency, transaction, locking"]
     C --> E["Lower latency, simpler design"]
     D --> F["Higher latency, stronger correctness guarantee"]
 ```
@@ -748,8 +748,8 @@ flowchart TD
     C --> D["Measure the specific expensive queries"]
     D --> E["Review application access pattern - N+1, over-fetching, pooling"]
     E --> F{"Root cause found?"}
-    F -->|"Yes"| G["Fix query, index, or app code"]
-    F -->|"No - database is truly at capacity"| H["Now consider architecture change"]
+    F -->|Yes| G["Fix query, index, or app code"]
+    F -->|No - database is truly at capacity| H["Now consider architecture change"]
 ```
 
 **Core Focus Areas:** Query plan analysis | Indexing | N+1 query detection | Connection management | Evidence-based diagnosis before migration
@@ -851,8 +851,8 @@ flowchart TD
 ```mermaid
 flowchart TD
     A["Primary database - source of truth"] --> B{"Is there a specific, measured problem a new system would solve?"}
-    B -->|"No"| C["Do not add a new system yet"]
-    B -->|"Yes - e.g. expensive reads, search relevance, analytics complexity"| D["Add exactly one system for that problem"]
+    B -->|No| C["Do not add a new system yet"]
+    B -->|Yes - e.g. expensive reads, search relevance, analytics complexity| D["Add exactly one system for that problem"]
     D --> E["New system updates asynchronously from the primary"]
     E --> F["New system is rebuildable from the primary if lost"]
 ```

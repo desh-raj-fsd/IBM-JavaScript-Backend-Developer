@@ -181,6 +181,7 @@ flowchart TD
   | **Example (business goal)** | "Become the top book-review site in our region." | "Reach 50,000 monthly active users within 12 months." |
 
 > ⚠️ **Correction (wording):** the lecture calls objectives "actionable and measurable **actions**". More precisely, an objective is a measurable **result** (an outcome), not the action itself. "Run an ad campaign" is an action; "50,000 monthly active users by December" is the objective the action should achieve. Keeping this difference clear stops teams from measuring "work done" instead of "results achieved".
+> **Lecture wording (for the quiz):** "actionable and measurable **actions**"; "Run an ad campaign"; "50,000 monthly active users by December"; "work done"; "results achieved" *(wording as recorded when this note was written; module 1 predates saved transcripts, so not re-checked against the video)*
 
 - **Why goals and objectives come before requirements:** every requirement should help reach an objective. If a requested feature supports **no** objective, it is a candidate for "nice to have" or "not now".
 
@@ -241,7 +242,7 @@ flowchart TD
 |--------------------------------|-----------|----------|
 | **Workshops** (story mapping, example mapping, EventStorming) | Stakeholders and the team work together in one session | Agreeing on scope and rules quickly; resolving conflicts |
 | **Observation / contextual inquiry** | Watch users do their real work, in their real place | Finding needs users forget to mention ("work-arounds") |
-| **Prototyping** | Clickable mock-ups (for example in Figma) that users try | Non-technical stakeholders; UI requirements |
+| **Prototyping** | Clickable mock-ups (for example in Figma) that users try | Non-technical stakeholders; UI (User Interface) requirements |
 | **Document analysis** | Read existing manuals, forms, laws, old system specs | Business rules and legal requirements |
 | **Product analytics** | Look at real usage data (funnels, drop-off points) | Finding what really happens, not what people say |
 | **Support tickets and reviews** | Read customer complaints and app-store reviews | Pain points and missing features |
@@ -284,7 +285,7 @@ flowchart TD
   |---------|---------|----------|---------|
   | **Ubiquitous** (always true) | — | The `<system>` shall `<response>`. | The API shall return all dates in ISO 8601 format. |
   | **Event-driven** | **When** | When `<trigger>`, the `<system>` shall `<response>`. | When a review is reported 3 times, the system shall hide it for moderation. |
-  | **State-driven** | **While** | While `<state>`, the `<system>` shall `<response>`. | While the database is in maintenance mode, the API shall return HTTP 503 with a `Retry-After` header. |
+  | **State-driven** | **While** | While `<state>`, the `<system>` shall `<response>`. | While the database is in maintenance mode, the API shall return HTTP (HyperText Transfer Protocol) 503 with a `Retry-After` header. |
   | **Unwanted behavior** | **If … then** | If `<unwanted condition>`, then the `<system>` shall `<response>`. | If a login fails 5 times in 10 minutes, then the system shall lock the account for 15 minutes. |
   | **Optional feature** | **Where** | Where `<feature is included>`, the `<system>` shall `<response>`. | Where single sign-on is enabled, the system shall redirect users to the identity provider. |
 
@@ -437,6 +438,7 @@ flowchart TD
 - **The product's purpose** describes **who will have access to the SRS** and **how they should use it**.
 
 > ⚠️ **Correction (confusing wording):** the lecture says "the **product's** purpose describes who will have access to the SRS and how they should use it". That describes the **document's** purpose (its intended audience and use) — not the product's purpose. In a real SRS, the **Purpose** section says what the *document* is for and who reads it (developers, testers, the client); the **product's** purpose (what problem it solves) belongs in the **Scope** or **Product overview** section.
+> **Lecture wording (for the quiz):** "the **product's** purpose describes who will have access to the SRS and how they should use it" *(wording as recorded when this note was written; module 1 predates saved transcripts, so not re-checked against the video)*
 
 - **The scope** describes the **benefits** of the software, its **goals** and its **objectives**.
 
@@ -449,6 +451,7 @@ flowchart TD
 | **Dependencies** | **Dependencies on other software products** should be noted | A payment provider's API; an email service; the client's identity provider |
 
 > ⚠️ **Correction (transcription):** the lecture text says constraints may include "**confirmation** to standards". The correct term is **conformance** (or conformity) to standards — meaning the product must follow a standard.
+> **Lecture wording (for the quiz):** "**confirmation** to standards" *(wording as recorded when this note was written; module 1 predates saved transcripts, so not re-checked against the video)*
 
 > ⚠️ **Clarification:** the lecture's assumption example ("a required operating system or hardware") is really an **environment requirement or constraint** once it is *required*. An **assumption** is something we **believe is true but have not confirmed** — for example "*we assume* all users already have a company account". The difference matters: a constraint is a fixed fact, while an assumption is a **risk** that must be checked, because if it is wrong, the plan changes.
 
@@ -508,7 +511,7 @@ flowchart TD
 #### 3.8.1 ✅ Modern Best Practice: user requirements as stories with acceptance criteria — tested automatically and by people
 
 > **Lecture says:** user requirements are user stories or use cases, checked by UAT.
-> **Industry today:** user stories carry **acceptance criteria** written before building; many criteria are **automated** as acceptance tests in CI, and humans still do a final **UAT** for usability and fit.
+> **Industry today:** user stories carry **acceptance criteria** written before building; many criteria are **automated** as acceptance tests in CI (Continuous Integration), and humans still do a final **UAT** for usability and fit.
 
 - **Three Cs of a user story** (Ron Jeffries): **Card** (the short story), **Conversation** (the details discussed with the team), **Confirmation** (the acceptance criteria).
 - **Acceptance criteria in Given/When/Then** (BDD — Behavior-Driven Development) can run as automated tests, so "has this requirement been met?" is answered on **every** commit, not only in UAT.
@@ -575,7 +578,7 @@ flowchart TD
 | **Traceability** | Requirement IDs linked to code (PRs, commits) and tests; an RTM in regulated projects | Prove every requirement is built and tested; see the impact of a change |
 | **Security requirements** | OWASP ASVS level; **abuse cases** ("As an attacker, I want…"); threat model input | Security added late is expensive and weak |
 | **Privacy requirements** | List personal data, purpose, retention and deletion; **GDPR** (General Data Protection Regulation) where it applies | Legal duty; users' trust |
-| **Accessibility** | **WCAG 2.2 AA** as a requirement; in the EU, the **European Accessibility Act** applies to many consumer products since June 2025 | Legal duty in many markets; quality for all users |
+| **Accessibility** | **WCAG 2.2 AA** as a requirement; in the EU (European Union), the **European Accessibility Act** applies to many consumer products since June 2025 | Legal duty in many markets; quality for all users |
 | **Operational requirements** | SLOs, logging, monitoring, backups, support hours | The system must be **run**, not only built |
 | **Data requirements** | Data sources, volumes, quality rules, migration of old data | Data problems are a top reason projects are late |
 | **Requirements tools** | Jira, Azure DevOps, GitHub Issues; in regulated industries, tools such as **Jama Connect**, **IBM DOORS Next** or **Siemens Polarion** that manage traceability | The tool holds the single source of truth |

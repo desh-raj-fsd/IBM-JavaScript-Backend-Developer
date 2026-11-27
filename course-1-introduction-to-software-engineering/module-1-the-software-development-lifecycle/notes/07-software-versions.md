@@ -30,7 +30,7 @@
 | **CalVer (Calendar Versioning)** | A scheme where the version is based on the **release date**, for example Ubuntu `18.04` = year 2018, month 04. | The version number is a date. | A magazine called "April 2018 issue". |
 | **Point release** | A small follow-up release of a version (for example Ubuntu `18.04.2`), usually collecting fixes and updates. | A refreshed version with fixes. | A reprint of a book with corrections. |
 | **Compatibility** | The ability of different versions of software, files or systems to work together correctly. | Do these versions work together? | Does this charger fit this phone? |
-| **Backward compatibility** | A **newer** version still works with **older** files, programs, systems or clients. | New works with old. | A new DVD player that still plays old DVDs. |
+| **Backward compatibility** | A **newer** version still works with **older** files, programs, systems or clients. | New works with old. | A new DVD (Digital Versatile Disc) player that still plays old DVDs. |
 | **Forward compatibility** *(industry term)* | An **older** version can still handle data or messages made by a **newer** version (usually by ignoring what it does not understand). | Old works with new. | An old radio that still plays a new station, without the new extras. |
 | **Breaking change** *(industry term)* | A change that makes existing users, code or clients stop working unless they change too. | A change that breaks other people's code. | Moving a door in a house: everyone walks into the wall. |
 | **Deprecation** *(industry term)* | Marking a feature as "will be removed in a future version" while it still works. | "Still works, but stop using it." | A shop's sign: "This entrance closes next month." |
@@ -245,7 +245,7 @@ flowchart TD
 
 #### 3.4.1 What counts as a breaking change for a backend developer?
 
-| Change to a REST API or library | Breaking? | Version bump |
+| Change to a REST (Representational State Transfer) API or library | Breaking? | Version bump |
 |---------------------------------|-----------|--------------|
 | Add a new endpoint or a new **optional** field | No | MINOR |
 | Fix a bug so the API now matches its documentation | Usually no | PATCH |
@@ -273,7 +273,7 @@ flowchart TD
 
 - **The lockfile (`package-lock.json`):** records the **exact** version (and a checksum) of **every** package, including dependencies of dependencies.
   - **Commit it to Git.**
-  - In CI and production builds use **`npm ci`**: it installs exactly what the lockfile says, and **fails** if `package.json` and the lockfile do not match.
+  - In CI (Continuous Integration) and production builds use **`npm ci`**: it installs exactly what the lockfile says, and **fails** if `package.json` and the lockfile do not match.
 - **Automated, controlled upgrades:** tools such as **Dependabot** or **Renovate** open pull requests for new versions, so CI tests every upgrade before it is merged. A **cooldown** (waiting a few days before adopting a brand-new version, for example npm's `min-release-age` setting) protects against hijacked package releases.
 - **Why:** a range alone can install **different** versions on Monday and on Friday. "It works on my machine" bugs and supply-chain attacks both become more likely without a lockfile.
 
@@ -395,7 +395,7 @@ flowchart TD
 |------|--------------|-----|
 | **Security updates depend on versions** | Vulnerability databases and `npm audit` list **affected version ranges**; the fix is "upgrade to version X or later" | Knowing your exact versions is the first step of every security response |
 | **SBOM (Software Bill of Materials)** | A machine-readable list of every component and its **version** in a release (CycloneDX or SPDX format) | Lets you answer "are we affected?" in minutes when a new vulnerability appears |
-| **End-of-life tracking** | Every runtime, framework, database and OS version has an EOL date; track them (for example on endoflife.date) | Running EOL software means no security fixes |
+| **End-of-life tracking** | Every runtime, framework, database and OS (operating system) version has an EOL date; track them (for example on endoflife.date) | Running EOL software means no security fixes |
 | **Immutable releases** | A published version (npm package, Git tag, image digest) is **never changed**; fixes get a new version | Two different builds with the same number make bugs impossible to trace |
 | **Several versions live at once** | Mobile apps, partner integrations and rolling deployments mean old and new versions run side by side | Compatibility must be designed, not hoped for |
 | **Feature flags vs. versions** | A new feature can ship **inside** a version but stay switched off | Releasing a feature no longer requires a new version for every user |
@@ -431,7 +431,7 @@ flowchart TD
 | First release / beta | `1.0` first release; below 1 (for example `0.9`) for beta | `0.y.z` = initial development; pre-release labels `-alpha`, `-beta`, `-rc` for any major |
 | Dates | Ubuntu `18.04.2` | CalVer `YY.MM` for time-based products; the third part counts point releases |
 | Meaning of the numbers | Major, minor, patch, build | MAJOR = breaking, MINOR = compatible features, PATCH = compatible fixes; build metadata after `+` |
-| Finding the version | About / Help menu | CLI commands, `npm ls` / `npm outdated`, `/version` endpoint, `service.version` in telemetry |
+| Finding the version | About / Help menu | CLI (command-line interface) commands, `npm ls` / `npm outdated`, `/version` endpoint, `service.version` in telemetry |
 | Compatibility | Check versions; update; backward compatibility | Ranges + lockfiles; API versioning; Deprecation/Sunset headers; expand → migrate → contract; LTS runtimes |
 | Tracking releases | Versioning tracks new software, updates, patches | Conventional Commits → automated version, changelog and Git tag |
 

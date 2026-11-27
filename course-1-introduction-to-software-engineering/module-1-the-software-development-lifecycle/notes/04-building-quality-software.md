@@ -279,7 +279,7 @@ flowchart TD
   | **Measure** | 95% in under 300 ms (p95 latency) |
 
 - **Privacy by design** — list personal data in the requirements and apply laws such as **GDPR (General Data Protection Regulation)**: collect only what you need, define how long you keep it, support "delete my data".
-- **Accessibility as a requirement** — for example "meets **WCAG 2.2** level AA". In the EU, the **European Accessibility Act** has applied to many digital products and services since June 2025.
+- **Accessibility as a requirement** — for example "meets **WCAG 2.2** level AA". In the EU (European Union), the **European Accessibility Act** has applied to many digital products and services since June 2025.
 - **Abuse cases / misuse stories** — "As an attacker, I want to post 10,000 fake reviews…". Each one creates a security requirement (rate limiting, CAPTCHA, moderation).
 - **Traceability** — link each requirement ID → design → code (PR) → tests. Then you can prove every requirement was built and tested, and see the impact of a change.
 - **Product discovery** — before building, test the idea cheaply (interviews, prototypes, A/B tests). Building the wrong thing well is still low quality.
@@ -398,7 +398,7 @@ paths:
 - **Design reviews / RFCs (Requests for Comments)** — for big changes, an engineer writes a short design doc; the team comments **before** coding starts. Decisions are saved as ADRs.
 - **API evolution rules** — never break clients:
   - Adding optional fields is safe; removing or renaming fields is a **breaking change** → new API version (`/v2`) or a deprecation period (the `Deprecation` and `Sunset` HTTP headers).
-  - **AsyncAPI** does for event/message APIs what OpenAPI does for REST.
+  - **AsyncAPI** does for event/message APIs what OpenAPI does for REST (Representational State Transfer).
   - **Idempotency keys** — a client can safely retry `POST /payments` without charging twice.
 - **Design for failure (resilience patterns)** — every network call can be slow or fail:
   - **Timeouts** on every call (for example `fetch(url, { signal: AbortSignal.timeout(2000) })`).
@@ -427,7 +427,7 @@ paths:
   - **Clean and consistent** — same style everywhere, no dead code.
   - **Easy to read and maintain.**
   - **Well documented.**
-  - **Efficient** — does not waste CPU, memory or network.
+  - **Efficient** — does not waste CPU (central processing unit), memory or network.
 - **Coding for quality** entails **following a set of coding practices during development**. These include:
   1. **Following common coding standards, conventions, patterns and styles.**
      - **Standards / conventions** — naming (`camelCase` for variables in JavaScript), file layout, error handling rules.
@@ -465,7 +465,7 @@ flowchart TD
   - Use **JSDoc** for public functions so editors show help and docs can be generated.
 - **Static analysis and security in CI:** tools such as **SonarQube / SonarCloud** or **CodeQL** (SAST — Static Application Security Testing), and dependency scanning (`npm audit`, **Dependabot**, **Snyk**).
 - **Secrets never in code** — use environment variables or a secret manager; scan for leaked keys (for example GitHub secret scanning).
-- **Common principles:** **DRY** (Don't Repeat Yourself), **KISS** (Keep It Simple, Stupid), **SOLID** principles, small pull requests.
+- **Common principles:** **DRY** (Don't Repeat Yourself), **KISS** (Keep It Simple, Stupid), **SOLID** (Single responsibility, Open–closed, Liskov substitution, Interface segregation, Dependency inversion) principles, small pull requests.
 - **AI coding tools:** AI-generated code is reviewed, linted and tested **exactly like** human code. The developer is still responsible for it.
 
 | | Old way | Modern way |
@@ -481,8 +481,8 @@ flowchart TD
 - **Branch protection / rulesets** — `main` cannot be pushed to directly; merges need passing CI and an approved review. **CODEOWNERS** files make sure the right team reviews each folder.
 - **Good code review** — small PRs (a few hundred lines at most), review for design, correctness, tests and security first, not style (tools handle style). Many teams follow published guides such as Google's engineering practices for code review.
 - **Pair and mob programming** — two or more people write the code together; review happens in real time.
-- **Validate all input at the edge** — every request body, query and header is checked against a schema (for example **Zod**, **Joi**, **Ajv** with JSON Schema, or generated from OpenAPI). Reject unknown fields. This blocks many OWASP API Security Top 10 problems such as **mass assignment** (see 5.5).
-- **Consistent error handling** — one central Express error middleware; errors returned in a standard format such as **RFC 9457 "Problem Details for HTTP APIs"** (`application/problem+json`); never leak stack traces to clients.
+- **Validate all input at the edge** — every request body, query and header is checked against a schema (for example **Zod**, **Joi**, **Ajv** with JSON (JavaScript Object Notation) Schema, or generated from OpenAPI). Reject unknown fields. This blocks many OWASP API Security Top 10 problems such as **mass assignment** (see 5.5).
+- **Consistent error handling** — one central Express error middleware; errors returned in a standard format such as **RFC (Request for Comments) 9457 "Problem Details for HTTP APIs"** (`application/problem+json`); never leak stack traces to clients.
 - **Structured logging** — JSON logs with a request ID (for example **pino**), no passwords or tokens in logs.
 - **Complexity limits** — linter rules like ESLint `complexity`, `max-depth` and `max-lines-per-function` keep functions small.
 - **Type safety** — **TypeScript** in strict mode. Recent Node.js versions can also run `.ts` files directly by stripping the types (type checking still needs `tsc`).
@@ -501,6 +501,7 @@ flowchart TD
 - **Software testing** is the process of **verifying that the software matches established requirements** and **is free of bugs**.
 
 > ⚠️ **Correction:** "Testing verifies that the software is free of bugs" → Testing can **show that bugs exist**, but it can **never prove there are no bugs** (a famous point by computer scientist Edsger Dijkstra). Testing **reduces risk** and gives **confidence** that the software meets the requirements. For quizzes, remember the lecture wording; in interviews, say "testing finds defects and builds confidence".
+> **Lecture wording (for the quiz):** "Testing verifies that the software is free of bugs" *(wording as recorded when this note was written; module 1 predates saved transcripts, so not re-checked against the video)*
 
 - **Its purpose:** to **identify errors, gaps, or missing requirements** when compared with the **stated requirements**.
   - **Errors** — the software does something wrong.
@@ -527,6 +528,7 @@ flowchart TD
 - The lecture says UAT is **sometimes called beta testing**.
 
 > ⚠️ **Correction / clarification:** UAT and beta testing are **related but not the same**. **UAT** is usually a **formal** check by the customer or business users against the agreed requirements, ending with a **sign-off**. **Beta testing** gives a nearly finished version to **real users in real conditions** to find bugs and get feedback, and it is often **informal**. In both, the end users test the software — that is why the lecture links them.
+> **Lecture wording (for the quiz):** The lecture says UAT is sometimes called beta testing. *(paraphrase)* *(wording as recorded when this note was written; module 1 predates saved transcripts, so not re-checked against the video)*
 
 ```mermaid
 flowchart TD
@@ -685,7 +687,7 @@ flowchart TD
   - **SBOM (Software Bill of Materials)** — generate it on every build (`npm sbom`, formats **CycloneDX** or **SPDX**) so you can answer "are we affected by this new vulnerability?" in minutes.
   - **Provenance and signing** — npm packages can be published with **provenance** from CI (`npm publish --provenance`, or npm **trusted publishing** with OIDC, which needs no long-lived token — npm revoked all classic tokens on 9 December 2025 and limits write tokens to 90 days); container images can be signed with **Sigstore cosign**.
   - **SLSA (Supply-chain Levels for Software Artifacts)** — a framework of levels for build integrity: scripted build → build service with provenance → hardened, isolated builds.
-  - **Pin CI actions** to a full commit SHA and give pipelines the **least permissions** they need.
+  - **Pin CI actions** to a full commit SHA (Secure Hash Algorithm) and give pipelines the **least permissions** they need.
 - **Rules are getting stricter** — the EU **CRA (Cyber Resilience Act)** requires makers of software products sold in the EU to handle vulnerabilities and security updates; its reporting duties (24-hour early warning, 72-hour notification for actively exploited vulnerabilities) have applied **since 11 September 2026**, and most other duties apply from **11 December 2027**.
 
 ```mermaid
@@ -804,11 +806,11 @@ flowchart TD
     PM --> SLI
 ```
 
-#### 3.8.2 🚀 Secure SDLC frameworks and maturity models
+#### 3.8.2 🚀 Secure SDLC (Software Development Life Cycle) frameworks and maturity models
 
 | Framework | What it is | Use it to… |
 |-----------|-----------|------------|
-| **NIST SSDF (Secure Software Development Framework, SP 800-218)** | A US government list of secure development practices | Check your process covers prepare, protect, produce and respond |
+| **NIST (National Institute of Standards and Technology) SSDF (Secure Software Development Framework, SP 800-218)** | A US (United States) government list of secure development practices | Check your process covers prepare, protect, produce and respond |
 | **OWASP SAMM (Software Assurance Maturity Model)** | A model to measure and improve security maturity | Score your team and plan the next steps |
 | **OWASP ASVS 5.0** (May 2025) | A list of security requirements to verify in an application, in three levels | Write security requirements and test cases |
 | **OWASP Top 10:2025 / API Security Top 10 (2023)** | The most common web and API risks | Train developers and focus reviews |
@@ -817,7 +819,7 @@ flowchart TD
 #### 3.8.3 🚀 Measuring quality and team health
 
 - **DORA metrics** (see the table above) show if delivery is **fast and stable at the same time** — high-performing teams are good at both.
-- **SPACE framework** — measures developer productivity from several sides: **S**atisfaction, **P**erformance, **A**ctivity, **C**ommunication and collaboration, **E**fficiency and flow. Never judge people by one number such as lines of code.
+- **SPACE (Satisfaction, Performance, Activity, Communication, Efficiency) framework** — measures developer productivity from several sides: **S**atisfaction, **P**erformance, **A**ctivity, **C**ommunication and collaboration, **E**fficiency and flow. Never judge people by one number such as lines of code.
 - **Quality signals to watch:** escaped defects (bugs found by users), change failure rate, flaky-test count, mean PR review time, age of open vulnerabilities, SLO compliance.
 - **Platform engineering and "golden paths"** — a platform team gives product teams ready-made templates (CI pipeline, Dockerfile, logging, dashboards). Quality becomes the **default**, not extra work.
 
@@ -872,7 +874,7 @@ flowchart TD
 | **Coding for quality** | ESLint + Prettier in CI. Clear names (`isValidRating`). A comment explains *why* the unique index exists. |
 | **Testing** | Unit: `isValidRating(6)` returns `false`. Integration: Supertest posts a review and checks MongoDB. System: full flow on staging. UAT: the client tries it and signs off. Regression: the full suite runs on every PR. |
 | **Releases** | `1.0.0-alpha.1` to the internal team (no search yet). `1.0.0-beta.1` to 50 invited readers. Bugs fixed, then `1.0.0` GA for everyone. |
-| **Documenting** | System: `README.md`, OpenAPI docs at `/docs`, ADR "Why MongoDB", a runbook. User: a help page "How to write a review" and tooltips on the form. |
+| **Documenting** | System: `README.md`, OpenAPI docs at `/docs`, ADR (Architecture Decision Record) "Why MongoDB", a runbook. User: a help page "How to write a review" and tooltips on the form. |
 
 ### 4.2 Real-world release stages
 

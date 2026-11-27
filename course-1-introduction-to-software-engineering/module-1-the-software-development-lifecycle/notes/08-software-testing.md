@@ -123,7 +123,7 @@
 #### 3.2.1 ✅ Modern Best Practice: test cases as executable specifications, designed with techniques
 
 > **Lecture says:** a test case contains steps, inputs, data and expected outputs.
-> **Industry today:** most test cases are **automated code** that runs in CI, many are written as **Given/When/Then** scenarios, and their inputs are chosen with **test design techniques** — not by guessing.
+> **Industry today:** most test cases are **automated code** that runs in CI (Continuous Integration), many are written as **Given/When/Then** scenarios, and their inputs are chosen with **test design techniques** — not by guessing.
 
 - **Executable specifications (BDD):** the acceptance criterion **is** the test.
 

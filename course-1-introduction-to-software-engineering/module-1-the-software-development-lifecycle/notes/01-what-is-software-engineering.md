@@ -101,8 +101,10 @@ flowchart TD
 | Works for large projects? | No | Yes |
 
 > ⚠️ **Correction:** "When computing began in the late 1950s" → Electronic computing actually began in the **1940s** (e.g., ENIAC — Electronic Numerical Integrator and Computer — in 1945). The **late 1950s** is when computers started to be used more widely in business and government, and software became a separate concern from hardware.
+> **Lecture wording (for the quiz):** "When computing began in the late 1950s" *(wording as recorded when this note was written; module 1 predates saved transcripts, so not re-checked against the video)*
 
 > ⚠️ **Correction (supplement):** The lecture says the field "became a discipline in the 1960s" but does not say how. → The term **"software engineering"** became widely known after the **1968 NATO (North Atlantic Treaty Organization) Software Engineering Conference** in Garmisch, Germany. This conference was organised because of the problems later called the **software crisis**. Margaret Hamilton (who led the Apollo flight software team) also used and promoted the term in the 1960s.
+> **Lecture wording (for the quiz):** "became a discipline in the 1960s" *(wording as recorded when this note was written; module 1 predates saved transcripts, so not re-checked against the video)*
 
 ![Timeline of software engineering from the late 1950s to today](../images/01-what-is-software-engineering-timeline.svg)
 
@@ -161,6 +163,7 @@ flowchart TD
   - The reason they are smaller: the **consistent application of engineering principles**.
 
 > ⚠️ **Correction:** "The software crisis lasted until the mid-1980s" → This is an **oversimplification**. There was no single end date. In 1986, Fred Brooks wrote the famous paper *"No Silver Bullet"*, arguing that no single tool or method would solve software's problems. Studies in the 1990s (e.g., the Standish Group CHAOS Report, 1994) still found that most software projects were late, over budget, or cancelled. The mid-1980s is better seen as the point when **better methods and tools started to reduce** the crisis, not end it.
+> **Lecture wording (for the quiz):** "The software crisis lasted until the mid-1980s" *(wording as recorded when this note was written; module 1 predates saved transcripts, so not re-checked against the video)*
 
 ```mermaid
 flowchart TD
@@ -273,6 +276,7 @@ flowchart TD
 ```
 
 > ⚠️ **Correction:** "Software engineers are systematic, whereas developers may have more creative approaches" → This is an **oversimplification**. Engineering work is also highly creative (design is a creative act), and good developers are also systematic. In industry, **job titles depend on the company**: many companies (e.g., Google, Meta) call almost everyone "Software Engineer", while others use "Developer" for the same job. The lecture's difference is about **scope and focus**, not about one group being more or less creative or skilled.
+> **Lecture wording (for the quiz):** "Software engineers are systematic, whereas developers may have more creative approaches" *(wording as recorded when this note was written; module 1 predates saved transcripts, so not re-checked against the video)*
 
 ![Software Engineer vs Software Developer](../images/01-what-is-software-engineering-engineer-vs-developer.svg)
 

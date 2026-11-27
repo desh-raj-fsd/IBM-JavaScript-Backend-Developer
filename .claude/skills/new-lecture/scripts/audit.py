@@ -36,7 +36,7 @@ SKIP_FILES = {"master-prompt.md"}  # contains example paths and rule text, not r
 BAD_NAME = re.compile(r'[:*?"<>|\\]')
 ACRO_IGNORE = {"OK", "PR", "TODO", "GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS", "NOT", "MUST", "ONLY",
                "NEVER", "AND", "OR", "WHAT", "HOW", "WHY", "SHOULD", "MAY", "ALWAYS", "NO", "YES", "UTF", "LF", "PX", "MS", "KB",
-               "MB", "GB", "ID", "ASP", "README", "CHANGELOG", "TV", "AA", "AAA", "LEGO", "IBM", "AWS", "PHP", "NGINX", "WHATWG", "IDEA", "FAQ", "AI", "ES", "DB", "JS"}
+               "MB", "GB", "ID", "ASP", "README", "CHANGELOG", "TV", "AA", "AAA", "LEGO", "IBM", "AWS", "PHP", "NGINX", "WHATWG", "IDEA", "FAQ", "AI", "ES", "DB", "JS", "VS", "INVEST", "MAJOR", "MINOR", "RICE", "DOORS", "IT", "SASS", "PCI", "DSS", "ASVS", "ADR"}
 ROMAN = re.compile(r"^[IVXL]+$")
 RESERVED = re.compile(r"^(CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9])(\.|$)", re.I)
 
