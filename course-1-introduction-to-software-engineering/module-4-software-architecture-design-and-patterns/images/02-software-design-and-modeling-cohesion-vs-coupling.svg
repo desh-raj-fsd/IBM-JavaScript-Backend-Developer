@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 420" width="920" height="420" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <rect width="920" height="420" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="460" y="34" text-anchor="middle" font-size="19" font-weight="700" fill="#0f172a">Structured Design: High Cohesion &amp; Loose Coupling</text>
+  <text x="460" y="56" text-anchor="middle" font-size="12.5" fill="#475569">Group related features inside cohesive modules while keeping module boundaries weakly connected</text>
+
+  <!-- Left Panel: Billing Hierarchy -->
+  <g transform="translate(24, 78)">
+    <rect width="426" height="260" rx="10" fill="#f8fafc" stroke="#2563eb" stroke-width="2"/>
+    <rect width="426" height="36" rx="10" fill="#2563eb"/>
+    <rect y="22" width="426" height="14" fill="#2563eb"/>
+    <text x="213" y="23" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">1. Structured Billing Module Hierarchy</text>
+
+    <!-- Main Module -->
+    <rect x="133" y="52" width="160" height="38" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.8"/>
+    <text x="213" y="75" text-anchor="middle" font-size="13" font-weight="700" fill="#1e3a8a">Billing (Main Module)</text>
+
+    <!-- Arrows down -->
+    <line x1="163" y1="90" x2="76" y2="124" stroke="#2563eb" stroke-width="2"/>
+    <line x1="213" y1="90" x2="213" y2="124" stroke="#2563eb" stroke-width="2"/>
+    <line x1="263" y1="90" x2="350" y2="124" stroke="#2563eb" stroke-width="2"/>
+
+    <!-- Sub-modules -->
+    <rect x="16" y="126" width="120" height="46" rx="6" fill="#ffffff" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="76" y="146" text-anchor="middle" font-size="11" font-weight="700" fill="#1e3a8a">Insurance</text>
+    <text x="76" y="162" text-anchor="middle" font-size="11" font-weight="700" fill="#1e3a8a">Verification</text>
+
+    <rect x="153" y="126" width="120" height="46" rx="6" fill="#ffffff" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="213" y="153" text-anchor="middle" font-size="11" font-weight="700" fill="#1e3a8a">Submit Claim</text>
+
+    <rect x="290" y="126" width="120" height="46" rx="6" fill="#ffffff" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="350" y="153" text-anchor="middle" font-size="11" font-weight="700" fill="#1e3a8a">Output Total</text>
+
+    <rect x="20" y="188" width="386" height="58" rx="6" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="213" y="209" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1e3a8a">High Cohesion Benefit:</text>
+    <text x="213" y="226" text-anchor="middle" font-size="11" fill="#1e40af">All billing steps belong together inside one focused module,</text>
+    <text x="213" y="240" text-anchor="middle" font-size="11" fill="#1e40af">with arrows showing clear data flow across sub-modules</text>
+  </g>
+
+  <!-- Right Panel: Tight vs Loose Coupling -->
+  <g transform="translate(470, 78)">
+    <rect width="426" height="260" rx="10" fill="#f8fafc" stroke="#0d9488" stroke-width="2"/>
+    <rect width="426" height="36" rx="10" fill="#0d9488"/>
+    <rect y="22" width="426" height="14" fill="#0d9488"/>
+    <text x="213" y="23" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">2. Tight vs. Loose Coupling</text>
+
+    <!-- Tight coupling box -->
+    <rect x="20" y="50" width="386" height="78" rx="6" fill="#fff1f2" stroke="#e11d48" stroke-width="1.5"/>
+    <text x="213" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="#9f1239">Tight Coupling (Avoid)</text>
+    <text x="213" y="90" text-anchor="middle" font-size="11" fill="#881337">Modules reach straight into each other's internal tables &amp; code.</text>
+    <text x="213" y="108" text-anchor="middle" font-size="11" fill="#881337">One edit ripples breaks across multiple modules at once.</text>
+
+    <!-- Loose coupling box -->
+    <rect x="20" y="142" width="386" height="104" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="213" y="163" text-anchor="middle" font-size="12" font-weight="700" fill="#14532d">Loose Coupling (Goal)</text>
+    <text x="213" y="184" text-anchor="middle" font-size="11" fill="#166534">Modules talk only through clean public contracts / adapters.</text>
+    <text x="213" y="202" text-anchor="middle" font-size="11" fill="#166534">Internal changes stay local without breaking callers.</text>
+    <text x="213" y="224" text-anchor="middle" font-size="11" font-weight="700" fill="#15803d">Foundation for modular monoliths, SOA, and microservices</text>
+  </g>
+
+  <!-- Bottom Banner -->
+  <rect x="24" y="354" width="872" height="48" rx="8" fill="#fefce8" stroke="#ca8a04" stroke-width="1.5"/>
+  <text x="460" y="375" text-anchor="middle" font-size="12.5" font-weight="700" fill="#854d0e">Design Warning: Microservices Do Not Automatically Guarantee Loose Coupling</text>
+  <text x="460" y="393" text-anchor="middle" font-size="11.5" fill="#713f12">Shared databases or chatty sync calls create a "distributed monolith" — master cohesion &amp; loose coupling in modules first</text>
+</svg>

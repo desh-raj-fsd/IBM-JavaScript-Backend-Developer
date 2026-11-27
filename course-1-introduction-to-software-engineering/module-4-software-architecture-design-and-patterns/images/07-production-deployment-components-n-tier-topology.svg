@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 430" width="920" height="430" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <rect width="920" height="430" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="460" y="32" text-anchor="middle" font-size="19" font-weight="700" fill="#0f172a">N-Tier Production Topology: Core Deployment Components</text>
+  <text x="460" y="53" text-anchor="middle" font-size="12.5" fill="#475569">Requests traverse presentation, firewall, web/app load balancers, proxy, and database servers</text>
+
+  <!-- Tier 1: Presentation -->
+  <rect x="36" y="70" width="848" height="42" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.8"/>
+  <text x="460" y="95" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1e3a8a">1. Presentation Tier: Client Applications / Browsers (Outside Internal Firewall)</text>
+
+  <line x1="460" y1="112" x2="460" y2="124" stroke="#475569" stroke-width="2"/>
+
+  <!-- Tier 2: Firewall -->
+  <rect x="36" y="124" width="848" height="44" rx="8" fill="#fff1f2" stroke="#e11d48" stroke-width="1.8"/>
+  <text x="460" y="143" text-anchor="middle" font-size="12.5" font-weight="700" fill="#9f1239">2. Firewall &amp; Security Barrier (Monitors Traffic Between Networks)</text>
+  <text x="460" y="160" text-anchor="middle" font-size="11" fill="#881337">Permits or blocks packets via security rules; modern stacks add Web Application Firewall (WAF) + TLS</text>
+
+  <line x1="460" y1="168" x2="460" y2="180" stroke="#475569" stroke-width="2"/>
+
+  <!-- Tier 3: Web Tier -->
+  <rect x="36" y="180" width="848" height="52" rx="8" fill="#ccfbf1" stroke="#0d9488" stroke-width="1.8"/>
+  <text x="460" y="200" text-anchor="middle" font-size="12.5" font-weight="700" fill="#134e4a">3. Web Tier: Web Load Balancer -&gt; Web Servers (Server Farm)</text>
+  <text x="460" y="220" text-anchor="middle" font-size="11" fill="#0f766e">Distributes concurrent HTTP requests; delivers web pages, files, images, and videos (or offloads to CDN)</text>
+
+  <line x1="460" y1="232" x2="460" y2="244" stroke="#475569" stroke-width="2"/>
+
+  <!-- Tier 4: Application Tier -->
+  <rect x="36" y="244" width="848" height="52" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="1.8"/>
+  <text x="460" y="264" text-anchor="middle" font-size="12.5" font-weight="700" fill="#14532d">4. Application Server Tier: App Load Balancer / Reverse Proxy -&gt; Application Servers</text>
+  <text x="460" y="284" text-anchor="middle" font-size="11" fill="#166534">Runs server-side business logic, transaction rules, and database coordination (e.g., Node.js / Express)</text>
+
+  <line x1="460" y1="296" x2="460" y2="308" stroke="#475569" stroke-width="2"/>
+
+  <!-- Tier 5: Data Tier -->
+  <rect x="36" y="308" width="848" height="52" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.8"/>
+  <text x="460" y="328" text-anchor="middle" font-size="12.5" font-weight="700" fill="#4c1d95">5. Data Tier: Database Server + DBMS &lt;-&gt; High-Availability Replica</text>
+  <text x="460" y="348" text-anchor="middle" font-size="11" fill="#5b21b6">DBMS stores and controls data access; HA replica provides failover reliability (+ separate point-in-time backups)</text>
+
+  <!-- Bottom Note -->
+  <rect x="36" y="372" width="848" height="44" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="460" y="399" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1e3a8a">Flexible Stack Tip: Many modern apps serve static assets via CDN and route APIs straight from a proxy to app servers</text>
+</svg>

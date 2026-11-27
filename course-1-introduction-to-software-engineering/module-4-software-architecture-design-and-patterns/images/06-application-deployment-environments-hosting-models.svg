@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 420" width="920" height="420" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <rect width="920" height="420" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="460" y="34" text-anchor="middle" font-size="19" font-weight="700" fill="#0f172a">Deployment Hosting Options: On-Premises vs. Cloud Models</text>
+  <text x="460" y="56" text-anchor="middle" font-size="12.5" fill="#475569">Trade-offs across cost, control, scalability, security, and operational maintenance burden</text>
+
+  <!-- Col 1: On-Premises -->
+  <g transform="translate(24, 80)">
+    <rect width="206" height="252" rx="10" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+    <rect width="206" height="36" rx="10" fill="#475569"/>
+    <rect y="22" width="206" height="14" fill="#475569"/>
+    <text x="103" y="23" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff">On-Premises</text>
+
+    <rect x="16" y="50" width="174" height="42" rx="6" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
+    <text x="103" y="68" text-anchor="middle" font-size="11" font-weight="700" fill="#1e293b">Org Physical Site</text>
+    <text x="103" y="84" text-anchor="middle" font-size="10.5" fill="#475569">Behind local firewall</text>
+
+    <text x="103" y="118" text-anchor="middle" font-size="11" font-weight="600" fill="#14532d">Pros:</text>
+    <text x="103" y="135" text-anchor="middle" font-size="11" fill="#334155">Direct control over</text>
+    <text x="103" y="151" text-anchor="middle" font-size="11" fill="#334155">data &amp; physical hardware</text>
+
+    <text x="103" y="182" text-anchor="middle" font-size="11" font-weight="600" fill="#9f1239">Cons:</text>
+    <text x="103" y="199" text-anchor="middle" font-size="11" fill="#475569">Usually most expensive;</text>
+    <text x="103" y="215" text-anchor="middle" font-size="11" fill="#475569">org owns all upkeep,</text>
+    <text x="103" y="231" text-anchor="middle" font-size="11" fill="#475569">patching &amp; hardware</text>
+  </g>
+
+  <!-- Col 2: Public Cloud -->
+  <g transform="translate(246, 80)">
+    <rect width="206" height="252" rx="10" fill="#f8fafc" stroke="#2563eb" stroke-width="2"/>
+    <rect width="206" height="36" rx="10" fill="#2563eb"/>
+    <rect y="22" width="206" height="14" fill="#2563eb"/>
+    <text x="103" y="23" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff">Public Cloud</text>
+
+    <rect x="16" y="50" width="174" height="42" rx="6" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="103" y="68" text-anchor="middle" font-size="11" font-weight="700" fill="#1e3a8a">Shared Provider Infra</text>
+    <text x="103" y="84" text-anchor="middle" font-size="10.5" fill="#1e40af">AWS, Azure, GCP, IBM</text>
+
+    <text x="103" y="118" text-anchor="middle" font-size="11" font-weight="600" fill="#14532d">Pros (Most Common):</text>
+    <text x="103" y="135" text-anchor="middle" font-size="11" fill="#334155">High elastic scalability</text>
+    <text x="103" y="151" text-anchor="middle" font-size="11" fill="#334155">&amp; lower upfront cost</text>
+
+    <text x="103" y="182" text-anchor="middle" font-size="11" font-weight="600" fill="#92400e">Watch out for:</text>
+    <text x="103" y="199" text-anchor="middle" font-size="11" fill="#475569">Shared hardware; you</text>
+    <text x="103" y="215" text-anchor="middle" font-size="11" fill="#475569">still own IAM, data &amp;</text>
+    <text x="103" y="231" text-anchor="middle" font-size="11" fill="#475569">app-level security</text>
+  </g>
+
+  <!-- Col 3: Private Cloud -->
+  <g transform="translate(468, 80)">
+    <rect width="206" height="252" rx="10" fill="#f8fafc" stroke="#0d9488" stroke-width="2"/>
+    <rect width="206" height="36" rx="10" fill="#0d9488"/>
+    <rect y="22" width="206" height="14" fill="#0d9488"/>
+    <text x="103" y="23" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff">Private Cloud</text>
+
+    <rect x="16" y="50" width="174" height="42" rx="6" fill="#ccfbf1" stroke="#0d9488" stroke-width="1.5"/>
+    <text x="103" y="68" text-anchor="middle" font-size="11" font-weight="700" fill="#134e4a">Single-Org Exclusive</text>
+    <text x="103" y="84" text-anchor="middle" font-size="10.5" fill="#0f766e">On-prem or provider-run</text>
+
+    <text x="103" y="118" text-anchor="middle" font-size="11" font-weight="600" fill="#14532d">Pros:</text>
+    <text x="103" y="135" text-anchor="middle" font-size="11" fill="#334155">Increased security &amp;</text>
+    <text x="103" y="151" text-anchor="middle" font-size="11" fill="#334155">deep customization</text>
+
+    <text x="103" y="182" text-anchor="middle" font-size="11" font-weight="600" fill="#92400e">Watch out for:</text>
+    <text x="103" y="199" text-anchor="middle" font-size="11" fill="#475569">Higher dedicated cost</text>
+    <text x="103" y="215" text-anchor="middle" font-size="11" fill="#475569">and narrower elastic</text>
+    <text x="103" y="231" text-anchor="middle" font-size="11" fill="#475569">burst capacity</text>
+  </g>
+
+  <!-- Col 4: Hybrid Cloud -->
+  <g transform="translate(690, 80)">
+    <rect width="206" height="252" rx="10" fill="#f8fafc" stroke="#7c3aed" stroke-width="2"/>
+    <rect width="206" height="36" rx="10" fill="#7c3aed"/>
+    <rect y="22" width="206" height="14" fill="#7c3aed"/>
+    <text x="103" y="23" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff">Hybrid Cloud</text>
+
+    <rect x="16" y="50" width="174" height="42" rx="6" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+    <text x="103" y="68" text-anchor="middle" font-size="11" font-weight="700" fill="#4c1d95">Public + Private Mix</text>
+    <text x="103" y="84" text-anchor="middle" font-size="10.5" fill="#5b21b6">Connected seamlessly</text>
+
+    <text x="103" y="118" text-anchor="middle" font-size="11" font-weight="600" fill="#14532d">Pros:</text>
+    <text x="103" y="135" text-anchor="middle" font-size="11" fill="#334155">Balances cost, scale,</text>
+    <text x="103" y="151" text-anchor="middle" font-size="11" fill="#334155">security &amp; flexibility</text>
+
+    <text x="103" y="182" text-anchor="middle" font-size="11" font-weight="600" fill="#92400e">Watch out for:</text>
+    <text x="103" y="199" text-anchor="middle" font-size="11" fill="#475569">Extra cross-network</text>
+    <text x="103" y="215" text-anchor="middle" font-size="11" fill="#475569">latency, routing, and</text>
+    <text x="103" y="231" text-anchor="middle" font-size="11" fill="#475569">multi-env operations</text>
+  </g>
+
+  <!-- Bottom Security Bar -->
+  <rect x="24" y="352" width="872" height="48" rx="8" fill="#fefce8" stroke="#ca8a04" stroke-width="1.5"/>
+  <text x="460" y="373" text-anchor="middle" font-size="12.5" font-weight="700" fill="#854d0e">Defense-in-Depth Networking Rule (Modern Cloud Security)</text>
+  <text x="460" y="391" text-anchor="middle" font-size="11.5" fill="#713f12">Never rely on a perimeter firewall alone — enforce private VPC subnets, TLS encryption, and server-side auth on every hop</text>
+</svg>

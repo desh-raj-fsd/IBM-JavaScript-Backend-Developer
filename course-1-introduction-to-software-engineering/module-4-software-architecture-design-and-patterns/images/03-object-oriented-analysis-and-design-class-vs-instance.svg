@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 420" width="920" height="420" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <rect width="920" height="420" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="460" y="34" text-anchor="middle" font-size="19" font-weight="700" fill="#0f172a">OOAD Core Concept: Class Blueprint vs. Object Instantiation</text>
+  <text x="460" y="56" text-anchor="middle" font-size="12.5" fill="#475569">A class defines generic properties and methods; instantiation fills concrete runtime values per instance</text>
+
+  <!-- Left Panel: Class Blueprint -->
+  <g transform="translate(24, 82)">
+    <rect width="320" height="252" rx="10" fill="#f8fafc" stroke="#2563eb" stroke-width="2"/>
+    <rect width="320" height="36" rx="10" fill="#2563eb"/>
+    <rect y="22" width="320" height="14" fill="#2563eb"/>
+    <text x="160" y="23" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">Class Blueprint: Patient</text>
+
+    <rect x="20" y="52" width="280" height="58" rx="6" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="160" y="70" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1e3a8a">Properties (Placeholder Data)</text>
+    <text x="160" y="88" text-anchor="middle" font-size="11" fill="#1e40af">- firstName : string</text>
+    <text x="160" y="102" text-anchor="middle" font-size="11" fill="#1e40af">- LastName : string</text>
+
+    <rect x="20" y="122" width="280" height="58" rx="6" fill="#ffffff" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="160" y="140" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1e3a8a">Methods (Available Behaviors)</text>
+    <text x="160" y="158" text-anchor="middle" font-size="11" fill="#334155">+ makeAppointment(slotId)</text>
+    <text x="160" y="172" text-anchor="middle" font-size="11" fill="#334155">+ cancelAppointment(slotId)</text>
+
+    <text x="160" y="206" text-anchor="middle" font-size="11" font-weight="600" fill="#475569">Generic template only:</text>
+    <text x="160" y="224" text-anchor="middle" font-size="11" fill="#64748b">No real patient name yet</text>
+  </g>
+
+  <!-- Center Instantiation Arrow -->
+  <line x1="354" y1="204" x2="504" y2="204" stroke="#0d9488" stroke-width="2.8"/>
+  <polygon points="510,204 500,198 500,210" fill="#0d9488"/>
+  <rect x="366" y="168" width="132" height="28" rx="6" fill="#ccfbf1" stroke="#0d9488" stroke-width="1.2"/>
+  <text x="432" y="186" text-anchor="middle" font-size="11.5" font-weight="700" fill="#134e4a">Instantiation (new)</text>
+  <text x="432" y="224" text-anchor="middle" font-size="10.5" fill="#0f766e">assigns real values</text>
+
+  <!-- Right Panel: Object Instances -->
+  <g transform="translate(516, 82)">
+    <rect width="380" height="252" rx="10" fill="#f8fafc" stroke="#0d9488" stroke-width="2"/>
+    <rect width="380" height="36" rx="10" fill="#0d9488"/>
+    <rect y="22" width="380" height="14" fill="#0d9488"/>
+    <text x="190" y="23" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">Runtime Objects (Specific Instances)</text>
+
+    <rect x="20" y="52" width="340" height="80" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="190" y="72" text-anchor="middle" font-size="12" font-weight="700" fill="#14532d">Instance 1: naya = new Patient("Naya", "Patel")</text>
+    <text x="190" y="92" text-anchor="middle" font-size="11" fill="#166534">firstName: "Naya"  |  LastName: "Patel"</text>
+    <text x="190" y="112" text-anchor="middle" font-size="11" fill="#166534">naya.cancelAppointment("slot-10")</text>
+
+    <rect x="20" y="144" width="340" height="62" rx="6" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+    <text x="190" y="164" text-anchor="middle" font-size="12" font-weight="700" fill="#075985">Instance 2: liam = new Patient("Liam", "Chen")</text>
+    <text x="190" y="186" text-anchor="middle" font-size="11" fill="#0c4a6e">Separate object data in memory from Naya</text>
+
+    <text x="190" y="230" text-anchor="middle" font-size="11" font-weight="600" fill="#334155">Multiple developers build interacting classes in parallel</text>
+  </g>
+
+  <!-- Bottom Note -->
+  <rect x="24" y="352" width="872" height="48" rx="8" fill="#fefce8" stroke="#ca8a04" stroke-width="1.5"/>
+  <text x="460" y="373" text-anchor="middle" font-size="12.5" font-weight="700" fill="#854d0e">JavaScript Prototypes &amp; Classes (per Mozilla Developer Network)</text>
+  <text x="460" y="391" text-anchor="middle" font-size="11.5" fill="#713f12">JS classes wrap prototype inheritance cleanly, and apps can also instantiate objects directly with {} literals</text>
+</svg>

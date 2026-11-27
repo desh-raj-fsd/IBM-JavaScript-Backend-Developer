@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 420" width="920" height="420" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <rect width="920" height="420" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="460" y="34" text-anchor="middle" font-size="19" font-weight="700" fill="#0f172a">Load Balancers, Reverse Proxies &amp; Server Farm Resilience</text>
+  <text x="460" y="56" text-anchor="middle" font-size="12.5" fill="#475569">Preventing server overload while adding caching, encryption, source-hiding, and health checks</text>
+
+  <!-- Left Panel: Load Balancer -->
+  <g transform="translate(24, 78)">
+    <rect width="426" height="260" rx="10" fill="#f8fafc" stroke="#2563eb" stroke-width="2"/>
+    <rect width="426" height="36" rx="10" fill="#2563eb"/>
+    <rect y="22" width="426" height="14" fill="#2563eb"/>
+    <text x="213" y="23" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">1. Load Balancer &amp; Server Farm</text>
+
+    <rect x="20" y="52" width="136" height="62" rx="6" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="88" y="77" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1e3a8a">Load Balancer</text>
+    <text x="88" y="95" text-anchor="middle" font-size="10.5" fill="#1e40af">Round-robin /</text>
+    <text x="88" y="109" text-anchor="middle" font-size="10.5" fill="#1e40af">least-connected</text>
+
+    <line x1="156" y1="68" x2="236" y2="56" stroke="#16a34a" stroke-width="2"/>
+    <line x1="156" y1="83" x2="236" y2="92" stroke="#e11d48" stroke-width="2" stroke-dasharray="4,3"/>
+    <line x1="156" y1="98" x2="236" y2="128" stroke="#16a34a" stroke-width="2"/>
+
+    <rect x="238" y="44" width="168" height="28" rx="5" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="322" y="62" text-anchor="middle" font-size="11" font-weight="700" fill="#14532d">Server A (Ready)</text>
+
+    <rect x="238" y="78" width="168" height="28" rx="5" fill="#fff1f2" stroke="#e11d48" stroke-width="1.5"/>
+    <text x="322" y="96" text-anchor="middle" font-size="11" font-weight="700" fill="#9f1239">Server B (Skip: Down)</text>
+
+    <rect x="238" y="112" width="168" height="28" rx="5" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="322" y="130" text-anchor="middle" font-size="11" font-weight="700" fill="#14532d">Server C (Ready)</text>
+
+    <text x="213" y="166" text-anchor="middle" font-size="11.5" font-weight="600" fill="#334155">Maximizes availability &amp; responsiveness</text>
+    <rect x="20" y="182" width="386" height="64" rx="6" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="213" y="203" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1e3a8a">Health checks (passive in nginx, active on cloud LBs):</text>
+    <text x="213" y="220" text-anchor="middle" font-size="11" fill="#1e40af">LB probes /healthz and stops sending traffic to failing nodes</text>
+    <text x="213" y="235" text-anchor="middle" font-size="11" fill="#1e40af">automatically without overloading healthy servers</text>
+  </g>
+
+  <!-- Right Panel: Proxy Server -->
+  <g transform="translate(470, 78)">
+    <rect width="426" height="260" rx="10" fill="#f8fafc" stroke="#0d9488" stroke-width="2"/>
+    <rect width="426" height="36" rx="10" fill="#0d9488"/>
+    <rect y="22" width="426" height="14" fill="#0d9488"/>
+    <text x="213" y="23" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">2. Proxy Server Roles (Nginx / Reverse Proxy)</text>
+
+    <rect x="20" y="48" width="184" height="54" rx="6" fill="#ccfbf1" stroke="#0d9488" stroke-width="1.2"/>
+    <text x="112" y="70" text-anchor="middle" font-size="11" font-weight="700" fill="#134e4a">Performance &amp; Routing</text>
+    <text x="112" y="88" text-anchor="middle" font-size="10.5" fill="#0f766e">Load balancing &amp; caching</text>
+
+    <rect x="222" y="48" width="184" height="54" rx="6" fill="#ccfbf1" stroke="#0d9488" stroke-width="1.2"/>
+    <text x="314" y="70" text-anchor="middle" font-size="11" font-weight="700" fill="#134e4a">Privacy &amp; Security</text>
+    <text x="314" y="88" text-anchor="middle" font-size="10.5" fill="#0f766e">TLS, mask origin, scan malware</text>
+
+    <text x="213" y="132" text-anchor="middle" font-size="11.5" font-weight="600" fill="#334155">Sits between tiers to optimize and protect traffic</text>
+
+    <rect x="20" y="150" width="386" height="96" rx="6" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+    <text x="213" y="171" text-anchor="middle" font-size="11.5" font-weight="700" fill="#92400e">Node.js / Express Warning (per expressjs.com):</text>
+    <text x="213" y="190" text-anchor="middle" font-size="11" fill="#78350f">Behind a reverse proxy, req.ip shows the proxy's local IP</text>
+    <text x="213" y="207" text-anchor="middle" font-size="11" fill="#78350f">unless you set app.set('trust proxy', hopCount) cleanly.</text>
+    <text x="213" y="224" text-anchor="middle" font-size="11" fill="#78350f">Never set trust proxy blindly if headers can be spoofed!</text>
+  </g>
+
+  <!-- Bottom Security Bar -->
+  <rect x="24" y="354" width="872" height="48" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="460" y="375" text-anchor="middle" font-size="12.5" font-weight="700" fill="#14532d">High Availability Database Warning</text>
+  <text x="460" y="393" text-anchor="middle" font-size="11.5" fill="#166534">A live DB replica prevents hardware downtime, NOT accidental deletes — always keep separate point-in-time backups</text>
+</svg>

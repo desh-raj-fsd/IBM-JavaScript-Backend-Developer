@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 450" width="920" height="450" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <rect width="920" height="450" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="460" y="34" text-anchor="middle" font-size="19" font-weight="700" fill="#0f172a">UML Class Diagram: MedicalPersonnel Inheritance Hierarchy</text>
+  <text x="460" y="56" text-anchor="middle" font-size="12.5" fill="#475569">Subclasses inherit parent properties &amp; methods and add specialized behaviors</text>
+
+  <!-- Parent Class: MedicalPersonnel -->
+  <g transform="translate(320, 74)">
+    <rect width="280" height="84" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+    <rect width="280" height="28" rx="8" fill="#2563eb"/>
+    <rect y="18" width="280" height="10" fill="#2563eb"/>
+    <text x="140" y="19" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">MedicalPersonnel (Parent Class)</text>
+    <text x="140" y="48" text-anchor="middle" font-size="11" fill="#1e3a8a">+ name, + staffId (properties)</text>
+    <line x1="12" y1="57" x2="268" y2="57" stroke="#93c5fd" stroke-width="1"/>
+    <text x="140" y="74" text-anchor="middle" font-size="11" font-weight="600" fill="#1e40af">+ clockIn() (inherited method)</text>
+  </g>
+
+  <!-- Inheritance arrows (subclasses pointing up to MedicalPersonnel with open triangle) -->
+  <polygon points="460,158 453,170 467,170" fill="#ffffff" stroke="#2563eb" stroke-width="2"/>
+  <line x1="460" y1="170" x2="460" y2="196" stroke="#2563eb" stroke-width="2"/>
+  <line x1="149" y1="184" x2="771" y2="184" stroke="#2563eb" stroke-width="2"/>
+  <line x1="149" y1="184" x2="149" y2="196" stroke="#2563eb" stroke-width="2"/>
+  <line x1="771" y1="184" x2="771" y2="196" stroke="#2563eb" stroke-width="2"/>
+  <text x="275" y="179" text-anchor="middle" font-size="10.5" font-weight="600" fill="#1d4ed8">inherits</text>
+
+  <!-- Subclass 1: Nurse -->
+  <g transform="translate(24, 198)">
+    <rect width="250" height="74" rx="8" fill="#f8fafc" stroke="#0d9488" stroke-width="2"/>
+    <rect width="250" height="26" rx="8" fill="#0d9488"/>
+    <rect y="16" width="250" height="10" fill="#0d9488"/>
+    <text x="125" y="18" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">Nurse (Subclass)</text>
+    <text x="125" y="45" text-anchor="middle" font-size="11" fill="#134e4a">Inherits name, staffId, clockIn()</text>
+    <text x="125" y="62" text-anchor="middle" font-size="11" font-weight="600" fill="#0f766e">Adds: triagePatient()</text>
+  </g>
+
+  <!-- Subclass 2: Doctor -->
+  <g transform="translate(335, 198)">
+    <rect width="250" height="74" rx="8" fill="#f8fafc" stroke="#0d9488" stroke-width="2"/>
+    <rect width="250" height="26" rx="8" fill="#0d9488"/>
+    <rect y="16" width="250" height="10" fill="#0d9488"/>
+    <text x="125" y="18" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">Doctor (Subclass)</text>
+    <text x="125" y="45" text-anchor="middle" font-size="11" fill="#134e4a">Inherits name, staffId, clockIn()</text>
+    <text x="125" y="62" text-anchor="middle" font-size="11" font-weight="600" fill="#0f766e">Adds: prescribe()</text>
+  </g>
+
+  <!-- Subclass 3: Technician -->
+  <g transform="translate(646, 198)">
+    <rect width="250" height="74" rx="8" fill="#f8fafc" stroke="#0d9488" stroke-width="2"/>
+    <rect width="250" height="26" rx="8" fill="#0d9488"/>
+    <rect y="16" width="250" height="10" fill="#0d9488"/>
+    <text x="125" y="18" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">Technician (Subclass)</text>
+    <text x="125" y="45" text-anchor="middle" font-size="11" fill="#134e4a">Inherits name, staffId, clockIn()</text>
+    <text x="125" y="62" text-anchor="middle" font-size="11" font-weight="600" fill="#0f766e">Adds: runLabScan()</text>
+  </g>
+
+  <!-- Specialist inherits Doctor -->
+  <polygon points="460,272 453,284 467,284" fill="#ffffff" stroke="#7c3aed" stroke-width="2"/>
+  <line x1="460" y1="284" x2="460" y2="298" stroke="#7c3aed" stroke-width="2"/>
+
+  <g transform="translate(310, 300)">
+    <rect width="300" height="72" rx="8" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+    <rect width="300" height="26" rx="8" fill="#7c3aed"/>
+    <rect y="16" width="300" height="10" fill="#7c3aed"/>
+    <text x="150" y="18" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">Specialist (Subclass of Doctor)</text>
+    <text x="150" y="45" text-anchor="middle" font-size="11" fill="#4c1d95">Inherits MedicalPersonnel + Doctor</text>
+    <text x="150" y="62" text-anchor="middle" font-size="11" font-weight="600" fill="#5b21b6">Adds: specialty, consult()</text>
+  </g>
+
+  <!-- Bottom Best Practice Bar -->
+  <rect x="24" y="388" width="872" height="48" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="460" y="409" text-anchor="middle" font-size="12.5" font-weight="700" fill="#14532d">Modern Architecture Tip: Prefer Composition Over Deep Inheritance Trees</text>
+  <text x="460" y="427" text-anchor="middle" font-size="11.5" fill="#166534">Avoid rigid 4-level class trees; assign capabilities (e.g., canPrescribe) via composition so hybrid roles stay flexible</text>
+</svg>

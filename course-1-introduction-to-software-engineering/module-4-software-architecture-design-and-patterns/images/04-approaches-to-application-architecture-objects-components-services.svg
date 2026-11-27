@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 430" width="920" height="430" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <rect width="920" height="430" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="460" y="34" text-anchor="middle" font-size="19" font-weight="700" fill="#0f172a">Layered Abstraction: Objects -&gt; Components -&gt; Services (SOA)</text>
+  <text x="460" y="56" text-anchor="middle" font-size="12.5" fill="#475569">Services are composed of components, and components consist of objects</text>
+
+  <!-- Panel 1: Objects -->
+  <g transform="translate(24, 80)">
+    <rect width="260" height="256" rx="10" fill="#f8fafc" stroke="#2563eb" stroke-width="2"/>
+    <rect width="260" height="36" rx="10" fill="#2563eb"/>
+    <rect y="22" width="260" height="14" fill="#2563eb"/>
+    <text x="130" y="23" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff">1. Objects (Lowest Layer)</text>
+
+    <rect x="20" y="52" width="220" height="58" rx="6" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="130" y="72" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1e3a8a">Fine-Grained Entities</text>
+    <text x="130" y="90" text-anchor="middle" font-size="11" fill="#1e40af">Customer, LoanQuote, Validator</text>
+
+    <text x="130" y="136" text-anchor="middle" font-size="11" fill="#334155">Bundle data fields and methods</text>
+    <text x="130" y="154" text-anchor="middle" font-size="11" fill="#334155">inside one program process.</text>
+
+    <rect x="20" y="176" width="220" height="62" rx="6" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.2"/>
+    <text x="130" y="196" text-anchor="middle" font-size="11" font-weight="700" fill="#1e3a8a">Abstraction level:</text>
+    <text x="130" y="214" text-anchor="middle" font-size="11" fill="#1e40af">Code-level classes &amp; structs</text>
+  </g>
+
+  <!-- Arrow 1 -> 2 -->
+  <line x1="286" y1="208" x2="314" y2="208" stroke="#475569" stroke-width="2.5"/>
+  <polygon points="318,208 309,202 309,214" fill="#475569"/>
+
+  <!-- Panel 2: Components -->
+  <g transform="translate(318, 80)">
+    <rect width="284" height="256" rx="10" fill="#f8fafc" stroke="#0d9488" stroke-width="2"/>
+    <rect width="284" height="36" rx="10" fill="#0d9488"/>
+    <rect y="22" width="284" height="14" fill="#0d9488"/>
+    <text x="142" y="23" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff">2. Components (Middle Layer)</text>
+
+    <rect x="18" y="48" width="248" height="96" rx="6" fill="#ccfbf1" stroke="#0d9488" stroke-width="1.5"/>
+    <text x="142" y="67" text-anchor="middle" font-size="11.5" font-weight="700" fill="#134e4a">Six Component Traits:</text>
+    <text x="142" y="85" text-anchor="middle" font-size="11" fill="#0f766e">Reusable &amp; Replaceable</text>
+    <text x="142" y="102" text-anchor="middle" font-size="11" fill="#0f766e">Independent &amp; Extensible</text>
+    <text x="142" y="119" text-anchor="middle" font-size="11" fill="#0f766e">Encapsulated &amp; Non-Context</text>
+    <text x="142" y="135" text-anchor="middle" font-size="10.5" fill="#134e4a">(higher abstraction than OOP)</text>
+
+    <rect x="18" y="156" width="248" height="84" rx="6" fill="#ffffff" stroke="#0d9488" stroke-width="1.2"/>
+    <text x="142" y="176" text-anchor="middle" font-size="11.5" font-weight="700" fill="#134e4a">Examples:</text>
+    <text x="142" y="194" text-anchor="middle" font-size="11" fill="#334155">Reusable DB API wrapper</text>
+    <text x="142" y="210" text-anchor="middle" font-size="11" fill="#334155">Data Access Object (DAO)</text>
+    <text x="142" y="226" text-anchor="middle" font-size="11" fill="#334155">Controller (routes event flow)</text>
+  </g>
+
+  <!-- Arrow 2 -> 3 -->
+  <line x1="604" y1="208" x2="632" y2="208" stroke="#475569" stroke-width="2.5"/>
+  <polygon points="636,208 627,202 627,214" fill="#475569"/>
+
+  <!-- Panel 3: Services -->
+  <g transform="translate(636, 80)">
+    <rect width="260" height="256" rx="10" fill="#f8fafc" stroke="#7c3aed" stroke-width="2"/>
+    <rect width="260" height="36" rx="10" fill="#7c3aed"/>
+    <rect y="22" width="260" height="14" fill="#7c3aed"/>
+    <text x="130" y="23" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff">3. Services (Deployable Unit)</text>
+
+    <rect x="20" y="52" width="220" height="86" rx="6" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+    <text x="130" y="71" text-anchor="middle" font-size="11.5" font-weight="700" fill="#4c1d95">Business Capabilities:</text>
+    <text x="130" y="89" text-anchor="middle" font-size="11" fill="#5b21b6">Checking customer credit</text>
+    <text x="130" y="106" text-anchor="middle" font-size="11" fill="#5b21b6">Monthly loan calculation</text>
+    <text x="130" y="123" text-anchor="middle" font-size="11" fill="#5b21b6">Processing mortgage app</text>
+
+    <rect x="20" y="152" width="220" height="88" rx="6" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1.2"/>
+    <text x="130" y="172" text-anchor="middle" font-size="11" font-weight="700" fill="#4c1d95">Deployed Independently:</text>
+    <text x="130" y="190" text-anchor="middle" font-size="11" fill="#5b21b6">Exposed over network protocol</text>
+    <text x="130" y="206" text-anchor="middle" font-size="11" fill="#5b21b6">(HTTP) to multiple clients</text>
+    <text x="130" y="224" text-anchor="middle" font-size="10.5" font-weight="600" fill="#6d28d9">Backed by stateless replicas</text>
+  </g>
+
+  <!-- Correction Banner -->
+  <rect x="24" y="354" width="872" height="54" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <text x="460" y="376" text-anchor="middle" font-size="12.5" font-weight="700" fill="#92400e">Correction (per 12factor.net &amp; Kubernetes): Logical Service Endpoint != Literally 1 Process</text>
+  <text x="460" y="395" text-anchor="middle" font-size="11.5" fill="#78350f">Clients talk to ONE logical service address, but production runs MULTIPLE stateless instances behind a load balancer</text>
+</svg>

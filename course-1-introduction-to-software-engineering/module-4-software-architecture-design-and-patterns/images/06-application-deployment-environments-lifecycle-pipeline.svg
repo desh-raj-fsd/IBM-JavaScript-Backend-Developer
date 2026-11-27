@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 420" width="920" height="420" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <rect width="920" height="420" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="460" y="34" text-anchor="middle" font-size="19" font-weight="700" fill="#0f172a">Application Environments: Pre-Production Stages to Production</text>
+  <text x="460" y="56" text-anchor="middle" font-size="12.5" fill="#475569">Build one immutable artifact once and promote through dev, QA, staging, and load-tested production</text>
+
+  <!-- Stage 1: Development -->
+  <g transform="translate(24, 80)">
+    <rect width="206" height="252" rx="10" fill="#f8fafc" stroke="#2563eb" stroke-width="2"/>
+    <rect width="206" height="36" rx="10" fill="#2563eb"/>
+    <rect y="22" width="206" height="14" fill="#2563eb"/>
+    <text x="103" y="23" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff">1. Development</text>
+
+    <rect x="16" y="50" width="174" height="42" rx="6" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="103" y="68" text-anchor="middle" font-size="11" font-weight="700" fill="#1e3a8a">Active Coding Stage</text>
+    <text x="103" y="84" text-anchor="middle" font-size="10.5" fill="#1e40af">Local workstation / IDE</text>
+
+    <text x="103" y="118" text-anchor="middle" font-size="11" fill="#334155">Pre-production stage 1.</text>
+    <text x="103" y="135" text-anchor="middle" font-size="11" fill="#334155">Fast code edits &amp; unit</text>
+    <text x="103" y="152" text-anchor="middle" font-size="11" fill="#334155">tests against local DB.</text>
+
+    <rect x="16" y="176" width="174" height="60" rx="6" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.2"/>
+    <text x="103" y="196" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1e3a8a">Modern Parity Tooling:</text>
+    <text x="103" y="213" text-anchor="middle" font-size="10.5" fill="#1e40af">Docker Compose + Dev</text>
+    <text x="103" y="227" text-anchor="middle" font-size="10.5" fill="#1e40af">Containers avoid drift</text>
+  </g>
+
+  <!-- Stage 2: QA / Testing -->
+  <g transform="translate(246, 80)">
+    <rect width="206" height="252" rx="10" fill="#f8fafc" stroke="#0d9488" stroke-width="2"/>
+    <rect width="206" height="36" rx="10" fill="#0d9488"/>
+    <rect y="22" width="206" height="14" fill="#0d9488"/>
+    <text x="103" y="23" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff">2. QA (Testing)</text>
+
+    <rect x="16" y="50" width="174" height="42" rx="6" fill="#ccfbf1" stroke="#0d9488" stroke-width="1.5"/>
+    <text x="103" y="68" text-anchor="middle" font-size="11" font-weight="700" fill="#134e4a">Component Validation</text>
+    <text x="103" y="84" text-anchor="middle" font-size="10.5" fill="#0f766e">QA &amp; CI test suites</text>
+
+    <text x="103" y="118" text-anchor="middle" font-size="11" fill="#334155">Pre-production stage 2.</text>
+    <text x="103" y="135" text-anchor="middle" font-size="11" fill="#334155">Verifies integration and</text>
+    <text x="103" y="152" text-anchor="middle" font-size="11" fill="#334155">regressions cleanly.</text>
+
+    <rect x="16" y="176" width="174" height="60" rx="6" fill="#f0fdfa" stroke="#0d9488" stroke-width="1.2"/>
+    <text x="103" y="196" text-anchor="middle" font-size="10.5" font-weight="700" fill="#134e4a">Modern Addition:</text>
+    <text x="103" y="213" text-anchor="middle" font-size="10.5" fill="#0f766e">Ephemeral PR preview</text>
+    <text x="103" y="227" text-anchor="middle" font-size="10.5" fill="#0f766e">environments per branch</text>
+  </g>
+
+  <!-- Stage 3: Staging -->
+  <g transform="translate(468, 80)">
+    <rect width="206" height="252" rx="10" fill="#f8fafc" stroke="#7c3aed" stroke-width="2"/>
+    <rect width="206" height="36" rx="10" fill="#7c3aed"/>
+    <rect y="22" width="206" height="14" fill="#7c3aed"/>
+    <text x="103" y="23" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff">3. Staging</text>
+
+    <rect x="16" y="50" width="174" height="42" rx="6" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+    <text x="103" y="68" text-anchor="middle" font-size="11" font-weight="700" fill="#4c1d95">Production Mirror</text>
+    <text x="103" y="84" text-anchor="middle" font-size="10.5" fill="#5b21b6">Not for general users</text>
+
+    <text x="103" y="118" text-anchor="middle" font-size="11" fill="#334155">Pre-production stage 3.</text>
+    <text x="103" y="135" text-anchor="middle" font-size="11" fill="#334155">Tests migrations, TLS,</text>
+    <text x="103" y="152" text-anchor="middle" font-size="11" fill="#334155">and deploy scripts live.</text>
+
+    <rect x="16" y="176" width="174" height="60" rx="6" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1.2"/>
+    <text x="103" y="196" text-anchor="middle" font-size="10.5" font-weight="700" fill="#4c1d95">Stop Config Drift:</text>
+    <text x="103" y="213" text-anchor="middle" font-size="10.5" fill="#5b21b6">Provision via IaC so</text>
+    <text x="103" y="227" text-anchor="middle" font-size="10.5" fill="#5b21b6">staging equals prod</text>
+  </g>
+
+  <!-- Stage 4: Production -->
+  <g transform="translate(690, 80)">
+    <rect width="206" height="252" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.2"/>
+    <rect width="206" height="36" rx="10" fill="#16a34a"/>
+    <rect y="22" width="206" height="14" fill="#16a34a"/>
+    <text x="103" y="23" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff">4. Production (Live)</text>
+
+    <rect x="16" y="50" width="174" height="42" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="103" y="68" text-anchor="middle" font-size="11" font-weight="700" fill="#14532d">All End-Users</text>
+    <text x="103" y="84" text-anchor="middle" font-size="10.5" fill="#166534">Thousands or millions</text>
+
+    <text x="103" y="118" text-anchor="middle" font-size="11" font-weight="600" fill="#14532d">Must satisfy NFRs:</text>
+    <text x="103" y="135" text-anchor="middle" font-size="11" fill="#166534">Heavy concurrent load</text>
+    <text x="103" y="152" text-anchor="middle" font-size="11" fill="#166534">Security &amp; reliability</text>
+
+    <rect x="16" y="176" width="174" height="60" rx="6" fill="#ffffff" stroke="#16a34a" stroke-width="1.2"/>
+    <text x="103" y="196" text-anchor="middle" font-size="10.5" font-weight="700" fill="#14532d">Enterprise Guarantees:</text>
+    <text x="103" y="213" text-anchor="middle" font-size="10.5" fill="#166534">Scalability, telemetry,</text>
+    <text x="103" y="227" text-anchor="middle" font-size="10.5" fill="#166534">and automated rollbacks</text>
+  </g>
+
+  <!-- Bottom Parity Bar -->
+  <rect x="24" y="352" width="872" height="48" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="460" y="373" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1e3a8a">Twelve-Factor Dev/Prod Parity (per 12factor.net/dev-prod-parity)</text>
+  <text x="460" y="391" text-anchor="middle" font-size="11.5" fill="#1e40af">Keep development, staging, and production as similar as possible — promote the exact same immutable image, change only env vars</text>
+</svg>

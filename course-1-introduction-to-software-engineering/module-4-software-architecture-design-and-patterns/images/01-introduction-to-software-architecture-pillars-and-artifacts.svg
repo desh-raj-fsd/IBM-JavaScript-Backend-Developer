@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 430" width="920" height="430" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <rect width="920" height="430" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="460" y="34" text-anchor="middle" font-size="19" font-weight="700" fill="#0f172a">Software Architecture: Quality Attributes, Tech Stack &amp; Design Artifacts</text>
+  <text x="460" y="56" text-anchor="middle" font-size="12.5" fill="#475569">Organizes fundamental structures, component interactions, operating environment, and design principles</text>
+
+  <!-- Panel 1: Why It Matters -->
+  <g transform="translate(24, 78)">
+    <rect width="276" height="270" rx="10" fill="#f8fafc" stroke="#2563eb" stroke-width="2"/>
+    <rect width="276" height="36" rx="10" fill="#2563eb"/>
+    <rect y="22" width="276" height="14" fill="#2563eb"/>
+    <text x="138" y="23" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">1. Why Architecture Matters</text>
+
+    <rect x="20" y="52" width="236" height="46" rx="6" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="138" y="71" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1e3a8a">System Blueprint</text>
+    <text x="138" y="88" text-anchor="middle" font-size="11" fill="#1e40af">Shapes components &amp; rules</text>
+
+    <text x="138" y="120" text-anchor="middle" font-size="11.5" font-weight="600" fill="#334155">Core benefits:</text>
+    <text x="138" y="139" text-anchor="middle" font-size="11" fill="#475569">Balances stakeholder needs</text>
+    <text x="138" y="156" text-anchor="middle" font-size="11" fill="#475569">Basis for team communication</text>
+    <text x="138" y="173" text-anchor="middle" font-size="11" fill="#475569">Supports agility &amp; longer life</text>
+
+    <rect x="20" y="190" width="236" height="64" rx="6" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="138" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="#1e3a8a">Evolutionary Design Today:</text>
+    <text x="138" y="227" text-anchor="middle" font-size="11" fill="#1e40af">Isolate hard-to-change parts</text>
+    <text x="138" y="242" text-anchor="middle" font-size="11" fill="#1e40af">via ports &amp; CI fitness checks</text>
+  </g>
+
+  <!-- Panel 2: Quality Attributes -->
+  <g transform="translate(322, 78)">
+    <rect width="276" height="270" rx="10" fill="#f8fafc" stroke="#0d9488" stroke-width="2"/>
+    <rect width="276" height="36" rx="10" fill="#0d9488"/>
+    <rect y="22" width="276" height="14" fill="#0d9488"/>
+    <text x="138" y="23" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">2. Non-Functional Attributes</text>
+
+    <rect x="20" y="52" width="236" height="118" rx="6" fill="#ccfbf1" stroke="#0d9488" stroke-width="1.5"/>
+    <text x="138" y="72" text-anchor="middle" font-size="11.5" font-weight="700" fill="#134e4a">Six Qualities in Lecture:</text>
+    <text x="138" y="92" text-anchor="middle" font-size="11" fill="#0f766e">Performance &amp; Scalability</text>
+    <text x="138" y="110" text-anchor="middle" font-size="11" fill="#0f766e">Maintainability &amp; Security</text>
+    <text x="138" y="128" text-anchor="middle" font-size="11" fill="#0f766e">Interoperability &amp; Manageability</text>
+    <text x="138" y="152" text-anchor="middle" font-size="11" font-weight="600" fill="#134e4a">+ Availability, Observability, Cost</text>
+
+    <rect x="20" y="186" width="236" height="68" rx="6" fill="#f0fdfa" stroke="#0d9488" stroke-width="1.5"/>
+    <text x="138" y="206" text-anchor="middle" font-size="11" font-weight="700" fill="#134e4a">Drives Tech Stack Choices:</text>
+    <text x="138" y="223" text-anchor="middle" font-size="11" fill="#0f766e">Compare stack pros and cons</text>
+    <text x="138" y="239" text-anchor="middle" font-size="11" fill="#0f766e">to hit target system qualities</text>
+  </g>
+
+  <!-- Panel 3: Artifacts -->
+  <g transform="translate(620, 78)">
+    <rect width="276" height="270" rx="10" fill="#f8fafc" stroke="#7c3aed" stroke-width="2"/>
+    <rect width="276" height="36" rx="10" fill="#7c3aed"/>
+    <rect y="22" width="276" height="14" fill="#7c3aed"/>
+    <text x="138" y="23" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">3. Design Artifacts</text>
+
+    <rect x="20" y="52" width="236" height="74" rx="6" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+    <text x="138" y="71" text-anchor="middle" font-size="11.5" font-weight="700" fill="#4c1d95">Lecture Artifacts:</text>
+    <text x="138" y="89" text-anchor="middle" font-size="11" fill="#5b21b6">Software Design Document (SDD)</text>
+    <text x="138" y="105" text-anchor="middle" font-size="11" fill="#5b21b6">Architectural Diagram + Patterns</text>
+    <text x="138" y="119" text-anchor="middle" font-size="11" fill="#5b21b6">UML Structure/Behavior Diagrams</text>
+
+    <rect x="20" y="138" width="236" height="116" rx="6" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1.5"/>
+    <text x="138" y="158" text-anchor="middle" font-size="11.5" font-weight="700" fill="#4c1d95">Modern Lightweight Docs in Git:</text>
+    <text x="138" y="177" text-anchor="middle" font-size="11" fill="#5b21b6">Short Design Docs &amp; ADRs</text>
+    <text x="138" y="194" text-anchor="middle" font-size="11" fill="#5b21b6">C4 Model (Context to Code)</text>
+    <text x="138" y="211" text-anchor="middle" font-size="11" fill="#5b21b6">OpenAPI Contracts First</text>
+    <text x="138" y="228" text-anchor="middle" font-size="11" fill="#5b21b6">Diagrams as Code (Mermaid)</text>
+  </g>
+
+  <!-- Bottom Banner -->
+  <rect x="24" y="364" width="872" height="48" rx="8" fill="#fefce8" stroke="#ca8a04" stroke-width="1.5"/>
+  <text x="460" y="385" text-anchor="middle" font-size="12.5" font-weight="700" fill="#854d0e">Key Principle: Record Hard-to-Change Choices Early via ADRs</text>
+  <text x="460" y="403" text-anchor="middle" font-size="11.5" fill="#713f12">Use lightweight specs in Git instead of heavy frozen Word documents so architecture evolves safely with code</text>
+</svg>
