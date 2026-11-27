@@ -3,6 +3,16 @@
 > One entry per review or significant change, **newest first**. Rules: [README §9.1 Review schedule](README.md#91-review-schedule).
 > Each entry lists the date, the files, the reviewers, what changed (or "no changes needed") and the sources checked.
 
+## 2026-11-27 — Full SDLC folder review: broken-item check, fact check, missing practices
+
+- **Files:** `README.md` (§10 rows, dates), `01-Planning/Planning.md`, `02-Design/Design.md`, `05-Deployment/Deployment.md`, `06-Maintenance/Maintenance.md`
+- **Scope:** **full-folder check** (links, anchors, images, templates, rule numbers, code syntax, versions, standards) plus targeted additions. Result: 0 broken internal links or anchors (all 6 phase files plus root overview), every template and image registered, 19 JavaScript blocks syntax-checked, `audit.py SDLC --rules` 0 problems.
+- **Reviewers:** <Tech Lead>, <Developers> — *to be filled in when the pull request is approved*
+- **What changed:** Design rule 26 and §4.5: **MFA** for staff and admin accounts, **passkeys** offered to end users. Maintenance rule 20 and §4.4: **CISA KEV** known-exploited vulnerabilities count as critical; **EPSS** to order the rest. Maintenance: **TLS certificate lifetimes** are shrinking (200 days now, 100 from Mar 2027, 47 from Mar 2029). Planning: **EU AI Act** dates (as amended by the Digital Omnibus) and **NIS2**. Deployment: CI example actions updated to current majors (`checkout@v7`, `setup-node@v7`, `login-action@v4`, `build-push-action@v7`), Node.js 26 (Active LTS) in examples, new rule 24 (pin third-party Actions to a full commit SHA). README §10: new rows for EU AI Act, NIS2, NIST SP 800-63-4, KEV/EPSS, certificate lifetimes.
+- **Sources checked (2026-11-27):** owasp.org (Top 10 2025, ASVS 5.0.0, API 2023, LLM 2026, MFA cheat sheet); csrc.nist.gov (SSDF Rev. 1 still draft, SP 800-63-4 final July 2025, SP 800-52 revision planned); w3.org (WCAG 2.2 Recommendation; WCAG 3.0 is only a Working Draft); slsa.dev (v1.2); scrumguides.org (2020); nodejs.org and `nodejs/Release` schedule.json (v26 Active LTS, v24 and v22 Maintenance, v20 end of life 30 Apr 2026); pcisecuritystandards.org (v4.0.1); AI Act Service Desk timeline; NIS2 page; cisa.gov KEV; first.org EPSS; GitHub release APIs for the Actions versions; Docker Hub `node:26-alpine`; GitHub Actions secure-use guide; letsencrypt.org (45-day plan).
+- **Not re-checked:** EAA date (EUR-Lex page would not load; the 28 June 2025 date is unchanged from the earlier check), GDPR text, ISTQB errata date, npm token limits, NIST SP 800-52 Rev. 3 (still only planned).
+- **Next review due:** README, Planning, Design, Deployment, Maintenance 2027-05-27.
+
 ## 2026-11-27 — Deep review of module 4 notes 01–07 and their SDLC changes (corrections)
 
 - **Files:** module-4 notes 02–07 and `images/07-production-deployment-components-proxy-and-lb.svg`; `02-Design/Design.md` (§4.12 item 6 wording)

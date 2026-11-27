@@ -2,7 +2,7 @@
 
 **SDLC series — Phase 6 of 6.** How professional backend teams do **Maintenance** today: the lecture's core tasks, the Waterfall way vs. the modern way, and the industry practices the lecture does not cover.
 
-> **Last reviewed:** 2026-11-26 · **Next review due:** 2027-05-26 · **Review owner:** Tech Lead · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
+> **Last reviewed:** 2026-11-27 · **Next review due:** 2027-05-27 · **Review owner:** Tech Lead · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
 
 [← Deployment](../05-Deployment/Deployment.md) · [Guide README](../README.md) · [Overview](../../6-Phases-of-SDLC-Modern-Best-Practices.md) · [Overview →](../../6-Phases-of-SDLC-Modern-Best-Practices.md)
 
@@ -294,8 +294,8 @@ groups:
 
 - **Runtime and framework upgrades:** move to a newer Node.js **LTS** line **before** the old one reaches end-of-life; keep Express and major libraries current. Small, regular upgrades are much cheaper than one huge upgrade every few years.
 - **Base images:** rebuild Docker images regularly to get OS security fixes, even if your code did not change.
-- **Certificates:** automate TLS certificate renewal (for example cert-manager with Let's Encrypt). Expired certificates are a classic, embarrassing outage.
-- **Vulnerability management:** fix known vulnerabilities within an agreed time by severity (for example critical within days).
+- **Certificates:** automate TLS certificate renewal (for example cert-manager with Let's Encrypt). Expired certificates are a classic, embarrassing outage, and the risk is growing: the maximum life of public TLS certificates is falling (CA/Browser Forum ballot SC-081v3: 200 days since 15 March 2026, 100 days from 15 March 2027, 47 days from 15 March 2029), and Let's Encrypt cuts its certificates from 90 to 45 days by 2028. Manual renewal will stop being practical.
+- **Vulnerability management:** fix known vulnerabilities within an agreed time by severity (for example critical within days). Do not rank by CVSS score alone: a vulnerability listed in the **CISA KEV** catalog (Known Exploited Vulnerabilities, attacks seen in the wild) is treated as critical, and **EPSS** (Exploit Prediction Scoring System, FIRST) helps order the rest.
   - **Let people report problems to you:** publish a **`/.well-known/security.txt`** file (RFC 9116) and a short **vulnerability disclosure policy** (how to report, what you promise).
   - **EU Cyber Resilience Act:** for products in scope, an **actively exploited vulnerability** or a **severe incident** must be reported: an **early warning within 24 hours**, a **notification within 72 hours**, and a final report later. These duties apply **since 11 September 2026**.
 - **Access reviews:** regularly remove access that people or services no longer need.
@@ -426,6 +426,7 @@ groups:
 17. **must** — On-call people can **check certificate expiry, DNS and the CDN** from a runbook, not only the application logs. Expired certificates and wrong DNS are among the most common avoidable outages.
 18. **should** — Web UIs collect **real-user Core Web Vitals** and **JavaScript errors** (with source maps); the 75th-percentile values and the error rate are reviewed in the monthly service review.
 19. **must** — The **end-of-life dates** of the framework, Node.js LTS line and build tools are tracked; the browser support policy is reviewed every quarter. Upgrade work is planned in the backlog **at least one quarter before** the date (rule 9 and the G5 check apply).
+20. **must** — A vulnerability in a dependency or image that is in the **CISA KEV** catalog is fixed within the **critical** time of rule 7 (§6.4), whatever its CVSS score. **Should:** use **EPSS** and whether the vulnerable code is reachable to order the rest within one severity level. Owner: Tech Lead.
 
 ### 6.6 Templates
 

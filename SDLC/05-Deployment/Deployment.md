@@ -2,7 +2,7 @@
 
 **SDLC series — Phase 5 of 6.** How professional backend teams do **Deployment** today: the lecture's core tasks, the Waterfall way vs. the modern way, and the industry practices the lecture does not cover.
 
-> **Last reviewed:** 2026-11-26 · **Next review due:** 2027-05-26 · **Review owner:** Tech Lead · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
+> **Last reviewed:** 2026-11-27 · **Next review due:** 2027-05-27 · **Review owner:** Tech Lead · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
 
 [← Testing](../04-Testing/Testing.md) · [Guide README](../README.md) · [Overview](../../6-Phases-of-SDLC-Modern-Best-Practices.md) · [Maintenance →](../06-Maintenance/Maintenance.md)
 
@@ -112,9 +112,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: { node-version: 24, cache: npm }  # a pinned Node.js LTS line (check nodejs.org); cache npm downloads
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with: { node-version: 26, cache: npm }  # a pinned Node.js LTS line (check nodejs.org); cache npm downloads
       - run: npm ci                             # exact versions from package-lock.json
       - run: npm run lint                       # coding standards
       - run: npm test                           # unit + integration tests
@@ -128,13 +128,13 @@ jobs:
       contents: read
       packages: write                           # needed to push to GitHub Container Registry
     steps:
-      - uses: actions/checkout@v4
-      - uses: docker/login-action@v3            # log in BEFORE pushing
+      - uses: actions/checkout@v7
+      - uses: docker/login-action@v4            # log in BEFORE pushing
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }} # short-lived token, no stored password
-      - uses: docker/build-push-action@v6
+      - uses: docker/build-push-action@v7
         with: { push: true, tags: "${{ env.IMAGE }}" }
 
   deploy-staging:
@@ -142,7 +142,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: staging                        # staging secrets and URL
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: ./scripts/deploy.sh staging "$IMAGE"   # e.g. update the GitOps repo or run kubectl
       - run: ./scripts/smoke-test.sh https://staging.example.com
 
@@ -151,7 +151,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: production                     # set "required reviewers" here = the sign-off gate
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: ./scripts/deploy.sh production "$IMAGE"  # the SAME image that passed staging
       - run: ./scripts/smoke-test.sh https://api.example.com
 ```
@@ -209,7 +209,7 @@ kubectl rollout status deployment/book-review-api   # watch it recover
 ### 4.1 Building a good container image
 
 - **Multi-stage build:** install and build in one stage, copy only what is needed into a small final image.
-- **Small, pinned base image** (for example `node:24-alpine` — an LTS line, pinned — or a "distroless" image) — fewer packages, fewer vulnerabilities.
+- **Small, pinned base image** (for example `node:26-alpine` — an LTS line, pinned — or a "distroless" image) — fewer packages, fewer vulnerabilities.
 - **Production dependencies only:** `npm ci --omit=dev`.
 - **Run as a non-root user** — set it by **numeric UID** (`USER 1000`); Kubernetes `runAsNonRoot` cannot verify a user given only by name and refuses to start the pod.
 - **`.dockerignore`** so `node_modules`, `.git`, `.env` and test files never enter the image.
@@ -220,12 +220,12 @@ kubectl rollout status deployment/book-review-api   # watch it recover
 
 ```dockerfile
 # Dockerfile — multi-stage, small, non-root
-FROM node:24-alpine AS deps
+FROM node:26-alpine AS deps
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci --omit=dev                 # exact production dependencies only
 
-FROM node:24-alpine
+FROM node:26-alpine
 ENV NODE_ENV=production
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
@@ -239,7 +239,7 @@ CMD ["node", "src/server.js"]         # node is PID 1 and receives SIGTERM direc
 
 ```dockerfile
 # ❌
-FROM node:24
+FROM node:26
 COPY . .                  # copies .env (secrets!), .git and local node_modules into the image
 RUN npm install           # dev dependencies too; versions may differ from the lockfile
 CMD npm start             # shell + npm wrap node; SIGTERM may not reach the app,
@@ -430,6 +430,7 @@ The **DORA (DevOps Research and Assessment)** research program measures software
 21. **should** — Source maps are uploaded to the error-tracking tool and are **not** served publicly, unless the project is open source.
 22. **should** — The **pull-request pipeline** (lint, type check, unit and affected tests, build) targets about **10 minutes**, with a ceiling of **15** (the XP guideline in Martin Fowler's article on Continuous Integration; he notes that most modern projects reach it). The **full suite** on `main` and the nightly runs ([Testing rule 14](../04-Testing/Testing.md#64-rules)) may take longer and run asynchronously. If the pull-request pipeline stays over 15 minutes for two weeks, the Tech Lead schedules a speed-up. A red build on `main` is **fixed or reverted within 1 hour** by the author of the breaking change (the Tech Lead is the backstop).
 23. **should** (**may** on prototypes) — Pin the explicit **target CPU architecture** in the CI build step (default: your single production target, typically `linux/amd64`, using `--platform`; add multi-platform `linux/amd64,linux/arm64` builds only when production deploys to both) instead of relying on the CI runner's default architecture (§4.1; Rule 1 already forbids shipping local laptop builds). Owner: Tech Lead.
+24. **must** on client projects, **should** on internal projects and prototypes — Third-party GitHub Actions in production pipelines are **pinned to a full-length commit SHA** (a tag such as `@v7` can be moved), with Dependabot or Renovate opening update pull requests; the `@v7` tags in the examples here are for readability (GitHub Actions secure-use guide). Owner: Tech Lead.
 
 ### 6.5 Templates
 

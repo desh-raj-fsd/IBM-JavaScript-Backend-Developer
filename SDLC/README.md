@@ -6,7 +6,7 @@
 - **Team model:** one cross-functional team of **4–8 people** per project.
 - **Technology:** **stack-neutral.** The guide fixes the *process*, not the tools. Tools named in the guide are **examples**; each project records its real choices in an ADR (Architecture Decision Record).
 - **Status:** living document. Change it through a pull request (see [9. Changing this guide](#9-changing-this-guide)).
-- **Last reviewed:** 2026-11-13 · **Next full-guide review due:** 2027-05-13 · External standards and their editions: [§10](#10-standards-this-guide-follows) · Every phase file shows its own review date ([9.1 Review schedule](#91-review-schedule), [review log](CHANGELOG.md)).
+- **Last reviewed:** 2026-11-27 · **Next full-guide review due:** 2027-05-27 · External standards and their editions: [§10](#10-standards-this-guide-follows) · Every phase file shows its own review date ([9.1 Review schedule](#91-review-schedule), [review log](CHANGELOG.md)).
 
 > **Must / should / may:** in the "LumenVenture Standard" sections, **must** = required on every project; **should** = the default, skip only with a written reason (ADR or project brief); **may** = optional, use when it helps.
 
@@ -473,6 +473,10 @@ The external standards, laws and specifications this guide relies on. **Review o
 | **WCAG** (accessibility) | 2.2 (W3C Recommendation, republished 12 Dec 2024; success criterion 4.1.1 Parsing removed), level AA as default target. AA includes text contrast 4.5:1 and a minimum touch-target size of 24×24 CSS pixels | Planning, Design, Development, Testing | 2026-11-26 |
 | **European Accessibility Act** | Applies since 28 June 2025 | Planning | next review |
 | **GDPR** (EU data protection) | Regulation (EU) 2016/679 | Planning, Design, Maintenance | next review |
+| **EU AI Act** (Regulation (EU) 2024/1689) | Applies in steps: prohibitions Feb 2025, general-purpose AI Aug 2025, most rules and transparency (Art. 50) **2 Aug 2026**, high-risk Annex III **2 Dec 2027**, Annex I products **2 Aug 2028** (as amended by the Digital Omnibus on AI) | Planning | 2026-11-27 (European Commission AI Act Service Desk timeline) |
+| **NIS2** (Directive (EU) 2022/2555) | In force; Member States had to transpose by 17 Oct 2024; national laws differ | Planning, Maintenance (client duties) | 2026-11-27 (European Commission NIS2 page; national status not checked) |
+| **NIST SP 800-63-4** (digital identity) / OWASP MFA Cheat Sheet | 800-63-4 final July 2025 (supersedes 800-63-3); passkeys (syncable authenticators) covered in 63B-4 | Design | 2026-11-27 |
+| **CISA KEV** catalog / **EPSS** (FIRST) | KEV = vulnerabilities exploited in the wild, a recommended input to prioritization; EPSS = probability of exploitation | Maintenance | 2026-11-27 |
 | **EU Cyber Resilience Act** | Reporting duties since **11 Sep 2026**; full application **11 Dec 2027** | Deployment, Maintenance | 2026-11-27 (European Commission page: reporting from 11 Sep 2026, main obligations from 11 Dec 2027; the Commission published guidance on 27 July 2026) |
 | **OpenAPI** | **3.2.0** (19 Sept 2025) and patch **3.2.1** (10 Sept 2026); 3.1 still widely supported | Design | 2026-11-27 |
 | **RFC 9457** Problem Details / **RFC 9745** Deprecation / **RFC 8594** Sunset / **RFC 9116** security.txt | Published RFCs | Design, Development, Maintenance | 2026-11-27 (all four RFC pages read: 9457 July 2023, 9745 March 2025, 8594 May 2019, 9116 April 2022) |
@@ -482,6 +486,7 @@ The external standards, laws and specifications this guide relies on. **Review o
 | **Browser security features** (MDN) | Cookies `HttpOnly`, `Secure`, `SameSite`; strict CSP with nonce or hash (test in Report-Only first); SRI with `integrity` + `crossorigin`; viewport meta `width=device-width` | Development, Deployment | 2026-11-26 |
 | **The Twelve-Factor App** (12factor.net) | 12 factors (I Codebase … XII Admin processes); page last updated 2017; still the common cloud-service baseline | Design, Development, Deployment | 2026-11-26 |
 | **HTTPS and TLS** — HSTS (RFC 6797), TLS 1.3 (RFC 8446), TLS 1.0/1.1 deprecated (RFC 8996), NIST SP 800-52 Rev. 2 | TLS 1.2 minimum, 1.3 preferred; HSTS `max-age` at least 1 year for preload. NIST has announced a Rev. 3 (not yet published): re-check at next review | Design, Deployment | 2026-11-26 (HSTS, NIST via MDN and NIST pages); RFC numbers next review |
+| **Public TLS certificate lifetime** (CA/Browser Forum SC-081v3) | Max validity 200 days (since 15 Mar 2026), 100 days (15 Mar 2027), 47 days (15 Mar 2029); Let's Encrypt 90 → 45 days by 2028 | Maintenance | 2026-11-27 (Let's Encrypt announcement read; CA/B schedule from several CA sources, cabforum.org page not fetched) |
 | **HTTP caching** (`Cache-Control`, `immutable`, RFC 9111 / RFC 8246) | Hashed files: long `max-age` + `immutable`; HTML: `no-cache`; personal data: `private` | Design, Deployment | 2026-11-26 (MDN) |
 | **Cloud shared responsibility** (provider "of the cloud", customer "in the cloud") and availability zones | AWS model used as the reference; other providers use the same idea | Design | 2026-11-26 (AWS docs) |
 | **Node.js release schedule** | Use an Active or Maintenance LTS line (v26 Active LTS, v24 & v22 Maintenance LTS; v20 EOL April 30, 2026); from Node.js 27, one major per year and every major becomes LTS | Development, Maintenance | 2026-11-26 |

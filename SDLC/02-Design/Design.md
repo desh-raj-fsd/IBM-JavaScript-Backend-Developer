@@ -298,7 +298,7 @@ flowchart TD
 
 (See [7 Authentication Concepts](../../7-Authentication-Concepts-Every-Senior-Developer-Should-Know.md) for details.)
 
-- **Authentication:** how users prove who they are (sessions, JWT, OAuth 2.0 / OpenID Connect).
+- **Authentication:** how users prove who they are (sessions, JWT, OAuth 2.0 / OpenID Connect). Add **MFA (multi-factor authentication)** for staff and admin accounts, and offer **passkeys** (WebAuthn, phishing-resistant) to end users where the product holds personal or payment data (OWASP Multifactor Authentication Cheat Sheet; NIST SP 800-63B-4, final July 2025).
 - **Authorization:** who may do what — check **ownership** on the server for every request (for example only the author can delete a review), preventing **BOLA (Broken Object Level Authorization)** (**API1:2023** in the OWASP API Security Top 10:2023).
 - **Payment data (PCI DSS, Payment Card Industry Data Security Standard, v4.0.1):** **never** design application back-ends or databases to store raw credit card numbers (**PAN**, Primary Account Number) or security codes (**CVV**, Card Verification Value / **CVC**, Card Verification Code). Send card fields straight from the client to a PCI DSS-certified payment processor (such as Stripe or Adyen) and store only the returned **payment token** plus an `Idempotency-Key` for charges.
 - **Least privilege:** every user, service and database account gets only the permissions it needs.
@@ -565,6 +565,7 @@ Many companies write a short design doc, often called an **RFC (Request for Comm
 23. **must** — Application back-ends and databases **never** store raw credit card numbers (PAN) or security codes (CVV/CVC); use **tokenization** via a PCI DSS-certified payment processor (§4.5).
 24. **must** on client and internal projects, **should** on prototypes — The technology stack (languages, frameworks, runtime, database, hosting) is chosen in an **ADR** (owner: Tech Lead) that lists at least two alternatives, the criteria of §4.14, the **license check** result and the support and end-of-life dates. Who runs each part follows rule 17, and the exit plan is the one rule 5 asks for. If the client mandates the stack, record it as a **constraint** with the license and end-of-life check only. The ADR names real components and versions: an acronym such as LAMP or MEAN is not enough.
 25. **should** — Default to **one primary database**. Add another kind of store (document, search, queue) only when a named access pattern in §4.3 needs it, and record it in an ADR. A cache such as Redis needs no extra ADR unless it holds the only copy of data. Owner: Tech Lead.
+26. **must** on client and internal projects, **should** on prototypes — **Staff, admin and operator accounts** (cloud console, source repository, CI/CD, admin screens) require **MFA**, preferably phishing-resistant (passkey or hardware security key). Products that hold personal or payment data **offer** MFA or passkeys to end users. Owner: Tech Lead.
 
 ### 6.5 Templates
 
