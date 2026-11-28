@@ -3,6 +3,16 @@
 > One entry per review or significant change, **newest first**. Rules: [README §9.1 Review schedule](README.md#91-review-schedule).
 > Each entry lists the date, the files, the reviewers, what changed (or "no changes needed") and the sources checked.
 
+## 2026-11-28 — RACI table in every phase file
+
+- **Files:** `README.md` (§3.1 footnotes, §9.2 item 3), `Planning.md` (§8.1), `Design.md`, `Development.md`, `Testing.md`, `Deployment.md`, `Maintenance.md` (§6.1), `tools/check.py`
+- **Scope:** **structural change**, asked for in the README review; no owner or rule changed.
+- **Reviewers:** <Tech Lead>, <Delivery Lead> — *to be filled in when the pull request is approved*
+- **What changed:** each phase file's short Owners table (Accountable / Responsible / Consulted) is replaced by that phase's full RACI table from README §3.1, with the legend and a link back to the README; everything in the old tables is covered by the RACI rows. Footnotes ¹–⁴ now sit under the table that uses them (README and phase files), instead of once after all six tables. `tools/check.py` has a new **RACI** check that fails when a phase file's table differs from its README copy (tested by changing one cell in a copy of the folder); README §9.2 lists it.
+- **Sources checked:** none needed (internal structure).
+- **Not re-checked:** —
+- **Next review due:** unchanged (2027-05-28 for all phase files and the README).
+
 ## 2026-11-28 — RACI split by phase and completed
 
 - **Files:** `README.md` (§3.1 only)

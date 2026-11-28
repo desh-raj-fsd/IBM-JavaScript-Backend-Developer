@@ -393,12 +393,22 @@ A web service can be rolled back in minutes. A device in a field or an app on a 
 
 ### 6.1 Owners
 
-| Activity | Accountable | Responsible | Consulted |
-|----------|-------------|-------------|-----------|
-| Pipeline and environments | Tech Lead | Tech Lead, developers | Security Champion |
-| Release go / no-go (G4) | Tech Lead | QA, release owner | PO, client |
-| Feature flag on/off (release to users) | Product Owner | Developers | Tech Lead |
-| Rollback decision | Tech Lead (or on-call) | On-call developer | PO |
+**Who does what in this phase (RACI).** This is the same table as [README §3.1.5](../README.md#315-phase-5-deployment); change both in the same pull request (`tools/check.py` fails when they differ). **R** = Responsible (does the work) · **A** = Accountable (owns the result; exactly one) · **C** = Consulted (asked before deciding) · **I** = Informed (told after) · **—** = not involved
+
+| Activity | SP (Sponsor) | PO (Product Owner) | DL (Delivery Lead) | TL (Tech Lead) | DEV (Developers) | QA (Quality Assurance Engineer) | SEC (Security Champion) ⁴ | CL (Client / Stakeholders) |
+|----------|----|----|----|----|-----|----|-----|----|
+| Pipeline and environments | — | I (Informed) | I (Informed) | **A/R (Accountable + Responsible)** | R (Responsible) | C (Consulted) | C (Consulted) | — |
+| Signed images and SBOM (Software Bill of Materials) | — | — | I (Informed) | **A (Accountable)** | R (Responsible) | C (Consulted) | R (Responsible) | — |
+| **Gate G4 — Release go/no-go** | I (Informed) | C (Consulted) | C (Consulted) | **A (Accountable)** | C (Consulted) | R (Responsible) | C (Consulted) | C (Consulted) |
+| Release checklist, rollback plan and release notes | I (Informed) | C (Consulted) | I (Informed) | **A (Accountable)** | R (Responsible) | R (Responsible) | C (Consulted) | I (Informed) |
+| Feature flag on/off (release to users) | — | **A (Accountable)** | I (Informed) | C (Consulted) | R (Responsible) | C (Consulted) | — | C (Consulted) |
+| Firmware OTA (over-the-air) rollout | — | C (Consulted) | I (Informed) | **A (Accountable)** | R (Responsible) | R (Responsible) | C (Consulted) | I (Informed) |
+| Mobile app store staged release | — | C (Consulted) | I (Informed) | **A (Accountable)** | R (Responsible) | R (Responsible) | — | I (Informed) |
+| Rollback decision | — | I (Informed) | I (Informed) | **A (Accountable)** | R (Responsible) | C (Consulted) | I (Informed) | I (Informed) |
+| User documentation ² | — | **A (Accountable)** | I (Informed) | C (Consulted) | R (Responsible) | C (Consulted) | — | C (Consulted) |
+| Sprint delivery note to the client | I (Informed) | **A/R (Accountable + Responsible)** | C (Consulted) | C (Consulted) | C (Consulted) | C (Consulted) | — | I (Informed) |
+
+² **R** = the technical writer when the project has one, otherwise developers; owner and rules in [§7.1](../README.md#71-documentation-map-what-we-keep-who-owns-it-when-it-changes) and [§7.2 rule 9](../README.md#72-documentation-rules). ⁴ **SEC** = the Security Champion, a developer with an extra hat ([§3](../README.md#3-roles-default-for-a-48-person-team)); on small teams the Tech Lead may hold it.
 
 ### 6.2 Required outputs
 

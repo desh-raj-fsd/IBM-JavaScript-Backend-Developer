@@ -8,6 +8,7 @@ Fails (exit 1) when it finds:
   UNLINKED a file in templates/ or images/ that no Markdown file mentions
   REF      words that point to course material (lecture, course note, module N, note NN, transcript)
   OVERDUE  a phase file or README whose "Next review due" date has passed
+  RACI     a phase file's RACI table differs from its copy in README §3.1
 CHANGELOG.md is exempt from REF (it is history).
 """
 import datetime, glob, os, re, sys
@@ -81,6 +82,32 @@ for f, t in texts.items():
     for n, line in enumerate(re.sub(r"```.*?```", lambda m: "\n" * m.group(0).count("\n"), t, flags=re.S).splitlines(), 1):
         if ref.search(line):
             problems.append(f"REF     {f}:{n}: course reference: {line.strip()[:80]}")
+
+# RACI: each phase file's Owners table must equal its README §3.1.N table
+phase_files = {"Planning": "01-Planning/Planning.md", "Design": "02-Design/Design.md",
+               "Development": "03-Development/Development.md", "Testing": "04-Testing/Testing.md",
+               "Deployment": "05-Deployment/Deployment.md", "Maintenance": "06-Maintenance/Maintenance.md"}
+
+
+def first_table(text):
+    rows, started = [], False
+    for line in text.splitlines():
+        if line.startswith("|"):
+            rows.append(line.strip())
+            started = True
+        elif started:
+            break
+    return rows
+
+
+readme = texts.get("README.md", "")
+for name, f in phase_files.items():
+    m = re.search(r"^#### 3\.1\.\d Phase \d: " + name + r"\n(.*?)(?=^#{2,4} )", readme, flags=re.M | re.S)
+    o = re.search(r"^### [68]\.1 Owners\n(.*?)(?=^### )", texts.get(f, ""), flags=re.M | re.S)
+    if not m or not o:
+        problems.append(f"RACI    {f}: RACI table or README §3.1 {name} table not found")
+    elif first_table(m.group(1)) != first_table(o.group(1)):
+        problems.append(f"RACI    {f}: Owners table differs from README §3.1 ({name})")
 
 today = datetime.date.today()
 for f, t in texts.items():

@@ -530,13 +530,19 @@ on:
 
 ### 6.1 Owners
 
-| Activity | Accountable | Responsible | Consulted |
-|----------|-------------|-------------|-----------|
-| Test strategy | QA Engineer | QA, Tech Lead | Developers, PO |
-| Unit and integration tests | Tech Lead | Developers | QA |
-| System (E2E and non-functional) tests | QA Engineer | QA, developers | Tech Lead, Security Champion |
-| Bug triage (severity and priority) | Product Owner | QA | Tech Lead |
-| UAT / acceptance | Product Owner | QA, PO (+ client) | Delivery Lead |
+**Who does what in this phase (RACI).** This is the same table as [README §3.1.4](../README.md#314-phase-4-testing); change both in the same pull request (`tools/check.py` fails when they differ). **R** = Responsible (does the work) · **A** = Accountable (owns the result; exactly one) · **C** = Consulted (asked before deciding) · **I** = Informed (told after) · **—** = not involved
+
+| Activity | SP (Sponsor) | PO (Product Owner) | DL (Delivery Lead) | TL (Tech Lead) | DEV (Developers) | QA (Quality Assurance Engineer) | SEC (Security Champion) ⁴ | CL (Client / Stakeholders) |
+|----------|----|----|----|----|-----|----|-----|----|
+| Test strategy and automation | — | C (Consulted) | I (Informed) | C (Consulted) | R (Responsible) | **A/R (Accountable + Responsible)** | C (Consulted) | I (Informed) |
+| System tests (end-to-end and non-functional) | — | I (Informed) | I (Informed) | C (Consulted) | R (Responsible) | **A/R (Accountable + Responsible)** | C (Consulted) | — |
+| Security testing: CI scans, DAST / penetration test | I (Informed) | I (Informed) | I (Informed) | **A (Accountable)** | R (Responsible) | C (Consulted) | R (Responsible) | I (Informed) |
+| Accessibility and UI check against the approved design | — | C (Consulted) | — | C (Consulted) | R (Responsible) | **A/R (Accountable + Responsible)** | — | — |
+| Device testing: simulator, HIL (hardware-in-the-loop) rig, installation and bad-condition tests (track B) | — | C (Consulted) | I (Informed) | R (Responsible) | R (Responsible) | **A/R (Accountable + Responsible)** | C (Consulted) | — |
+| Bug triage: severity and priority | — | **A (Accountable)** | I (Informed) | C (Consulted) | C (Consulted) | R (Responsible) | — | C (Consulted) |
+| UAT (User Acceptance Testing) / acceptance | I (Informed) | **A (Accountable)** | C (Consulted) | C (Consulted) | C (Consulted) | R (Responsible) | — | R (Responsible) |
+
+⁴ **SEC** = the Security Champion, a developer with an extra hat ([§3](../README.md#3-roles-default-for-a-48-person-team)); on small teams the Tech Lead may hold it.
 
 ### 6.2 Required outputs
 

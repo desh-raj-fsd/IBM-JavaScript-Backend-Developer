@@ -562,15 +562,27 @@ flowchart TD
 
 ### 8.1 Owners
 
-| Activity                              | Accountable   | Responsible       | Consulted                  |
-| ------------------------------------- | ------------- | ----------------- | -------------------------- |
-| Project brief, scope, success metrics | Product Owner | PO, Delivery Lead | Sponsor, Tech Lead, client |
-| Backlog and priorities                | Product Owner | PO                | Team, client               |
-| Risk register                         | Delivery Lead | DL, Tech Lead     | Team                       |
-| Estimates                             | Delivery Lead | Whole team        | PO                         |
-| Change requests                       | Product Owner | Delivery Lead     | Client, Tech Lead          |
-| Client discovery (client projects, §8.6) | Product Owner | PO, Delivery Lead, Tech Lead | Client decision-maker |
-| Client PRD and its approval | Product Owner | PO | Client decision-maker, Tech Lead |
+**Who does what in this phase (RACI).** This is the same table as [README §3.1.1](../README.md#311-phase-1-planning); change both in the same pull request (`tools/check.py` fails when they differ). **R** = Responsible (does the work) · **A** = Accountable (owns the result; exactly one) · **C** = Consulted (asked before deciding) · **I** = Informed (told after) · **—** = not involved
+
+| Activity | SP (Sponsor) | PO (Product Owner) | DL (Delivery Lead) | TL (Tech Lead) | DEV (Developers) | QA (Quality Assurance Engineer) | SEC (Security Champion) ⁴ | CL (Client / Stakeholders) |
+|----------|----|----|----|----|-----|----|-----|----|
+| Project brief and scope | C (Consulted) | **A/R (Accountable + Responsible)** | R (Responsible) | C (Consulted) | I (Informed) | I (Informed) | I (Informed) | C (Consulted) |
+| Stakeholder register | I (Informed) | **A/R (Accountable + Responsible)** | C (Consulted) | C (Consulted) | I (Informed) | I (Informed) | — | C (Consulted) |
+| Idea validation for internal products ³ | **A (Accountable)** | R (Responsible) | C (Consulted) | C (Consulted) | C (Consulted) | I (Informed) | I (Informed) | — |
+| Client discovery and client PRD approval (client projects) | I (Informed) | **A/R (Accountable + Responsible)** | R (Responsible) | R (Responsible) | I (Informed) | C (Consulted) | I (Informed) | C (Consulted) |
+| Signed scope / SOW (Statement of Work) (client projects) | **A (Accountable)** | R (Responsible) | C (Consulted) | C (Consulted) | — | — | — | R (Responsible) |
+| Backlog and priorities | I (Informed) | **A/R (Accountable + Responsible)** | C (Consulted) | C (Consulted) | C (Consulted) | C (Consulted) | C (Consulted) | C (Consulted) |
+| Backlog refinement and Definition of Ready (per story) | — | **A (Accountable)** | C (Consulted) | C (Consulted) | R (Responsible) | R (Responsible) | C (Consulted) | C (Consulted) |
+| Non-functional requirements and compliance check (privacy, accessibility, licenses, AI rules) | I (Informed) | **A (Accountable)** | C (Consulted) | R (Responsible) | C (Consulted) | C (Consulted) | R (Responsible) | C (Consulted) |
+| Full SRS (Software Requirements Specification) and traceability matrix (regulated projects) | I (Informed) | **A (Accountable)** | C (Consulted) | R (Responsible) | C (Consulted) | R (Responsible) | C (Consulted) | C (Consulted) |
+| Estimates and forecasts | I (Informed) | C (Consulted) | **A/R (Accountable + Responsible)** | C (Consulted) | R (Responsible) | R (Responsible) | C (Consulted) | I (Informed) |
+| Risk register | I (Informed) | C (Consulted) | **A/R (Accountable + Responsible)** | R (Responsible) | C (Consulted) | C (Consulted) | C (Consulted) | I (Informed) |
+| Team roles and working agreement | I (Informed) | C (Consulted) | **A/R (Accountable + Responsible)** | R (Responsible) | R (Responsible) | R (Responsible) | R (Responsible) | — |
+| Change requests (client projects) | C (Consulted) | **A (Accountable)** | R (Responsible) | C (Consulted) | C (Consulted) | C (Consulted) | — | C (Consulted) |
+| Sprint capacity split across projects | C (Consulted) | C (Consulted) | **A/R (Accountable + Responsible)** | C (Consulted) | C (Consulted) | C (Consulted) | — | — |
+| **Gate G1 — Plan approved** | **A (Accountable)** | R (Responsible) | R (Responsible) | C (Consulted) | I (Informed) | I (Informed) | I (Informed) | C (Consulted) |
+
+³ **R** = the named idea owner (often the PO); the Sponsor decides go / change / stop. ⁴ **SEC** = the Security Champion, a developer with an extra hat ([§3](../README.md#3-roles-default-for-a-48-person-team)); on small teams the Tech Lead may hold it.
 
 ### 8.2 Required outputs
 

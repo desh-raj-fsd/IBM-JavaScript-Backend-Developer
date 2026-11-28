@@ -118,6 +118,8 @@ Details: [Planning](01-Planning/Planning.md).
 | Sprint capacity split across projects | C (Consulted) | C (Consulted) | **A/R (Accountable + Responsible)** | C (Consulted) | C (Consulted) | C (Consulted) | — | — |
 | **Gate G1 — Plan approved** | **A (Accountable)** | R (Responsible) | R (Responsible) | C (Consulted) | I (Informed) | I (Informed) | I (Informed) | C (Consulted) |
 
+³ **R** = the named idea owner (often the PO); the Sponsor decides go / change / stop. ⁴ **SEC** = the Security Champion, a developer with an extra hat ([§3](#3-roles-default-for-a-48-person-team)); on small teams the Tech Lead may hold it.
+
 #### 3.1.2 Phase 2: Design
 
 Details: [Design](02-Design/Design.md).
@@ -136,6 +138,8 @@ Details: [Design](02-Design/Design.md).
 | Hardware milestones and cloud cost per device (track B) | C (Consulted) | C (Consulted) | C (Consulted) | **A/R (Accountable + Responsible)** | R (Responsible) | C (Consulted) | — | C (Consulted) |
 | **Gate G2 — Architecture approved** (design review) | C (Consulted) | C (Consulted) | I (Informed) | **A/R (Accountable + Responsible)** | R (Responsible) | C (Consulted) | C (Consulted) | C (Consulted) |
 
+¹ **R** = the UX / product designer when the project has one ([§3.2](#32-optional-and-shared-roles)), otherwise developers. ⁴ **SEC** = the Security Champion, a developer with an extra hat ([§3](#3-roles-default-for-a-48-person-team)); on small teams the Tech Lead may hold it.
+
 #### 3.1.3 Phase 3: Development
 
 Details: [Development](03-Development/Development.md).
@@ -151,6 +155,8 @@ Details: [Development](03-Development/Development.md).
 | AI eval set and pass threshold | — | C (Consulted) | I (Informed) | **A (Accountable)** | R (Responsible) | R (Responsible) | C (Consulted) | C (Consulted) |
 | **Gate G3 — Story done** (Definition of Done) | — | C (Consulted) | I (Informed) | **A (Accountable)** | R (Responsible) | R (Responsible) | C (Consulted) | — |
 
+⁴ **SEC** = the Security Champion, a developer with an extra hat ([§3](#3-roles-default-for-a-48-person-team)); on small teams the Tech Lead may hold it.
+
 #### 3.1.4 Phase 4: Testing
 
 Details: [Testing](04-Testing/Testing.md).
@@ -164,6 +170,8 @@ Details: [Testing](04-Testing/Testing.md).
 | Device testing: simulator, HIL (hardware-in-the-loop) rig, installation and bad-condition tests (track B) | — | C (Consulted) | I (Informed) | R (Responsible) | R (Responsible) | **A/R (Accountable + Responsible)** | C (Consulted) | — |
 | Bug triage: severity and priority | — | **A (Accountable)** | I (Informed) | C (Consulted) | C (Consulted) | R (Responsible) | — | C (Consulted) |
 | UAT (User Acceptance Testing) / acceptance | I (Informed) | **A (Accountable)** | C (Consulted) | C (Consulted) | C (Consulted) | R (Responsible) | — | R (Responsible) |
+
+⁴ **SEC** = the Security Champion, a developer with an extra hat ([§3](#3-roles-default-for-a-48-person-team)); on small teams the Tech Lead may hold it.
 
 #### 3.1.5 Phase 5: Deployment
 
@@ -181,6 +189,8 @@ Details: [Deployment](05-Deployment/Deployment.md).
 | Rollback decision | — | I (Informed) | I (Informed) | **A (Accountable)** | R (Responsible) | C (Consulted) | I (Informed) | I (Informed) |
 | User documentation ² | — | **A (Accountable)** | I (Informed) | C (Consulted) | R (Responsible) | C (Consulted) | — | C (Consulted) |
 | Sprint delivery note to the client | I (Informed) | **A/R (Accountable + Responsible)** | C (Consulted) | C (Consulted) | C (Consulted) | C (Consulted) | — | I (Informed) |
+
+² **R** = the technical writer when the project has one, otherwise developers; owner and rules in [§7.1](#71-documentation-map-what-we-keep-who-owns-it-when-it-changes) and [§7.2 rule 9](#72-documentation-rules). ⁴ **SEC** = the Security Champion, a developer with an extra hat ([§3](#3-roles-default-for-a-48-person-team)); on small teams the Tech Lead may hold it.
 
 #### 3.1.6 Phase 6: Maintenance
 
@@ -203,7 +213,7 @@ Details: [Maintenance](06-Maintenance/Maintenance.md).
 | Knowledge base upkeep | — | R (Responsible) | **A (Accountable)** | R (Responsible) | R (Responsible) | R (Responsible) | R (Responsible) | — |
 | Retrospective actions and changes to this guide | C (Consulted) | C (Consulted) | **A/R (Accountable + Responsible)** | C (Consulted) | C (Consulted) | C (Consulted) | C (Consulted) | — |
 
-¹ **R** = the UX / product designer when the project has one ([§3.2](#32-optional-and-shared-roles)), otherwise developers. ² **R** = the technical writer when the project has one, otherwise developers; owner and rules in [§7.1](#71-documentation-map-what-we-keep-who-owns-it-when-it-changes) and [§7.2 rule 9](#72-documentation-rules). ³ **R** = the named idea owner (often the PO); the Sponsor decides go / change / stop. ⁴ **SEC** = the Security Champion, a developer with an extra hat ([§3](#3-roles-default-for-a-48-person-team)); on small teams the Tech Lead may hold it.
+⁴ **SEC** = the Security Champion, a developer with an extra hat ([§3](#3-roles-default-for-a-48-person-team)); on small teams the Tech Lead may hold it.
 
 ### 3.2 Optional and shared roles
 
@@ -625,7 +635,7 @@ Review the affected file **within 2 weeks** when:
 
 1. **Branch protection on `main`:** pull request required, at least **2 approvals** (the review owner and the second reviewer from the table in [9.1](#91-review-schedule)), approvals dismissed when new commits arrive, status check below required, no force-push.
 2. **Guide owners** are required reviewers for any change to a **must** rule or any new **must** rule (set this with a `CODEOWNERS` entry for the phase files).
-3. **Required check:** `python3 tools/check.py` (standard library only) must pass. It finds broken links and anchors, links that leave this folder, skipped or duplicate rule numbers, templates and images that no file mentions, references to course material, and files whose review date has passed.
+3. **Required check:** `python3 tools/check.py` (standard library only) must pass. It finds broken links and anchors, links that leave this folder, skipped or duplicate rule numbers, templates and images that no file mentions, references to course material, files whose review date has passed, and phase RACI tables that differ from README §3.1.
 4. **Every pull request** adds an entry at the top of the [CHANGELOG](CHANGELOG.md) (files, what changed, sources checked, not re-checked), updates "Last reviewed" and "Next review due" only in the files it changed, and links the **public source** of each changed fact.
 5. **Emergency fix** (a wrong fact that could cause harm): the Tech Lead may merge with **one** approval, and the second review happens within 2 working days.
 

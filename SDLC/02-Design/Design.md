@@ -555,13 +555,23 @@ flowchart TD
 
 ### 6.1 Owners
 
-| Activity | Accountable | Responsible | Consulted |
-|----------|-------------|-------------|-----------|
-| Architecture (HLD) and ADRs | Tech Lead | Tech Lead, developers | PO, QA, Sponsor (big decisions) |
-| Feature design (LLD) | Tech Lead | Developer building it | QA, Security Champion |
-| Threat model | Tech Lead | Security Champion, developers | QA |
-| Design review | Tech Lead | Reviewers | Client (HLD on client projects) |
-| UI design brief and approval (rules 27–30) | Product Owner | Designer | Developer, QA, client approver |
+**Who does what in this phase (RACI).** This is the same table as [README §3.1.2](../README.md#312-phase-2-design); change both in the same pull request (`tools/check.py` fails when they differ). **R** = Responsible (does the work) · **A** = Accountable (owns the result; exactly one) · **C** = Consulted (asked before deciding) · **I** = Informed (told after) · **—** = not involved
+
+| Activity | SP (Sponsor) | PO (Product Owner) | DL (Delivery Lead) | TL (Tech Lead) | DEV (Developers) | QA (Quality Assurance Engineer) | SEC (Security Champion) ⁴ | CL (Client / Stakeholders) |
+|----------|----|----|----|----|-----|----|-----|----|
+| Architecture (HLD, high-level design) and ADRs (Architecture Decision Records) | I (Informed) | C (Consulted) | I (Informed) | **A/R (Accountable + Responsible)** | R (Responsible) | C (Consulted) | C (Consulted) | I (Informed) |
+| Feature design (LLD, low-level design) | — | C (Consulted) | — | **A (Accountable)** | R (Responsible) | C (Consulted) | C (Consulted) | — |
+| API contract (OpenAPI / AsyncAPI) | — | C (Consulted) | I (Informed) | **A (Accountable)** | R (Responsible) | C (Consulted) | C (Consulted) | C (Consulted) |
+| Data design (schema, migrations, personal-data map) | — | C (Consulted) | I (Informed) | **A (Accountable)** | R (Responsible) | C (Consulted) | C (Consulted) | — |
+| Threat model | I (Informed) | C (Consulted) | I (Informed) | **A (Accountable)** | R (Responsible) | C (Consulted) | R (Responsible) | I (Informed) |
+| UX (User Experience) design and usability tests ¹ | — | **A (Accountable)** | I (Informed) | C (Consulted) | R (Responsible) | C (Consulted) | — | C (Consulted) |
+| Design brief and design approval ¹ | — | **A (Accountable)** | I (Informed) | C (Consulted) | R (Responsible) | C (Consulted) | — | C (Consulted) |
+| Design system and component library choice ¹ | — | C (Consulted) | I (Informed) | **A (Accountable)** | R (Responsible) | C (Consulted) | — | — |
+| Connected product: device-to-cloud-to-app design (track B) | I (Informed) | C (Consulted) | I (Informed) | **A/R (Accountable + Responsible)** | R (Responsible) | C (Consulted) | R (Responsible) | C (Consulted) |
+| Hardware milestones and cloud cost per device (track B) | C (Consulted) | C (Consulted) | C (Consulted) | **A/R (Accountable + Responsible)** | R (Responsible) | C (Consulted) | — | C (Consulted) |
+| **Gate G2 — Architecture approved** (design review) | C (Consulted) | C (Consulted) | I (Informed) | **A/R (Accountable + Responsible)** | R (Responsible) | C (Consulted) | C (Consulted) | C (Consulted) |
+
+¹ **R** = the UX / product designer when the project has one ([§3.2](../README.md#32-optional-and-shared-roles)), otherwise developers. ⁴ **SEC** = the Security Champion, a developer with an extra hat ([§3](../README.md#3-roles-default-for-a-48-person-team)); on small teams the Tech Lead may hold it.
 
 ### 6.2 Required outputs
 

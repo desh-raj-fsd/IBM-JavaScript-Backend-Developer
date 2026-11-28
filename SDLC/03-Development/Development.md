@@ -536,12 +536,20 @@ Set-Cookie: sid=<value>; Secure; HttpOnly; SameSite=Lax; Path=/
 
 ### 6.1 Owners
 
-| Activity | Accountable | Responsible | Consulted |
-|----------|-------------|-------------|-----------|
-| Repository setup and standards | Tech Lead | Tech Lead | Developers |
-| Writing code and tests | Tech Lead | Developers | QA |
-| Code review | Tech Lead | Developers (not the author) | Security Champion (security-relevant changes) |
-| Dependency choices | Tech Lead | Developers | Security Champion |
+**Who does what in this phase (RACI).** This is the same table as [README §3.1.3](../README.md#313-phase-3-development); change both in the same pull request (`tools/check.py` fails when they differ). **R** = Responsible (does the work) · **A** = Accountable (owns the result; exactly one) · **C** = Consulted (asked before deciding) · **I** = Informed (told after) · **—** = not involved
+
+| Activity | SP (Sponsor) | PO (Product Owner) | DL (Delivery Lead) | TL (Tech Lead) | DEV (Developers) | QA (Quality Assurance Engineer) | SEC (Security Champion) ⁴ | CL (Client / Stakeholders) |
+|----------|----|----|----|----|-----|----|-----|----|
+| Repository setup and walking skeleton | — | I (Informed) | I (Informed) | **A/R (Accountable + Responsible)** | R (Responsible) | C (Consulted) | C (Consulted) | — |
+| Technical docs: README, versioning policy, SOPs, CHANGELOG | — | I (Informed) | I (Informed) | **A (Accountable)** | R (Responsible) | C (Consulted) | — | — |
+| Code and code review | — | I (Informed) | I (Informed) | **A (Accountable)** | R (Responsible) | C (Consulted) | C (Consulted) | — |
+| Ticket for every change; QA told when it reaches staging | — | C (Consulted) | **A (Accountable)** | C (Consulted) | R (Responsible) | R (Responsible) | — | — |
+| Dependency choices | — | — | — | **A (Accountable)** | R (Responsible) | — | C (Consulted) | — |
+| Firmware build, signing and toolchain (track B) | — | — | I (Informed) | **A (Accountable)** | R (Responsible) | C (Consulted) | R (Responsible) | — |
+| AI eval set and pass threshold | — | C (Consulted) | I (Informed) | **A (Accountable)** | R (Responsible) | R (Responsible) | C (Consulted) | C (Consulted) |
+| **Gate G3 — Story done** (Definition of Done) | — | C (Consulted) | I (Informed) | **A (Accountable)** | R (Responsible) | R (Responsible) | C (Consulted) | — |
+
+⁴ **SEC** = the Security Champion, a developer with an extra hat ([§3](../README.md#3-roles-default-for-a-48-person-team)); on small teams the Tech Lead may hold it.
 
 ### 6.2 Required outputs
 

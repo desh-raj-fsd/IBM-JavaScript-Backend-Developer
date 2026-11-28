@@ -379,14 +379,26 @@ groups:
 
 ### 6.1 Owners
 
-| Activity | Accountable | Responsible | Consulted |
-|----------|-------------|-------------|-----------|
-| SLOs and alerts | Tech Lead | Developers | PO |
-| On-call and incident response | Tech Lead | On-call developer, incident commander | DL, PO |
-| Postmortems | Tech Lead | Incident commander | Whole team |
-| Monthly service review | Tech Lead | Tech Lead, DL | PO, client (optional) |
-| Security and platform updates | Tech Lead | Security Champion, developers | — |
-| Client communication during incidents | Delivery Lead | DL | PO, Tech Lead |
+**Who does what in this phase (RACI).** This is the same table as [README §3.1.6](../README.md#316-phase-6-maintenance); change both in the same pull request (`tools/check.py` fails when they differ). **R** = Responsible (does the work) · **A** = Accountable (owns the result; exactly one) · **C** = Consulted (asked before deciding) · **I** = Informed (told after) · **—** = not involved
+
+| Activity | SP (Sponsor) | PO (Product Owner) | DL (Delivery Lead) | TL (Tech Lead) | DEV (Developers) | QA (Quality Assurance Engineer) | SEC (Security Champion) ⁴ | CL (Client / Stakeholders) |
+|----------|----|----|----|----|-----|----|-----|----|
+| SLOs (Service Level Objectives) and alerts | — | C (Consulted) | I (Informed) | **A (Accountable)** | R (Responsible) | C (Consulted) | — | I (Informed) |
+| Runbooks (one per alert) | — | — | I (Informed) | **A (Accountable)** | R (Responsible) | C (Consulted) | C (Consulted) | — |
+| On-call, incidents and postmortems | I (Informed) | I (Informed) | C (Consulted) | **A (Accountable)** | R (Responsible) | C (Consulted) | C (Consulted) | I (Informed) |
+| Client communication during incidents | I (Informed) | C (Consulted) | **A/R (Accountable + Responsible)** | C (Consulted) | C (Consulted) | — | — | I (Informed) |
+| **Gate G5 — Live and healthy** / monthly service review | C (Consulted) | C (Consulted) | R (Responsible) | **A/R (Accountable + Responsible)** | C (Consulted) | C (Consulted) | C (Consulted) | I (Informed) |
+| Device fleet review (track B) | I (Informed) | C (Consulted) | I (Informed) | **A/R (Accountable + Responsible)** | R (Responsible) | C (Consulted) | C (Consulted) | I (Informed) |
+| Security and platform updates | — | I (Informed) | I (Informed) | **A (Accountable)** | R (Responsible) | C (Consulted) | R (Responsible) | — |
+| Backups and restore tests | — | I (Informed) | I (Informed) | **A (Accountable)** | R (Responsible) | C (Consulted) | C (Consulted) | — |
+| Audit logs and quarterly access review (regulated projects) | I (Informed) | I (Informed) | I (Informed) | **A (Accountable)** | R (Responsible) | — | R (Responsible) | C (Consulted) |
+| Takeover audit and risk report | I (Informed) | C (Consulted) | I (Informed) | **A/R (Accountable + Responsible)** | R (Responsible) | C (Consulted) | C (Consulted) | C (Consulted) |
+| Small fixed-price jobs (track E) | — | C (Consulted) | I (Informed) | **A (Accountable)** | R (Responsible) | C (Consulted) | — | C (Consulted) |
+| Project closure report | C (Consulted) | R (Responsible) | **A/R (Accountable + Responsible)** | R (Responsible) | C (Consulted) | C (Consulted) | — | C (Consulted) |
+| Knowledge base upkeep | — | R (Responsible) | **A (Accountable)** | R (Responsible) | R (Responsible) | R (Responsible) | R (Responsible) | — |
+| Retrospective actions and changes to this guide | C (Consulted) | C (Consulted) | **A/R (Accountable + Responsible)** | C (Consulted) | C (Consulted) | C (Consulted) | C (Consulted) | — |
+
+⁴ **SEC** = the Security Champion, a developer with an extra hat ([§3](../README.md#3-roles-default-for-a-48-person-team)); on small teams the Tech Lead may hold it.
 
 ### 6.2 Required outputs
 
