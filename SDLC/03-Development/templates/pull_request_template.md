@@ -3,6 +3,10 @@
 ## What and why
 <!-- What does this change do, and why? Link the story/requirement: Closes #123 (REQ-07) -->
 
+- **Ticket:** <ID and link> (required: no ticket, no merge — Development rule 31)
+- **Design:** <link to the Approved design, for UI changes> / not a UI change
+- **QA told:** [ ] the ticket is updated, and QA knows what changed and where to test it
+
 ## How to test
 <!-- Commands, requests or steps a reviewer can follow -->
 

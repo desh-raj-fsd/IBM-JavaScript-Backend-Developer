@@ -2,7 +2,7 @@
 
 **SDLC series — Phase 6 of 6.** How professional backend teams do **Maintenance** today: the core tasks, the Waterfall way vs. the modern way, and the industry practices modern teams add.
 
-> **Last reviewed:** 2026-11-27 · **Next review due:** 2027-05-27 · **Review owner:** Tech Lead · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
+> **Last reviewed:** 2026-11-28 · **Next review due:** 2027-05-28 · **Review owner:** Tech Lead · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
 
 [← Deployment](../05-Deployment/Deployment.md) · [Guide README](../README.md)
 
@@ -340,6 +340,23 @@ groups:
 - **Automate small updates** (Dependabot or Renovate) and let CI tests prove they are safe; do **major** framework upgrades one version at a time.
 - **Review the support policy** every quarter: browsers, operating systems and devices change.
 
+### 4.13 Taking over a product from another vendor
+
+> **Track E** ([README §4.1](../README.md#41-delivery-tracks-by-service)). Clients often come to us when the product works but the team that built it is gone. Taking over someone else's software, firmware or cloud is risky: we do not know what we do not know yet.
+
+- **Audit first, promise later.** Start with a **fixed-length, paid audit sprint** (default 1–2 weeks) using the [takeover audit](templates/takeover-audit.md). No feature, date or price for new work is promised before it ends.
+- **Ownership and access first.** Every repository, cloud account, domain, app store account, signing key and device registry must be **owned by the client** (or by us under contract), not by a former vendor's personal account. Rotate every shared password and key after the transfer.
+- **Prove we can rebuild it.** Build every part from source, deploy to staging, and flash a bench device. If production runs a version we cannot rebuild, that is the first risk in the report.
+- **Measure the baseline** before changing anything: errors, uptime, monthly cloud cost, device fleet and firmware versions. Then every later improvement (for example a cloud cost reduction) can be shown with numbers.
+- **Add safety before changes:** tests and monitoring around the parts we will touch first (§4.10).
+- **Report and agree:** a risk report sorted by impact, with "fix now" and "plan later", accepted by the client in writing. It becomes the first backlog.
+
+### 4.14 Closing work and keeping what we learned
+
+- **Every end is a closure.** When a project or phase is delivered, paused, handed over or **stopped**, the Delivery Lead writes a [closure report](templates/project-closure.md): what was delivered, the hand-over checklist (repositories, accounts, credentials, docs, user guide), time and money against the estimate, and lessons. A stopped project is closed on purpose, not left to fade out.
+- **Small fixed-price jobs** (for example a fix from a website health check, usually under 5 working days) skip Gates G1 and G2 but never skip the basics: a ticket with acceptance criteria and the agreed price, the client's written OK, the normal pipeline, and **before/after evidence** (a screenshot, a scan result or a measurement) sent to the client.
+- **One knowledge base.** Research, spikes, design explorations, vendor and API notes (for example a payment provider's edge cases) and closure lessons go into **one shared knowledge base** with a fixed structure — for example `knowledge/<area>/<topic>.md` in a team repository, or one wiki space with the same folders — linked from the ticket that produced it. Search there before starting a spike.
+
 ## 5. A service is "healthy and well maintained" when...
 
 - [ ] **SLOs** are defined, measured (SLIs), and **met**; the error budget is tracked.
@@ -427,6 +444,11 @@ groups:
 18. **should** — Web UIs collect **real-user Core Web Vitals** and **JavaScript errors** (with source maps); the 75th-percentile values and the error rate are reviewed in the monthly service review.
 19. **must** — The **end-of-life dates** of the framework, Node.js LTS line and build tools are tracked; the browser support policy is reviewed every quarter. Upgrade work is planned in the backlog **at least one quarter before** the date (rule 9 and the G5 check apply).
 20. **must** — A vulnerability in a dependency or image that is in the **CISA KEV** catalog is fixed within the **critical** time of rule 7 (§6.4), whatever its CVSS score. **Should:** use **EPSS** and whether the vulnerable code is reachable to order the rest within one severity level. Owner: Tech Lead.
+21. **must** on track E — Taking over a product from another vendor starts with a **fixed-length takeover audit** ([template](templates/takeover-audit.md), §4.13): ownership and access transferred and credentials rotated, every part rebuilt from source, a measured baseline, and a written risk report accepted by the client **before** new work is promised. Owner: Tech Lead.
+22. **must** — Every project or phase that ends — delivered, paused, handed over or **stopped** — gets a **closure report** ([template](templates/project-closure.md)) within 2 weeks, with the hand-over checklist done and lessons sent to the next retrospective. Owner: Delivery Lead.
+23. **must** on track E — A **small fixed-price job** has a ticket with acceptance criteria and price, the client's written OK, goes through the normal pipeline, and ends with **before/after evidence** sent to the client (§4.14). Owner: Tech Lead.
+24. **should** — Research, spikes, design explorations and closure lessons are stored in the team's **one knowledge base** with a fixed folder structure and linked from the ticket; the Delivery Lead checks every quarter that it is used and tidy. Owner: Delivery Lead.
+25. **must** on track B — The monthly service review also covers the **device fleet**: devices online, firmware version spread, failed updates, unexpected restarts, and **cloud cost per device** against the design estimate ([Design rule 32](../02-Design/Design.md#64-rules)). Owner: Tech Lead.
 
 ### 6.6 Templates
 
@@ -437,6 +459,8 @@ groups:
 | [postmortem.md](templates/postmortem.md) | `docs/postmortems/<date>-<title>.md` |
 | [go-live-checklist.md](templates/go-live-checklist.md) | Use before first release; keep in `docs/releases/` |
 | [service-review.md](templates/service-review.md) | `docs/service-reviews/<YYYY-MM>.md` |
+| [takeover-audit.md](templates/takeover-audit.md) | `docs/takeover/audit.md` (track E, first sprint) |
+| [project-closure.md](templates/project-closure.md) | `docs/closure-report.md` (copy to the client) |
 
 ---
 

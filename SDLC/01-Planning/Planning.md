@@ -2,7 +2,7 @@
 
 **SDLC series — Phase 1 of 6.** How professional backend teams do **Planning** today: the core tasks, the Waterfall way vs. the modern way, and the industry practices modern teams add.
 
-> **Last reviewed:** 2026-11-27 · **Next review due:** 2027-05-27 · **Review owner:** Product Owner · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
+> **Last reviewed:** 2026-11-28 · **Next review due:** 2027-05-28 · **Review owner:** Product Owner · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
 
 [Guide README](../README.md) · [Design →](../02-Design/Design.md)
 
@@ -230,7 +230,7 @@ Every requirements list must contain **both** kinds:
 
 ### 4.5 Definition of Ready and traceability
 
-- **Definition of Ready (DoR):** a checklist a story must pass **before** a sprint can start it — for example "clear acceptance criteria, small enough for one sprint, no open blockers".
+- **Definition of Ready (DoR):** a checklist a story must pass **before** a sprint can start it — for example "clear acceptance criteria, small enough for one sprint, no open blockers". At LumenVenture it also includes "design approved" and "tech note written" where they apply (rule 25): building before the design or the technical approach is ready is the most common cause of rework.
 - **Traceability:** give each requirement an **ID** (for example `REQ-07`) and link it to its design, code (commits, PRs) and tests. You can then prove every requirement was built and tested. In regulated industries, a **traceability matrix** is required.
 
 ### 4.6 Change management
@@ -640,6 +640,10 @@ flowchart TD
 22. **should** — After each release, check whether the linked **key results moved**, and feed the result back into the backlog.
 23. **must** — Dates and budgets are given as **ranges with a confidence level**; from Sprint 3 on, forecasts come from **measured throughput**, and the **85% date** is the one reported to the sponsor or client.
 24. **must** — Client projects record their **contract model** (§4.17) in the project brief §9 before Gate G1; when time or budget runs short, **scope** is cut by the PO — testing, security and the Definition of Done are never cut.
+25. **must** — The **Definition of Ready** ([user story template](templates/user-story.md)) also requires, before a story enters a sprint: (a) for stories with screens, the design is **Approved** and linked ([Design rule 30](../02-Design/Design.md#64-rules)); (b) for stories over about 2 days of work, or that use a library, device or service new to the team, a short **tech note** (approach, risks, what to spike) checked by the Tech Lead; (c) **QA has reviewed** the acceptance criteria; (d) everything the story depends on is available (API keys, client content, test devices or hardware). Owner: Product Owner.
+26. **must** on client projects, **should** on internal products — Discovery interviews **every person who pays for, signs off or will run** the product (not only the first contact), and **observes** the people who do the work in their current system before a new system is proposed (§8.7). They are listed in the stakeholder register. Owner: Product Owner.
+27. **must** on projects with screens — The project brief records the **visual quality bar** (reference products, brand assets, "showcase" or "working tool" level) and the client confirms it before Gate G1. A basic or unstyled UI is **not** acceptable on client work unless the brief says so. Owner: Product Owner, with the designer.
+28. **must** — An **internal product** gets sprint capacity only after **idea validation** ([template](templates/idea-validation.md), §8.7) is decided "go" by the Sponsor. It has one named owner, planned time, a launch plan and stop criteria, which are checked at every Sprint Review. Owner: the idea owner; decision: Sponsor.
 
 ### 8.5 Templates
 
@@ -658,6 +662,7 @@ flowchart TD
 | [assumptions-and-decisions-log.md](templates/assumptions-and-decisions-log.md) | `docs/discovery/assumptions-and-decisions-log.md` |
 | [mvp-workshop.md](templates/mvp-workshop.md) | `docs/discovery/mvp-workshop-<date>.md` |
 | [client-prd.md](templates/client-prd.md) | `docs/discovery/client-prd.md` (send the client a PDF or shared-doc copy) |
+| [idea-validation.md](templates/idea-validation.md) | `docs/idea-validation.md` (internal products, before Gate G1) |
 
 ### 8.6 Client Discovery (client projects)
 
@@ -757,6 +762,35 @@ flowchart TD
 - [ ] The **client PRD** is approved **in writing**, and it matches the project brief
 - [ ] The first **epics and user stories** exist, linked to PRD feature IDs, and the first stories meet the **Definition of Ready**
 - [ ] The client knows the **demo rhythm**, the **feedback deadline** and the **change rules**
+- [ ] Every person who **pays, signs off or will run** the product was interviewed, and the people who do the work today were **observed** in their current system (rule 26)
+- [ ] The **visual quality bar** is agreed (rule 27)
+
+### 8.7 Validate before we build
+
+> **Why:** we have lost work by building what **we** thought users needed — for clients (a new system when the users wanted their existing one improved) and for ourselves (internal tools nobody validated, later abandoned). This section stops that.
+
+**For client projects (part of discovery, §8.6):**
+
+- **Talk to everyone who decides.** The founder is rarely the only decision-maker: family members, partners, managers and the people who will run the system each day can stop a project. Put each of them in the stakeholder register and interview them.
+- **Watch the current way of working.** Before proposing new software, sit with the people who do the work and see their current system or spreadsheet. Often the best answer is to improve or connect what they already use (for example by adding AI or automation to an existing system) instead of replacing it.
+- **Ask how it must look, not only what it must do.** For many founders the product is also a **showcase** for investors, partners or the press. Write down the **visual quality bar**: 2–3 reference apps or sites they like, brand assets, and whether this is a "showcase" or a "working tool". Designs are judged against it ([design brief](../02-Design/templates/design-brief.md)).
+
+**For internal products (our own tools and products):**
+
+- An idea gets **no build capacity** until it passes **idea validation** ([template](templates/idea-validation.md)): a named owner with planned time, the riskiest assumption tested with real people (at least 5 problem interviews), a launch and marketing plan, and **stop criteria**.
+- The method is **build → measure → learn** (Lean Startup): the smallest test that could prove the idea wrong comes first — a landing page, a clickable prototype, or doing the service by hand for a few users.
+- A validated idea becomes an **internal product** (Gate G1). A stopped idea gets a short closure note with its lessons ([Maintenance rule 22](../06-Maintenance/Maintenance.md#65-rules)).
+
+```mermaid
+flowchart TD
+    I["Idea"] --> O["Named owner and time budget"]
+    O --> A["Riskiest assumption"]
+    A --> T["Cheapest test: interviews, landing page, prototype"]
+    T --> D{"Evidence meets the target?"}
+    D -->|yes| G1["Internal product: Gate G1, then sprints"]
+    D -->|partly| A
+    D -->|no| S["Stop: closure note and lessons"]
+```
 
 ---
 

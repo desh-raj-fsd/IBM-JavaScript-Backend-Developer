@@ -46,3 +46,7 @@ Scenario: <error / edge case>
 - [ ] Dependencies and open questions resolved (or a spike planned)
 - [ ] Design needs known (does it need a design doc / ADR / threat-model update?)
 - [ ] Security and privacy impact considered
+- [ ] **Screens:** design is **Approved** in its design brief and linked here — never "we'll guess and fix later" (Planning rule 25, Design rule 30)
+- [ ] **Over about 2 days, or new library / device / service:** tech note written and checked by the Tech Lead
+- [ ] **QA reviewed** the acceptance criteria (refinement with product, development and QA)
+- [ ] Inputs available: API keys, client content, test devices or hardware, accounts

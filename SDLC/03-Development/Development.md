@@ -2,7 +2,7 @@
 
 **SDLC series — Phase 3 of 6.** How professional backend teams do **Development** today: the core tasks, the Waterfall way vs. the modern way, and the industry practices modern teams add.
 
-> **Last reviewed:** 2026-11-27 · **Next review due:** 2027-05-27 · **Review owner:** Tech Lead · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
+> **Last reviewed:** 2026-11-28 · **Next review due:** 2027-05-28 · **Review owner:** Tech Lead · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
 
 [← Design](../02-Design/Design.md) · [Guide README](../README.md) · [Testing →](../04-Testing/Testing.md)
 
@@ -501,6 +501,19 @@ Set-Cookie: sid=<value>; Secure; HttpOnly; SameSite=Lax; Path=/
 - **Separate runtime and migration DB (Database) roles:** Run the application with a least-privilege DB role (`SELECT`, `INSERT`, `UPDATE`, `DELETE` plus schema/sequence `USAGE` where needed — never `DROP` or `GRANT`), and reserve DDL (Data Definition Language: `CREATE`, `ALTER`, `DROP`) on shared and production databases for the pipeline's migration step.
 - **Track every schema change with versioned migrations:** Store database schema changes as reviewed migration files in Git, keep them backward-compatible during rolling deploys (add new columns before dropping old ones), and run migrations as a controlled pipeline step before or alongside app rollout.
 
+### 4.16 Firmware and device code
+
+> **Track B** ([README §4.1](../README.md#41-delivery-tracks-by-service)). Firmware follows the same rules as other code — Git, small PRs, review, CI — plus a few extra ones because a bug on a device in the field is hard to reach and can stop the device.
+
+- **Separate logic from hardware.** Put hardware access (GPIO pins, sensors, Bluetooth, the modem) behind a thin **hardware abstraction layer** (HAL). Business logic then runs and is unit-tested **on a normal computer** in CI, with fake hardware (test doubles, [Testing §4.5](../04-Testing/Testing.md#45-test-doubles-mocks-stubs-fakes-spies)).
+- **Unit tests on the host in CI** with a C or C++ test framework (for example GoogleTest or Unity). Turn on compiler warnings as errors, a static analyzer, and sanitizers (address and undefined-behavior) for the host build.
+- **Reproducible builds.** The toolchain version, the board support package and every library version are pinned in the repository (for example in a container image used by CI). Any developer and CI produce the same image from the same commit.
+- **Every image knows its version.** The firmware version (Semantic Versioning) and the commit hash are built into the image and reported to the cloud at start-up, so we always know what runs on each device.
+- **Signed images only.** Release images are built and **signed** in CI; signing keys live in the secrets store or a hardware security module, never on a laptop.
+- **Configuration is data, not a new build.** Site- or customer-specific settings come from provisioning or the cloud, not from separate firmware builds.
+- **Watchdog and safe defaults.** A hardware or software watchdog restarts a hung device; on start-up after a crash the device reports why it restarted (for example the reset reason).
+- **Device set-up apps** (mobile, Bluetooth) live in the same story as the firmware change they need; a firmware developer and an app developer review each other's interface code.
+
 ## 5. Development is "done" when... (a typical Definition of Done)
 
 - [ ] The code meets the story's **acceptance criteria** and follows the **design** (API contract, layers, ADRs).
@@ -589,6 +602,9 @@ Set-Cookie: sid=<value>; Secure; HttpOnly; SameSite=Lax; Path=/
 28. **must** (restates rule 1 for pairs) — **Pairing never replaces review:** every pull request is approved by someone **outside the pair**, as rule 1 and gate G3 already require. Pairing is an extra layer and a good way to onboard. On a team too small to have an outsider (a prototype), the Tech Lead or another LumenVenture developer reviews; write that arrangement in the project brief §10.
 29. **should** (**must** on client and regulated projects) — CI runs `git diff --check origin/main...HEAD` (with full-depth checkout) so that leftover **conflict markers** (`<<<<<<<`) fail the build; whitespace warnings follow the repository's `core.whitespace` / `.gitattributes` settings (Markdown line breaks, lockfiles and generated files are excluded). A pre-commit hook may run `git diff --cached --check` as an early warning, but CI is the enforcement. Conflicts are resolved by a developer who has **read both sides**.
 30. **should** (**must** for packages published outside the company) — A published package (npm or an internal registry) has a `files` allowlist (never `files: ["."]` or a broad glob; `.npmignore` only as a fallback). The release job runs `npm pack --dry-run --json` and **fails** if forbidden paths appear (`.env`, `*.pem`, `test/`, `.git*`). Owner: Tech Lead. This applies to packages that are **published**, not to services that are only deployed. Publishing itself follows [Deployment rule 12](../05-Deployment/Deployment.md#64-rules).
+31. **must** — Every PR links its **ticket** (story, bug or task ID), and the ticket's status on the board is updated when the PR opens and when it reaches staging. A PR without a ticket is not merged. This makes every change visible to the PO and QA ([README §6.6](../README.md#66-working-rhythm-rules) rule 12). Owner: Tech Lead (branch protection or a CI check enforces the link).
+32. **must** on track B — Firmware (§4.16): logic behind a hardware abstraction layer with **host unit tests in CI**; warnings as errors and a static analyzer; a **pinned, reproducible** toolchain; version and commit built into every image; release images **signed in CI** with keys never stored on laptops. Owner: Tech Lead.
+33. **must** on track C and for any AI feature — Before the build, the team writes an **eval set** (realistic inputs with expected results or scoring rules, including attack cases such as prompt injection) and a **pass threshold** agreed with the PO. Actions with an outside effect (sending email, paying, changing records, controlling a device) need a **person's approval** until evals and monitoring show they are safe, and every AI feature has a **cost budget** with an alert. Owner: Tech Lead.
 
 ### 6.5 Templates
 

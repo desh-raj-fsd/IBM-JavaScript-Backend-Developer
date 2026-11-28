@@ -9,6 +9,9 @@
 - [ ] ★ Reviewed and approved by at least one other developer
 - [ ] Small, focused PR with a clear description
 - [ ] User-facing UI: native elements, keyboard test, works at 320 px and on desktop, accessibility check passes ([frontend-checklist.md](frontend-checklist.md))
+- [ ] ★ UI matches the **Approved** design (all states), checked by QA or the designer (Testing rule 20)
+- [ ] ★ Firmware (track B): tested on the **target hardware**, not only in a simulator (Testing rule 21)
+- [ ] ★ AI features (track C): eval set passes its threshold (Testing rule 23)
 
 ## Tests
 - [ ] ★ Unit and integration tests written and passing in CI
@@ -34,3 +37,4 @@
 ## Delivery
 - [ ] ★ Merged to `main` and deployed to staging by the pipeline
 - [ ] Accepted by the Product Owner
+- [ ] Client projects: included in this sprint's **delivery note**, with user-guide changes (Deployment rule 27)

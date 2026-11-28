@@ -2,7 +2,7 @@
 
 **SDLC series — Phase 2 of 6.** How professional backend teams do **Design** today: the core tasks, the Waterfall way vs. the modern way, and the industry practices modern teams add.
 
-> **Last reviewed:** 2026-11-27 · **Next review due:** 2027-05-27 · **Review owner:** Tech Lead · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
+> **Last reviewed:** 2026-11-28 · **Next review due:** 2027-05-28 · **Review owner:** Tech Lead · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
 
 [← Planning](../01-Planning/Planning.md) · [Guide README](../README.md) · [Development →](../03-Development/Development.md)
 
@@ -367,6 +367,25 @@ flowchart TD
 - Use a **design system** (shared components and styles) so all screens look and behave the same.
 - Design for **accessibility** (WCAG) from the start — adding it later is expensive.
 - The classic design-phase **prototype** (a preliminary mock-up for demonstration) fits here: show it to stakeholders before building.
+- **How design work flows at LumenVenture (rules 27–30):**
+  1. **Brief.** The PO writes a [design brief](templates/design-brief.md): the problem, the user, the **acceptance criteria for the design**, the constraints, and **one named approver**.
+  2. **Draft with the developer.** A developer looks at each draft early ("can we build this with our component library, in time?"). This catches limits of the library before the design is final.
+  3. **Review.** The approver answers within **2 working days**, in writing, and each "no" names the criterion it fails. After 2 rounds, open points go to the PO and Delivery Lead to decide, so nobody waits for weeks.
+  4. **Approved → Ready for dev.** The designer hands over (a short walk-through with the developer and QA, final link, assets, all states). Only now can the story enter a sprint (Definition of Ready).
+  5. **Changes after approval** go through the PO like any other scope change; developers never change a design on their own, and designers never change an approved design without telling the team.
+- **Choose the component library together, at the start.** Before Sprint 1, the designer and the Tech Lead pick the design system or component library together, after a short spike that tests its limits (theming, complex tables, mobile, accessibility). Record the choice and its known limits in an ADR. A library chosen without this step often becomes a bottleneck instead of a help.
+- **Keep the design language.** The design tokens (colors, type, spacing) and components are the single source; new screens reuse them. QA compares built screens with the approved design before a story is done ([Testing rule 20](../04-Testing/Testing.md#64-rules)).
+
+```mermaid
+flowchart TD
+    BR["Design brief - criteria and one approver"] --> DR["Draft, checked by a developer"]
+    DR --> RV{"Review within 2 working days"}
+    RV -->|changes - reason linked to a criterion| DR
+    RV -->|after round 2 still open| ES["PO and Delivery Lead decide"]
+    ES --> AP
+    RV -->|approved| AP["Approved - walk-through with dev and QA"]
+    AP --> RD["Ready for dev - story may enter a sprint"]
+```
 
 ### 4.10 The design document (RFC) template
 
@@ -477,6 +496,41 @@ Many companies write a short design doc, often called an **RFC (Request for Comm
 - **Execution model and memory safety**: match the runtime to the workload—ahead-of-time (AOT) compiled binaries (for example Go, Rust, .NET Native AOT, or GraalVM Native Image) start fastest for serverless cold starts; JIT-compiled (Just-In-Time) or bytecode runtimes (Node.js/TypeScript, Python, JVM — Java Virtual Machine, .NET CLR — Common Language Runtime) favor fast iteration and rich ecosystems. Prefer memory-safe languages or runtimes over raw C/C++ for new services, and consider **WebAssembly (Wasm)** only when a browser UI needs near-native compute speed alongside JavaScript. Record the runtime choice in the stack ADR (rule 24).
 - **Stack names age:** check what a name means today (for example ASP.NET today is ASP.NET Core, which is cross-platform).
 
+### 4.15 Connected products: device to cloud to app
+
+> **Track B** ([README §4.1](../README.md#41-delivery-tracks-by-service)). A connected product has three parts that must work together: the **device** (hardware and firmware, for example a Raspberry Pi controller), the **cloud** (for example AWS IoT Core and back-end services) and the **app** (for example a mobile app that sets the device up over Bluetooth). We design them **as one system**, with one team.
+
+- **One design doc for the whole path.** The HLD shows device, cloud and app in one C4 container diagram, with every link: Bluetooth, Wi-Fi or cellular, MQTT (Message Queuing Telemetry Transport) or HTTPS, and who starts each connection.
+- **Write the device-to-cloud data contract like an API.** Message topics, payload schema with a **version field**, units, and what happens when an old device sends an old version. Devices in the field update slowly, so the cloud must accept **at least the previous message version** (the same idea as additive API changes, §4.4.1).
+- **Design the device states.** For example: new in box → provisioning → online → offline → updating → fault. For each state: what the device does, what the cloud shows, what the app shows, and how it recovers.
+- **Design for bad conditions:** no network for hours (store and forward, with a limit), power loss at any moment (also during an update), clock drift, a full disk, a sensor that returns nonsense.
+- **Provisioning and identity:** each device has its **own** identity (certificate or key), never one shared secret for the fleet. Write down how a device is registered, paired by the installer, moved to another site, and retired.
+- **Updates:** plan the over-the-air (OTA) update path from day one: signed images, two partitions (A/B) or another way to fall back to the last working version, and a staged rollout ([Deployment §4.11](../05-Deployment/Deployment.md#411-releasing-firmware-and-mobile-apps)).
+- **Security baseline:** use **ETSI EN 303 645** (the European baseline for consumer IoT security) as the checklist even for business devices — for example no universal default passwords, a published way to report vulnerabilities, secure updates, secure storage of secrets, and minimal exposed services. The EU **Cyber Resilience Act** applies to products with digital elements sold in the EU (README §10).
+- **Languages on the device:** C and C++ are still common on devices; when used, CI adds static analysis and compiler warnings as errors (Development §4.16). Prefer a memory-safe language for new device-side services when the hardware allows it (§4.14).
+- **Cost:** estimate cloud cost **per device per month** (messages, storage, data transfer) at the planned fleet size; it is reviewed in the monthly service review.
+- **Hardware milestones.** Hardware cannot change every sprint. The plan shows hardware milestones (for example prototype → engineering validation (EVT) → design validation (DVT) → production validation (PVT); names vary by company), and the firmware, cloud and app sprints that fit inside each. A hardware review (parts, power, enclosure, cost) is done before each milestone.
+
+```mermaid
+flowchart TD
+    subgraph DEV["Device"]
+        FW["Firmware - versioned, signed"]
+    end
+    subgraph APP["Mobile app"]
+        PAIR["Set-up and pairing over Bluetooth"]
+    end
+    subgraph CLOUD["Cloud"]
+        HUB["IoT hub - device identity, messages"]
+        SVC["Back-end services and reports"]
+        OTA["OTA update jobs - staged"]
+    end
+    PAIR -->|provision, Wi-Fi details| FW
+    FW -->|telemetry, versioned schema| HUB
+    HUB --> SVC
+    SVC -->|status| PAIR
+    OTA -->|signed image| FW
+```
+
 ## 5. Design is "done enough" when...
 
 - [ ] The **HLD** is agreed: components, technology choices and an **architecture style**, with a C4 context and container diagram.
@@ -507,6 +561,7 @@ Many companies write a short design doc, often called an **RFC (Request for Comm
 | Feature design (LLD) | Tech Lead | Developer building it | QA, Security Champion |
 | Threat model | Tech Lead | Security Champion, developers | QA |
 | Design review | Tech Lead | Reviewers | Client (HLD on client projects) |
+| UI design brief and approval (rules 27–30) | Product Owner | Designer | Developer, QA, client approver |
 
 ### 6.2 Required outputs
 
@@ -535,6 +590,8 @@ Many companies write a short design doc, often called an **RFC (Request for Comm
 - [ ] **Delivery and cloud baseline** recorded (§4.12): delivery style, CDN and cache headers, service model, availability zones
 - [ ] **Front-end decisions** recorded (§4.13) for web UIs: approach ADR, support policy, accessibility and performance targets
 - [ ] **Technology stack** recorded (§4.14): ADR with alternatives, license check and support dates
+- [ ] **Projects with screens:** design system or component library chosen by designer + Tech Lead, limits recorded (rule 29); first design briefs written (rule 27)
+- [ ] **Connected products (track B):** device-to-cloud-to-app design, data contract, OTA path, ETSI EN 303 645 checklist (rule 31); hardware milestones planned (rule 32)
 - [ ] **Rollout, migration and rollback** approach known
 - [ ] Reviewed as a **pull request** by the Tech Lead and at least one other developer
 
@@ -566,11 +623,18 @@ Many companies write a short design doc, often called an **RFC (Request for Comm
 24. **must** on client and internal projects, **should** on prototypes — The technology stack (languages, frameworks, runtime, database, hosting) is chosen in an **ADR** (owner: Tech Lead) that lists at least two alternatives, the criteria of §4.14, the **license check** result and the support and end-of-life dates. Who runs each part follows rule 17, and the exit plan is the one rule 5 asks for. If the client mandates the stack, record it as a **constraint** with the license and end-of-life check only. The ADR names real components and versions: an acronym such as LAMP or MEAN is not enough.
 25. **should** — Default to **one primary database**. Add another kind of store (document, search, queue) only when a named access pattern in §4.3 needs it, and record it in an ADR. A cache such as Redis needs no extra ADR unless it holds the only copy of data. Owner: Tech Lead.
 26. **must** on client and internal projects, **should** on prototypes — **Staff, admin and operator accounts** (cloud console, source repository, CI/CD, admin screens) require **MFA**, preferably phishing-resistant (passkey or hardware security key). Products that hold personal or payment data **offer** MFA or passkeys to end users. Owner: Tech Lead.
+27. **must** on projects with screens (tracks A and D) — Design work starts from a **design brief** ([template](templates/design-brief.md)) with written acceptance criteria and **one named approver** (the PO; on client projects the client's named decision-maker). Owner: Product Owner.
+28. **must** — Design feedback is **written** in the brief's review log, and every rejection names the criterion it fails. The approver answers within **2 working days**; after **2 review rounds**, open points are decided by the PO and Delivery Lead. Owner: Product Owner.
+29. **must** on projects with screens — The **design system or component library** is chosen at Gate G2 by the designer **and** the Tech Lead together, after a short spike that tests its limits, and recorded in an ADR with those limits. Owner: Tech Lead.
+30. **must** — Each design has a status on the board: **Draft → In review → Approved → Ready for dev**. Development of a screen starts only at **Ready for dev**; a change to an approved design goes through the PO. Owner: Product Owner; the designer keeps the status current.
+31. **must** on track B — A connected product has one **device-to-cloud-to-app design** (§4.15): C4 containers for all three parts, a **versioned** device data contract, device states and recovery, provisioning and per-device identity, the OTA update and fallback path, and the **ETSI EN 303 645** checklist result. Owner: Tech Lead.
+32. **should** on track B — The plan shows the **hardware milestones** and the sprints inside each; a hardware review (parts, power, enclosure, cost per unit) and the **cloud cost per device** estimate are done before each milestone. Owner: Tech Lead, with the Sponsor for cost.
 
 ### 6.5 Templates
 
 | Template | Copy to |
 |----------|---------|
+| [design-brief.md](templates/design-brief.md) | `docs/design/briefs/<feature>.md` or the design ticket |
 | [design-doc.md](templates/design-doc.md) | `docs/design/<name>.md` |
 | [adr.md](templates/adr.md) | `docs/adr/<NNNN>-<title>.md` |
 | [threat-model.md](templates/threat-model.md) | `docs/threat-model.md` |

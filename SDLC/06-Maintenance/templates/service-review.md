@@ -27,6 +27,12 @@
 
 ## 5. Cost
 - Cloud cost this month vs. budget; actions:
+- AI features: cost per request and eval score trend (track C):
+
+## 5a. Device fleet (connected products, track B — Maintenance rule 25)
+- Devices online / total; unexpected restarts:
+- Firmware version spread; failed or stopped OTA updates:
+- Cloud cost per device vs. design estimate:
 
 ## 6. Technical debt and maintenance
 - Corrective / adaptive / perfective / preventive items for the backlog:

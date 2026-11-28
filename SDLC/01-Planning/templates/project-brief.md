@@ -5,6 +5,7 @@
 | Field | Value |
 |-------|-------|
 | **Project type** | Internal product / Client project / Prototype — plus Regulated data? (yes/no) |
+| **Delivery track(s)** | A Product build / B Connected product (IoT) / C AI agents / D Launch and brand / E Support, takeover, small jobs ([README §4.1](../../README.md#41-delivery-tracks-by-service)) |
 | **Sponsor** | |
 | **Product Owner** | |
 | **Delivery Lead** | |
@@ -62,6 +63,7 @@
 | Security | e.g. OWASP ASVS 5.0 level 2 |
 | Accessibility | e.g. WCAG 2.2 AA |
 | Data retention | |
+| **Visual quality bar** (projects with screens, Planning rule 27) | Reference apps or sites: <2–3 links> · Brand assets: <link> · Level: showcase / working tool · Confirmed by client on <date> |
 
 ## 7. Feasibility
 | Type | Result (OK / risk / blocker) | Notes |
@@ -78,7 +80,8 @@
 - **Dependencies:**
 
 ## 9. Estimate, forecast and delivery model
-- **Methodology:** Scrum, 2-week sprints (default) / Kanban / Scrum + V-model traceability (regulated) — see [README §6.1](../../README.md#61-our-methodology-by-project-type)
+- **Methodology:** the track's method — Scrum, 2-week sprints with design one sprint ahead (A) / Scrum inside hardware milestones (B) / AI pilot then Scrum (C) / phased Kanban (D) / Kanban lane (E) / + V-model traceability (regulated) — see [README §6.1](../../README.md#61-our-methodology-by-delivery-track)
+- **Capacity share:** <% of the team's shared sprint for this project> (README §6.6 rule 10)
 - **Delivery / contract model:** fixed budget, flexible scope / fixed price per phase / time and materials with a cap / paid discovery first ([Planning §4.17](../Planning.md#417-forecasting-and-budgeting-fix-time-and-cost-flex-scope))
 - **Effort / cost range:** <low – high>
 - **Confidence:** low / medium / high — re-estimated every sprint

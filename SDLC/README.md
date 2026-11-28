@@ -2,11 +2,13 @@
 
 **The way LumenVenture plans, designs, builds, tests, releases and runs software — for every project.**
 
-- **Applies to:** all projects — internal products, client projects, and any other kind (prototypes, integrations, migrations). Rules for adapting the process are in [4. Project types](#4-project-types-and-tailoring).
-- **Team model:** one cross-functional team of **4–8 people** per project.
+- **Applies to:** all projects — internal products, client projects, and any other kind (prototypes, integrations, migrations) — and every service we sell: apps, SaaS, custom software, connected (IoT) products and firmware, AI agents, launch and brand work, support and takeovers. Each project picks a **type** and a **delivery track**: [4. Project types and tailoring](#4-project-types-and-tailoring).
+- **Method:** **Agile** for every track, adapted to the kind of work ([§6.1](#61-our-methodology-by-delivery-track)).
+- **Team model:** one cross-functional team of **4–8 people**. A small company team that runs several projects at once works on **one sprint and one board** ([§6.6 rule 10](#66-working-rhythm-rules)).
+- **Why it exists:** every rule added since November 2026 is linked to a real problem from our own projects and retrospectives ([§4.2](#42-why-these-rules-exist-problems-they-solve)).
 - **Technology:** **stack-neutral.** The guide fixes the *process*, not the tools. Tools named in the guide are **examples**; each project records its real choices in an ADR (Architecture Decision Record).
 - **Status:** living document. Change it through a pull request (see [9. Changing this guide](#9-changing-this-guide)).
-- **Last reviewed:** 2026-11-27 · **Next full-guide review due:** 2027-05-27 · External standards and their editions: [§10](#10-standards-this-guide-follows) · Every phase file shows its own review date ([9.1 Review schedule](#91-review-schedule), [review log](CHANGELOG.md)).
+- **Last reviewed:** 2026-11-28 · **Next full-guide review due:** 2027-05-28 · External standards and their editions: [§10](#10-standards-this-guide-follows) · Every phase file shows its own review date ([9.1 Review schedule](#91-review-schedule), [review log](CHANGELOG.md)).
 
 > **Must / should / may:** in the "LumenVenture Standard" sections, **must** = required on every project; **should** = the default, skip only with a written reason (ADR or project brief); **may** = optional, use when it helps.
 
@@ -42,7 +44,7 @@ Each phase file has the same shape:
 | # | Step | Owner | Output | Template |
 |---|------|-------|--------|----------|
 | 1 | Name the **Product Owner**, **Tech Lead** and **Delivery Lead** (and any optional roles, [§3.2](#32-optional-and-shared-roles)); book the kickoff | Sponsor | Named roles and backups in `docs/team-roles.md` | [team-roles.md](01-Planning/templates/team-roles.md) |
-| 2 | Pick the **project type(s)** and tailoring level | Delivery Lead + Product Owner | Recorded in the project brief | [§4](#4-project-types-and-tailoring) |
+| 2 | Pick the **project type**, the **delivery track(s)** and the tailoring level; internal products first pass **idea validation** | Delivery Lead + Product Owner | Recorded in the project brief | [§4](#4-project-types-and-tailoring), [idea-validation.md](01-Planning/templates/idea-validation.md) |
 | 2a | **Client projects: run Client Discovery** — discovery meeting, same-day summaries, prototype, MVP workshop, client PRD (paid discovery phase if the idea is vague) | Product Owner + Delivery Lead | `docs/discovery/` | [Planning §8.6](01-Planning/Planning.md#86-client-discovery-client-projects) |
 | 3 | Write the **project brief**: vision, scope, stakeholders, success metrics, the 8 planning factors, feasibility | Product Owner | `docs/project-brief.md` | [project-brief.md](01-Planning/templates/project-brief.md) |
 | 4 | Fill in the **stakeholder register**; start the **risk register** | Product Owner / Delivery Lead | `docs/stakeholder-register.md`, `docs/risk-register.md` | [stakeholder-register.md](01-Planning/templates/stakeholder-register.md), [risk-register.md](01-Planning/templates/risk-register.md) |
@@ -146,16 +148,22 @@ flowchart TD
 6. **should** — Nobody holds more than **3 hats** on one project (Developer work, on-call duty and backup duty do **not** count as hats), and nobody is planned for more than 100% of their time across projects. The PO and DL should be different people where the team size allows.
 7. **should** — Projects with end-user screens have a **UX / product designer** (shared is fine) for at least part of every sprint in which screens change; if none, `docs/team-roles.md` records the reason and the fallback from §3.2. Client projects that integrate several client systems name a **solution architect** (may be the TL) in `docs/team-roles.md`.
 8. **should** — If a client or another team says **"squad"**, we map it to our project team: a squad is a small cross-skilled Agile team, **similar to a Scrum team** (the word comes from the Spotify way of working). It has **10 or fewer people in total** (our default: 4–8) and **no extra "squad leader" role**: the **PO** sets priorities, the **TL** guides technical decisions and the **DL** coaches the process. The Scrum Guide's "10 or fewer" is a **ceiling, not a target**; 4–8 stays our default. Tribes, chapters and guilds are not needed for one team.
+9. **must** — When one person is both the **designer** and the **PO or DL** on the same project, this is written in the risk register with a mitigation: a second person reviews designs, design work gets its own planned capacity, and design briefs ([Design rule 27](02-Design/Design.md#64-rules)) are used so the work can be handed over. A designer who joins mid-project gets a **hand-over session** (the brief, the design system, past decisions and why designs were rejected) before their first task. Owner: Delivery Lead.
 
 ---
 
 ## 4. Project Types and Tailoring
 
-Every project picks **one base type** and adds **"Regulated data"** if it applies. When a project fits no type ("other"), use the **closest** one and write the differences in the project brief.
+Every project records **two choices** in the project brief §10:
+
+1. **Type: who it is for**: internal product, client project or prototype, plus **"Regulated data"** if it applies (table below). The type sets sign-offs, contracts and release approvals.
+2. **Delivery track: what kind of work** (§4.1). The track sets the method and the extra outputs. A project may use **several tracks** (for example a connected device with a set-up app = tracks B + A); each part follows its own track, on one board.
+
+When a project fits no type or track ("other"), use the **closest** one and write the differences in the project brief.
 
 | Topic | **Internal product** | **Client project** | **Prototype / proof of concept** | **+ Regulated data** (add-on) |
 |-------|----------------------|--------------------|----------------------------------|-------------------------------|
-| **Requirements** | Light brief + backlog | **Client discovery** + brief + **client PRD and signed scope** (SOW — Statement of Work) + backlog | One-page goal + questions to answer | **Full SRS** (ISO/IEC/IEEE 29148 style) + traceability matrix |
+| **Requirements** | **Idea validation** first ([Planning §8.7](01-Planning/Planning.md#87-validate-before-we-build)), then light brief + backlog | **Client discovery** + brief + **client PRD and signed scope** (SOW — Statement of Work) + backlog | One-page goal + questions to answer | **Full SRS** (ISO/IEC/IEEE 29148 style) + traceability matrix |
 | **Sign-offs** | PO accepts | **Client** signs G1, G2 (major), UAT, release | PO decides keep / throw away | Formal records kept for audit |
 | **Changes to scope** | Backlog reorder | **Change request** with cost and time impact | Free | Change request + impact on compliance |
 | **Design** | Design doc for significant features | Design doc + client review of HLD | Spike notes only | + DPIA (Data Protection Impact Assessment) where GDPR applies |
@@ -164,6 +172,36 @@ Every project picks **one base type** and adds **"Regulated data"** if it applie
 | **Maintenance** | Team on call | As agreed in the **support agreement / SLA** | None | + audit logs, access reviews, retention rules |
 
 > **Prototype rule (must):** a prototype that becomes a real product must pass **G1–G2** and the full Development and Testing standards **before** real users or real data touch it.
+
+### 4.1 Delivery tracks (by service)
+
+| Track | Services it covers | Method ([§6.1](#61-our-methodology-by-delivery-track)) | Extra outputs on top of the project type | Main rules |
+|-------|--------------------|--------------------------------|-------------------------------------------|------------|
+| **A. Product build** | Mobile apps, SaaS products, custom software (portals, internal tools, dashboards), the product part of a startup launch | Scrum, 2-week sprints, **design one sprint ahead** | Design brief per feature, design-system ADR, sprint delivery note to the client | [Design §4.9](02-Design/Design.md#49-uiux-design-and-prototypes), Design rules 27–30 |
+| **B. Connected product (IoT)** | Device firmware, device set-up apps (for example Bluetooth pairing), cloud connection (for example AWS IoT Core), hardware review | Scrum for firmware, cloud and app **inside hardware milestones**; one story covers device → cloud → app; demo on a **real device** every sprint | Device-to-cloud-to-app design, hardware-in-the-loop test rig, over-the-air (OTA) update plan, installation checklist | [Design §4.15](02-Design/Design.md#415-connected-products-device-to-cloud-to-app), [Development §4.16](03-Development/Development.md#416-firmware-and-device-code), [Testing §4.17](04-Testing/Testing.md#417-testing-connected-devices-and-ai-features), [Deployment §4.11](05-Deployment/Deployment.md#411-releasing-firmware-and-mobile-apps) |
+| **C. AI agents and automation** | AI agents, automated workflows, AI search and chat over company data, AI features inside tracks A and B | A **time-boxed AI pilot** (one workflow, a few weeks, a clear before/after result), then Scrum; **evals written before the build** | Eval set with a pass threshold, list of actions that need human approval, AI cost budget | Development rule 33, Testing rule 23, [Maintenance §4.11](06-Maintenance/Maintenance.md#411-using-ai-in-maintenance) |
+| **D. Launch and brand** | Brand and logo, launch website, first social media set-up; website refresh or rebuild | **Phased Kanban**: brand → website → launch, with a client sign-off between phases | Design brief per phase, sprint delivery note per phase, go-live checklist for the website | Design rules 27–28 |
+| **E. Support, takeover and small jobs** | Maintenance and support retainers, taking over a product from another vendor, cloud cost work, fixed-price fixes | **Kanban lane** with a WIP limit and response-time targets; a takeover starts with a **fixed-length audit sprint** | Takeover audit; per job: ticket with acceptance criteria and before/after evidence | [Maintenance §4.13](06-Maintenance/Maintenance.md#413-taking-over-a-product-from-another-vendor), Maintenance rules 21–23 |
+
+### 4.2 Why these rules exist: problems they solve
+
+The guide is only useful if it stops the problems we have actually had. Each row is a problem seen in our past projects or retrospectives, and the rules that now prevent it. **When a retrospective finds a new problem, add a row here and the rule that fixes it** (§9).
+
+| # | Problem we had | Rules that fix it |
+|---|----------------|-------------------|
+| P1 | Development started before designs were ready; UI was built from text or spoken instructions, then rebuilt | [§6.6](#66-working-rhythm-rules) rule 11; [Planning rule 25](01-Planning/Planning.md#84-rules) (Definition of Ready); Design rule 30 |
+| P2 | Designs were rejected with no written reason; designers and developers waited | Design rules 27–28; [design brief](02-Design/templates/design-brief.md) |
+| P3 | Limits of the component library were found late; the design language was lost over time; UI quality too basic | Design rules 22 and 29; Testing rule 20; visual quality bar (Planning rule 27) |
+| P4 | One person held two heavy roles (product + design); design work was not handed over | [§3.3](#33-role-rules) rule 9 |
+| P5 | Features were built "silently"; QA did not know what had changed | [§6.6](#66-working-rhythm-rules) rule 12; Development rule 31 |
+| P6 | The technical approach was not planned before building a feature or project | Planning rule 25 (tech note in the Definition of Ready); [Design §6.3](02-Design/Design.md#63-gate-g2--architecture-approved) (Gate G2) |
+| P7 | The user's real pain point, other decision-makers and the client's visual expectations were missed | Planning rules 26–27 |
+| P8 | No per-sprint delivery note, user guide, release notes or closure report for the client | Deployment rule 27; [§7.2](#72-documentation-rules) rule 9; Maintenance rule 22 |
+| P9 | Internal product ideas were built without validation, then abandoned | Planning rule 28; [idea validation](01-Planning/templates/idea-validation.md) |
+| P10 | Projects stopped without a decision or a closure; work was lost | [§6.6](#66-working-rhythm-rules) rule 13; Maintenance rule 22 |
+| P11 | Research and design explorations were not stored where others could find them | Maintenance rule 24 |
+| P12 | Several projects ran at once and the team was out of sync | [§6.6](#66-working-rhythm-rules) rule 10 |
+| P13 | Firmware, takeovers of other vendors' systems and AI work had no process | Tracks B, C and E (§4.1) |
 
 ---
 
@@ -194,17 +232,39 @@ Every project picks **one base type** and adds **"Regulated data"** if it applie
 
 ![One LumenVenture sprint: Scrum events, daily scrums, continuous releases through the pipeline, and a Kanban lane for support work](images/sdlc-modern-sprint-cadence.svg)
 
-### 6.1 Our methodology by project type
+### 6.1 Our methodology by delivery track
 
-> **Default:** **Scrum** (as in the Scrum Guide 2020) with **2-week sprints**, plus the engineering practices in this guide (TDD, CI/CD, trunk-based development, feature flags). It is **iterative** (we repeat and improve) and **incremental** (each sprint adds a working piece). Record any change from the default in the project brief §10.
+> **Default:** **Scrum** (as in the Scrum Guide 2020) with **2-week sprints**, plus the engineering practices in this guide (TDD, CI/CD, trunk-based development, feature flags). It is **iterative** (we repeat and improve) and **incremental** (each sprint adds a working piece). Every track below is **Agile**; they differ in how work flows. Record the track and any change from the default in the project brief §10.
 
-| Project type | How we run it | Release to users |
-|--------------|---------------|------------------|
-| **Internal product** | Scrum, 2-week sprints; forecasts from measured throughput | **Continuous Deployment** — any time the pipeline is green |
-| **Client project** | **Paid discovery** (when the idea is vague) → Scrum; the client joins **every Sprint Review**; contract model from [Planning §4.17](01-Planning/Planning.md#417-forecasting-and-budgeting-fix-time-and-cost-flex-scope) | **Continuous Delivery** with a client approval gate |
-| **Prototype** | **Kanban** or 1-week sprints, time-boxed, answering named questions | Demo environment only — never real users or real data |
-| **After go-live** (support and maintenance) | A **Kanban lane** with a WIP limit, in the **same backlog** as features ([6.3](#63-kanban-for-continuous-work)) | Hotfixes through the normal pipeline |
+| Track or type | How we run it | Release to users |
+|---------------|---------------|------------------|
+| **A. Product build** | Scrum, 2-week sprints, **dual-track**: discovery and design for sprint N+1 happen **during** sprint N, so every UI story starts with an approved design | Internal: **Continuous Deployment**. Client: **Continuous Delivery** with a client approval gate. Mobile: staged store rollout ([Deployment rule 26](05-Deployment/Deployment.md#64-rules)) |
+| **B. Connected product (IoT)** | Scrum for firmware, cloud and app. Hardware changes slowly, so sprints sit **inside hardware milestones** (for example prototype → engineering validation (EVT) → design validation (DVT) → production validation (PVT)). Each sprint ends with a demo **on a real device**; "done" includes testing on the target hardware | Firmware: signed, **staged over-the-air rollout** with automatic stop and rollback ([Deployment rule 25](05-Deployment/Deployment.md#64-rules)) |
+| **C. AI agents and automation** | **AI pilot** first: one workflow, time-boxed (a few weeks), a measured before/after result and an eval set agreed with the client. Then Scrum as track A | Behind a feature flag; key actions need a **person's approval** until evals and monitoring show it is safe |
+| **D. Launch and brand** | **Phased Kanban** with a WIP limit: brand → website → launch. Each phase has a design brief and ends with the client's written sign-off | Website go-live checklist; launch on an agreed date |
+| **E. Support, takeover and small jobs** | **Kanban lane** with a WIP limit and response-time targets ([6.3](#63-kanban-for-continuous-work)). A takeover starts with a **1–2 week audit sprint** ([Maintenance §4.13](06-Maintenance/Maintenance.md#413-taking-over-a-product-from-another-vendor)) | Fixes and hotfixes through the normal pipeline |
+| **Client project** (type) | **Paid discovery** (when the idea is vague) → the track's method; the client joins **every Sprint Review** and receives a **sprint delivery note**; contract model from [Planning §4.17](01-Planning/Planning.md#417-forecasting-and-budgeting-fix-time-and-cost-flex-scope) | Client approval gate |
+| **Internal product** (type) | **Idea validation** first (build → measure → learn, [Planning §8.7](01-Planning/Planning.md#87-validate-before-we-build)); only a validated idea gets sprint capacity, with stop criteria | Continuous Deployment |
+| **Prototype** (type) | **Kanban** or 1-week sprints, time-boxed, answering named questions | Demo environment only — never real users or real data |
+| **After go-live** (any track) | A **Kanban lane** with a WIP limit, in the **same backlog** as features ([6.3](#63-kanban-for-continuous-work)) | Hotfixes through the normal pipeline |
 | **+ Regulated data** (add-on) | Scrum **plus V-model discipline**: every requirement traced to a test, signed test records, run as **one small V per increment** ([Testing §4.12](04-Testing/Testing.md#412-the-v-model-idea-each-design-artifact-gets-its-test)) | Approval gate + change record |
+
+**One team, one sprint, one board.** A small team works on several projects at once. Separate plans per project hide work from each other and from QA. So the whole team runs **one shared 2-week sprint** with **one board** (a column or label per project). In Sprint Planning the team first splits its **capacity by project** (for example 50% project X, 30% project Y, 20% support lane), then picks stories per project. Each project still has its own Sprint Goal, Sprint Review with its client, and delivery note.
+
+```mermaid
+flowchart TD
+    subgraph N["Sprint N"]
+        D1["Design and discovery for sprint N+1: brief, review, approve"]
+        B1["Build and test stories approved in sprint N-1"]
+    end
+    subgraph N1["Sprint N+1"]
+        D2["Design for sprint N+2"]
+        B2["Build and test stories approved in sprint N"]
+    end
+    D1 -->|approved designs, Ready for dev| B2
+    B1 --> R1["Sprint Review and delivery note"]
+    B2 --> R2["Sprint Review and delivery note"]
+```
 
 ![Methodology by project type, and the anti-patterns we never accept](images/sdlc-modern-methodology-by-project-type.svg)
 
@@ -273,6 +333,11 @@ flowchart TD
 7. **must** (prototypes: **should**) — Every project has a written **working agreement** ([template](01-Planning/templates/working-agreement.md)) made by the whole team at kickoff. It is reviewed in a Sprint Retrospective at least every **3 sprints** (Kanban teams: monthly) and when a person joins.
 8. **should** — The team runs a short **team health check** (the five questions in the working agreement) about every **3 sprints**, discusses the two lowest scores in the retrospective and turns them into an improvement action. Scores are collected **anonymously** (a poll tool or paper slips) and only the team average and spread are discussed; they are **never used to rate individuals**.
 9. **should** — **Knowledge is shared on purpose:** every important part of the system has at least **two people** who can change and operate it (**bus factor ≥ 2**); demos or tech talks are recorded for newcomers **when the content allows** (never record production data, secrets, personal data or client-confidential content; keep recordings in the project's access-controlled space); every new joiner gets a **buddy** and an onboarding checklist in their first week. A **monthly shared-learning hour** (a guild habit) is a good way to spread skills across teams (**may**). Parts with only one expert are listed in the working agreement with a plan to fix it.
+10. **must** — A team that works on more than one project runs **one shared sprint and one board** for all of them (§6.1). Sprint Planning records the **capacity per project** (and for the support lane); nobody is planned above 100%. A request that skips the board ("can you quickly…") goes onto the board first. Owner: Delivery Lead.
+11. **must** on tracks A and D, **should** on others — **Design runs one sprint ahead** of development (dual-track). A story with screens enters a sprint only when its design is **Approved** and linked ([Design rule 30](02-Design/Design.md#64-rules)). If a design is late, the team builds other ready work; it does **not** guess the design. Owner: Product Owner.
+12. **must** — **No work without a ticket**, and **no silent features**: every change (feature, fix, experiment) has a ticket on the board **before** work starts. QA joins backlog refinement for every story (product, development and QA check it together, sometimes called "three amigos"), and QA is told — by the board or an automatic message — when a story reaches staging. Owner: Delivery Lead; QA Engineer checks it.
+13. **must** — A project, phase or internal product that **stops or pauses** gets a written decision from the Sponsor and a **closure report** ([Maintenance rule 22](06-Maintenance/Maintenance.md#65-rules)) within 2 weeks. Work is never left to fade out. Owner: Delivery Lead.
+14. **should** — The Sprint Retrospective checks the problem table in [§4.2](#42-why-these-rules-exist-problems-they-solve): is an old problem coming back? A problem that appears in **two retrospectives** becomes a pull request to this guide (a new or stronger rule). Owner: Delivery Lead.
 
 ---
 
@@ -291,13 +356,18 @@ Every project keeps its documents **in its Git repository**, next to the code, s
 │   ├── risk-register.md          # Planning
 │   ├── change-requests/          # Planning (client projects)
 │   ├── discovery/                # Planning (client projects): meetings/, assumptions log, MVP workshop, client-prd.md
+│   ├── idea-validation.md        # Planning (internal products, §4)
 │   ├── design/                   # Design docs (one per significant feature)
+│   │   └── briefs/               # Design briefs with review log (Design rule 27)
 │   ├── adr/                      # 0001-short-title.md, 0002-...
 │   ├── threat-model.md           # Design
 │   ├── versioning-policy.md      # Development (Sprint 0)
 │   ├── test-strategy.md          # Testing
 │   ├── test-cases/               # Testing: written test cases for manual, UAT and OAT tests (client and regulated projects)
 │   ├── releases/                 # Release checklists / notes
+│   ├── delivery-notes/           # Sprint delivery notes sent to the client (Deployment rule 27)
+│   ├── takeover/                 # Takeover audit (track E, Maintenance rule 21)
+│   ├── closure-report.md         # When the project or a phase ends (Maintenance rule 22)
 │   ├── slo.md                    # Maintenance
 │   ├── runbooks/                 # One per alert
 │   ├── sop/                      # SOPs: repeated, project-specific procedures (§7.2)
@@ -370,6 +440,8 @@ flowchart TD
 | Planning | [assumptions-and-decisions-log.md](01-Planning/templates/assumptions-and-decisions-log.md) | Living list of assumptions and agreed decisions |
 | Planning | [mvp-workshop.md](01-Planning/templates/mvp-workshop.md) | MoSCoW workshop to agree the MVP |
 | Planning | [client-prd.md](01-Planning/templates/client-prd.md) | Plain-language PRD the client approves |
+| Planning | [idea-validation.md](01-Planning/templates/idea-validation.md) | Validate an internal product idea before it gets build time; stop criteria |
+| Design | [design-brief.md](02-Design/templates/design-brief.md) | What a design must achieve, one approver, written review log, hand-off to development |
 | Design | [design-doc.md](02-Design/templates/design-doc.md) | Design / RFC for a system or significant feature |
 | Design | [adr.md](02-Design/templates/adr.md) | One architecture decision |
 | Design | [threat-model.md](02-Design/templates/threat-model.md) | STRIDE threat model |
@@ -385,6 +457,9 @@ flowchart TD
 | Testing | [test-case.md](04-Testing/templates/test-case.md) | Written test cases and execution record for tests that cannot be automated (UAT, OAT, regulated) |
 | Deployment | [release-checklist.md](05-Deployment/templates/release-checklist.md) | Gate G4 for each release |
 | Deployment | [pipeline-checklist.md](05-Deployment/templates/pipeline-checklist.md) | Setting up CI/CD and environments |
+| Deployment | [sprint-delivery-note.md](05-Deployment/templates/sprint-delivery-note.md) | What the client can use after each sprint, how to use it, what we need from them |
+| Maintenance | [takeover-audit.md](06-Maintenance/templates/takeover-audit.md) | Taking over a product from another vendor: access, rebuild, baseline, risk report |
+| Maintenance | [project-closure.md](06-Maintenance/templates/project-closure.md) | Closing a project or phase (delivered, paused or stopped): hand-over and lessons |
 | Maintenance | [slo.md](06-Maintenance/templates/slo.md) | SLIs, SLOs, error budget |
 | Maintenance | [runbook.md](06-Maintenance/templates/runbook.md) | One per alert |
 | Maintenance | [postmortem.md](06-Maintenance/templates/postmortem.md) | After SEV1/SEV2 incidents |
@@ -506,7 +581,9 @@ The external standards, laws and specifications this guide relies on. **Review o
 | **NIS2** (Directive (EU) 2022/2555) | In force; Member States had to transpose by 17 Oct 2024; national laws differ | Planning, Maintenance (client duties) | 2026-11-27 (European Commission NIS2 page; national status not checked) |
 | **NIST SP 800-63-4** (digital identity) / OWASP MFA Cheat Sheet | 800-63-4 final July 2025 (supersedes 800-63-3); passkeys (syncable authenticators) covered in 63B-4 | Design | 2026-11-27 |
 | **CISA KEV** catalog / **EPSS** (FIRST) | KEV = vulnerabilities exploited in the wild, a recommended input to prioritization; EPSS = probability of exploitation | Maintenance | 2026-11-27 |
-| **EU Cyber Resilience Act** | Reporting duties since **11 Sep 2026**; full application **11 Dec 2027** | Deployment, Maintenance | 2026-11-27 (European Commission page: reporting from 11 Sep 2026, main obligations from 11 Dec 2027; the Commission published guidance on 27 July 2026) |
+| **ETSI EN 303 645** (cyber security baseline for consumer IoT) | **V3.1.3** (published 2024) — for example no universal default passwords, a way to report vulnerabilities, secure software updates | Design (track B connected products) | 2026-11-28 (etsi.org deliverables folder: latest published version 03.01.03) |
+| **App store staged releases** | Apple App Store **phased release**: 7 days (1% → 2% → 5% → 10% → 20% → 50% → 100%), pause up to 30 days. Google Play **staged rollout**: a percentage of users you raise over time; updates only, not the first release | Deployment (mobile apps) | 2026-11-28 (developer.apple.com and Play Console Help pages read) |
+| **EU Cyber Resilience Act** | Reporting duties since **11 Sep 2026**; full application **11 Dec 2027**. Applies to products with digital elements, including connected devices and their software | Design (track B), Deployment, Maintenance | 2026-11-27 (European Commission page: reporting from 11 Sep 2026, main obligations from 11 Dec 2027; the Commission published guidance on 27 July 2026) |
 | **OpenAPI** | **3.2.0** (19 Sept 2025) and patch **3.2.1** (10 Sept 2026); 3.1 still widely supported | Design | 2026-11-27 |
 | **RFC 9457** Problem Details / **RFC 9745** Deprecation / **RFC 8594** Sunset / **RFC 9116** security.txt | Published RFCs | Design, Development, Maintenance | 2026-11-27 (all four RFC pages read: 9457 July 2023, 9745 March 2025, 8594 May 2019, 9116 April 2022) |
 | **DORA metrics** | **Five** metrics: change lead time, deployment frequency, failed deployment recovery time, change fail rate, deployment rework rate | Deployment, Maintenance | 2026-11-27 (dora.dev: five-metric model; MTTR replaced by failed deployment recovery time) |

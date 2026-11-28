@@ -2,7 +2,7 @@
 
 **SDLC series — Phase 5 of 6.** How professional backend teams do **Deployment** today: the core tasks, the Waterfall way vs. the modern way, and the industry practices modern teams add.
 
-> **Last reviewed:** 2026-11-27 · **Next review due:** 2027-05-27 · **Review owner:** Tech Lead · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
+> **Last reviewed:** 2026-11-28 · **Next review due:** 2027-05-28 · **Review owner:** Tech Lead · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
 
 [← Testing](../04-Testing/Testing.md) · [Guide README](../README.md) · [Maintenance →](../06-Maintenance/Maintenance.md)
 
@@ -352,6 +352,27 @@ The **DORA (DevOps Research and Assessment)** research program measures software
   - Upload **source maps** to the error-tracking tool instead of serving them to every visitor, so errors stay readable without publishing your source.
 - **Check from outside:** open the site from a network that is not the office or VPN, and run the checks above against the real domain. Many problems only appear at the edge.
 
+### 4.11 Releasing firmware and mobile apps
+
+A web service can be rolled back in minutes. A device in a field or an app on a user's phone cannot, so these releases go out **in stages**.
+
+**Firmware over the air (OTA), track B:**
+
+1. **Build and sign in CI** ([Development rule 32](../03-Development/Development.md#64-rules)). The device checks the signature and refuses an unsigned or wrong image.
+2. **Bench first:** the release candidate passes the hardware-in-the-loop rig and the installation tests ([Testing §4.17](../04-Testing/Testing.md#417-testing-connected-devices-and-ai-features)).
+3. **Staged rollout:** our own test devices → a small group of real devices (for example 5%, chosen across sites and hardware versions) → larger groups → all. IoT platforms support this directly; for example AWS IoT Jobs has **rollout** settings (how fast devices get the job) and **abort** settings (stop when too many fail).
+4. **Automatic stop:** set the abort rule before starting (for example "stop if more than 2% of updates fail or devices do not come back online within 30 minutes").
+5. **Fallback on the device:** an A/B partition or a similar method boots the last working image when the new one fails its start-up check. An update must never leave a device that cannot be reached ("bricked") — including after a power cut **during** the update.
+6. **Tell the client** which devices got which version, and when (the sprint delivery note or release notes).
+
+**Mobile apps (track A):**
+
+- Use the stores' staged releases: Apple App Store **phased release** (over 7 days, from 1% to 100% of users with automatic updates, can be paused) and Google Play **staged rollout** (a percentage of users you raise over time; for updates, not the first release).
+- Watch crash-free sessions and reviews at each step; pause or halt the rollout when they get worse. Because users keep old versions, the back end must keep supporting **at least the previous app version** (Design §4.4.1).
+- Store review can take time: plan the submission date in the sprint, not on the day the client expects the release.
+
+**After every sprint, for the client:** the **sprint delivery note** ([template](templates/sprint-delivery-note.md)) tells the client, in plain words, what they can use now, how to use it, what is still waiting for their approval, and what we need from them. It shows the value of each sprint, so the client never has to ask "what did you do?".
+
 ## 5. Deployment is "done" when...
 
 - [ ] The change reached production through the **pipeline** (no manual steps), using the **same image** that passed staging.
@@ -431,6 +452,9 @@ The **DORA (DevOps Research and Assessment)** research program measures software
 22. **should** — The **pull-request pipeline** (lint, type check, unit and affected tests, build) targets about **10 minutes**, with a ceiling of **15** (the XP guideline in Martin Fowler's article on Continuous Integration; he notes that most modern projects reach it). The **full suite** on `main` and the nightly runs ([Testing rule 14](../04-Testing/Testing.md#64-rules)) may take longer and run asynchronously. If the pull-request pipeline stays over 15 minutes for two weeks, the Tech Lead schedules a speed-up. A red build on `main` is **fixed or reverted within 1 hour** by the author of the breaking change (the Tech Lead is the backstop).
 23. **should** (**may** on prototypes) — Pin the explicit **target CPU architecture** in the CI build step (default: your single production target, typically `linux/amd64`, using `--platform`; add multi-platform `linux/amd64,linux/arm64` builds only when production deploys to both) instead of relying on the CI runner's default architecture (§4.1; Rule 1 already forbids shipping local laptop builds). Owner: Tech Lead.
 24. **must** on client projects, **should** on internal projects and prototypes — Third-party GitHub Actions in production pipelines are **pinned to a full-length commit SHA** (a tag such as `@v7` can be moved), with Dependabot or Renovate opening update pull requests; the `@v7` tags in the examples here are for readability (GitHub Actions secure-use guide). Owner: Tech Lead.
+25. **must** on track B — Firmware reaches devices only by a **signed, staged OTA rollout** (§4.11) with an **abort rule set before it starts**, a device-side **fallback** to the last working image, and a fleet check after each stage. Owner: Tech Lead.
+26. **must** for mobile apps on client and internal projects — Store releases use **phased release** (App Store) or **staged rollout** (Google Play), and the back end supports at least the previous app version. Owner: Tech Lead.
+27. **must** on client projects, **should** on internal products — After every Sprint Review, the PO sends a **sprint delivery note** ([template](templates/sprint-delivery-note.md)) to the client and saves it in `docs/delivery-notes/`; user-guide pages for the delivered features are updated in the same sprint ([README §7.2](../README.md#72-documentation-rules) rule 9). Owner: Product Owner.
 
 ### 6.5 Templates
 
@@ -438,6 +462,7 @@ The **DORA (DevOps Research and Assessment)** research program measures software
 |----------|---------|
 | [release-checklist.md](templates/release-checklist.md) | `docs/releases/<version>.md` or the release ticket |
 | [pipeline-checklist.md](templates/pipeline-checklist.md) | Use once at project start (with the repo setup checklist) |
+| [sprint-delivery-note.md](templates/sprint-delivery-note.md) | Email to the client after each Sprint Review + `docs/delivery-notes/sprint-<n>.md` |
 
 ---
 

@@ -2,7 +2,7 @@
 
 **SDLC series — Phase 4 of 6.** How professional backend teams do **Testing** today: the core tasks, the Waterfall way vs. the modern way, and the industry practices modern teams add.
 
-> **Last reviewed:** 2026-11-26 · **Next review due:** 2027-05-26 · **Review owner:** QA Engineer · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
+> **Last reviewed:** 2026-11-28 · **Next review due:** 2027-05-28 · **Review owner:** QA Engineer · [Review rule](../README.md#91-review-schedule) · [Review log](../CHANGELOG.md)
 
 [← Development](../03-Development/Development.md) · [Guide README](../README.md) · [Deployment →](../05-Deployment/Deployment.md)
 
@@ -484,6 +484,29 @@ on:
 - **Performance:** a **lab** test (Lighthouse or similar) with a budget in CI for key pages, and **field** data (real users) after release ([Maintenance 4.12](../06-Maintenance/Maintenance.md#412-front-end-monitoring-and-upgrades)). Targets at the 75th percentile: Largest Contentful Paint (LCP) ≤ 2.5 s, Interaction to Next Paint (INP) ≤ 200 ms, Cumulative Layout Shift (CLS) ≤ 0.1.
 - **Security:** include XSS (Cross-Site Scripting) cases (script text in every input that is shown back) and check that no secret is in the build output.
 - **Visual regression** (see [4.2](#42-common-test-types-and-when-they-run)) catches unwanted style changes.
+- **Check against the approved design.** Before a UI story is done, QA (or the designer) compares the built screen with the **Approved** design in its brief: all states (empty, loading, error, success), spacing, text and behavior on a phone and on desktop. Differences are fixed or agreed with the PO — never silently accepted (rule 20).
+
+### 4.17 Testing connected devices and AI features
+
+**Connected devices (track B).** Test in layers, from fast and cheap to slow and real:
+
+| Layer | What runs | When |
+|-------|-----------|------|
+| **Host unit tests** | Firmware logic on a normal computer, hardware faked behind the HAL ([Development §4.16](../03-Development/Development.md#416-firmware-and-device-code)) | Every PR, in CI |
+| **Device simulator** | A program that behaves like the device (sends telemetry, answers commands, can fail on purpose), so the cloud and app teams can test without hardware | Every PR for cloud and app; shared by the whole team |
+| **Hardware-in-the-loop (HIL) rig** | A real device on the bench, connected to CI: CI flashes the build, runs scripted tests, reads the results | Every release candidate (more often when firmware changes) |
+| **Field and installation tests** | The full path an installer follows: unbox → pair with the app → online in the cloud → first report. Plus **bad conditions**: no network for hours, power cut (also **during an update**), weak Bluetooth, a second device nearby | Before each firmware release and each new hardware milestone |
+
+- "Done" for a firmware story includes **running on the target hardware**, not only in the simulator.
+- Write down the test set-up (rig wiring, how to flash, test accounts) as an SOP, so anyone in the team can run it.
+- After every OTA rollout stage, check the fleet: devices online, update success rate, new errors ([Deployment §4.11](../05-Deployment/Deployment.md#411-releasing-firmware-and-mobile-apps)).
+
+**AI features (track C).** An AI answer is not exact, so normal pass/fail tests are not enough.
+
+- **Evals** are tests for AI behavior: a set of realistic inputs with expected answers or scoring rules (correct facts, right tool called, safe refusal), scored automatically and, for a sample, by a person.
+- The eval set is written **before** the build ([Development rule 33](../03-Development/Development.md#64-rules)) and grows with every real failure, like a regression test.
+- It includes **attack cases** from the OWASP Top 10 for LLM Applications: prompt injection (also hidden in documents and web pages the agent reads), leaking personal or secret data, and unsafe actions.
+- Run evals in CI on every change to prompts, tools, models or retrieved data, and **before any model upgrade**. A release needs the agreed pass threshold.
 
 ## 5. Testing is "done enough" when... (exit criteria)
 
@@ -563,6 +586,10 @@ The release goes to [G4 in Deployment](../05-Deployment/Deployment.md#6-lumenven
 17. **must** on regulated projects, **should** on client projects — Tests that cannot be automated (UAT scripts, OAT, manual accessibility checks) are written with the [test-case template](templates/test-case.md) **before** the test session, linked to requirement IDs, and the executed record is kept with the release (`docs/releases/`).
 18. **must** on client and regulated projects (and wherever a legal accessibility duty applies), **should** on internal products — UI changes pass an **automated accessibility check in CI** and a **manual keyboard test**; key flows get a **screen-reader check** before each major release (§4.16).
 19. **should** — Key pages have a **performance budget** in CI. The **bundle-size** budget is the reliable part; lab scores (Lighthouse) vary from run to run, so treat them as advice. The **field** Core Web Vitals (Largest Contentful Paint 2.5 s, Interaction to Next Paint 200 ms, Cumulative Layout Shift 0.1) are reviewed after release.
+20. **must** on projects with screens — Before a UI story is done, QA or the designer checks the built screens against the **Approved** design (all states, phone and desktop); differences are fixed or agreed with the PO in the ticket (§4.16). Owner: QA Engineer.
+21. **must** on track B — Firmware is tested in layers (§4.17): host unit tests on every PR, a shared **device simulator** for cloud and app work, a **hardware-in-the-loop rig** for every release candidate, and a story is done only after it runs on the **target hardware**. Owner: QA Engineer, with the Tech Lead for the rig.
+22. **must** on track B — Before each firmware release and each hardware milestone, the **installation path** and **bad conditions** (no network, power cut during an update, weak Bluetooth) are tested and recorded with the [test-case template](templates/test-case.md). Owner: QA Engineer.
+23. **must** on track C and for any AI feature — The **eval set** runs in CI on every change to prompts, tools, models or data sources, and before any model upgrade; it includes prompt-injection and data-leak cases; a release needs the agreed **pass threshold**. Owner: QA Engineer, with the Tech Lead.
 
 ### 6.5 Templates
 
