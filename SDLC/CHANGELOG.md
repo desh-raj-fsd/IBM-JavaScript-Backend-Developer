@@ -3,6 +3,16 @@
 > One entry per review or significant change, **newest first**. Rules: [README §9.1 Review schedule](README.md#91-review-schedule).
 > Each entry lists the date, the files, the reviewers, what changed (or "no changes needed") and the sources checked.
 
+## 2026-11-28 — RACI split by phase and completed
+
+- **Files:** `README.md` (§3.1 only)
+- **Scope:** **structural change** to the RACI, asked for in the README review; no rule changed.
+- **Reviewers:** <Tech Lead>, <Delivery Lead> — *to be filled in when the pull request is approved*
+- **What changed:** §3.1 is now six tables, one per phase (3.1.1 Planning … 3.1.6 Maintenance), each with a link to its phase file. Activities went from 12 to 65: every gate (G1–G5 and the Definition of Ready), every activity in the phase files' owners and required-outputs tables, and every rule with a named owner, including the new track B, C and E work. New **SEC (Security Champion)** column (footnote ⁴). Role names and RACI letters are written in full in every cell (for example "C (Consulted)"); "—" means not involved. Rule links were removed from activity names. Each row has exactly one Accountable, and it matches the owner named in the rule.
+- **Sources checked:** none needed (internal structure; owners taken from the phase files).
+- **Not re-checked:** —
+- **Next review due:** README 2027-05-28 (unchanged).
+
 ## 2026-11-28 — Fit the guide to LumenVenture's services and fix the problems from our own projects
 
 - **Files:** `README.md` (header, §2 step 2, §3.3 rule 9, §4 two choices + new §4.1 delivery tracks + new §4.2 problem table, §6.1 rewritten by track with dual-track and shared-sprint diagram, §6.6 rules 10–14, §7 tree, §8, §10 three rows), `Planning.md` (§4.5, §8.4 rules 25–28, §8.5, §8.6.5, new §8.7), `Design.md` (§4.9 design flow, new §4.15, §6.1, §6.3, rules 27–32, §6.5), `Development.md` (new §4.16, rules 31–33), `Testing.md` (§4.16, new §4.17, rules 20–23), `Deployment.md` (new §4.11, rules 25–27, §6.5), `Maintenance.md` (new §4.13 and §4.14, rules 21–25, §6.6); templates changed: `user-story.md` (Definition of Ready), `project-brief.md` (track, capacity, visual quality bar), `pull_request_template.md` (ticket, design, QA told), `definition-of-done.md`, `service-review.md` (device fleet); **new templates:** `idea-validation.md`, `design-brief.md`, `sprint-delivery-note.md`, `takeover-audit.md`, `project-closure.md`.
