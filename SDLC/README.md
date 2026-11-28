@@ -106,9 +106,10 @@ Details: [Planning](01-Planning/Planning.md).
 | Stakeholder register | I (Informed) | **A/R (Accountable + Responsible)** | C (Consulted) | C (Consulted) | I (Informed) | I (Informed) | — | C (Consulted) |
 | Idea validation for internal products ³ | **A (Accountable)** | R (Responsible) | C (Consulted) | C (Consulted) | C (Consulted) | I (Informed) | I (Informed) | — |
 | Client discovery and client PRD approval (client projects) | I (Informed) | **A/R (Accountable + Responsible)** | R (Responsible) | R (Responsible) | I (Informed) | C (Consulted) | I (Informed) | C (Consulted) |
+| Proposal to the client (client projects) | **A (Accountable)** | R (Responsible) | R (Responsible) | C (Consulted) | — | — | — | C (Consulted) |
 | Signed scope / SOW (Statement of Work) (client projects) | **A (Accountable)** | R (Responsible) | C (Consulted) | C (Consulted) | — | — | — | R (Responsible) |
 | Backlog and priorities | I (Informed) | **A/R (Accountable + Responsible)** | C (Consulted) | C (Consulted) | C (Consulted) | C (Consulted) | C (Consulted) | C (Consulted) |
-| Backlog refinement and Definition of Ready (per story) | — | **A (Accountable)** | C (Consulted) | C (Consulted) | R (Responsible) | R (Responsible) | C (Consulted) | C (Consulted) |
+| Backlog refinement: title, description, acceptance criteria and Definition of Ready (per story) | — | **A (Accountable)** | C (Consulted) | C (Consulted) | R (Responsible) | R (Responsible) | C (Consulted) | C (Consulted) |
 | Non-functional requirements and compliance check (privacy, accessibility, licenses, AI rules) | I (Informed) | **A (Accountable)** | C (Consulted) | R (Responsible) | C (Consulted) | C (Consulted) | R (Responsible) | C (Consulted) |
 | Full SRS (Software Requirements Specification) and traceability matrix (regulated projects) | I (Informed) | **A (Accountable)** | C (Consulted) | R (Responsible) | C (Consulted) | R (Responsible) | C (Consulted) | C (Consulted) |
 | Estimates and forecasts | I (Informed) | C (Consulted) | **A/R (Accountable + Responsible)** | C (Consulted) | R (Responsible) | R (Responsible) | C (Consulted) | I (Informed) |
@@ -458,6 +459,8 @@ Every project keeps its documents **in its Git repository**, next to the code, s
 │   ├── working-agreement.md      # Planning: how the team communicates, reviews, decides (§6.6)
 │   ├── stakeholder-register.md   # Planning
 │   ├── risk-register.md          # Planning
+│   ├── estimate/                 # Planning (client projects): internal estimate per phase (never sent)
+│   ├── sow/                      # Planning (client projects): signed Statement of Work per phase
 │   ├── change-requests/          # Planning (client projects)
 │   ├── discovery/                # Planning (client projects): meetings/, assumptions log, MVP workshop, client-prd.md
 │   ├── idea-validation.md        # Planning (internal products, §4)
@@ -538,6 +541,8 @@ flowchart TD
 | Planning | [risk-register.md](01-Planning/templates/risk-register.md) | Living list of risks |
 | Planning | [user-story.md](01-Planning/templates/user-story.md) | Story + objective, source, priority + acceptance criteria (and EARS rules) + DoR |
 | Planning | [change-request.md](01-Planning/templates/change-request.md) | Scope changes (client and regulated projects) |
+| Planning | [estimate-and-proposal.md](01-Planning/templates/estimate-and-proposal.md) | Effort per epic, team size, cost range (internal) + proposal with price options for the client (client projects) |
+| Planning | [sow.md](01-Planning/templates/sow.md) | Statement of Work: signed scope, deliverables, timeline, price, client inputs, change and acceptance rules (client projects) |
 | Planning | [discovery-proposal.md](01-Planning/templates/discovery-proposal.md) | Offer a paid discovery phase to a client with a vague idea |
 | Planning | [discovery-questions.md](01-Planning/templates/discovery-questions.md) | Question list for the first client discovery meeting |
 | Planning | [meeting-summary.md](01-Planning/templates/meeting-summary.md) | Same-day summary after every client meeting |

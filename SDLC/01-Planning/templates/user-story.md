@@ -11,6 +11,19 @@
 
 **As a** <user/persona>, **I want** <goal>, **so that** <reason>.
 
+## Description
+- **Context:** why this story exists, what happens today (current screen, workflow or workaround), and who is affected.
+- **What changes:** in plain words, what the user will be able to do after this story.
+- **Out of scope for this story:** what it does **not** include (split it into another story if needed).
+- Screenshots or examples of today's behavior (no real personal data).
+
+## Design and technical links
+| Link | Value |
+|------|-------|
+| **Approved design** (stories with screens) | <link to the frame or page, not the whole file> · Design brief: `docs/design/briefs/<feature>.md` · Status: **Ready for dev** (Design rule 30) |
+| **Tech note** (over about 2 days, or new library / device / service) | <link or short note: approach, risks, what to spike> · Checked by Tech Lead: <name, date> |
+| Design doc / ADR / API contract | <links, if any> |
+
 ## Acceptance criteria
 ```gherkin
 Scenario: <happy path>
@@ -32,7 +45,6 @@ Scenario: <error / edge case>
 - Performance / security / accessibility / privacy points that apply to this story — as **numbers**, not words like "fast" or "secure".
 
 ## Notes and links
-- Design doc / ADR / API contract:
 - Dependencies:
 - Assumptions (each with an owner and a date to confirm):
 
@@ -46,7 +58,7 @@ Scenario: <error / edge case>
 - [ ] Dependencies and open questions resolved (or a spike planned)
 - [ ] Design needs known (does it need a design doc / ADR / threat-model update?)
 - [ ] Security and privacy impact considered
-- [ ] **Screens:** design is **Approved** in its design brief and linked here — never "we'll guess and fix later" (Planning rule 25, Design rule 30)
-- [ ] **Over about 2 days, or new library / device / service:** tech note written and checked by the Tech Lead
+- [ ] **Screens:** design is **Approved** in its design brief and linked in "Design and technical links" — never "we'll guess and fix later" (Planning rule 25, Design rule 30)
+- [ ] **Over about 2 days, or new library / device / service:** tech note written, linked in "Design and technical links" and checked by the Tech Lead
 - [ ] **QA reviewed** the acceptance criteria (refinement with product, development and QA)
 - [ ] Inputs available: API keys, client content, test devices or hardware, accounts

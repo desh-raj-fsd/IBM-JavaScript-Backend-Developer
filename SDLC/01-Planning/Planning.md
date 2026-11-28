@@ -570,9 +570,10 @@ flowchart TD
 | Stakeholder register | I (Informed) | **A/R (Accountable + Responsible)** | C (Consulted) | C (Consulted) | I (Informed) | I (Informed) | — | C (Consulted) |
 | Idea validation for internal products ³ | **A (Accountable)** | R (Responsible) | C (Consulted) | C (Consulted) | C (Consulted) | I (Informed) | I (Informed) | — |
 | Client discovery and client PRD approval (client projects) | I (Informed) | **A/R (Accountable + Responsible)** | R (Responsible) | R (Responsible) | I (Informed) | C (Consulted) | I (Informed) | C (Consulted) |
+| Proposal to the client (client projects) | **A (Accountable)** | R (Responsible) | R (Responsible) | C (Consulted) | — | — | — | C (Consulted) |
 | Signed scope / SOW (Statement of Work) (client projects) | **A (Accountable)** | R (Responsible) | C (Consulted) | C (Consulted) | — | — | — | R (Responsible) |
 | Backlog and priorities | I (Informed) | **A/R (Accountable + Responsible)** | C (Consulted) | C (Consulted) | C (Consulted) | C (Consulted) | C (Consulted) | C (Consulted) |
-| Backlog refinement and Definition of Ready (per story) | — | **A (Accountable)** | C (Consulted) | C (Consulted) | R (Responsible) | R (Responsible) | C (Consulted) | C (Consulted) |
+| Backlog refinement: title, description, acceptance criteria and Definition of Ready (per story) | — | **A (Accountable)** | C (Consulted) | C (Consulted) | R (Responsible) | R (Responsible) | C (Consulted) | C (Consulted) |
 | Non-functional requirements and compliance check (privacy, accessibility, licenses, AI rules) | I (Informed) | **A (Accountable)** | C (Consulted) | R (Responsible) | C (Consulted) | C (Consulted) | R (Responsible) | C (Consulted) |
 | Full SRS (Software Requirements Specification) and traceability matrix (regulated projects) | I (Informed) | **A (Accountable)** | C (Consulted) | R (Responsible) | C (Consulted) | R (Responsible) | C (Consulted) | C (Consulted) |
 | Estimates and forecasts | I (Informed) | C (Consulted) | **A/R (Accountable + Responsible)** | C (Consulted) | R (Responsible) | R (Responsible) | C (Consulted) | I (Informed) |
@@ -591,7 +592,8 @@ flowchart TD
 | Project brief ([template](templates/project-brief.md))                                          | **must** | **must**                       | one page **must** | **must**                           |
 | Discovery pack: meeting summaries, assumptions and decisions log, clickable prototype, MVP workshop result (§8.6) | **may** | **must** | **may** | **must** (if client) |
 | Client PRD, approved in writing ([template](templates/client-prd.md)) | — | **must** | — | **must** (if client), plus the full SRS |
-| Signed scope / SOW (Statement of Work)                                                          | —        | **must**                       | —                 | —                                  |
+| Estimate and proposal, accepted by the client ([template](templates/estimate-and-proposal.md)) | —        | **must**                       | —                 | **must** (if client)               |
+| Signed scope / SOW (Statement of Work) ([template](templates/sow.md))                           | —        | **must**                       | —                 | —                                  |
 | Full SRS + traceability matrix                                                                  | —        | **may** (if the contract asks) | —                 | **must**                           |
 | Goals with measurable objectives / key results, with IDs (in the project brief)                  | **must** | **must**                       | **should**        | **must**                           |
 | SyRS (System Requirements Specification) — only if the product includes devices, hardware or operators (§4.15) | **must** if it applies | **must** if it applies | —     | **must** if it applies             |
@@ -656,6 +658,7 @@ flowchart TD
 26. **must** on client projects, **should** on internal products — Discovery interviews **every person who pays for, signs off or will run** the product (not only the first contact), and **observes** the people who do the work in their current system before a new system is proposed (§8.7). They are listed in the stakeholder register. Owner: Product Owner.
 27. **must** on projects with screens — The project brief records the **visual quality bar** (reference products, brand assets, "showcase" or "working tool" level) and the client confirms it before Gate G1. A basic or unstyled UI is **not** acceptable on client work unless the brief says so. Owner: Product Owner, with the designer.
 28. **must** — An **internal product** gets sprint capacity only after **idea validation** ([template](templates/idea-validation.md), §8.7) is decided "go" by the Sponsor. It has one named owner, planned time, a launch plan and stop criteria, which are checked at every Sprint Review. Owner: the idea owner; decision: Sponsor.
+29. **must** on client projects — **No SOW without an accepted proposal.** After the client PRD is approved, the Delivery Lead builds the estimate with the people who will do the work ([template](templates/estimate-and-proposal.md), Part A: effort per epic as ranges, team size and share of time, cost with contingency and third-party costs); the Tech Lead checks it; the **Sponsor approves the price**; the Product Owner sends the proposal (Part B). The SOW copies the accepted option. Owner: Sponsor (price); Delivery Lead (estimate).
 
 ### 8.5 Templates
 
@@ -668,6 +671,8 @@ flowchart TD
 | [risk-register.md](templates/risk-register.md)               | `docs/risk-register.md`             |
 | [user-story.md](templates/user-story.md)                     | Your tracking tool (issue template) |
 | [change-request.md](templates/change-request.md)             | `docs/change-requests/CR-<n>.md`    |
+| [estimate-and-proposal.md](templates/estimate-and-proposal.md) | Part A: `docs/estimate/<phase>.md` (internal) · Part B: send to the client |
+| [sow.md](templates/sow.md) | `docs/sow/<phase>.md` + signed PDF (client projects, one per phase) |
 | [discovery-proposal.md](templates/discovery-proposal.md) | Send to the client (PDF or shared doc) |
 | [discovery-questions.md](templates/discovery-questions.md) | `docs/discovery/discovery-questions.md` |
 | [meeting-summary.md](templates/meeting-summary.md) | Email to the client + `docs/discovery/meetings/<date>-<topic>.md` |
@@ -714,7 +719,8 @@ flowchart TD
 | 3 | **Clickable prototype** of the main screens — show, don't tell | PO + designer/DEV | Prototype link (for example Figma) | — |
 | 4 | **Prototype review + MVP workshop** — client clicks through; sort features with **MoSCoW**; fit the Must list to budget and date | PO (facilitator), TL (sizes) | Agreed MVP feature list + phase 2 list | [mvp-workshop.md](templates/mvp-workshop.md) |
 | 5 | **Write two versions** — client PRD in plain words; first epics and user stories for the team | PO (+ team) | `client-prd.md`, backlog | [client-prd.md](templates/client-prd.md), [user-story.md](templates/user-story.md) |
-| 6 | **Written agreement** — client approves the PRD and the scope / SOW (in/out, assumptions, price, feedback deadline, change rules) → **Gate G1** | Client decision-maker, SP | Signed PRD + SOW | client-prd.md §12, project brief §11 |
+| 5a | **Estimate and proposal** — the team sizes each epic (ranges), shapes the team, builds the cost with contingency; the Tech Lead checks it, the **Sponsor approves the price**; the client gets a proposal with price options | DL (estimate), PO (proposal), TL (checks), SP (price) | Accepted proposal | [estimate-and-proposal.md](templates/estimate-and-proposal.md) |
+| 6 | **Written agreement** — the accepted proposal becomes the **SOW** (in/out, deliverables, timeline, price, client inputs, change and acceptance rules); the client signs it with the approved PRD → **Gate G1** | Client decision-maker, SP | Signed PRD + SOW | [sow.md](templates/sow.md), client-prd.md §12, project brief §11 |
 | 7 | **Build in sprints, Sprint Review with the client every 2 weeks** — working software is the best requirements tool | Team | Sprint Reviews with the client | — |
 | 8 | **Handle changes fairly** — **swap** (same size, no price change) or **change request** (extra cost and time, approved first) | PO + DL | Updated log / CR | [change-request.md](templates/change-request.md) |
 
@@ -729,8 +735,12 @@ flowchart TD
     P --> W["Prototype review and MVP workshop - MoSCoW"]
     W --> PRD["Client PRD in plain words"]
     W --> US["Epics and user stories for the team"]
-    PRD --> A{"Client approves PRD and SOW in writing?"}
-    A -->|no - comments| PRD
+    PRD --> E["Estimate - effort, team, cost range; Sponsor approves price"]
+    E --> PR{"Client accepts the proposal?"}
+    PR -->|no - change scope or option| E
+    PR -->|yes| SOW["SOW written from the accepted proposal"]
+    SOW --> A{"Client signs PRD and SOW?"}
+    A -->|no - comments| SOW
     A -->|yes| G1["Gate G1 - plan approved"]
     G1 --> SP["Sprints with a demo every 2 weeks"]
     SP --> CH{"Client asks for a change?"}

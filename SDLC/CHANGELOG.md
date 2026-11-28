@@ -3,6 +3,36 @@
 > One entry per review or significant change, **newest first**. Rules: [README §9.1 Review schedule](README.md#91-review-schedule).
 > Each entry lists the date, the files, the reviewers, what changed (or "no changes needed") and the sources checked.
 
+## 2026-11-28 — Estimate and proposal before the SOW
+
+- **Files:** new `01-Planning/templates/estimate-and-proposal.md`; `Planning.md` (§8.2 row, §8.4 rule 29, §8.5, §8.6.2 step 5a and diagram, §8.1 RACI row), `README.md` (§3.1.1 RACI row, §7 tree, §8), `templates/sow.md` (intro)
+- **Scope:** **new must rule** (client projects) and new template, asked for in the README review. Needs both guide owners.
+- **Reviewers:** <Sponsor>, <Delivery Lead> — *to be filled in when the pull request is approved*
+- **What changed:** client discovery now runs PRD approved → **estimate** (effort per epic as ranges, team size and share of time, cost with contingency and third-party costs; checked by the Tech Lead; price approved by the Sponsor) → **proposal** with price options → client accepts → **SOW** → Gate G1. Rule 29: no SOW without an accepted proposal. New RACI row "Proposal to the client" (Sponsor Accountable); the "Estimates and forecasts" row is unchanged. A company sales pitch deck stays outside the guide (sales material, before discovery).
+- **Sources checked:** none needed (internal process).
+- **Not re-checked:** the contingency example (10–30%) is our default, not an external figure.
+- **Next review due:** unchanged.
+
+## 2026-11-28 — User story template: description and design links
+
+- **Files:** `01-Planning/templates/user-story.md`; `README.md` and `Planning.md` (one RACI row renamed)
+- **Scope:** **template change**, asked for in the README review; no rule changed.
+- **Reviewers:** <Product Owner>, <QA Engineer> — *to be filled in when the pull request is approved*
+- **What changed:** the user story template has a new **Description** section (context, what changes, out of scope for this story, screenshots) and a **Design and technical links** table (approved design with its brief and status, tech note with the Tech Lead's check, design doc / ADR / API contract). The Definition of Ready items for design and tech note point to it. The RACI row is now "Backlog refinement: title, description, acceptance criteria and Definition of Ready (per story)".
+- **Sources checked:** none needed.
+- **Not re-checked:** —
+- **Next review due:** unchanged.
+
+## 2026-11-28 — SOW template
+
+- **Files:** new `01-Planning/templates/sow.md`; `Planning.md` (§8.2 row, §8.5), `README.md` (§7 tree, §8)
+- **Scope:** **new template**; no rule changed. Planning rule 10 already required a signed scope / SOW on client projects but gave no template.
+- **Reviewers:** <Product Owner>, <Delivery Lead> — *to be filled in when the pull request is approved*
+- **What changed:** the SOW template covers background and goal, in/out of scope, deliverables, timeline as ranges, price and payment schedule, client inputs, change rules (swap or change request), acceptance (UAT, no scope acceptance by silence), ownership of code and accounts, after-go-live support and signatures. It states that legal terms belong in the master agreement and need a qualified review.
+- **Sources checked:** none needed (internal template built from existing rules).
+- **Not re-checked:** —
+- **Next review due:** unchanged.
+
 ## 2026-11-28 — RACI table in every phase file
 
 - **Files:** `README.md` (§3.1 footnotes, §9.2 item 3), `Planning.md` (§8.1), `Design.md`, `Development.md`, `Testing.md`, `Deployment.md`, `Maintenance.md` (§6.1), `tools/check.py`
