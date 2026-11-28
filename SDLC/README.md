@@ -92,24 +92,118 @@ flowchart TD
 
 ### 3.1 Who does what (RACI)
 
-**R** = Responsible (does the work) · **A** = Accountable (owns the result; exactly one) · **C** = Consulted · **I** = Informed
+**R** = Responsible (does the work) · **A** = Accountable (owns the result; exactly one) · **C** = Consulted (asked before deciding) · **I** = Informed (told after) · **—** = not involved
 
-| Activity | SP | PO | DL | TL | DEV | QA | CL |
-|----------|----|----|----|----|-----|----|----|
-| Project brief and scope | C | **A/R** | R | C | I | I | C |
-| Backlog and priorities | I | **A/R** | C | C | C | C | C |
-| Risk register | I | C | **A/R** | R | C | C | I |
-| Architecture and ADRs | I | C | I | **A/R** | R | C | I |
-| Threat model | I | C | I | **A** | R | C | I |
-| Code and code review | — | I | I | **A** | R | C | — |
-| Test strategy and automation | — | C | I | C | R | **A/R** | I |
-| UAT / acceptance | I | **A** | C | C | C | R | R |
-| Release go/no-go (G4) | I | C | C | **A** | C | R | C |
-| Incidents and postmortems | I | I | C | **A** | R | C | I |
-| UX design and usability tests ¹ | — | **A** | I | C | R | C | C |
-| User documentation ² | — | **A** | I | C | R | C | C |
+The table is split by **SDLC phase**, in the order the work happens. Each phase table lists that phase's activities and gates; read the one for the phase you are in.
 
-¹ **R** = the UX / product designer when the project has one ([§3.2](#32-optional-and-shared-roles)), otherwise developers. ² **R** = the technical writer when the project has one, otherwise developers; owner and rules in [§7.1](#71-documentation-map-what-we-keep-who-owns-it-when-it-changes) and [§7.2 rule 9](#72-documentation-rules).
+#### 3.1.1 Phase 1: Planning
+
+Details: [Planning](01-Planning/Planning.md).
+
+| Activity | SP (Sponsor) | PO (Product Owner) | DL (Delivery Lead) | TL (Tech Lead) | DEV (Developers) | QA (Quality Assurance Engineer) | SEC (Security Champion) ⁴ | CL (Client / Stakeholders) |
+|----------|----|----|----|----|-----|----|-----|----|
+| Project brief and scope | C (Consulted) | **A/R (Accountable + Responsible)** | R (Responsible) | C (Consulted) | I (Informed) | I (Informed) | I (Informed) | C (Consulted) |
+| Stakeholder register | I (Informed) | **A/R (Accountable + Responsible)** | C (Consulted) | C (Consulted) | I (Informed) | I (Informed) | — | C (Consulted) |
+| Idea validation for internal products ³ | **A (Accountable)** | R (Responsible) | C (Consulted) | C (Consulted) | C (Consulted) | I (Informed) | I (Informed) | — |
+| Client discovery and client PRD approval (client projects) | I (Informed) | **A/R (Accountable + Responsible)** | R (Responsible) | R (Responsible) | I (Informed) | C (Consulted) | I (Informed) | C (Consulted) |
+| Signed scope / SOW (Statement of Work) (client projects) | **A (Accountable)** | R (Responsible) | C (Consulted) | C (Consulted) | — | — | — | R (Responsible) |
+| Backlog and priorities | I (Informed) | **A/R (Accountable + Responsible)** | C (Consulted) | C (Consulted) | C (Consulted) | C (Consulted) | C (Consulted) | C (Consulted) |
+| Backlog refinement and Definition of Ready (per story) | — | **A (Accountable)** | C (Consulted) | C (Consulted) | R (Responsible) | R (Responsible) | C (Consulted) | C (Consulted) |
+| Non-functional requirements and compliance check (privacy, accessibility, licenses, AI rules) | I (Informed) | **A (Accountable)** | C (Consulted) | R (Responsible) | C (Consulted) | C (Consulted) | R (Responsible) | C (Consulted) |
+| Full SRS (Software Requirements Specification) and traceability matrix (regulated projects) | I (Informed) | **A (Accountable)** | C (Consulted) | R (Responsible) | C (Consulted) | R (Responsible) | C (Consulted) | C (Consulted) |
+| Estimates and forecasts | I (Informed) | C (Consulted) | **A/R (Accountable + Responsible)** | C (Consulted) | R (Responsible) | R (Responsible) | C (Consulted) | I (Informed) |
+| Risk register | I (Informed) | C (Consulted) | **A/R (Accountable + Responsible)** | R (Responsible) | C (Consulted) | C (Consulted) | C (Consulted) | I (Informed) |
+| Team roles and working agreement | I (Informed) | C (Consulted) | **A/R (Accountable + Responsible)** | R (Responsible) | R (Responsible) | R (Responsible) | R (Responsible) | — |
+| Change requests (client projects) | C (Consulted) | **A (Accountable)** | R (Responsible) | C (Consulted) | C (Consulted) | C (Consulted) | — | C (Consulted) |
+| Sprint capacity split across projects | C (Consulted) | C (Consulted) | **A/R (Accountable + Responsible)** | C (Consulted) | C (Consulted) | C (Consulted) | — | — |
+| **Gate G1 — Plan approved** | **A (Accountable)** | R (Responsible) | R (Responsible) | C (Consulted) | I (Informed) | I (Informed) | I (Informed) | C (Consulted) |
+
+#### 3.1.2 Phase 2: Design
+
+Details: [Design](02-Design/Design.md).
+
+| Activity | SP (Sponsor) | PO (Product Owner) | DL (Delivery Lead) | TL (Tech Lead) | DEV (Developers) | QA (Quality Assurance Engineer) | SEC (Security Champion) ⁴ | CL (Client / Stakeholders) |
+|----------|----|----|----|----|-----|----|-----|----|
+| Architecture (HLD, high-level design) and ADRs (Architecture Decision Records) | I (Informed) | C (Consulted) | I (Informed) | **A/R (Accountable + Responsible)** | R (Responsible) | C (Consulted) | C (Consulted) | I (Informed) |
+| Feature design (LLD, low-level design) | — | C (Consulted) | — | **A (Accountable)** | R (Responsible) | C (Consulted) | C (Consulted) | — |
+| API contract (OpenAPI / AsyncAPI) | — | C (Consulted) | I (Informed) | **A (Accountable)** | R (Responsible) | C (Consulted) | C (Consulted) | C (Consulted) |
+| Data design (schema, migrations, personal-data map) | — | C (Consulted) | I (Informed) | **A (Accountable)** | R (Responsible) | C (Consulted) | C (Consulted) | — |
+| Threat model | I (Informed) | C (Consulted) | I (Informed) | **A (Accountable)** | R (Responsible) | C (Consulted) | R (Responsible) | I (Informed) |
+| UX (User Experience) design and usability tests ¹ | — | **A (Accountable)** | I (Informed) | C (Consulted) | R (Responsible) | C (Consulted) | — | C (Consulted) |
+| Design brief and design approval ¹ | — | **A (Accountable)** | I (Informed) | C (Consulted) | R (Responsible) | C (Consulted) | — | C (Consulted) |
+| Design system and component library choice ¹ | — | C (Consulted) | I (Informed) | **A (Accountable)** | R (Responsible) | C (Consulted) | — | — |
+| Connected product: device-to-cloud-to-app design (track B) | I (Informed) | C (Consulted) | I (Informed) | **A/R (Accountable + Responsible)** | R (Responsible) | C (Consulted) | R (Responsible) | C (Consulted) |
+| Hardware milestones and cloud cost per device (track B) | C (Consulted) | C (Consulted) | C (Consulted) | **A/R (Accountable + Responsible)** | R (Responsible) | C (Consulted) | — | C (Consulted) |
+| **Gate G2 — Architecture approved** (design review) | C (Consulted) | C (Consulted) | I (Informed) | **A/R (Accountable + Responsible)** | R (Responsible) | C (Consulted) | C (Consulted) | C (Consulted) |
+
+#### 3.1.3 Phase 3: Development
+
+Details: [Development](03-Development/Development.md).
+
+| Activity | SP (Sponsor) | PO (Product Owner) | DL (Delivery Lead) | TL (Tech Lead) | DEV (Developers) | QA (Quality Assurance Engineer) | SEC (Security Champion) ⁴ | CL (Client / Stakeholders) |
+|----------|----|----|----|----|-----|----|-----|----|
+| Repository setup and walking skeleton | — | I (Informed) | I (Informed) | **A/R (Accountable + Responsible)** | R (Responsible) | C (Consulted) | C (Consulted) | — |
+| Technical docs: README, versioning policy, SOPs, CHANGELOG | — | I (Informed) | I (Informed) | **A (Accountable)** | R (Responsible) | C (Consulted) | — | — |
+| Code and code review | — | I (Informed) | I (Informed) | **A (Accountable)** | R (Responsible) | C (Consulted) | C (Consulted) | — |
+| Ticket for every change; QA told when it reaches staging | — | C (Consulted) | **A (Accountable)** | C (Consulted) | R (Responsible) | R (Responsible) | — | — |
+| Dependency choices | — | — | — | **A (Accountable)** | R (Responsible) | — | C (Consulted) | — |
+| Firmware build, signing and toolchain (track B) | — | — | I (Informed) | **A (Accountable)** | R (Responsible) | C (Consulted) | R (Responsible) | — |
+| AI eval set and pass threshold | — | C (Consulted) | I (Informed) | **A (Accountable)** | R (Responsible) | R (Responsible) | C (Consulted) | C (Consulted) |
+| **Gate G3 — Story done** (Definition of Done) | — | C (Consulted) | I (Informed) | **A (Accountable)** | R (Responsible) | R (Responsible) | C (Consulted) | — |
+
+#### 3.1.4 Phase 4: Testing
+
+Details: [Testing](04-Testing/Testing.md).
+
+| Activity | SP (Sponsor) | PO (Product Owner) | DL (Delivery Lead) | TL (Tech Lead) | DEV (Developers) | QA (Quality Assurance Engineer) | SEC (Security Champion) ⁴ | CL (Client / Stakeholders) |
+|----------|----|----|----|----|-----|----|-----|----|
+| Test strategy and automation | — | C (Consulted) | I (Informed) | C (Consulted) | R (Responsible) | **A/R (Accountable + Responsible)** | C (Consulted) | I (Informed) |
+| System tests (end-to-end and non-functional) | — | I (Informed) | I (Informed) | C (Consulted) | R (Responsible) | **A/R (Accountable + Responsible)** | C (Consulted) | — |
+| Security testing: CI scans, DAST / penetration test | I (Informed) | I (Informed) | I (Informed) | **A (Accountable)** | R (Responsible) | C (Consulted) | R (Responsible) | I (Informed) |
+| Accessibility and UI check against the approved design | — | C (Consulted) | — | C (Consulted) | R (Responsible) | **A/R (Accountable + Responsible)** | — | — |
+| Device testing: simulator, HIL (hardware-in-the-loop) rig, installation and bad-condition tests (track B) | — | C (Consulted) | I (Informed) | R (Responsible) | R (Responsible) | **A/R (Accountable + Responsible)** | C (Consulted) | — |
+| Bug triage: severity and priority | — | **A (Accountable)** | I (Informed) | C (Consulted) | C (Consulted) | R (Responsible) | — | C (Consulted) |
+| UAT (User Acceptance Testing) / acceptance | I (Informed) | **A (Accountable)** | C (Consulted) | C (Consulted) | C (Consulted) | R (Responsible) | — | R (Responsible) |
+
+#### 3.1.5 Phase 5: Deployment
+
+Details: [Deployment](05-Deployment/Deployment.md).
+
+| Activity | SP (Sponsor) | PO (Product Owner) | DL (Delivery Lead) | TL (Tech Lead) | DEV (Developers) | QA (Quality Assurance Engineer) | SEC (Security Champion) ⁴ | CL (Client / Stakeholders) |
+|----------|----|----|----|----|-----|----|-----|----|
+| Pipeline and environments | — | I (Informed) | I (Informed) | **A/R (Accountable + Responsible)** | R (Responsible) | C (Consulted) | C (Consulted) | — |
+| Signed images and SBOM (Software Bill of Materials) | — | — | I (Informed) | **A (Accountable)** | R (Responsible) | C (Consulted) | R (Responsible) | — |
+| **Gate G4 — Release go/no-go** | I (Informed) | C (Consulted) | C (Consulted) | **A (Accountable)** | C (Consulted) | R (Responsible) | C (Consulted) | C (Consulted) |
+| Release checklist, rollback plan and release notes | I (Informed) | C (Consulted) | I (Informed) | **A (Accountable)** | R (Responsible) | R (Responsible) | C (Consulted) | I (Informed) |
+| Feature flag on/off (release to users) | — | **A (Accountable)** | I (Informed) | C (Consulted) | R (Responsible) | C (Consulted) | — | C (Consulted) |
+| Firmware OTA (over-the-air) rollout | — | C (Consulted) | I (Informed) | **A (Accountable)** | R (Responsible) | R (Responsible) | C (Consulted) | I (Informed) |
+| Mobile app store staged release | — | C (Consulted) | I (Informed) | **A (Accountable)** | R (Responsible) | R (Responsible) | — | I (Informed) |
+| Rollback decision | — | I (Informed) | I (Informed) | **A (Accountable)** | R (Responsible) | C (Consulted) | I (Informed) | I (Informed) |
+| User documentation ² | — | **A (Accountable)** | I (Informed) | C (Consulted) | R (Responsible) | C (Consulted) | — | C (Consulted) |
+| Sprint delivery note to the client | I (Informed) | **A/R (Accountable + Responsible)** | C (Consulted) | C (Consulted) | C (Consulted) | C (Consulted) | — | I (Informed) |
+
+#### 3.1.6 Phase 6: Maintenance
+
+Details: [Maintenance](06-Maintenance/Maintenance.md).
+
+| Activity | SP (Sponsor) | PO (Product Owner) | DL (Delivery Lead) | TL (Tech Lead) | DEV (Developers) | QA (Quality Assurance Engineer) | SEC (Security Champion) ⁴ | CL (Client / Stakeholders) |
+|----------|----|----|----|----|-----|----|-----|----|
+| SLOs (Service Level Objectives) and alerts | — | C (Consulted) | I (Informed) | **A (Accountable)** | R (Responsible) | C (Consulted) | — | I (Informed) |
+| Runbooks (one per alert) | — | — | I (Informed) | **A (Accountable)** | R (Responsible) | C (Consulted) | C (Consulted) | — |
+| On-call, incidents and postmortems | I (Informed) | I (Informed) | C (Consulted) | **A (Accountable)** | R (Responsible) | C (Consulted) | C (Consulted) | I (Informed) |
+| Client communication during incidents | I (Informed) | C (Consulted) | **A/R (Accountable + Responsible)** | C (Consulted) | C (Consulted) | — | — | I (Informed) |
+| **Gate G5 — Live and healthy** / monthly service review | C (Consulted) | C (Consulted) | R (Responsible) | **A/R (Accountable + Responsible)** | C (Consulted) | C (Consulted) | C (Consulted) | I (Informed) |
+| Device fleet review (track B) | I (Informed) | C (Consulted) | I (Informed) | **A/R (Accountable + Responsible)** | R (Responsible) | C (Consulted) | C (Consulted) | I (Informed) |
+| Security and platform updates | — | I (Informed) | I (Informed) | **A (Accountable)** | R (Responsible) | C (Consulted) | R (Responsible) | — |
+| Backups and restore tests | — | I (Informed) | I (Informed) | **A (Accountable)** | R (Responsible) | C (Consulted) | C (Consulted) | — |
+| Audit logs and quarterly access review (regulated projects) | I (Informed) | I (Informed) | I (Informed) | **A (Accountable)** | R (Responsible) | — | R (Responsible) | C (Consulted) |
+| Takeover audit and risk report | I (Informed) | C (Consulted) | I (Informed) | **A/R (Accountable + Responsible)** | R (Responsible) | C (Consulted) | C (Consulted) | C (Consulted) |
+| Small fixed-price jobs (track E) | — | C (Consulted) | I (Informed) | **A (Accountable)** | R (Responsible) | C (Consulted) | — | C (Consulted) |
+| Project closure report | C (Consulted) | R (Responsible) | **A/R (Accountable + Responsible)** | R (Responsible) | C (Consulted) | C (Consulted) | — | C (Consulted) |
+| Knowledge base upkeep | — | R (Responsible) | **A (Accountable)** | R (Responsible) | R (Responsible) | R (Responsible) | R (Responsible) | — |
+| Retrospective actions and changes to this guide | C (Consulted) | C (Consulted) | **A/R (Accountable + Responsible)** | C (Consulted) | C (Consulted) | C (Consulted) | C (Consulted) | — |
+
+¹ **R** = the UX / product designer when the project has one ([§3.2](#32-optional-and-shared-roles)), otherwise developers. ² **R** = the technical writer when the project has one, otherwise developers; owner and rules in [§7.1](#71-documentation-map-what-we-keep-who-owns-it-when-it-changes) and [§7.2 rule 9](#72-documentation-rules). ³ **R** = the named idea owner (often the PO); the Sponsor decides go / change / stop. ⁴ **SEC** = the Security Champion, a developer with an extra hat ([§3](#3-roles-default-for-a-48-person-team)); on small teams the Tech Lead may hold it.
 
 ### 3.2 Optional and shared roles
 
